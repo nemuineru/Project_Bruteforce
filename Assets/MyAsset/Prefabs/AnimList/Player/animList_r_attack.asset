@@ -1,0 +1,283 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bd391a9e706014f88c1ba738a67323, type: 3}
+  m_Name: animList_r_attack
+  m_EditorClassIdentifier: 
+  animDef:
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 1
+    Name: Jab
+    animClip:
+    - Clip: {fileID: 7400000, guid: cc6d90ac22aa9f146b6a23f470c4344a, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.02
+    blendOutTime: 0.05
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: hand.l
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: -0.49, z: 0}
+        endPos: {x: 0, y: 0.33, z: 0}
+        width: 0.29
+        _lastcalcStartPos: {x: -2.005118, y: 0.67928535, z: 1.9083921}
+        _lastcalcEndPos: {x: -1.7067127, y: 0.8188073, z: 1.8886932}
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 2
+    Name: Jab_R
+    animClip:
+    - Clip: {fileID: 7400000, guid: a7e95567c435a79429d9a14d9f9c3494, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.02
+    blendOutTime: 0
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: hand.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: -0.15, z: 0}
+        endPos: {x: 0, y: 0.33, z: 0}
+        width: 0.18
+        _lastcalcStartPos: {x: -2.005118, y: 0.67928535, z: 1.9083921}
+        _lastcalcEndPos: {x: -1.7067127, y: 0.8188073, z: 1.8886932}
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 3
+    Name: Kick
+    animClip:
+    - Clip: {fileID: 7400000, guid: 418d04f5b5a9f8e429e08773447a79ad, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.1
+    blendOutTime: 0.08
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: lowerleg.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.39, z: 0}
+        endPos: {x: 0, y: 0, z: 0}
+        width: 0.12
+        _lastcalcStartPos: {x: 0, y: 0, z: 0}
+        _lastcalcEndPos: {x: 0, y: 0, z: 0}
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 5
+    Name: Hard_Knifes
+    animClip:
+    - Clip: {fileID: 7400000, guid: ef15f6167a26a9142b12faa0e8237153, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.1
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: kf01
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0, z: 0.75}
+        endPos: {x: 0.24, y: 0, z: -0.15}
+        width: 0.32
+        _lastcalcStartPos: {x: -0.45079607, y: -0.14649418, z: -8.905193}
+        _lastcalcEndPos: {x: -0.108253896, y: 0.6150805, z: -9.31783}
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 6
+    Name: Hard_LV1_Axes
+    animClip:
+    - Clip: {fileID: 7400000, guid: 7353eb9b9f1d31f4c937a070d3d6cd6e, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.1
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: ax01
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0, z: 0.8}
+        endPos: {x: 0, y: 0, z: 0}
+        width: 0.17
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 7
+    Name: Hard_LV2_Hammer
+    animClip:
+    - Clip: {fileID: 7400000, guid: 49522fb913cff5e40a2a5e3e4114c782, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.1
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: ha01
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0, z: -0.28}
+        endPos: {x: 0, y: 0, z: -1.23}
+        width: 0.3
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 20
+    Name: Air_Kick
+    animClip:
+    - Clip: {fileID: 7400000, guid: 06a7ae7954d29c146b10be13ddb8c2ca, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.04
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: lowerleg.l
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.39, z: 0}
+        endPos: {x: 0, y: -0.25, z: 0}
+        width: 0.12
+        _lastcalcStartPos: {x: 0.88136834, y: 0.13926509, z: -12.541889}
+        _lastcalcEndPos: {x: 1.2251477, y: 0.30532974, z: -12.4622755}
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 25
+    Name: AirHardAttack_Knife
+    animClip:
+    - Clip: {fileID: 7400000, guid: 67093dc924031d24c896ff11fa6ff5fa, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.1
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: kf01
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0, z: 0.8}
+        endPos: {x: 0, y: 0, z: 0}
+        width: 0.12
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 100
+    Name: BurstAttack_Kicker
+    animClip:
+    - Clip: {fileID: 7400000, guid: 4eb69cf5536fd1a4eafde9294b090d6c, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.12
+    blendOutTime: 0.12
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: lowerleg.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.62, z: 0}
+        endPos: {x: 0, y: -0.57, z: 0}
+        width: 0.51
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList:
+      - head
+      - hip
+      root: {fileID: 0}
+      eraseAllClss: 0

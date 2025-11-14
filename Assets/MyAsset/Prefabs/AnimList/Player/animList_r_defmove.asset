@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bd391a9e706014f88c1ba738a67323, type: 3}
+  m_Name: animList_r_defmove
+  m_EditorClassIdentifier: 
+  animDef:
+  - mixType: 3
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 0
+    Name: Movement
+    animClip:
+    - Clip: {fileID: 7400000, guid: b1746320c4335404a98fc1316048773b, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    - Clip: {fileID: 7400000, guid: 9a191339cd1901b4ab0bcf9b725ec44e, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: -1, y: 0}
+    - Clip: {fileID: 7400000, guid: 7443f9112c567254eb7c324efb27134f, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 1}
+    - Clip: {fileID: 7400000, guid: 83ec618451ca6de4487d5784d247a2e7, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: -1}
+    - Clip: {fileID: 7400000, guid: f55222405eb971247ae12ff2036268b4, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 1, y: 0}
+    blendInTime: 0.05
+    blendOutTime: 0
+    useDefaultClss: 1
+    clssSetting:
+      clssDefs: []
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 50
+    Name: Jump
+    animClip:
+    - Clip: {fileID: 7400000, guid: 7dd67cce11e9cc64d9d817b21324c527, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.1
+    blendOutTime: 0
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 5000
+    Name: Damaged
+    animClip:
+    - Clip: {fileID: 7400000, guid: df78d3aec4fb10245a4699ee03339e18, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.2
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 0
+        attachTo: hand.l
+        showGizmo: 0
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0, z: 0}
+        endPos: {x: 0, y: 0, z: 0}
+        width: 0
+        _lastcalcStartPos: {x: 0, y: 0, z: 0}
+        _lastcalcEndPos: {x: 0, y: 0, z: 0}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 5050
+    Name: BlowOut
+    animClip:
+    - Clip: {fileID: 7400000, guid: 6abb78ce4a9f70e42957498b0dd09dd6, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.1
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 5100
+    Name: Down
+    animClip:
+    - Clip: {fileID: 7400000, guid: 7f6a3d3729dbabb4dba10c2f966afbe9, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.4
+    useDefaultClss: 1
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 5101
+    Name: Recovery
+    animClip:
+    - Clip: {fileID: 7400000, guid: dd34b6c288e39b040a21dfdb477c0624, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.4
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 1
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 180
+    Name: Win Pose
+    animClip:
+    - Clip: {fileID: 7400000, guid: 6386a353b18bd6841a521ea523b3c841, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.4
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 1

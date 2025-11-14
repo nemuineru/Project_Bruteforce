@@ -1,0 +1,1052 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
+  m_Name: stateDefTest_Rusty_Base
+  m_EditorClassIdentifier: 
+  stateDefs:
+  - StateDefName: OnInitLoad
+    StateDefID: 0
+    LuaAsset: {fileID: -8122155829129254986, guid: 13b365a8419da704db1d5867ceb26d49, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: LuaOutput
+    stateType: 83
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 3002629528666767590
+    - rid: 3002629213760520200
+    - rid: 3002629213760520201
+    - rid: 3002629528666767591
+    - rid: 3579422750824726546
+    - rid: 1982101199356952583
+    setCtrl: 0
+  - StateDefName: Combo1 Jab_First
+    StateDefID: 1
+    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 3579423065411158016
+    - rid: 3002629213760520203
+    - rid: 3002629213760520202
+    - rid: 3579423095655497736
+    - rid: 1982101230649868288
+    - rid: 4404388529659445248
+    setCtrl: 0
+  - StateDefName: Combo2 Jab_Second
+    StateDefID: 2
+    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 3579423095655497729
+    - rid: 3002629213760520203
+    - rid: 3579423095655497732
+    - rid: 1982101230649868296
+    - rid: 4404388637674569761
+    setCtrl: 0
+  - StateDefName: Combo3 Kick Finisher
+    StateDefID: 3
+    LuaAsset: {fileID: -8122155829129254986, guid: 3fcddc9c2ce5f8b479bf3d800b4cbf2f, type: 3}
+    preStateVerdictName: QueuedStateID_GrdCombo3_Finisher
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 4404388799971590146
+    - rid: 4404388799971590147
+    - rid: 1982101230649868297
+    - rid: 4404388799971590148
+    setCtrl: 0
+  - StateDefName: KnifeStab
+    StateDefID: 5
+    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    preStateVerdictName: QueuedStateID_Knife
+    ParamLoadName: null
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 4404388709018370071
+    - rid: 4404388709018370072
+    - rid: 4404388709018370073
+    - rid: 1982101230649868302
+    setCtrl: 0
+  - StateDefName: AxeSlash
+    StateDefID: 6
+    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    preStateVerdictName: QueuedStateID_Axe
+    ParamLoadName: Accel_Start
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 7982028148908752899
+    - rid: 7982028148908752901
+    - rid: 7982028148908752900
+    - rid: 7982028148908752902
+    - rid: 1982101096022933504
+    - rid: 1982101252599447552
+    setCtrl: 0
+  - StateDefName: Hammer
+    StateDefID: 7
+    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    preStateVerdictName: QueuedStateID_Hammer
+    ParamLoadName: null
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 7982028148908752904
+    - rid: 7982028148908752905
+    - rid: 7982028148908752907
+    - rid: 7982028148908752906
+    - rid: 1982101252599447559
+    setCtrl: 0
+  - StateDefName: AirCombo Kicking
+    StateDefID: 20
+    LuaAsset: {fileID: -8122155829129254986, guid: 3fcddc9c2ce5f8b479bf3d800b4cbf2f, type: 3}
+    preStateVerdictName: QueuedStateID_J
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 3579423095655497732
+    - rid: 4404388637674569820
+    - rid: 3002629213760520203
+    - rid: 1982101252599447575
+    - rid: 4404388637674569830
+    setCtrl: 0
+  - StateDefName: AirHard Knife
+    StateDefID: 25
+    LuaAsset: {fileID: -8122155829129254986, guid: 3fcddc9c2ce5f8b479bf3d800b4cbf2f, type: 3}
+    preStateVerdictName: QueuedStateID_J_Knife
+    ParamLoadName: null
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 4404388709018370089
+    - rid: 4404388709018370090
+    - rid: 4404388709018370088
+    - rid: 1982101252599447576
+    setCtrl: 0
+  - StateDefName: Jump
+    StateDefID: 50
+    LuaAsset: {fileID: -8122155829129254986, guid: 0a4fa2b859e4f404e9fb997aabe9fd46, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 4404389163807801372
+    - rid: 4404389163807801374
+    - rid: 4404389163807801373
+    setCtrl: 0
+  - StateDefName: Grd Special Attack
+    StateDefID: 100
+    LuaAsset: {fileID: -8122155829129254986, guid: e2196b211f6c3ac429635c532984bd3f, type: 3}
+    preStateVerdictName: QueuedStateID_100
+    ParamLoadName: Accel
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 7557642759318274048
+    - rid: 7557642759318274052
+    - rid: 7557642759318274051
+    - rid: 7557642759318274049
+    - rid: 7557642759318274113
+    - rid: 7557642759318274050
+    - rid: 7557642784103727104
+    setCtrl: 0
+  - StateDefName: Air Special Attack
+    StateDefID: 105
+    LuaAsset: {fileID: 0}
+    preStateVerdictName: 
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList: []
+    setCtrl: 0
+  - StateDefName: Winning Pose
+    StateDefID: 180
+    LuaAsset: {fileID: -8122155829129254986, guid: 13b365a8419da704db1d5867ceb26d49, type: 3}
+    preStateVerdictName: WinningPose
+    ParamLoadName: 
+    stateType: 83
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 7557642767827468288
+    setCtrl: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1982101096022933504
+      type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: Accels
+        vels:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority: 0
+    - rid: 1982101199356952583
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 5300
+          stLuaLoads: 
+        stateControllerSubName: set it death if it is dead
+        changeTo: 5300
+        priority: 0
+    - rid: 1982101230649868288
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: whoosh1
+        audio: {fileID: 8300000, guid: 1138d641ce050584190279ce15310706, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101230649868296
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: whoosh2
+        audio: {fileID: 8300000, guid: 1138d641ce050584190279ce15310706, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101230649868297
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: whooshF
+        audio: {fileID: 8300000, guid: 95768d7a054056c4faf1607e55843824, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101230649868302
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: knife1
+        audio: {fileID: 8300000, guid: 60b4d2b19538feb4bb472fa4649535fc, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101252599447552
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: swooshsnd
+        audio: {fileID: 8300000, guid: 902bff6a8c7aaf640a805954d4c00fda, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101252599447559
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: heavSwoosh
+        audio: {fileID: 8300000, guid: 0910dbd1d178e924aa8826fd0c74346a, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101252599447575
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: shootsound
+        audio: {fileID: 8300000, guid: 1138d641ce050584190279ce15310706, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982101252599447576
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: knifefast
+        audio: {fileID: 8300000, guid: eb9e83790a6812d47a66dbb922a7143e, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 3002629213760520200
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: ChangeState To Jumping
+        changeTo: 50
+        priority: 1
+    - rid: 3002629213760520201
+      type: {class: scMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Move_Auto
+    - rid: 3002629213760520202
+      type: {class: scColorChange, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: ColorChange_red
+        color: {r: 1, g: 0.4669811, b: 0.4669811, a: 1}
+    - rid: 3002629213760520203
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Change To init
+        changeTo: 0
+        priority: 1
+    - rid: 3002629528666767590
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: AnimSetter
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 3002629528666767591
+      type: {class: scAnimParamChange, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimParamChanger
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: 0
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0}
+          useID: 0
+          stLuaLoads: 
+    - rid: 3579422750824726546
+      type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 800
+          stLuaLoads: 
+        stateControllerSubName: rotate
+        RotateWeight: 0.5
+    - rid: 3579423065411158016
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimSet_Jab
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 3579423095655497729
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimSet RHandJab
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 2
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 3579423095655497732
+      type: {class: scColorChange, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: SO RED
+        color: {r: 1, g: 0.6273585, b: 0.6273585, a: 1}
+    - rid: 3579423095655497736
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: SelfState Change
+        changeTo: 1
+        priority: 0
+    - rid: 4404388529659445248
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: JabHit
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 20
+            velset: {x: 1.5, y: 0, z: 0}
+            hitStopTime: {x: 1, y: 8}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 1
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388637674569761
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: JabHit
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 20
+            velset: {x: 1.8, y: 0.7, z: 0}
+            hitStopTime: {x: 3, y: 9}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 1
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388637674569820
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Air Kick Anims
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 20
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388637674569830
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: Air_KickHit
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 9
+            velset: {x: 3.1, y: 0.3, z: 0}
+            hitStopTime: {x: 7, y: 4}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 6
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388709018370071
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Knifes Anim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 5
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388709018370072
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: ChangeInit
+        changeTo: 0
+        priority: 10
+    - rid: 4404388709018370073
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: Damages
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 80
+            velset: {x: 1, y: 2, z: 0}
+            hitStopTime: {x: 3, y: 10}
+            HitEff: {fileID: 130626, guid: 763c35982e678ac4bbc44144c42c505f, type: 3}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 2
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388709018370088
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: Damage
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 65
+            velset: {x: 4, y: 0, z: 0}
+            hitStopTime: {x: 12, y: 25}
+            HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 1
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SAL
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388709018370089
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AirKnifeAnim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 25
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388709018370090
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Init
+        changeTo: 0
+        priority: 0
+    - rid: 4404388799971590146
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimSet_Combo_Finisher Kick
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 3
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404388799971590147
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Change to Init
+        changeTo: 0
+        priority: 0
+    - rid: 4404388799971590148
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: HitDef_ Kicker
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 30
+            velset: {x: 3, y: 4, z: 0}
+            hitStopTime: {x: 10, y: 14}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5050
+            maxEntityHits: 8
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404389163807801372
+      type: {class: scJump, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 50
+          stLuaLoads: 
+        stateControllerSubName: JumpAnimVel
+    - rid: 4404389163807801373
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 50
+          stLuaLoads: 
+        stateControllerSubName: JumpAnim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 50
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404389163807801374
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: InitState
+        changeTo: 0
+        priority: 1
+    - rid: 7557642759318274048
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: init anim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 100
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 7557642759318274049
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Burst Anim
+        audio: {fileID: 0}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 7557642759318274050
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Hits
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 25
+            velset: {x: 4, y: 1, z: 0}
+            hitStopTime: {x: 7, y: 7}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5050
+            maxEntityHits: 8
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 88130000ba130000bb130000
+          useID: -1
+          stLuaLoads: 
+    - rid: 7557642759318274051
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: Change To Inits
+        changeTo: 0
+        priority: 0
+    - rid: 7557642759318274052
+      type: {class: scAddEnergy, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Set Energy Drain for 25
+        value: -25
+        priority: 0
+    - rid: 7557642759318274113
+      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: setVel
+        vels:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority: 0
+    - rid: 7557642767827468288
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Animset_winningPose
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 180
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 7557642784103727104
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: playShot
+        audio: {fileID: 8300000, guid: dce5cb2d1a1063c4887673091463b147, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028148908752899
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Axe Anim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 6
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028148908752900
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Change state at end anim
+        changeTo: 0
+        priority: 0
+    - rid: 7982028148908752901
+      type: {class: scSetCharge, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: ResetCharge
+        value: 0
+        priority: 0
+    - rid: 7982028148908752902
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Damages
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 70
+            velset: {x: 0.8, y: 7, z: 0}
+            hitStopTime: {x: 0, y: 0}
+            HitEff: {fileID: 130626, guid: d21f96766665f5b4591b1c012ae59e31, type: 3}
+            ChangeState_Enemy: 5050
+            maxEntityHits: 3
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028148908752904
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: HammerAnim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 7
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028148908752905
+      type: {class: scSetCharge, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: reset Charge
+        value: 0
+        priority: 0
+    - rid: 7982028148908752906
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: End at end of anims
+        changeTo: 0
+        priority: 0
+    - rid: 7982028148908752907
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Damage
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 100
+            velset: {x: 0, y: 0, z: 0}
+            hitStopTime: {x: 0, y: 0}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5100
+            maxEntityHits: 5
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IAH
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 

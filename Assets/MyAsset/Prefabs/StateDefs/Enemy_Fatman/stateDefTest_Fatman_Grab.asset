@@ -1,0 +1,417 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
+  m_Name: stateDefTest_Fatman_Grab
+  m_EditorClassIdentifier: 
+  stateDefs:
+  - StateDefName: Throw_Start
+    StateDefID: 5
+    LuaAsset: {fileID: -8122155829129254986, guid: f14ff619c01490245aa75a98093e22b8, type: 3}
+    preStateVerdictName: QueuedStateID_Throw_Start
+    ParamLoadName: Accel_Start
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 7982028315445428225
+    - rid: 7982028315445428226
+    - rid: 1982100910739292167
+    - rid: 7982028315445428224
+    setCtrl: 0
+  - StateDefName: Throw_Player State Start
+    StateDefID: 6
+    LuaAsset: {fileID: -8122155829129254986, guid: f14ff619c01490245aa75a98093e22b8, type: 3}
+    preStateVerdictName: QueuedStateID_ThrowHit_Player_OnProcess
+    ParamLoadName: ChokerSped
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 7982028360077541376
+    - rid: 1982100910739292239
+    - rid: 1982100662934306928
+    - rid: 7982028360077541377
+    setCtrl: 0
+  - StateDefName: Throw_Player State End
+    StateDefID: 7
+    LuaAsset: {fileID: -8122155829129254986, guid: f14ff619c01490245aa75a98093e22b8, type: 3}
+    preStateVerdictName: QueuedStateID_ThrowHit_Player_EndProcess
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 83
+    StateList:
+    - rid: 1982100910739292161
+    - rid: 1982100910739292162
+    setCtrl: 0
+  - StateDefName: Throw_Enemy State Start
+    StateDefID: 8
+    LuaAsset: {fileID: -8122155829129254986, guid: f14ff619c01490245aa75a98093e22b8, type: 3}
+    preStateVerdictName: QueuedStateID_ThrowHit_Enemy_OnProcess
+    ParamLoadName: ChockAnim_Track
+    stateType: 0
+    moveType: 0
+    physType: 78
+    StateList:
+    - rid: 7982028498543837196
+    - rid: 1982100910739292250
+    - rid: 1982100662934306822
+    - rid: 1982100662934306816
+    - rid: 1982100910739292163
+    setCtrl: 0
+  - StateDefName: Throw_Enemy State End
+    StateDefID: 9
+    LuaAsset: {fileID: -8122155829129254986, guid: f14ff619c01490245aa75a98093e22b8, type: 3}
+    preStateVerdictName: QueuedStateID_ThrowHit_Enemy_EndProcess
+    ParamLoadName: ChockAnim_Track
+    stateType: 0
+    moveType: 0
+    physType: 83
+    StateList:
+    - rid: 1982100910739292230
+    - rid: 1982100910739292166
+    - rid: 1982100935841939495
+    - rid: 1982100910739292165
+    - rid: 1982100935841939508
+    - rid: 1982100935841939514
+    setCtrl: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1982100662934306816
+      type: {class: scIgnoreEntityCollisions, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Entity Colider  Ignorement
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100662934306822
+      type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: set 0 velocity at first
+        vels:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        priority: 0
+    - rid: 1982100662934306928
+      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Physics_Movement
+        vels:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority: 0
+    - rid: 1982100910739292161
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Init Anims(4)
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 4
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100910739292162
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: EndAnim
+        changeTo: 0
+        priority: 0
+    - rid: 1982100910739292163
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Change To Next state
+        changeTo: 9
+        priority: 0
+    - rid: 1982100910739292165
+      type: {class: scSelfState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Return to self
+        changeTo: 5100
+        priority: 0
+    - rid: 1982100910739292166
+      type: {class: scAnimParentSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Init(6)
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 6
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100910739292167
+      type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: Start on Accel
+        vels:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority: 0
+    - rid: 1982100910739292230
+      type: {class: scAddHealth, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Damage
+        value: -25
+        priority: 0
+    - rid: 1982100910739292239
+      type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Stop!
+        vels:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        priority: 0
+    - rid: 1982100910739292250
+      type: {class: scAddPos, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: TrackPos_GrabberHand
+        position:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100935841939495
+      type: {class: scAddPos, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: SlamToGround
+        position:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100935841939508
+      type: {class: scIgnoreEntityCollisions, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Ignore-rance Phys
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100935841939514
+      type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: PushToEnemyForward
+        vels:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 1
+          stLuaLoads: 
+        priority: 0
+    - rid: 7982028315445428224
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: HitDef for init Attack
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 0
+            velset: {x: 0, y: 0, z: 0}
+            hitStopTime: {x: 0, y: 0}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 8
+            maxEntityHits: 1
+            enemyRefsPlayerNum: 1
+            ChangeState_Player: 6
+            HitPhysFlag: SA
+            HitMoveFlag: IA
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028315445428225
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Init Anims(2)
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 2
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028315445428226
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Change to 0 init state for non-connected hit
+        changeTo: 0
+        priority: 0
+    - rid: 7982028360077541376
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Init Anims(3)
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 3
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 7982028360077541377
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Change To Ground
+        changeTo: 7
+        priority: 0
+    - rid: 7982028498543837196
+      type: {class: scAnimParentSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: QueuedStateID_ThrowHit_Enemy
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 5
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 

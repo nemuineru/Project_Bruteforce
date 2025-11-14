@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
+  m_Name: stateDefTest_WK
+  m_EditorClassIdentifier: 
+  stateDefs:
+  - StateDefName: OnInitLoad
+    StateDefID: 0
+    LuaAsset: {fileID: -8122155829129254986, guid: ff709de9f1b554644a3462e045adc0ab, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 83
+    StateList:
+    - rid: 3002629528666767590
+    - rid: 3002629213760520200
+    - rid: 3002629213760520201
+    - rid: 3002629528666767591
+    - rid: 3579422750824726546
+    setCtrl: 0
+  - StateDefName: Throw Bottles
+    StateDefID: 1
+    LuaAsset: {fileID: -8122155829129254986, guid: 3991d08a4d22acf44b502b22d45ad625, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: ThrowPos
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 1982100731693105157
+    - rid: 1982100731693105158
+    - rid: 1982100731693105159
+    setCtrl: 0
+  - StateDefName: Jump
+    StateDefID: 50
+    LuaAsset: {fileID: -8122155829129254986, guid: 0bbbf6571014c244498b834896fdd87c, type: 3}
+    preStateVerdictName: QueuedStateID
+    ParamLoadName: LuaOutput
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 4404389163807801372
+    - rid: 4404389163807801374
+    - rid: 4404389163807801373
+    setCtrl: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1982100731693105157
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Set Throwing
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100731693105158
+      type: {class: scProjectile, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Proj Shot
+        projs: {fileID: 5354473868157599039, guid: 38285fd282f99c1438237f117fc493ea, type: 3}
+        InstDirection:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        InstPosition:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 1
+          stLuaLoads: 
+    - rid: 1982100731693105159
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Throwing End
+        changeTo: 0
+        priority: 0
+    - rid: 3002629213760520200
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: ChangeState To Jumping
+        changeTo: 50
+        priority: 1
+    - rid: 3002629213760520201
+      type: {class: scMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: Move_Auto
+    - rid: 3002629528666767590
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: AnimSetter
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 3002629528666767591
+      type: {class: scAnimParamChange, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimParamChanger
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: 0
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0}
+          useID: 0
+          stLuaLoads: 
+    - rid: 3579422750824726546
+      type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 800
+          stLuaLoads: 
+        stateControllerSubName: rotate
+        RotateWeight: 0.5
+    - rid: 4404389163807801372
+      type: {class: scJump, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 50
+          stLuaLoads: 
+        stateControllerSubName: JumpAnimVel
+    - rid: 4404389163807801373
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 50
+          stLuaLoads: 
+        stateControllerSubName: JumpAnim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 50
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 4404389163807801374
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: InitState
+        changeTo: 0
+        priority: 1
