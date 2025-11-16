@@ -8,13 +8,22 @@ using Puerts;
 //lua enviroments loads as static.
 //its because of the convenience.
 
-public class Lua_OnLoad : MonoBehaviour
+public class PuerTS_Framework : MonoBehaviour
 {
-    public static Lua_OnLoad main;
+    public static PuerTS_Framework main;
+    internal Puerts.JsEnv JSEnv;
     // Start is called before the first frame update
     void Awake()
     {
-        main = this;
+        if (main == null)
+        {
+            main = this;
+            JSEnv = new JsEnv();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
