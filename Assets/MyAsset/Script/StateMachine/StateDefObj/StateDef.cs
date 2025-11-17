@@ -358,6 +358,12 @@ public class StateDef
         }
     }
 
+    //PUERTSの実装を開始する.
+    public void ExecutePuerTS()
+    {
+        PuerTS_Framework.main.JSEnv.ExecuteModule("");
+    }
+
     public void Execute(Entity entity)
     {
         //stateTimeが0の時, 恒常設定されたステートパラメータを確認
@@ -367,7 +373,7 @@ public class StateDef
         }
 
         // if (_stateLoadTables == null)
-            OnInitDef();
+        OnInitDef();
         //メインのLUA仮想マシンに読み出すテキストを以下に記述.
         if (LuaAsset != null)
         {
