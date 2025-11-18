@@ -53,7 +53,7 @@ public class stateDefShow : Editor
             SerializedProperty stDefNameProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.StateDefName));
             SerializedProperty stDefIDProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.StateDefID));
             //LuaConditionの文章習得.
-            SerializedProperty LuScript = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.LuaAsset));
+            SerializedProperty LuScript = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.ScriptDirectory));
 
             //基本情報の表示
             EditorGUILayout.PropertyField(stDefNameProperty);

@@ -222,13 +222,20 @@ public class StateDef
     internal int stateTime = 0;
 
     //executing state is decided from this.
-    public TextAsset LuaAsset;
+    public string ScriptDirectory;
+    //executing state is decided from this.
+    public string ScriptName;
 
     public string preStateVerdictName;
     public string ParamLoadName;
 
     // private LuaTable _stateLoadTables;
     // private LuaTable _stateParamTables;
+
+    //int for state-Execution, Object for preverdicted-Parameters.
+    List<int> ExecuteStates;
+    List<System.Object> StateParams;
+
 
     //それぞれMoveType
     public char stateType;
@@ -252,7 +259,7 @@ public class StateDef
         retDef.StateDefName = StateDefName;
         retDef.StateDefID = StateDefID;
         retDef.stateTime = stateTime;
-        retDef.LuaAsset = LuaAsset;
+        retDef.ScriptDirectory = ScriptDirectory;
         retDef.preStateVerdictName = preStateVerdictName;
         retDef.ParamLoadName = ParamLoadName;
         retDef.StateList = StateList;
@@ -361,7 +368,10 @@ public class StateDef
     //PUERTSの実装を開始する.
     public void ExecutePuerTS()
     {
-        PuerTS_Framework.main.JSEnv.ExecuteModule("");
+        //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
+        PuerTS_Framework.main.JSEnv.ExecuteModule(ScriptDirectory + "/" + ScriptName);
+        
+        
     }
 
     public void Execute(Entity entity)
@@ -375,7 +385,7 @@ public class StateDef
         // if (_stateLoadTables == null)
         OnInitDef();
         //メインのLUA仮想マシンに読み出すテキストを以下に記述.
-        if (LuaAsset != null)
+        if (ScriptDirectory != null)
         {
             //env.DoString(LuaAsset.text);
 

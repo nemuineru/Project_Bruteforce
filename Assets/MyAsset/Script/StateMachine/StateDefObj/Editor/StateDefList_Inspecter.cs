@@ -283,7 +283,8 @@ public class StateDefList_Inspector : Editor
                 SerializedProperty stDefNameProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.StateDefName));
                 SerializedProperty stDefIDProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.StateDefID));
                 //LuaConditionの文章習得.
-                SerializedProperty LuScript = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.LuaAsset));
+                SerializedProperty ScriptDirectory = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.ScriptDirectory));
+                SerializedProperty ScriptName = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.ScriptName));
                 
                 SerializedProperty stDefinitCtrlProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.setCtrl));
                 SerializedProperty ststateTypeProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.stateType));
@@ -296,7 +297,8 @@ public class StateDefList_Inspector : Editor
                 //基本情報の表示
                 EditorGUILayout.PropertyField(stDefNameProperty);
                 EditorGUILayout.PropertyField(stDefIDProperty);
-                EditorGUILayout.PropertyField(LuScript);
+                EditorGUILayout.PropertyField(ScriptDirectory);
+                EditorGUILayout.PropertyField(ScriptName);
                 EditorGUILayout.Space();
                 EditorGUILayout.PropertyField(stDefinitCtrlProperty);
                 EditorGUILayout.PropertyField(ststateTypeProperty);
@@ -351,5 +353,161 @@ public class StateContDrawer : PropertyDrawer
         return PropertyDrawerUtility.GetDefaultPropertyHeight(property, label);
     }
 }
+
+//単純に全要素を表示するだけのスクリプト.
+//this section borrowed from here - 
+//https://light11.hatenadiary.com/entry/2019/05/13/215814
+public static class PropertyDrawerUtility
+{
+    public static void DrawDefaultGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        property = property.serializedObject.FindProperty(property.propertyPath);
+        var fieldRect = position;
+        fieldRect.height = EditorGUIUtility.singleLineHeight;
+
+        using ( new EditorGUI.PropertyScope(fieldRect, label, property)) 
+        {
+            if (property.hasChildren) {
+                // 子要素があれば折り畳み表示
+                property.isExpanded = EditorGUI.Foldout (fieldRect, property.isExpanded, label);
+            }
+            else {
+                // 子要素が無ければラベルだけ表示
+                EditorGUI.LabelField(fieldRect, label);
+                return;
+            }
+            fieldRect.y += EditorGUIUtility.singleLineHeight;
+            fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+
+            if (property.isExpanded) {
+
+                using (new EditorGUI.IndentLevelScope()) 
+                {
+                    // 最初の要素を描画
+                    property.NextVisible(true);
+                    var depth = property.depth;
+                    EditorGUI.PropertyField(fieldRect, property, true);
+                    fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                    fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+
+                    // それ以降の要素を描画
+                    while(property.NextVisible(false)) {
+                        
+                        // depthが最初の要素と同じもののみ処理
+                        if (property.depth != depth) {
+                            break;
+                        }
+                        EditorGUI.PropertyField(fieldRect, property, true);
+                        fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                        fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+                    }
+                }
+            }
+        }
+    }
+
+    public static float GetDefaultPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        property = property.serializedObject.FindProperty(property.propertyPath);
+        var height = 0.0f;
+        
+        // プロパティ名
+        height += EditorGUIUtility.singleLineHeight;
+        height += EditorGUIUtility.standardVerticalSpacing;
+
+        if (!property.hasChildren) {
+            // 子要素が無ければラベルだけ表示
+            return height;
+        }
+        
+        if (property.isExpanded) {
+        
+            // 最初の要素
+            property.NextVisible(true);
+            var depth = property.depth;
+            height += EditorGUI.GetPropertyHeight(property, true);
+            height += EditorGUIUtility.standardVerticalSpacing;
+            
+            // それ以降の要素
+            while(property.NextVisible(false))
+            {
+                // depthが最初の要素と同じもののみ処理
+                if (property.depth != depth) {
+                    break;
+                }
+                height += EditorGUI.GetPropertyHeight(property, true);
+                height += EditorGUIUtility.standardVerticalSpacing;
+            }
+            // 最後はスペース不要なので削除
+            height -= EditorGUIUtility.standardVerticalSpacing;
+        }
+
+        return height;
+    }
+
+        /// <summary>
+        /// Gets the object the property represents.
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <returns></returns>
+        public static object GetTargetObjectOfProperty(SerializedProperty prop)
+        {
+            var path = prop.propertyPath.Replace(".Array.data[", "[");
+            object obj = prop.serializedObject.targetObject;
+            var elements = path.Split('.');
+            foreach (var element in elements)
+            {
+                if (element.Contains("["))
+                {
+                    var elementName = element.Substring(0, element.IndexOf("["));
+                    var index = System.Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                    obj = GetValue_Imp(obj, elementName, index);
+                }
+                else
+                {
+                    obj = GetValue_Imp(obj, element);
+                }
+            }
+            return obj;
+        }
+
+        private static object GetValue_Imp(object source, string name)
+        {
+            if (source == null)
+                return null;
+            var type = source.GetType();
+
+            while (type != null)
+            {
+                var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                if (f != null)
+                    return f.GetValue(source);
+
+                var p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                if (p != null)
+                    return p.GetValue(source, null);
+
+                type = type.BaseType;
+            }
+            return null;
+        }
+
+        private static object GetValue_Imp(object source, string name, int index)
+        {
+            var enumerable = GetValue_Imp(source, name) as System.Collections.IEnumerable;
+            if (enumerable == null) return null;
+            var enm = enumerable.GetEnumerator();
+            //while (index-- >= 0)
+            //    enm.MoveNext();
+            //return enm.Current;
+
+            for (int i = 0; i <= index; i++)
+            {
+                if (!enm.MoveNext()) return null;
+            }
+            return enm.Current;
+        }
+}
+
 
 
