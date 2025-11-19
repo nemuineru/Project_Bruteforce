@@ -44,7 +44,7 @@ public class StateDefList_Inspector : Editor
     //StateDefのList表示用管理クラス
     ReorderableList _stateDefList;
     //選択したStateDefをSerializedPropertyとして考える
-    SerializedProperty DefListProperty, SelectedDefProperty;
+    SerializedProperty StateDirectoryProperty ,DefListProperty, SelectedDefProperty;
     StateDefListObject targetStateDefLists;
     StateDef targetedStates;
 
@@ -78,7 +78,7 @@ public class StateDefList_Inspector : Editor
         serializedObject.Update();
         executableStateListUp();
 
-
+        setMainDirectory();
         using (new GUILayout.HorizontalScope())
         {
             stateDefPicker_OnGUI();
@@ -88,6 +88,13 @@ public class StateDefList_Inspector : Editor
             }
         }
         serializedObject.ApplyModifiedProperties();
+    }
+
+    //ステコンスクリプトのメインディレクトリ設定.
+    void setMainDirectory()
+    {
+        StateDirectoryProperty = serializedObject.FindProperty(nameof(StateDefListObject.ScriptDirectory));
+        EditorGUILayout.PropertyField(StateDirectoryProperty);
     }
 
     //ステコン追加ボタンの設定.
@@ -283,7 +290,6 @@ public class StateDefList_Inspector : Editor
                 SerializedProperty stDefNameProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.StateDefName));
                 SerializedProperty stDefIDProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.StateDefID));
                 //LuaConditionの文章習得.
-                SerializedProperty ScriptDirectory = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.ScriptDirectory));
                 SerializedProperty ScriptName = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.ScriptName));
                 
                 SerializedProperty stDefinitCtrlProperty = SelectedDefProperty.FindPropertyRelative(nameof(StateDef.setCtrl));
@@ -297,7 +303,6 @@ public class StateDefList_Inspector : Editor
                 //基本情報の表示
                 EditorGUILayout.PropertyField(stDefNameProperty);
                 EditorGUILayout.PropertyField(stDefIDProperty);
-                EditorGUILayout.PropertyField(ScriptDirectory);
                 EditorGUILayout.PropertyField(ScriptName);
                 EditorGUILayout.Space();
                 EditorGUILayout.PropertyField(stDefinitCtrlProperty);

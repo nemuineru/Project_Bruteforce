@@ -12,6 +12,7 @@ using UnityEngine.Analytics;
 // using XLua.LuaDLL;
 using System;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
+using Puerts;
 
 //EditorExtention. for deepcopy.
 public static class ObjectExtension
@@ -270,10 +271,13 @@ public class StateDef
         return retDef;
     }
 
+    Puerts.JsEnv env;
+
     void OnInitDef()
     {
+        //PuerTS用に改変中.
+        env = PuerTS_Framework.main.JSEnv;
         // Debug.Log("Generating Metatables on " + StateDefID);
-        // env = Lua_OnLoad.main.LEnv;
         // env.Global.Set("LC", new LC());
 
         // //StateID用にメタテーブルを作成.
@@ -366,15 +370,30 @@ public class StateDef
     }
 
     //PUERTSの実装を開始する.
-    public void ExecutePuerTS()
+    public void Execute(Entity entity)
     {
-        //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
-        PuerTS_Framework.main.JSEnv.ExecuteModule(ScriptDirectory + "/" + ScriptName);
-        
-        
+        //stateTimeが0の時, 恒常設定されたステートパラメータを確認
+        if (entity.stateTime == 0)
+        {
+            entityTypeSet(entity);
+        }
+
+        if (ScriptDirectory != null)
+        {
+            if (env == null)
+            {
+                OnInitDef();
+            }
+            //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
+            JSObject executer = PuerTS_Framework.main.JSEnv.ExecuteModule(ScriptDirectory + "/" + ScriptName);
+
+            //Func型じゃないと取れなかったんじゃないっけ？
+            ExecuteStates = executer.Get<List<int>>(preStateVerdictName);
+
+        }      
     }
 
-    public void Execute(Entity entity)
+    public void _Execute(Entity entity)
     {
         //stateTimeが0の時, 恒常設定されたステートパラメータを確認
         if (entity.stateTime == 0)

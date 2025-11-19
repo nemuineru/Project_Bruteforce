@@ -174,6 +174,8 @@ public class Entity : MonoBehaviour
         {
             foreach (StateDef state in dObj.stateDefs)
             {
+                //set ScriptDirectory for Load.
+                state.ScriptDirectory = dObj.ScriptDirectory;
                 loadedDefs.Add(state.Clone());
             }
         }

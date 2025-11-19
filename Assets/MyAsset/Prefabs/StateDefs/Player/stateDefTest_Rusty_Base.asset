@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateDefTest_Rusty_Base
   m_EditorClassIdentifier: 
+  ScriptDirectory: StateScript/Rusty
   stateDefs:
   - StateDefName: OnInitLoad
     StateDefID: 0
-    LuaAsset: {fileID: -8122155829129254986, guid: 13b365a8419da704db1d5867ceb26d49, type: 3}
-    preStateVerdictName: QueuedStateID
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: statescript_main.mjs
+    preStateVerdictName: stateID_0
     ParamLoadName: LuaOutput
     stateType: 83
     moveType: 0
@@ -31,7 +33,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Combo1 Jab_First
     StateDefID: 1
-    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID
     ParamLoadName: LuaOutput
     stateType: 0
@@ -47,7 +50,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Combo2 Jab_Second
     StateDefID: 2
-    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID
     ParamLoadName: LuaOutput
     stateType: 0
@@ -62,7 +66,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Combo3 Kick Finisher
     StateDefID: 3
-    LuaAsset: {fileID: -8122155829129254986, guid: 3fcddc9c2ce5f8b479bf3d800b4cbf2f, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_GrdCombo3_Finisher
     ParamLoadName: LuaOutput
     stateType: 0
@@ -76,7 +81,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: KnifeStab
     StateDefID: 5
-    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_Knife
     ParamLoadName: null
     stateType: 0
@@ -90,7 +96,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: AxeSlash
     StateDefID: 6
-    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_Axe
     ParamLoadName: Accel_Start
     stateType: 0
@@ -106,7 +113,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Hammer
     StateDefID: 7
-    LuaAsset: {fileID: -8122155829129254986, guid: cd00f5aa3ee1af945b2501f30c22bbeb, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_Hammer
     ParamLoadName: null
     stateType: 0
@@ -121,7 +129,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: AirCombo Kicking
     StateDefID: 20
-    LuaAsset: {fileID: -8122155829129254986, guid: 3fcddc9c2ce5f8b479bf3d800b4cbf2f, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_J
     ParamLoadName: LuaOutput
     stateType: 0
@@ -136,7 +145,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: AirHard Knife
     StateDefID: 25
-    LuaAsset: {fileID: -8122155829129254986, guid: 3fcddc9c2ce5f8b479bf3d800b4cbf2f, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_J_Knife
     ParamLoadName: null
     stateType: 0
@@ -150,7 +160,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Jump
     StateDefID: 50
-    LuaAsset: {fileID: -8122155829129254986, guid: 0a4fa2b859e4f404e9fb997aabe9fd46, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID
     ParamLoadName: LuaOutput
     stateType: 0
@@ -163,7 +174,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Grd Special Attack
     StateDefID: 100
-    LuaAsset: {fileID: -8122155829129254986, guid: e2196b211f6c3ac429635c532984bd3f, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: QueuedStateID_100
     ParamLoadName: Accel
     stateType: 0
@@ -180,7 +192,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Air Special Attack
     StateDefID: 105
-    LuaAsset: {fileID: 0}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: 
     ParamLoadName: 
     stateType: 0
@@ -190,7 +203,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Winning Pose
     StateDefID: 180
-    LuaAsset: {fileID: -8122155829129254986, guid: 13b365a8419da704db1d5867ceb26d49, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
     preStateVerdictName: WinningPose
     ParamLoadName: 
     stateType: 83
