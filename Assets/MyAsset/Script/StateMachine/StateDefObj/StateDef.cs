@@ -390,6 +390,8 @@ public class StateDef
             //Func型じゃないと取れなかったんじゃないっけ？
             ExecuteStates = executer.Get<List<int>>(preStateVerdictName);
 
+            StateParams = executer.Get<List<object>>(ParamLoadName);
+
         }      
     }
 
