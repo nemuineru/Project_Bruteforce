@@ -103,6 +103,9 @@ public class stParams<Type>
     [SerializeField]
     string stLuaLoads = "";
 
+    //mjs等のスクリプト指定. 基本的に呼び出されたStateDefの値を用いる.
+    internal string modulePath = ""; 
+
     delegate object luaCalcParam(Entity entity);
 
     //どの形式で値を読み出すかをenumで管理する.
@@ -124,7 +127,7 @@ public class stParams<Type>
 
     public Type valueGet(List<object> loadParams, Entity entity)
     {
-        //LuaEnv env = Lua_OnLoad.main.LEnv;
+        JsEnv env = PuerTS_Framework.main.JSEnv;
         Type retValue = stParamValue;
         switch (loadTypes)
         {
@@ -139,9 +142,9 @@ public class stParams<Type>
             //Calclationなら読み出すLuaCondition中に書かれたfunctionを実行しその値を読み出す.
             case loadType.Calclation:
                 {
-                    // luaCalcParam calcParam =
-                    // env.Global.Get<luaCalcParam>(stLuaLoads);
-                    // retValue = (Type)calcParam.Invoke(entity);
+                    luaCalcParam calcParam =
+                    env.ExecuteModule<luaCalcParam>(modulePath, stLuaLoads);
+                    retValue = (Type)calcParam.Invoke(entity);
                     break;
                 }
             //コンスタント値または未定義ならstParamvalueをそのまま使用.
