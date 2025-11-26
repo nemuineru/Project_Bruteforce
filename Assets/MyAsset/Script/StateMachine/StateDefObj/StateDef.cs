@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
+using System;
 using UnityEngine;
+using UnityEditor.AssetImporters;
 
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.Analytics;
 // using XLua;
 // using XLua.LuaDLL;
-using System;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using Puerts;
 
@@ -274,30 +275,21 @@ public class StateDef
         return retDef;
     }
 
+    //実行仮想環境とJavaScriptの実行モジュールオブジェクト.
     Puerts.JsEnv env;
+    JSObject executer;
 
     void OnInitDef()
     {
         //PuerTS用に改変中.
         env = PuerTS_Framework.main.JSEnv;
-        // Debug.Log("Generating Metatables on " + StateDefID);
-        // env.Global.Set("LC", new LC());
+        //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
+        executer = PuerTS_Framework.main.JSEnv.ExecuteModule(ScriptDirectory + "/" + ScriptName);
 
-        // //StateID用にメタテーブルを作成.
-        // var _sLoadT = env.NewTable();
-        // _stateLoadTables = env.NewTable();
-        // _sLoadT.Set("__index", env.Global);
-        // //メタテーブルに登録.
-        // _stateLoadTables.SetMetaTable(_sLoadT);
-        // _sLoadT.Dispose();
+        //executeStatesとStateParamsの初期化
+        ExecuteStates = new List<int>();
+        StateParams = new List<System.Object>();
 
-        // //パラメータテーブルも同様.
-        // var _sParamT = env.NewTable();
-        // _stateParamTables = env.NewTable();
-        // _sParamT.Set("__index", env.Global);
-        // //別のメタテーブルに登録.
-        // _stateParamTables.SetMetaTable(_sParamT);
-        // _sParamT.Dispose();
     }
 
     //Execute時のLuaのStateIDをそれぞれのStateDefに保存 - これ、掴みの時のEntity参照時の設定時に重複発生しそー..    
@@ -387,14 +379,38 @@ public class StateDef
             {
                 OnInitDef();
             }
-            //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
-            JSObject executer = PuerTS_Framework.main.JSEnv.ExecuteModule(ScriptDirectory + "/" + ScriptName);
-
             //Func型じゃないと取れなかったんじゃないっけ？
-            ExecuteStates = executer.Get<List<int>>(preStateVerdictName);
+            Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
+            Func<Entity, List<object>> executer_stateParamGet = executer.Get<Func<Entity, List<object>>>(ParamLoadName);
 
-            StateParams = executer.Get<List<object>>(ParamLoadName);
+            //Func型として返される値を格納
 
+            List<int> ExecuteStateIDs = executer_stateIDGet(entity);
+            luaOutputParams = executer_stateParamGet(entity);
+            
+            //for debug string
+            string executingStr = "";
+            if (ExecuteStateIDs != null)
+            {
+                for (int i = 0; i < ExecuteStateIDs.Count(); i++)
+                {
+                    executingStr += ExecuteStateIDs[i] + " , ";
+                }
+            }
+            foreach (StateController state in StateList)
+            {
+                //idがステート読み出しリスト内・もしくはステート自体が読み出し処理を行う場合
+                //Debug.LogWarning(entity.gameObject.name + " loads " + state.ID.value.ToString());
+                if (state.isIDValid(ExecuteStateIDs.ToArray(), entity))
+                {
+                    //stateにluaOutputParamsを予め登録.
+                    state.loadParams = luaOutputParams;
+
+                    //実際に実行.
+                    //state.Entityに直接登録すると、別キャラクターが参照するため変更..
+                    state.OnExecute(entity);
+                }
+            }
         }      
     }
 
