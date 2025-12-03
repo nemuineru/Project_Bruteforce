@@ -160,7 +160,7 @@ public class MixAnimNode
             {
             //var playClip = def.animClip[i];
                 float f = currentAnimTime - startAnimTime;
-            Debug.Log("time - " + f);
+                //Debug.Log("time - " + f);
                 PlayList[i].SetTime(f);
             }
         }

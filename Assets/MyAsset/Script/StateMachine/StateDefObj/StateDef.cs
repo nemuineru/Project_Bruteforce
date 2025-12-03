@@ -373,12 +373,9 @@ public class StateDef
             entityTypeSet(entity);
         }
 
-        if (ScriptDirectory != null)
+        if (ScriptDirectory != null && executer != null)
         {
-            if (env == null)
-            {
-                OnInitDef();
-            }
+            Debug.Log("Executed PuerTS");
             //Func型じゃないと取れなかったんじゃないっけ？
             Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
             Func<Entity, List<object>> executer_stateParamGet = executer.Get<Func<Entity, List<object>>>(ParamLoadName);
@@ -387,7 +384,7 @@ public class StateDef
 
             List<int> ExecuteStateIDs = executer_stateIDGet(entity);
             luaOutputParams = executer_stateParamGet(entity);
-            
+
             //for debug string
             string executingStr = "";
             if (ExecuteStateIDs != null)
@@ -411,6 +408,10 @@ public class StateDef
                     state.OnExecute(entity);
                 }
             }
+        }
+        else
+        { 
+            OnInitDef();
         }      
     }
 

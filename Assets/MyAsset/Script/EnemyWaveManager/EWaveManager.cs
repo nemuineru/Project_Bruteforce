@@ -83,7 +83,7 @@ public class EWaveManager : MonoBehaviour
         int countSpawned = spawnedEntity.FindAll(et => et != null).Count;
         if (currentDesc != null && gameState.self.gDesc == gameState.GameStateDesc.InGame && currentSpawnSec > spawnSec && EnemySpawnPoints.Count > 0)
         {
-            Debug.Log("Decriptor found - LV." + currentDesc.minlevel + " - " + currentDesc.maxlevel);
+            //Debug.Log("Decriptor found - LV." + currentDesc.minlevel + " - " + currentDesc.maxlevel);
             //一度に生成するエンティティ量が指定の量を超えないまでは..
             if (countSpawned < currentDesc.maxEntityNum && currentSpawnIndex < currentDesc.spawnEntity.Count)
             {
