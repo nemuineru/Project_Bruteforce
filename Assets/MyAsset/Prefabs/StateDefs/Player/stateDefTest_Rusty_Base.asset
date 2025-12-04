@@ -18,8 +18,8 @@ MonoBehaviour:
     StateDefID: 0
     ScriptDirectory: StateScript/Rusty
     ScriptName: statescript_main.mjs
-    preStateVerdictName: stateID_0
-    ParamLoadName: LuaOutput
+    preStateVerdictName: StateDef_0_ID
+    ParamLoadName: StateDef_0_Param
     stateType: 83
     moveType: 0
     physType: 0

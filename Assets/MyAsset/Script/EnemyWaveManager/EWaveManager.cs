@@ -58,7 +58,7 @@ public class EWaveManager : MonoBehaviour
         if (isWaveChanged == false)
         {
             //レベル設定.
-            Debug.Log("finding Level");
+            //Debug.Log("finding Level");
 
             //設定したCurrentDescをリセット
             currentDesc = null;

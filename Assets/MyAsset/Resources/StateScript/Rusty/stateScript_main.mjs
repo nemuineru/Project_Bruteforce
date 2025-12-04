@@ -19,7 +19,7 @@ export function StateDef_0_ID(entity) {
     let selfStTime = CS.LuaCondition.CheckStateTime(entity) 
 
     //Init.
-    if (selfStTime == 0)
+    if (selfStTime > 0)
     { 
         verdList.add(0) 
     }
@@ -33,6 +33,7 @@ export function StateDef_0_ID(entity) {
             verdList.add(3);
         }
     }
+    CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
     return verdList;
 }
 

@@ -176,6 +176,7 @@ public class Entity : MonoBehaviour
             {
                 //set ScriptDirectory for Load.
                 state.ScriptDirectory = dObj.ScriptDirectory;
+                Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
                 loadedDefs.Add(state.Clone());
             }
         }

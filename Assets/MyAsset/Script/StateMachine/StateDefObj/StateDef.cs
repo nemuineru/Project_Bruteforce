@@ -98,7 +98,7 @@ public class stParams<Type>
 
     //
     [SerializeField]
-    LC LuaCondition = new LC();
+    Elem LuaCondition = new Elem();
 
     //Luaで読み出すメソッド名
     [SerializeField]
@@ -265,6 +265,7 @@ public class StateDef
         retDef.StateDefID = StateDefID;
         retDef.stateTime = stateTime;
         retDef.ScriptDirectory = ScriptDirectory;
+        retDef.ScriptName = ScriptName;
         retDef.preStateVerdictName = preStateVerdictName;
         retDef.ParamLoadName = ParamLoadName;
         retDef.StateList = StateList;
@@ -285,13 +286,12 @@ public class StateDef
         env = PuerTS_Framework.main.JSEnv;
         //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
         string Dir = ScriptDirectory + "/" + ScriptName;
-        Debug.Log("script Directory " + Dir);
+        Debug.Log("script Directory " + Dir + " : at ID of " + StateDefID);
         executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
 
         //executeStatesとStateParamsの初期化
         ExecuteStates = new List<int>();
         StateParams = new List<System.Object>();
-
     }
 
     //Execute時のLuaのStateIDをそれぞれのStateDefに保存 - これ、掴みの時のEntity参照時の設定時に重複発生しそー..    
@@ -380,9 +380,9 @@ public class StateDef
             OnInitDef();
         } 
 
-        if (ScriptDirectory != null && false)
+        if (ScriptDirectory != null)
         {     
-            Debug.Log("Executed PuerTS");
+            Debug.Log("Executed PuerTS : At StateDefID " + StateDefID);
             //Func型じゃないと取れなかったんじゃないっけ？
             Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
             Func<Entity, List<object>> executer_stateParamGet = executer.Get<Func<Entity, List<object>>>(ParamLoadName);

@@ -17,9 +17,9 @@ MonoBehaviour:
   - StateDefName: Default
     StateDefID: -1
     ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_main.mjs
-    preStateVerdictName: Queue_Cmd
-    ParamLoadName: LuaOutput
+    ScriptName: stateScript_cmd.mjs
+    preStateVerdictName: stateCmd
+    ParamLoadName: 
     stateType: 0
     moveType: 0
     physType: 0
