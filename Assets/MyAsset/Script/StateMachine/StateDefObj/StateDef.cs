@@ -389,26 +389,35 @@ public class StateDef
 
             //Func型として返される値を格納
 
-            List<int> ExecuteStateIDs = executer_stateIDGet(entity);
-            luaOutputParams = executer_stateParamGet(entity);
+            if (executer_stateIDGet != null)
+            {
+                ExecuteStates = executer_stateIDGet(entity);
+            }
+            if (executer_stateParamGet != null)
+            { 
+                luaOutputParams = executer_stateParamGet(entity);
+            }
 
             //for debug string
             string executingStr = "";
-            if (ExecuteStateIDs != null)
+            if (ExecuteStates != null)
             {
-                for (int i = 0; i < ExecuteStateIDs.Count(); i++)
+                for (int i = 0; i < ExecuteStates.Count(); i++)
                 {
-                    executingStr += ExecuteStateIDs[i] + " , ";
+                    executingStr += ExecuteStates[i] + " , ";
                 }
+                //Debug.Log(executingStr); 
             }
             foreach (StateController state in StateList)
             {
                 //idがステート読み出しリスト内・もしくはステート自体が読み出し処理を行う場合
                 //Debug.LogWarning(entity.gameObject.name + " loads " + state.ID.value.ToString());
-                if (state.isIDValid(ExecuteStateIDs.ToArray(), entity))
+                if (state.isIDValid(ExecuteStates.ToArray(), entity))
                 {
                     //stateにluaOutputParamsを予め登録.
                     state.loadParams = luaOutputParams;
+
+                    //Debug.Log("Executed" + state.ID);
 
                     //実際に実行.
                     //state.Entityに直接登録すると、別キャラクターが参照するため変更..

@@ -6,31 +6,30 @@
 // We could use List name, if they call variable first.
 export function StateDef_0_ID(entity) {
     //List<Int>
-    const List_Int =
-        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
     
     let verdList = new List_Int();
 
-    let selfOnGrd = CS.LuaCondition.isEntityOnGround(entity)
-    let isPressed_A = CS.LuaCondition.isEntityOnGround(entity, "_a");
-    let isPressed_B = CS.LuaCondition.isEntityOnGround(entity, "_b");
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let isPressed_A = CS.Elem.CheckButtonPressed(entity, "_a");
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "_b");
 
     //this must be set as 0.
-    let selfStTime = CS.LuaCondition.CheckStateTime(entity) 
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
 
     //Init.
     if (selfStTime > 0)
     { 
-        verdList.add(0) 
+        verdList.Add(0) 
     }
 
     if (selfOnGrd) { 
         //Idle/Moving
-        verdList.add(2);
+        verdList.Add(2);
         //ChangeState To Jump. (stateNo - 3)
         if (isPressed_A)
         { 
-            verdList.add(3);
+            verdList.Add(3);
         }
     }
     CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
@@ -42,8 +41,8 @@ export function StateDef_0_ID(entity) {
 // returned as GenericList such like List<object>,
 // ..otherwise it fails completely. - N.
 export function StateDef_0_Param(entity) { 
-    const List_Object =
-        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.object);
+    let List_Object =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
     let outs = new List_Object();
 
     const Vector2 = CS.UnityEngine.Vector2;
@@ -52,14 +51,15 @@ export function StateDef_0_Param(entity) {
     let vel3 = new Vector3(0,0,0);
 
     //オブジェクトのRigidBodyを取得する.
-    vel3 = in_entity.rigid.velocity    
+    vel3 = entity.rigid.velocity    
     //オブジェクトの正面方向・右方向を考え、Dotで計算.
     let vel_relate_f = entity.transform.forward;
     let vel_relate_r = entity.transform.right;
     vel2.x = Vector3.Dot(vel3,vel_relate_r)
     vel2.y = Vector3.Dot(vel3,vel_relate_f)
 
-    outs.add(vel2);
+    outs.Add(vel2);
+    //CS.UnityEngine.Debug.Log(vel2);
     return outs
 }
 
