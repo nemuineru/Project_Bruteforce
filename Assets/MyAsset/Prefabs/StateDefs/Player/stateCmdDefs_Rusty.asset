@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateCmdDefs_Rusty
   m_EditorClassIdentifier: 
+  ScriptDirectory: StateScript/Rusty
   stateDefs:
   - StateDefName: Default
     StateDefID: -1
-    LuaAsset: {fileID: -8122155829129254986, guid: 8e994d9382ba03445bddab6509ecadc4, type: 3}
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_main.mjs
     preStateVerdictName: Queue_Cmd
     ParamLoadName: LuaOutput
     stateType: 0

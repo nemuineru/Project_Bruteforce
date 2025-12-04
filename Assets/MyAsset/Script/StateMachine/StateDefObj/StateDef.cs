@@ -284,7 +284,9 @@ public class StateDef
         //PuerTS用に改変中.
         env = PuerTS_Framework.main.JSEnv;
         //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
-        executer = PuerTS_Framework.main.JSEnv.ExecuteModule(ScriptDirectory + "/" + ScriptName);
+        string Dir = ScriptDirectory + "/" + ScriptName;
+        Debug.Log("script Directory " + Dir);
+        executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
 
         //executeStatesとStateParamsの初期化
         ExecuteStates = new List<int>();
@@ -373,8 +375,13 @@ public class StateDef
             entityTypeSet(entity);
         }
 
-        if (ScriptDirectory != null && executer != null)
-        {
+        if (executer == null)
+        { 
+            OnInitDef();
+        } 
+
+        if (ScriptDirectory != null && false)
+        {     
             Debug.Log("Executed PuerTS");
             //Func型じゃないと取れなかったんじゃないっけ？
             Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
@@ -409,10 +416,6 @@ public class StateDef
                 }
             }
         }
-        else
-        { 
-            OnInitDef();
-        }      
     }
 
     public void _Execute(Entity entity)
