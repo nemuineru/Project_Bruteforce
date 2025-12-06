@@ -13,6 +13,7 @@ export function StateDef_0_ID(entity) {
     let selfOnGrd = CS.Elem.isEntityOnGround(entity)
     let isPressed_A = CS.Elem.CheckButtonPressed(entity, "_a");
     let isPressed_B = CS.Elem.CheckButtonPressed(entity, "_b");
+    let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
@@ -31,6 +32,11 @@ export function StateDef_0_ID(entity) {
         { 
             verdList.Add(3);
         }
+    }
+
+    if( !isPressed_C)
+    {
+            verdList.Add(800);
     }
     CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
     return verdList;
