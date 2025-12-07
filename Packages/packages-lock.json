@@ -6,14 +6,6 @@
       "source": "local",
       "dependencies": {}
     },
-    "com.tencent.puerts.ts-loader": {
-      "version": "file:C:/Users/sutea/source/repos/puerts_ts_loader/puerts-ts-loader/upm",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.tencent.puerts.core": "2.0.5"
-      }
-    },
     "com.tencent.puerts.webgl": {
       "version": "file:C:/Users/sutea/source/repos/puerts_st/puerts/unity/Assets/webgl/upm",
       "depth": 0,

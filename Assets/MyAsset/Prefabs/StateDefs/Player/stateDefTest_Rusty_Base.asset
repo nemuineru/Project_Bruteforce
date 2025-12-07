@@ -161,16 +161,16 @@ MonoBehaviour:
   - StateDefName: Jump
     StateDefID: 50
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID
-    ParamLoadName: LuaOutput
+    ScriptName: statescript_main.mjs
+    preStateVerdictName: StateDef_50_ID
+    ParamLoadName: 
     stateType: 0
     moveType: 0
     physType: 0
     StateList:
     - rid: 4404389163807801372
-    - rid: 4404389163807801374
     - rid: 4404389163807801373
+    - rid: 4404389163807801374
     setCtrl: 0
   - StateDefName: Grd Special Attack
     StateDefID: 100

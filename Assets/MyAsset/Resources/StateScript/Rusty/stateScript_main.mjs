@@ -24,7 +24,8 @@ export function StateDef_0_ID(entity) {
         verdList.Add(0) 
     }
 
-    if (selfOnGrd) { 
+    if (selfOnGrd) 
+    { 
         //Idle/Moving
         verdList.Add(2);
         //ChangeState To Jump. (stateNo - 3)
@@ -38,8 +39,44 @@ export function StateDef_0_ID(entity) {
     {
             verdList.Add(800);
     }
-    CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+    
+    //entityに登録されたmixerの数が0のときは緊急。
+    if( CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0)
+    {
+        //Debug.Log("Init Anim Loaded")
+        verdList.Add(100) 
+    }
+    if(!entity.attrs.alive)
+    {
+        verdList.Add(5100)
+    }
+    //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
     return verdList;
+}
+
+//Function for jump.
+export function StateDef_50_ID(entity) 
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let selfStTime =  CS.Elem.CheckStateTime(entity)
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+
+    //On Ground.
+    if(selfStTime > 1 && selfOnGrd_f == true)
+    {
+        verdList.Add(1);
+    }
+
+    //idleのanimを指定する
+    if(selfStTime == 0)
+    {
+    //Debug.Log("Jumping Vect");
+    verdList.Add(50);
+    }
+    return verdList
 }
 
 // export Parameter @ stateDef 0.
