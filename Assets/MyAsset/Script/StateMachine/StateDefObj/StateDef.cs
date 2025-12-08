@@ -6,14 +6,6 @@ using Unity.VisualScripting;
 using System;
 using UnityEngine;
 
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.Analytics;
-// using XLua;
-// using XLua.LuaDLL;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
-using Puerts;
-
 //EditorExtention. for deepcopy.
 public static class ObjectExtension
 {
@@ -127,7 +119,7 @@ public class stParams<Type>
 
     public Type valueGet(List<object> loadParams, Entity entity)
     {
-        JsEnv env = PuerTS_Framework.main.JSEnv;
+        Puerts.JsEnv env = PuerTS_Framework.main.JSEnv;
         Type retValue = stParamValue;
         switch (loadTypes)
         {
@@ -249,6 +241,8 @@ public class StateDef
     [SerializeReference, SerializeField]
     public List<StateController> StateList = new List<StateController>();
 
+    public string Dir;
+
     //LuaCondition内でstateDefParamsで定義された値を受け取るためのクラス.
     //...Objectで良いのか？
     List<object> luaOutputParams = new List<object>();
@@ -277,20 +271,15 @@ public class StateDef
 
     //実行仮想環境とJavaScriptの実行モジュールオブジェクト.
     Puerts.JsEnv env;
-    JSObject executer;
+    Puerts.JSObject executer;
 
     void OnInitDef()
     {
         //PuerTS用に改変中.
         env = PuerTS_Framework.main.JSEnv;
         //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
-        string Dir = ScriptDirectory + "/" + ScriptName;
+        Dir = ScriptDirectory + "/" + ScriptName;
         Debug.Log("script Directory " + Dir + " : at ID of " + StateDefID);
-        executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
-
-        //executeStatesとStateParamsの初期化
-        ExecuteStates = new List<int>();
-        StateParams = new List<System.Object>();
     }
 
     //Execute時のLuaのStateIDをそれぞれのStateDefに保存 - これ、掴みの時のEntity参照時の設定時に重複発生しそー..    
@@ -381,6 +370,13 @@ public class StateDef
 
         if (ScriptDirectory != null)
         {     
+            
+            executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
+
+            //executeStatesとStateParamsの初期化
+            ExecuteStates = new List<int>();
+            StateParams = new List<System.Object>();
+
             Debug.Log("Executed PuerTS : At StateDefID " + StateDefID);
             //Func型じゃないと取れなかったんじゃないっけ？
             Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);

@@ -17,7 +17,7 @@ MonoBehaviour:
   - StateDefName: OnInitLoad
     StateDefID: 0
     ScriptDirectory: StateScript/Rusty
-    ScriptName: statescript_main.mjs
+    ScriptName: stateScript_main.mjs
     preStateVerdictName: StateDef_0_ID
     ParamLoadName: StateDef_0_Param
     stateType: 83
@@ -30,6 +30,7 @@ MonoBehaviour:
     - rid: 3002629528666767591
     - rid: 3579422750824726546
     - rid: 1982101199356952583
+    Dir: 
     setCtrl: 0
   - StateDefName: Combo1 Jab_First
     StateDefID: 1
@@ -47,6 +48,7 @@ MonoBehaviour:
     - rid: 3579423095655497736
     - rid: 1982101230649868288
     - rid: 4404388529659445248
+    Dir: 
     setCtrl: 0
   - StateDefName: Combo2 Jab_Second
     StateDefID: 2
@@ -63,6 +65,7 @@ MonoBehaviour:
     - rid: 3579423095655497732
     - rid: 1982101230649868296
     - rid: 4404388637674569761
+    Dir: 
     setCtrl: 0
   - StateDefName: Combo3 Kick Finisher
     StateDefID: 3
@@ -78,6 +81,7 @@ MonoBehaviour:
     - rid: 4404388799971590147
     - rid: 1982101230649868297
     - rid: 4404388799971590148
+    Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
     StateDefID: 5
@@ -93,6 +97,7 @@ MonoBehaviour:
     - rid: 4404388709018370072
     - rid: 4404388709018370073
     - rid: 1982101230649868302
+    Dir: 
     setCtrl: 0
   - StateDefName: AxeSlash
     StateDefID: 6
@@ -110,6 +115,7 @@ MonoBehaviour:
     - rid: 7982028148908752902
     - rid: 1982101096022933504
     - rid: 1982101252599447552
+    Dir: 
     setCtrl: 0
   - StateDefName: Hammer
     StateDefID: 7
@@ -126,6 +132,7 @@ MonoBehaviour:
     - rid: 7982028148908752907
     - rid: 7982028148908752906
     - rid: 1982101252599447559
+    Dir: 
     setCtrl: 0
   - StateDefName: AirCombo Kicking
     StateDefID: 20
@@ -142,6 +149,7 @@ MonoBehaviour:
     - rid: 3002629213760520203
     - rid: 1982101252599447575
     - rid: 4404388637674569830
+    Dir: 
     setCtrl: 0
   - StateDefName: AirHard Knife
     StateDefID: 25
@@ -157,11 +165,12 @@ MonoBehaviour:
     - rid: 4404388709018370090
     - rid: 4404388709018370088
     - rid: 1982101252599447576
+    Dir: 
     setCtrl: 0
   - StateDefName: Jump
     StateDefID: 50
     ScriptDirectory: StateScript/Rusty
-    ScriptName: statescript_main.mjs
+    ScriptName: stateScript_main.mjs
     preStateVerdictName: StateDef_50_ID
     ParamLoadName: 
     stateType: 0
@@ -171,6 +180,7 @@ MonoBehaviour:
     - rid: 4404389163807801372
     - rid: 4404389163807801373
     - rid: 4404389163807801374
+    Dir: 
     setCtrl: 0
   - StateDefName: Grd Special Attack
     StateDefID: 100
@@ -189,6 +199,7 @@ MonoBehaviour:
     - rid: 7557642759318274113
     - rid: 7557642759318274050
     - rid: 7557642784103727104
+    Dir: 
     setCtrl: 0
   - StateDefName: Air Special Attack
     StateDefID: 105
@@ -200,6 +211,7 @@ MonoBehaviour:
     moveType: 0
     physType: 0
     StateList: []
+    Dir: 
     setCtrl: 0
   - StateDefName: Winning Pose
     StateDefID: 180
@@ -212,6 +224,7 @@ MonoBehaviour:
     physType: 0
     StateList:
     - rid: 7557642767827468288
+    Dir: 
     setCtrl: 0
   references:
     version: 2
