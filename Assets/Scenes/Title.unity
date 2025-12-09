@@ -302,8 +302,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145479010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.051187146, y: 0.898264, z: 0.10877777, w: -0.42269275}
-  m_LocalPosition: {x: 2.7739768, y: -0.40457776, z: 2.2181318}
+  m_LocalRotation: {x: 0.051187202, y: 0.898264, z: 0.10877791, w: -0.4226926}
+  m_LocalPosition: {x: 2.773976, y: -0.4045778, z: 2.2181313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 327368229}
   - component: {fileID: 327368233}
   - component: {fileID: 327368232}
+  - component: {fileID: 327368234}
   m_Layer: 5
   m_Name: MainMenu_UI
   m_TagString: Untagged
@@ -746,6 +747,18 @@ MonoBehaviour:
   isSelectReset: 1
   menuIndexText: {fileID: 1540622477}
   descIndexText: {fileID: 1985477323}
+--- !u!114 &327368234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327368227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3334ad5ea1b721a45ae03aaaae32539e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &440042852
 GameObject:
   m_ObjectHideFlags: 3
@@ -3827,8 +3840,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127540796}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14450535, y: 0.24937843, z: -0.037662674, w: 0.956823}
-  m_LocalPosition: {x: -2.2248921, y: -0.075992435, z: -0.64156294}
+  m_LocalRotation: {x: 0.14450535, y: 0.24937841, z: -0.03766268, w: 0.956823}
+  m_LocalPosition: {x: -2.2248921, y: -0.075992405, z: -0.641563}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

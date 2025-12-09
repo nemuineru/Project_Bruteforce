@@ -16,7 +16,9 @@ public class onStartJSLib : MonoBehaviour
     {
         #if !UNITY_EDITOR && UNITY_WEBGL
         {
-            var url = "https://cdn.jsdelivr.net/npm/sweetalert2@11";
+            var url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts-runtime.js";
+            InjectionJs(url);
+            url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts_browser_js_resources.js";
             InjectionJs(url);
         }
         #endif

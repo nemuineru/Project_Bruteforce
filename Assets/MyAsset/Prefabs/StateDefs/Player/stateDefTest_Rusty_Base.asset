@@ -17,7 +17,7 @@ MonoBehaviour:
   - StateDefName: OnInitLoad
     StateDefID: 0
     ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_main.mjs
+    ScriptName: stateScript_Rusty_Main.mjs
     preStateVerdictName: StateDef_0_ID
     ParamLoadName: StateDef_0_Param
     stateType: 83
@@ -35,8 +35,8 @@ MonoBehaviour:
   - StateDefName: Combo1 Jab_First
     StateDefID: 1
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: StateDef_1_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   - StateDefName: Jump
     StateDefID: 50
     ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_main.mjs
+    ScriptName: stateScript_Rusty_Main.mjs
     preStateVerdictName: StateDef_50_ID
     ParamLoadName: 
     stateType: 0

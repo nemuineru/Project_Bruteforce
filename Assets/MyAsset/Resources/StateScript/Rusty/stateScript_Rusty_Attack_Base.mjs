@@ -20,7 +20,7 @@ export function StateDef_1_ID(entity)
         verdList.Add(0);
     }
     //Aight, does native JS supports math function?
-    if (math.abs(CurrentTime - 4) < 2 &&
+    if (Math.abs(CurrentTime - 4) < 2 &&
         entity.attrs.isStateHit == 0)
     {
         verdList.Add(10);
@@ -52,7 +52,7 @@ export function StateDef_3_ID(entity){
     }
     //Aight, does native JS supports math function?
     //current Animtime needs to be set more than 8
-    if (math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 &&
+    if (Math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 &&
         entity.attrs.isStateHit == 0)
     {
         verdList.Add(10);
