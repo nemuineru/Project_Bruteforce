@@ -28,6 +28,14 @@ export function stateCmd(entity) {
     }
 
     //the combo button could charge to the doubleskill - to full skill
-    if(AttackCmd_x_isPressed)
+    if(AttackCmd_x_isPressed && stateID < 5000)
+    {
+        verdList.Add(30)
+    }
+    //for at damaged. the charge is gone to none
+    else if(stateID >= 5000 && stateID <= 5300)
+    {
+        verdList.Add(31)
+    }
     return verdList;
 }
