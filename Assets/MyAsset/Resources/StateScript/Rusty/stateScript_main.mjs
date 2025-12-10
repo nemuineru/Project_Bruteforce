@@ -11,8 +11,8 @@ export function StateDef_0_ID(entity) {
     let verdList = new List_Int();
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity)
-    let isPressed_A = CS.Elem.CheckButtonPressed(entity, "_a");
-    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "_b");
+    let isPressed_A = CS.Elem.CheckButtonPressed(entity, "a_");
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "b_");
     let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
 
     //this must be set as 0.
