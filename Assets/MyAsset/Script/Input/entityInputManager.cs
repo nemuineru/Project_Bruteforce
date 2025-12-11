@@ -575,9 +575,9 @@ public class entityInputManager
 
     public bool _CheckInput(string command, int buffer)
     {
-        //入力済みのLength迄の値を用いる
+        //入力済みのLength迄の値を用いる()
         //最小値は0
-        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length),0);
+        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1),0);
         bool result = false;
         string[] commands = command.Split(',');
         for (int i = 0; i < commands.Length; i++)
@@ -591,6 +591,7 @@ public class entityInputManager
             //indexは0を最新とする. そこからbuffer最大値まで遡って登録.
             for (int index = startindex; index < bufferMax; index++)
             {
+                //[F],[a],[b+a],[a^]..という風に分ける.
                 foreach (string comOne in commands)
                 {
                     //コンマで区切られたコマンド値の読み出し..
@@ -598,17 +599,21 @@ public class entityInputManager
                     //(~!)xxab(^_)
                     //という感じで.
                     //小文字と大文字は分ける.
+                    //あとは元々MUGENにあった+（複合入力）は廃止. 
 
                     //時間かかるから先ずはbutton + conditionの一部だけ使う.
-                        string conditions = Regex.Match(comOne, @"[~_^]").Value;
-                        string seconds = Regex.Match(comOne, @"[\d]").Value;
-                        string button = Regex.Match(comOne, @"[a-z]").Value;
-                        string stick = Regex.Match(comOne, @"[A-Z]").Value;
+                    string conditions = Regex.Match(comOne, @"[~_^]").Value;
+                    string seconds = Regex.Match(comOne, @"[\d]").Value;
+                    //入力値をすべて取る. buttonは得られた小文字分の数だけ生成.
+                    string buttons = Regex.Match(comOne, @"[a-z]").Value;
+                    string stick = Regex.Match(comOne, @"[A-Z]").Value;
 
-                        structInputs checker = anlInputs[7];
+                    structInputs[] checkers = new structInputs[buttons.Length];
 
-
-                        switch (button[0])
+                    for (int i = 0; i < buttons.Length; i++)
+                    {
+                        structInputs checker = new structInputs();
+                        switch (buttons[i])
                         {
                             case 'a':
                                 {
@@ -651,6 +656,67 @@ public class entityInputManager
                                     break;
                                 }
                         }
+                        checkers[i] = checker;
+                    }
+
+                    //で、その後に得られたcheckersの値を使用してなんとかする.
+
+
+                            
+                    int cmd_check_rightNow, cmd_check_before;
+
+                    cmd_check_rightNow = commandBuffer[index].inputs;
+                    cmd_check_before = commandBuffer[index + 1].inputs;
+                    //Debug.Log(b_rn + " " + b_bf);
+
+                    foreach (structInputs checker in checkers)
+                    {
+                        //conditionの最初の文問のみ..
+                        if (conditions.Length != 0)
+                            switch (conditions[0])
+                            {
+                                //押した瞬間を確認
+                                //2フレーム以上必要.
+                                case '_':
+                                    {
+                                        //Debug.Log("cmd check - pressPulse");
+                                        if (ButtonCheck(cmd_check_rightNow, checker.bitNum) == '+' && commandBuffer_max > 1 &&
+                                        (ButtonCheck(cmd_check_before, checker.bitNum) == '.' || ButtonCheck(cmd_check_before, checker.bitNum) == '-'))
+                                        {
+                                            result = true;
+                                        }
+                                        break;
+                                    }
+                                //離された瞬間を確認
+                                //2フレーム以上必要.
+                                case '^':
+                                    {
+                                        if ((ButtonCheck(cmd_check_rightNow, checker.bitNum) == '.' || ButtonCheck(cmd_check_rightNow, checker.bitNum) == '-') && commandBuffer_max > 1 &&
+                                        ButtonCheck(cmd_check_before, checker.bitNum) == '+')
+                                        {
+                                            result = true;
+                                        }
+                                        break;
+                                    }
+                                //defaultは入力値のみを見るとして..
+                                //1フレのみを計測
+                                default:
+                                    {
+                                        if (ButtonCheck(cmd_check_rightNow, checker.bitNum) == '+')
+                                        {
+                                            result = true;
+                                        }
+                                        break;
+                                    }
+                            }
+                        else
+                        {
+                            if (ButtonCheck(cmd_check_rightNow, checker.bitNum) == '+')
+                            {
+                                result = true;
+                            }
+                        }
+                    }
                 }
             }
         }
