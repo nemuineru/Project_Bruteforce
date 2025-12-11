@@ -570,6 +570,96 @@ public class entityInputManager
         new structInputs(0B_10000000, "o")
         };
 
+
+    
+
+    public bool _CheckInput(string command, int buffer)
+    {
+        //入力済みのLength迄の値を用いる
+        //最小値は0
+        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length),0);
+        bool result = false;
+        string[] commands = command.Split(',');
+        for (int i = 0; i < commands.Length; i++)
+        {
+            //前後及び余分な空白を消す.
+            commands[i] = commands[i].Trim().Replace(" ", "");
+        }
+        //buffer分遡って、全コマンドが正常値ならresultにtrueを返す.
+        for (int startindex = 0; startindex < bufferMax; startindex++)
+        {
+            //indexは0を最新とする. そこからbuffer最大値まで遡って登録.
+            for (int index = startindex; index < bufferMax; index++)
+            {
+                foreach (string comOne in commands)
+                {
+                    //コンマで区切られたコマンド値の読み出し..
+                    //buffer値に基づき、commandBufferの配列を読み出す..
+                    //(~!)xxab(^_)
+                    //という感じで.
+                    //小文字と大文字は分ける.
+
+                    //時間かかるから先ずはbutton + conditionの一部だけ使う.
+                        string conditions = Regex.Match(comOne, @"[~_^]").Value;
+                        string seconds = Regex.Match(comOne, @"[\d]").Value;
+                        string button = Regex.Match(comOne, @"[a-z]").Value;
+                        string stick = Regex.Match(comOne, @"[A-Z]").Value;
+
+                        structInputs checker = anlInputs[7];
+
+
+                        switch (button[0])
+                        {
+                            case 'a':
+                                {
+                                    checker = anlInputs[0];
+                                    break;
+                                }
+                            case 'b':
+                                {
+                                    checker = anlInputs[1];
+                                    break;
+                                }
+                            case 'c':
+                                {
+                                    checker = anlInputs[4];
+                                    break;
+                                }
+                            case 'x':
+                                {
+                                    checker = anlInputs[2];
+                                    break;
+                                }
+                            case 'y':
+                                {
+                                    checker = anlInputs[3];
+                                    break;
+                                }
+                            case 'z':
+                                {
+                                    checker = anlInputs[5];
+                                    break;
+                                }
+                            case 's':
+                                {
+                                    checker = anlInputs[6];
+                                    break;
+                                }
+                            case 'o':
+                                {
+                                    checker = anlInputs[7];
+                                    break;
+                                }
+                        }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    //Inputの入力値設定..古いタイプなので後で直す
+
     public bool CheckInput(string command, int buffer)
     {
         bool result = false;
