@@ -589,9 +589,11 @@ public class entityInputManager
         for (int startindex = 0; startindex < bufferMax; startindex++)
         {
             //indexは0を最新とする. そこからbuffer最大値まで遡って登録.
+            //こうすれば、どの入力で記録したとしても..
             for (int index = startindex; index < bufferMax; index++)
             {
                 //[F],[a],[b+a],[a^]..という風に分ける.
+                //この連続入力の正誤値どうしようかなー.
                 foreach (string comOne in commands)
                 {
                     //コンマで区切られたコマンド値の読み出し..
@@ -599,7 +601,7 @@ public class entityInputManager
                     //(~!)xxab(^_)
                     //という感じで.
                     //小文字と大文字は分ける.
-                    //あとは元々MUGENにあった+（複合入力）は廃止. 
+                    //あとは元々MUGENにあった+形式での（複合入力）は廃止. 
 
                     //時間かかるから先ずはbutton + conditionの一部だけ使う.
                     string conditions = Regex.Match(comOne, @"[~_^]").Value;
@@ -662,16 +664,17 @@ public class entityInputManager
                     //で、その後に得られたcheckersの値を使用してなんとかする.
 
 
-                            
+
                     int cmd_check_rightNow, cmd_check_before;
 
                     cmd_check_rightNow = commandBuffer[index].inputs;
                     cmd_check_before = commandBuffer[index + 1].inputs;
                     //Debug.Log(b_rn + " " + b_bf);
 
+                    //判別するボタンの数だけ、設定を行う.
                     foreach (structInputs checker in checkers)
                     {
-                        //conditionの最初の文問のみ..
+                        //まず、conditionの最初の文問のみを考える.
                         if (conditions.Length != 0)
                             switch (conditions[0])
                             {
