@@ -277,7 +277,7 @@ public class entityInputManager
                 cmdPallettes[idx].CurrentElapsedTime++;
             }
             //ElapsedTimeが0未満なら消し飛ばそう
-            cmdPallettes.RemoveAll(x =>  x.CommandLength - x.CurrentElapsedTime < 0);
+            cmdPallettes.RemoveAll(x => x.CommandLength - x.CurrentElapsedTime < 0);
             RecordInput_Core(rec);
         }
     }
@@ -286,11 +286,11 @@ public class entityInputManager
     {
         if (cmdPallettes != null && cmdPallettes.Count != 0)
         {
-            cmdPallettes.Sort((x , y) => y.CommandPriority - x.CommandPriority);
+            cmdPallettes.Sort((x, y) => y.CommandPriority - x.CommandPriority);
         }
     }
 
-    public 
+    public
 
 
     //--!!旧版　使うな!!--//
@@ -571,14 +571,14 @@ public class entityInputManager
         };
 
 
-    
+
 
     public bool _CheckInput(string command, int buffer)
     {
         //入力済みのLength迄の値を用いる()
         //最小値は0
         //やっぱ、連続コマンドの実装はやめたほうが良いかも..
-        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1),0);
+        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1), 0);
         bool result = false;
         string[] commands = command.Split(',');
         for (int i = 0; i < commands.Length; i++)
@@ -759,7 +759,7 @@ public class entityInputManager
             //前後及び余分な空白を消す.
             commands[i] = commands[i].Trim().Replace(" ", "");
         }
-        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1),0);
+        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1), 0);
 
         //最新のコマンドバッファ値.
         int commandBuffer_max = commandBuffer.Length;
@@ -822,7 +822,7 @@ public class entityInputManager
 
                     int b_rn, b_bf;
 
-                    Debug.Log("Checking buttons " + button + " at "  + buttons);
+                    Debug.Log("Checking buttons " + button + " at " + buttons);
 
                     b_rn = commandBuffer[index].inputs;
                     b_bf = b_rn;
@@ -916,5 +916,23 @@ public class entityInputManager
         public string drawStr { get; set; }
     }
 
+
+    public class entityInput_Buffers
+    {
+        public string CommandName;
+
+        public string Command;
+        public int currentBufferTime = 0;
+        public int bufferMaxTime = 0;
+
+        //check the command. and return the int values
+        public int isCommandPressed()
+        {
+            currentBufferTime -= 1;
+
+            return currentBufferTime;
+        }
+
+    }
 }
 
