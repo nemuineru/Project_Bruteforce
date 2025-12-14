@@ -577,6 +577,7 @@ public class entityInputManager
     {
         //入力済みのLength迄の値を用いる()
         //最小値は0
+        //やっぱ、連続コマンドの実装はやめたほうが良いかも..
         int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1),0);
         bool result = false;
         string[] commands = command.Split(',');
@@ -588,14 +589,18 @@ public class entityInputManager
         //buffer分遡って、全コマンドが正常値ならresultにtrueを返す.
         for (int startindex = 0; startindex < bufferMax; startindex++)
         {
+            bool confirmation = false;
             //indexは0を最新とする. そこからbuffer最大値まで遡って登録.
             //こうすれば、どの入力で記録したとしても..
             for (int index = startindex; index < bufferMax; index++)
             {
+                bool commandCorrect = false;
                 //[F],[a],[b+a],[a^]..という風に分ける.
                 //この連続入力の正誤値どうしようかなー.
-                foreach (string comOne in commands)
+                //commandsのindex値を考えなければ..
+                for (int comI = 0; comI < commands.Length; comI++)
                 {
+                    string comOne = commands[comI];
                     //コンマで区切られたコマンド値の読み出し..
                     //buffer値に基づき、commandBufferの配列を読み出す..
                     //(~!)xxab(^_)
@@ -671,7 +676,10 @@ public class entityInputManager
                     cmd_check_before = commandBuffer[index + 1].inputs;
                     //Debug.Log(b_rn + " " + b_bf);
 
+                    bool buttonPressedCorectly = false;
+
                     //判別するボタンの数だけ、設定を行う.
+                    //同時押しの判定とかを実装.
                     foreach (structInputs checker in checkers)
                     {
                         //まず、conditionの最初の文問のみを考える.
@@ -686,7 +694,11 @@ public class entityInputManager
                                         if (ButtonCheck(cmd_check_rightNow, checker.bitNum) == '+' && commandBuffer_max > 1 &&
                                         (ButtonCheck(cmd_check_before, checker.bitNum) == '.' || ButtonCheck(cmd_check_before, checker.bitNum) == '-'))
                                         {
-                                            result = true;
+                                            buttonPressedCorectly = true;
+                                        }
+                                        else
+                                        {
+                                            buttonPressedCorectly = false;
                                         }
                                         break;
                                     }
@@ -697,7 +709,11 @@ public class entityInputManager
                                         if ((ButtonCheck(cmd_check_rightNow, checker.bitNum) == '.' || ButtonCheck(cmd_check_rightNow, checker.bitNum) == '-') && commandBuffer_max > 1 &&
                                         ButtonCheck(cmd_check_before, checker.bitNum) == '+')
                                         {
-                                            result = true;
+                                            buttonPressedCorectly = true;
+                                        }
+                                        else
+                                        {
+                                            buttonPressedCorectly = false;
                                         }
                                         break;
                                     }
@@ -707,7 +723,11 @@ public class entityInputManager
                                     {
                                         if (ButtonCheck(cmd_check_rightNow, checker.bitNum) == '+')
                                         {
-                                            result = true;
+                                            buttonPressedCorectly = true;
+                                        }
+                                        else
+                                        {
+                                            buttonPressedCorectly = false;
                                         }
                                         break;
                                     }
@@ -722,12 +742,13 @@ public class entityInputManager
                     }
                 }
             }
+            //最後に、結合.
+            result = confirmation;
         }
 
         return result;
     }
 
-    //Inputの入力値設定..古いタイプなので後で直す
 
     public bool CheckInput(string command, int buffer)
     {
@@ -754,100 +775,102 @@ public class entityInputManager
         {
             string conditions = Regex.Match(sCom, @"[~_^]").Value;
             string seconds = Regex.Match(sCom, @"[\d]").Value;
-            string button = Regex.Match(sCom, @"[a-z]").Value;
+            string buttons = Regex.Match(sCom, @"[a-z]").Value;
             string stick = Regex.Match(sCom, @"[A-Z]").Value;
 
             structInputs checker = anlInputs[7];
 
-
-            switch (button[0])
+            foreach (char button in buttons)
             {
-                case 'a':
-                    {
-                        checker = anlInputs[0];
-                        break;
-                    }
-                case 'b':
-                    {
-                        checker = anlInputs[1];
-                        break;
-                    }
-                case 'c':
-                    {
-                        checker = anlInputs[4];
-                        break;
-                    }
-                case 'x':
-                    {
-                        checker = anlInputs[2];
-                        break;
-                    }
-                case 'y':
-                    {
-                        checker = anlInputs[3];
-                        break;
-                    }
-                case 'z':
-                    {
-                        checker = anlInputs[5];
-                        break;
-                    }
-            }
-
-            int b_rn, b_bf;
-
-            b_rn = commandBuffer[0].inputs;
-            b_bf = b_rn;
-            if (commandBuffer_max > 1)
-            {
-                b_bf = commandBuffer[1].inputs;
-            }
-            //Debug.Log(b_rn + " " + b_bf);
-
-
-            //conditionの最初の文問のみ..
-            if (conditions.Length != 0)
-                switch (conditions[0])
+                switch (button)
                 {
-                    //押した瞬間を確認
-                    //2フレーム以上必要.
-                    case '_':
+                    case 'a':
                         {
-                            //Debug.Log("cmd check - pressPulse");
-                            if (ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
-                            (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-'))
-                            {
-                                result = true;
-                            }
+                            checker = anlInputs[0];
                             break;
                         }
-                    //離された瞬間を確認
-                    //2フレーム以上必要.
-                    case '^':
+                    case 'b':
                         {
-                            if ((ButtonCheck(b_rn, checker.bitNum) == '.' || ButtonCheck(b_rn, checker.bitNum) == '-') && commandBuffer_max > 1 &&
-                            ButtonCheck(b_bf, checker.bitNum) == '+')
-                            {
-                                result = true;
-                            }
+                            checker = anlInputs[1];
                             break;
                         }
-                    //defaultは入力値のみを見るとして..
-                    //1フレのみを計測
-                    default:
+                    case 'c':
                         {
-                            if (ButtonCheck(b_rn, checker.bitNum) == '+')
-                            {
-                                result = true;
-                            }
+                            checker = anlInputs[4];
+                            break;
+                        }
+                    case 'x':
+                        {
+                            checker = anlInputs[2];
+                            break;
+                        }
+                    case 'y':
+                        {
+                            checker = anlInputs[3];
+                            break;
+                        }
+                    case 'z':
+                        {
+                            checker = anlInputs[5];
                             break;
                         }
                 }
-            else
-            {
-                if (ButtonCheck(b_rn, checker.bitNum) == '+')
+
+                int b_rn, b_bf;
+
+                b_rn = commandBuffer[0].inputs;
+                b_bf = b_rn;
+                if (commandBuffer_max > 1)
                 {
-                    result = true;
+                    b_bf = commandBuffer[1].inputs;
+                }
+                //Debug.Log(b_rn + " " + b_bf);
+
+
+                //conditionの最初の文問のみ..
+                if (conditions.Length != 0)
+                    switch (conditions[0])
+                    {
+                        //押した瞬間を確認
+                        //2フレーム以上必要.
+                        case '_':
+                            {
+                                //Debug.Log("cmd check - pressPulse");
+                                if (ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
+                                (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-'))
+                                {
+                                    result = true;
+                                }
+                                break;
+                            }
+                        //離された瞬間を確認
+                        //2フレーム以上必要.
+                        case '^':
+                            {
+                                if ((ButtonCheck(b_rn, checker.bitNum) == '.' || ButtonCheck(b_rn, checker.bitNum) == '-') && commandBuffer_max > 1 &&
+                                ButtonCheck(b_bf, checker.bitNum) == '+')
+                                {
+                                    result = true;
+                                }
+                                break;
+                            }
+                        //defaultは入力値のみを見るとして..
+                        //1フレのみを計測
+                        default:
+                            {
+                                if (ButtonCheck(b_rn, checker.bitNum) == '+')
+                                {
+                                    result = true;
+                                }
+                                break;
+                            }
+                    }
+                else
+                {
+                    if (ButtonCheck(b_rn, checker.bitNum) == '+')
+                    {
+                        result = true;
+                    }
                 }
             }
 
