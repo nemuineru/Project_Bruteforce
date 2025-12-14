@@ -14,7 +14,7 @@ export function stateCmd(entity) {
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity);
     //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "x_");
+    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "xy");
     //charger for basic 
     let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "x");
     let StateDefID = entity.CurrentStateID;
@@ -28,12 +28,12 @@ export function stateCmd(entity) {
     }
 
     //the combo button could charge to the doubleskill - to full skill
-    if(AttackCmd_x_isPressed && stateID < 5000)
+    if(AttackCmd_x_isPressed && StateDefID < 5000)
     {
         verdList.Add(30)
     }
     //for at damaged. the charge is gone to none
-    else if(stateID >= 5000 && stateID <= 5300)
+    else if(!AttackCmd_x_isPressed || StateDefID >= 5000 && StateDefID <= 5300)
     {
         verdList.Add(31)
     }

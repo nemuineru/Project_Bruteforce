@@ -759,6 +759,7 @@ public class entityInputManager
             //前後及び余分な空白を消す.
             commands[i] = commands[i].Trim().Replace(" ", "");
         }
+        int bufferMax = Mathf.Max(Mathf.Min(buffer, commandBuffer.Length - 1),0);
 
         //最新のコマンドバッファ値.
         int commandBuffer_max = commandBuffer.Length;
@@ -771,109 +772,120 @@ public class entityInputManager
         //小文字と大文字は分ける.
 
         //時間かかるから先ずはbutton + conditionの一部だけ使う.
-        foreach (string sCom in commands)
+        for (int index = 0; index < bufferMax; index++)
         {
-            string conditions = Regex.Match(sCom, @"[~_^]").Value;
-            string seconds = Regex.Match(sCom, @"[\d]").Value;
-            string buttons = Regex.Match(sCom, @"[a-z]").Value;
-            string stick = Regex.Match(sCom, @"[A-Z]").Value;
-
-            structInputs checker = anlInputs[7];
-
-            foreach (char button in buttons)
+            bool isButtonChecked = true;
+            foreach (string sCom in commands)
             {
-                switch (button)
+                string conditions = Regex.Match(sCom, @"[~_^]+").Value;
+                string seconds = Regex.Match(sCom, @"[\d]+").Value;
+                string buttons = Regex.Match(sCom, @"[a-z]+").Value;
+                string stick = Regex.Match(sCom, @"[A-Z]").Value;
+
+                structInputs checker = anlInputs[7];
+
+                foreach (char button in buttons)
                 {
-                    case 'a':
-                        {
-                            checker = anlInputs[0];
-                            break;
-                        }
-                    case 'b':
-                        {
-                            checker = anlInputs[1];
-                            break;
-                        }
-                    case 'c':
-                        {
-                            checker = anlInputs[4];
-                            break;
-                        }
-                    case 'x':
-                        {
-                            checker = anlInputs[2];
-                            break;
-                        }
-                    case 'y':
-                        {
-                            checker = anlInputs[3];
-                            break;
-                        }
-                    case 'z':
-                        {
-                            checker = anlInputs[5];
-                            break;
-                        }
-                }
-
-                int b_rn, b_bf;
-
-                b_rn = commandBuffer[0].inputs;
-                b_bf = b_rn;
-                if (commandBuffer_max > 1)
-                {
-                    b_bf = commandBuffer[1].inputs;
-                }
-                //Debug.Log(b_rn + " " + b_bf);
-
-
-                //conditionの最初の文問のみ..
-                if (conditions.Length != 0)
-                    switch (conditions[0])
+                    switch (button)
                     {
-                        //押した瞬間を確認
-                        //2フレーム以上必要.
-                        case '_':
+                        case 'a':
                             {
-                                //Debug.Log("cmd check - pressPulse");
-                                if (ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
-                                (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-'))
-                                {
-                                    result = true;
-                                }
+                                checker = anlInputs[0];
                                 break;
                             }
-                        //離された瞬間を確認
-                        //2フレーム以上必要.
-                        case '^':
+                        case 'b':
                             {
-                                if ((ButtonCheck(b_rn, checker.bitNum) == '.' || ButtonCheck(b_rn, checker.bitNum) == '-') && commandBuffer_max > 1 &&
-                                ButtonCheck(b_bf, checker.bitNum) == '+')
-                                {
-                                    result = true;
-                                }
+                                checker = anlInputs[1];
                                 break;
                             }
-                        //defaultは入力値のみを見るとして..
-                        //1フレのみを計測
-                        default:
+                        case 'c':
                             {
-                                if (ButtonCheck(b_rn, checker.bitNum) == '+')
-                                {
-                                    result = true;
-                                }
+                                checker = anlInputs[4];
+                                break;
+                            }
+                        case 'x':
+                            {
+                                checker = anlInputs[2];
+                                break;
+                            }
+                        case 'y':
+                            {
+                                checker = anlInputs[3];
+                                break;
+                            }
+                        case 'z':
+                            {
+                                checker = anlInputs[5];
                                 break;
                             }
                     }
-                else
-                {
-                    if (ButtonCheck(b_rn, checker.bitNum) == '+')
+
+                    int b_rn, b_bf;
+
+                    Debug.Log("Checking buttons " + button + " at "  + buttons);
+
+                    b_rn = commandBuffer[index].inputs;
+                    b_bf = b_rn;
+                    if (commandBuffer_max > 1)
                     {
-                        result = true;
+                        b_bf = commandBuffer[index + 1].inputs;
+                    }
+                    //Debug.Log(b_rn + " " + b_bf);
+
+
+                    //conditionの最初の文問のみ..
+                    if (conditions.Length != 0)
+                        switch (conditions[0])
+                        {
+                            //押した瞬間を確認
+                            //2フレーム以上必要.
+                            case '_':
+                                {
+                                    //Debug.Log("cmd check - pressPulse");
+                                    if (!(ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
+                                    (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-')))
+                                    {
+                                        isButtonChecked = false;
+                                    }
+                                    break;
+                                }
+                            //離された瞬間を確認
+                            //2フレーム以上必要.
+                            case '^':
+                                {
+                                    if (!((ButtonCheck(b_rn, checker.bitNum) == '.' || ButtonCheck(b_rn, checker.bitNum) == '-') && commandBuffer_max > 1 &&
+                                    ButtonCheck(b_bf, checker.bitNum) == '+'))
+                                    {
+                                        isButtonChecked = false;
+                                    }
+                                    break;
+                                }
+                            //defaultは入力値のみを見るとして..
+                            //1フレのみを計測
+                            default:
+                                {
+                                    if (!(ButtonCheck(b_rn, checker.bitNum) == '+'))
+                                    {
+                                        isButtonChecked = false;
+                                    }
+                                    break;
+                                }
+                        }
+                    else //conditionLengthが0になるとき..はボタンの入力のみを考える..
+                    {
+                        if (!(ButtonCheck(b_rn, checker.bitNum) == '+'))
+                        {
+                            isButtonChecked = false;
+                        }
                     }
                 }
+                if (isButtonChecked)
+                {
+                    result = true;
+                    return result;
+                }
+
             }
-
         }
         return result;
     }
