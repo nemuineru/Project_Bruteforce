@@ -839,11 +839,29 @@ public class entityInputManager
                         {
                             //押した瞬間を確認
                             //2フレーム以上必要.
+                            //複数入力のときも考慮してバッファを取る.
                             case '_':
                                 {
-                                    //Debug.Log("cmd check - pressPulse");
-                                    if (!(ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
-                                    (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-')))
+                                    int bufferTime = 3;
+                                    bool isSelectedButtonPressed = false;
+                                    for (int pressBuffer = 0; pressBuffer < bufferTime; pressBuffer++)
+                                    {
+                                        //Debug.Log("cmd check - pressPulse");
+                                        if (commandBuffer_max > bufferTime)
+                                        {
+                                            b_rn = commandBuffer[index + pressBuffer].inputs;
+                                            b_bf = commandBuffer[index + 1 + pressBuffer].inputs;
+                                            Debug.Log("");
+                                        }
+                                        if ((ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
+                                            (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-')))
+                                        {
+                                            isSelectedButtonPressed = true;
+                                            break;
+                                        }
+                                    }
+                                    //全部の面で引っかからなかったらfalseを出力...出来てない.
+                                    if(isSelectedButtonPressed == false)
                                     {
                                         isButtonChecked = false;
                                     }

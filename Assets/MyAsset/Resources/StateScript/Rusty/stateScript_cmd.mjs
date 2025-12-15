@@ -14,7 +14,7 @@ export function stateCmd(entity) {
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity);
     //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "xy");
+    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "_x");
     //charger for basic 
     let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "x");
     let StateDefID = entity.CurrentStateID;
