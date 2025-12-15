@@ -22,9 +22,17 @@ export function stateCmd(entity) {
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
-    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 0 )
+    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 0)
     {
         verdList.Add(1);
+    }
+    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 1  && selfStTime > 6)
+    {
+        verdList.Add(2);
+    }
+    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 2  && selfStTime > 8)
+    {
+        verdList.Add(3);
     }
 
     //the combo button could charge to the doubleskill - to full skill

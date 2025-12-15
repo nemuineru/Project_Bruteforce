@@ -842,7 +842,7 @@ public class entityInputManager
                             //複数入力のときも考慮してバッファを取る.
                             case '_':
                                 {
-                                    int bufferTime = 3;
+                                    int bufferTime = 4;
                                     bool isSelectedButtonPressed = false;
                                     for (int pressBuffer = 0; pressBuffer < bufferTime; pressBuffer++)
                                     {

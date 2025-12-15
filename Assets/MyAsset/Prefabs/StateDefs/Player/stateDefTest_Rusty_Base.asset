@@ -52,8 +52,8 @@ MonoBehaviour:
   - StateDefName: Combo2 Jab_Second
     StateDefID: 2
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID
+    ScriptName: stateScript_Rusty_Attack_Base.mjs
+    preStateVerdictName: StateDef_1_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -69,8 +69,8 @@ MonoBehaviour:
   - StateDefName: Combo3 Kick Finisher
     StateDefID: 3
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID_GrdCombo3_Finisher
+    ScriptName: stateScript_Rusty_Attack_Base.mjs
+    preStateVerdictName: StateDef_3_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
