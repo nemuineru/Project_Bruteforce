@@ -822,7 +822,7 @@ public class entityInputManager
 
                     int b_rn, b_bf;
 
-                    Debug.Log("Checking buttons " + button + " at " + buttons);
+                    //Debug.Log("Checking buttons " + button + " at " + buttons);
 
                     b_rn = commandBuffer[index].inputs;
                     b_bf = b_rn;
@@ -842,7 +842,40 @@ public class entityInputManager
                             //複数入力のときも考慮してバッファを取る.
                             case '_':
                                 {
-                                    int bufferTime = 4;
+                                    int bufferTime = 1;
+
+                                    if (int.TryParse(seconds, out int psInt))
+                                    {
+                                        bufferTime = Mathf.Max(Mathf.Min(commandBuffer_max, psInt), 0);
+                                        //Debug.Log(bufferTime);
+                                    }
+
+                                    bool isSelectedButtonPressed = false;
+                                    for (int pressBuffer = 0; pressBuffer < bufferTime &&
+                                    index + pressBuffer + 1 < commandBuffer_max ; pressBuffer++)
+                                    {
+                                        //Debug.Log("cmd check - pressPulse");
+                                        if (commandBuffer_max > bufferTime)
+                                        {
+                                            b_rn = commandBuffer[index + pressBuffer].inputs;
+                                            b_bf = commandBuffer[index + 1 + pressBuffer].inputs;
+                                        }
+                                        if ((ButtonCheck(b_rn, checker.bitNum) == '+' && commandBuffer_max > 1 &&
+                                            (ButtonCheck(b_bf, checker.bitNum) == '.' || ButtonCheck(b_bf, checker.bitNum) == '-')))
+                                        {
+                                            isSelectedButtonPressed = true;
+                                            break;
+                                        }
+                                    }
+                                    //全部の面で引っかからなかったらfalseを出力...出来てない.
+                                    if(isSelectedButtonPressed == false)
+                                    {
+                                        isButtonChecked = false;
+                                    }
+                                    break;
+                                }
+                                /*
+                                int bufferTime = 4;
                                     bool isSelectedButtonPressed = false;
                                     for (int pressBuffer = 0; pressBuffer < bufferTime; pressBuffer++)
                                     {
@@ -866,17 +899,51 @@ public class entityInputManager
                                         isButtonChecked = false;
                                     }
                                     break;
-                                }
+                                */
                             //離された瞬間を確認
                             //2フレーム以上必要.
                             case '^':
                                 {
+                                    
+                                    int bufferTime = 1;
+                                    if (int.TryParse(seconds, out int psInt))
+                                    {
+                                        bufferTime = Mathf.Max(Mathf.Min(commandBuffer_max, psInt), 0);
+                                        //Debug.Log(bufferTime);
+                                    }
+
+                                    bool isSelectedButtonPressed = false;
+                                    for (int pressBuffer = 0; pressBuffer < bufferTime &&
+                                    index + pressBuffer + 1 < commandBuffer_max ; pressBuffer++)
+                                    {
+                                        //Debug.Log("cmd check - pressPulse");
+                                        if (commandBuffer_max > bufferTime)
+                                        {
+                                            b_rn = commandBuffer[index + pressBuffer].inputs;
+                                            b_bf = commandBuffer[index + 1 + pressBuffer].inputs;
+                                        }
+                                        if (((ButtonCheck(b_rn, checker.bitNum) == '.' || ButtonCheck(b_rn, checker.bitNum) == '-') && commandBuffer_max > 1 &&
+                                            ButtonCheck(b_bf, checker.bitNum) == '+'))
+                                        {
+                                            isSelectedButtonPressed = true;
+                                            break;
+                                        }
+                                    }
+                                    //全部の面で引っかからなかったらfalseを出力...出来てない.
+                                    if(isSelectedButtonPressed == false)
+                                    {
+                                        isButtonChecked = false;
+                                    }
+                                    break;
+
+                                    /*
                                     if (!((ButtonCheck(b_rn, checker.bitNum) == '.' || ButtonCheck(b_rn, checker.bitNum) == '-') && commandBuffer_max > 1 &&
                                     ButtonCheck(b_bf, checker.bitNum) == '+'))
                                     {
                                         isButtonChecked = false;
                                     }
                                     break;
+                                    */
                                 }
                             //defaultは入力値のみを見るとして..
                             //1フレのみを計測
@@ -934,7 +1001,7 @@ public class entityInputManager
         public string drawStr { get; set; }
     }
 
-
+    [System.Serializable]
     public class entityInput_Buffers
     {
         public string CommandName;
@@ -942,13 +1009,21 @@ public class entityInputManager
         public string Command;
         public int currentBufferTime = 0;
         public int bufferMaxTime = 0;
+        public int readLength = 5;
 
         //check the command. and return the int values
-        public int isCommandPressed()
+        public void CheckCommand(entityInputManager manager)
         {
-            currentBufferTime -= 1;
+            currentBufferTime = Mathf.Max(0, currentBufferTime - 1);
+            if (manager.CheckInput(Command, readLength))
+            {
+                currentBufferTime = bufferMaxTime;
+            }
+        }
 
-            return currentBufferTime;
+        public bool isCommandPressed()
+        { 
+            return currentBufferTime > 0;
         }
 
     }

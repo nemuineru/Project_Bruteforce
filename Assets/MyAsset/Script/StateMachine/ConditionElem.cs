@@ -118,9 +118,15 @@ public class Elem
     }
 
 
-    public static bool CheckButtonPressed(Entity et, string command)
+    public static bool CheckButtonPressed(Entity et, string commandName)
     {
-        return et.entityInput.CheckInput(command, 1);
+        bool isCmdFound = false;
+        entityInputManager.entityInput_Buffers find = et.cmdList.Find(ct => ct.CommandName == commandName);
+        if (find != null)
+        {
+            isCmdFound = find.isCommandPressed();
+        }
+        return isCmdFound;
     }
 
     public static int CheckStateDefID(Entity et)

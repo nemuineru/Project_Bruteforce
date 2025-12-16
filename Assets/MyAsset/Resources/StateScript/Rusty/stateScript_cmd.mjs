@@ -5,7 +5,7 @@
 
 // We could use List name, if they call variable first.
 export function stateCmd(entity) {
-    CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
+    //CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
     //List<Int>
     const List_Int =
         puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
@@ -14,9 +14,9 @@ export function stateCmd(entity) {
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity);
     //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "_x");
+    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
     //charger for basic 
-    let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "x");
+    let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
     let StateDefID = entity.CurrentStateID;
 
     //this must be set as 0.

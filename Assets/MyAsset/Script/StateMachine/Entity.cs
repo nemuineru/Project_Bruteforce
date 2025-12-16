@@ -204,6 +204,10 @@ public class Entity : MonoBehaviour
 
     Vector3 pausedVel = Vector3.zero;
 
+    //CMDList for command buffering, and checks @ .mjs file
+    [SerializeField]
+    internal List<entityInputManager.entityInput_Buffers> cmdList;
+
     //Awake後に設定される. UIとか指定したい.
     void Start()
     {
@@ -220,6 +224,11 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //check each cmds. and buffers it.
+        foreach (var cmds in cmdList)
+        {
+            cmds.CheckCommand(entityInput);
+        }
         status.setCurrentValue();
         defaultClss.clssPosUpdate();
 

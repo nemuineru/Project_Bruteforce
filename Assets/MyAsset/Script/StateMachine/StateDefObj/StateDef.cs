@@ -377,7 +377,7 @@ public class StateDef
             ExecuteStates = new List<int>();
             StateParams = new List<System.Object>();
 
-            Debug.Log("Executed PuerTS : At StateDefID " + StateDefID);
+            //Debug.Log("Executed PuerTS : At StateDefID " + StateDefID);
             //Func型じゃないと取れなかったんじゃないっけ？
             Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
             Func<Entity, List<object>> executer_stateParamGet = executer.Get<Func<Entity, List<object>>>(ParamLoadName);
