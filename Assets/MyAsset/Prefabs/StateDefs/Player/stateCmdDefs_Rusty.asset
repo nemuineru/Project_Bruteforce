@@ -28,20 +28,41 @@ MonoBehaviour:
     - rid: 4404388664824299527
     - rid: 4404388799971590145
     - rid: 4404388664824299528
+    - rid: 1814087929669091328
+    - rid: 1814087929669091329
     - rid: 4404388709018370078
-    - rid: 7982028148908752896
-    - rid: 7982028148908752897
-    - rid: 4404388664824299529
     - rid: 4404388709018370091
     - rid: 7982028180311244820
     - rid: 7982028180311244821
-    - rid: 7982028315445428230
     - rid: 7982027888260546560
     - rid: 7982027949219512324
+    - rid: 4404388664824299529
+    - rid: 7982028315445428230
+    Dir: 
     setCtrl: 0
   references:
     version: 2
     RefIds:
+    - rid: 1814087929669091328
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 210
+          stLuaLoads: 
+        stateControllerSubName: 210 ComboFinisher_LV1 Upper
+        changeTo: 210
+        priority: 0
+    - rid: 1814087929669091329
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 220
+          stLuaLoads: 
+        stateControllerSubName: 220 ComboFinisher_LV2 RoundKick
+        changeTo: 220
+        priority: 0
     - rid: 1982101323848089607
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -49,7 +70,7 @@ MonoBehaviour:
           useLua: 0
           value: 50
           stLuaLoads: 
-        stateControllerSubName: Jump/JumpCancel
+        stateControllerSubName: 50 Jump/JumpCancel
         changeTo: 50
         priority: 0
     - rid: 4404388664824299527
@@ -57,60 +78,60 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 1
+          value: 200
           stLuaLoads: 
-        stateControllerSubName: Combo1 Jab_Cmd
-        changeTo: 1
+        stateControllerSubName: 200 Combo1 Jab_Cmd
+        changeTo: 200
         priority: 0
     - rid: 4404388664824299528
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 3
+          value: 202
           stLuaLoads: 
-        stateControllerSubName: Combo3 Kick_Cmd
-        changeTo: 3
+        stateControllerSubName: 202 Combo3 Kick_Cmd
+        changeTo: 202
         priority: 2
     - rid: 4404388664824299529
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 20
+          value: 300
           stLuaLoads: 
-        stateControllerSubName: JumpCombo Kick_Cmd
-        changeTo: 20
+        stateControllerSubName: 300 JumpCombo Kick_Cmd
+        changeTo: 300
         priority: 0
     - rid: 4404388709018370078
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 5
+          value: 250
           stLuaLoads: 
-        stateControllerSubName: Hard1 GKnife_Cmd
-        changeTo: 5
+        stateControllerSubName: 250 Hard1 GKnife_Cmd
+        changeTo: 250
         priority: 1
     - rid: 4404388709018370091
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 25
+          value: 350
           stLuaLoads: 
-        stateControllerSubName: JumpHard AKnife_Cmd
-        changeTo: 25
+        stateControllerSubName: 350 JumpHard AKnife_Cmd
+        changeTo: 350
         priority: 1
     - rid: 4404388799971590145
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 2
+          value: 201
           stLuaLoads: 
-        stateControllerSubName: Combo2 Jab_2 Cmd
-        changeTo: 2
+        stateControllerSubName: 201 Combo2 Jab_2 Cmd
+        changeTo: 201
         priority: 1
     - rid: 7982027888260546560
       type: {class: scAddCharge, ns: , asm: Assembly-CSharp}
@@ -119,7 +140,7 @@ MonoBehaviour:
           useLua: 0
           value: 30
           stLuaLoads: 
-        stateControllerSubName: Auto_Def_Charge
+        stateControllerSubName: 30 Auto_Def_Charge
         value: 1
         priority: 0
     - rid: 7982027949219512324
@@ -129,48 +150,28 @@ MonoBehaviour:
           useLua: 0
           value: 31
           stLuaLoads: 
-        stateControllerSubName: Auto_Def_Reset
+        stateControllerSubName: 31 Auto_Def_Reset
         value: 0
-        priority: 0
-    - rid: 7982028148908752896
-      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 6
-          stLuaLoads: 
-        stateControllerSubName: Hard2 Axes_Cmd
-        changeTo: 6
-        priority: 0
-    - rid: 7982028148908752897
-      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 7
-          stLuaLoads: 
-        stateControllerSubName: Hard3 Hammer_Cmd
-        changeTo: 7
         priority: 0
     - rid: 7982028180311244820
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 100
+          value: 400
           stLuaLoads: 
-        stateControllerSubName: Grd_Special
-        changeTo: 100
+        stateControllerSubName: 400 Grd_Special
+        changeTo: 400
         priority: 0
     - rid: 7982028180311244821
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 105
+          value: 405
           stLuaLoads: 
-        stateControllerSubName: Air_Special
-        changeTo: 105
+        stateControllerSubName: 405 Air_Special
+        changeTo: 405
         priority: 0
     - rid: 7982028315445428230
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
@@ -179,6 +180,6 @@ MonoBehaviour:
           useLua: 0
           value: 10
           stLuaLoads: 
-        stateControllerSubName: throw
+        stateControllerSubName: 10 throw
         changeTo: 10
         priority: -1

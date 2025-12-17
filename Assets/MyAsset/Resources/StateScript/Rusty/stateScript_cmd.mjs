@@ -24,15 +24,15 @@ export function stateCmd(entity) {
 
     if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 0)
     {
-        verdList.Add(1);
+        verdList.Add(200);
     }
-    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 1  && selfStTime > 6)
+    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 200  && selfStTime > 8)
     {
-        verdList.Add(2);
+        verdList.Add(201);
     }
-    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 2  && selfStTime > 8)
+    if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 201  && selfStTime > 11)
     {
-        verdList.Add(3);
+        verdList.Add(202);
     }
 
     //the combo button could charge to the doubleskill - to full skill

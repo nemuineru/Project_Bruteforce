@@ -16,7 +16,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 1
+    ID: 200
     Name: Jab
     animClip:
     - Clip: {fileID: 7400000, guid: cc6d90ac22aa9f146b6a23f470c4344a, type: 2}
@@ -46,8 +46,8 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 2
-    Name: Jab_R
+    ID: 201
+    Name: Jab_L
     animClip:
     - Clip: {fileID: 7400000, guid: a7e95567c435a79429d9a14d9f9c3494, type: 2}
       speed: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 3
+    ID: 202
     Name: Kick
     animClip:
     - Clip: {fileID: 7400000, guid: 418d04f5b5a9f8e429e08773447a79ad, type: 2}
@@ -106,7 +106,65 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 5
+    ID: 210
+    Name: ChargeAttack_LV1_Upper
+    animClip:
+    - Clip: {fileID: 7400000, guid: b23978875880e6f4fb5a56cc8ac4f224, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.12
+    blendOutTime: 0.12
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: hand.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.62, z: 0}
+        endPos: {x: 0, y: -0.57, z: 0}
+        width: 0.51
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 220
+    Name: ChargeAttack_LV2_SwingKicker
+    animClip:
+    - Clip: {fileID: 7400000, guid: c9eda245837fb91409627c18bfa563e9, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.12
+    blendOutTime: 0.12
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: lowerleg.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.62, z: 0}
+        endPos: {x: 0, y: -0.57, z: 0}
+        width: 0.51
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 250
     Name: Hard_Knifes
     animClip:
     - Clip: {fileID: 7400000, guid: ef15f6167a26a9142b12faa0e8237153, type: 2}
@@ -136,7 +194,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 6
+    ID: 260
     Name: Hard_LV1_Axes
     animClip:
     - Clip: {fileID: 7400000, guid: 7353eb9b9f1d31f4c937a070d3d6cd6e, type: 2}
@@ -165,7 +223,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 7
+    ID: 270
     Name: Hard_LV2_Hammer
     animClip:
     - Clip: {fileID: 7400000, guid: 49522fb913cff5e40a2a5e3e4114c782, type: 2}
@@ -194,7 +252,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 20
+    ID: 300
     Name: Air_Kick
     animClip:
     - Clip: {fileID: 7400000, guid: 06a7ae7954d29c146b10be13ddb8c2ca, type: 2}
@@ -224,7 +282,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 25
+    ID: 350
     Name: AirHardAttack_Knife
     animClip:
     - Clip: {fileID: 7400000, guid: 67093dc924031d24c896ff11fa6ff5fa, type: 2}
@@ -253,7 +311,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 100
+    ID: 400
     Name: BurstAttack_Kicker
     animClip:
     - Clip: {fileID: 7400000, guid: 4eb69cf5536fd1a4eafde9294b090d6c, type: 2}

@@ -10,56 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
-  m_Name: stateDefTest_Rusty_Base
+  m_Name: stateDefTest_Rusty_Attack
   m_EditorClassIdentifier: 
   ScriptDirectory: StateScript/Rusty
   stateDefs:
-  - StateDefName: OnInitLoad
-    StateDefID: 0
-    ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_Rusty_Main.mjs
-    preStateVerdictName: StateDef_0_ID
-    ParamLoadName: StateDef_0_Param
-    stateType: 83
-    moveType: 0
-    physType: 0
-    StateList:
-    - rid: 3002629528666767590
-    - rid: 3002629213760520200
-    - rid: 3002629213760520201
-    - rid: 3002629528666767591
-    - rid: 3579422750824726546
-    - rid: 1982101199356952583
-    Dir: 
-    setCtrl: 0
-  - StateDefName: Jump
-    StateDefID: 50
-    ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_Rusty_Main.mjs
-    preStateVerdictName: StateDef_50_ID
-    ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
-    StateList:
-    - rid: 4404389163807801372
-    - rid: 4404389163807801373
-    - rid: 4404389163807801374
-    Dir: 
-    setCtrl: 0
-  - StateDefName: Winning Pose
-    StateDefID: 180
-    ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: WinningPose
-    ParamLoadName: 
-    stateType: 83
-    moveType: 0
-    physType: 0
-    StateList:
-    - rid: 7557642767827468288
-    Dir: 
-    setCtrl: 0
   - StateDefName: Combo1 Jab_First
     StateDefID: 200
     ScriptDirectory: StateScript/Rusty
@@ -243,16 +197,6 @@ MonoBehaviour:
           useID: 0
           stLuaLoads: 
         priority: 0
-    - rid: 1982101199356952583
-      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 5300
-          stLuaLoads: 
-        stateControllerSubName: set it death if it is dead
-        changeTo: 5300
-        priority: 0
     - rid: 1982101230649868288
       type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
       data:
@@ -373,24 +317,6 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-    - rid: 3002629213760520200
-      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 3
-          stLuaLoads: 
-        stateControllerSubName: ChangeState To Jumping
-        changeTo: 50
-        priority: 1
-    - rid: 3002629213760520201
-      type: {class: scMove, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 2
-          stLuaLoads: 
-        stateControllerSubName: Move_Auto
     - rid: 3002629213760520203
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -401,55 +327,6 @@ MonoBehaviour:
         stateControllerSubName: Change To init
         changeTo: 0
         priority: 1
-    - rid: 3002629528666767590
-      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 100
-          stLuaLoads: 
-        stateControllerSubName: AnimSetter
-        changeAnimID:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        animParameter:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: {x: 0, y: 0}
-          useID: -1
-          stLuaLoads: 
-    - rid: 3002629528666767591
-      type: {class: scAnimParamChange, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 0
-          stLuaLoads: 
-        stateControllerSubName: AnimParamChanger
-        changeAnimID:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: 0
-          useID: 0
-          stLuaLoads: 
-        animParameter:
-          _setEssential: 0
-          loadTypes: 1
-          stParamValue: {x: 0, y: 0}
-          useID: 0
-          stLuaLoads: 
-    - rid: 3579422750824726546
-      type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 800
-          stLuaLoads: 
-        stateControllerSubName: rotate
-        RotateWeight: 0.5
     - rid: 3579423065411158016
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -461,7 +338,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 200
           useID: -1
           stLuaLoads: 
         animParameter:
@@ -481,7 +358,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 2
+          stParamValue: 201
           useID: -1
           stLuaLoads: 
         animParameter:
@@ -615,7 +492,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 5
+          stParamValue: 250
           useID: -1
           stLuaLoads: 
         animParameter:
@@ -725,7 +602,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 3
+          stParamValue: 202
           useID: -1
           stLuaLoads: 
         animParameter:
@@ -769,44 +646,6 @@ MonoBehaviour:
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
-    - rid: 4404389163807801372
-      type: {class: scJump, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 50
-          stLuaLoads: 
-        stateControllerSubName: JumpAnimVel
-    - rid: 4404389163807801373
-      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 50
-          stLuaLoads: 
-        stateControllerSubName: JumpAnim
-        changeAnimID:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: 50
-          useID: -1
-          stLuaLoads: 
-        animParameter:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: {x: 0, y: 0}
-          useID: -1
-          stLuaLoads: 
-    - rid: 4404389163807801374
-      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 1
-          stLuaLoads: 
-        stateControllerSubName: InitState
-        changeTo: 0
-        priority: 1
     - rid: 7557642759318274048
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -902,26 +741,6 @@ MonoBehaviour:
           useID: 0
           stLuaLoads: 
         priority: 0
-    - rid: 7557642767827468288
-      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 0
-          stLuaLoads: 
-        stateControllerSubName: Animset_winningPose
-        changeAnimID:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: 180
-          useID: -1
-          stLuaLoads: 
-        animParameter:
-          _setEssential: 0
-          loadTypes: 0
-          stParamValue: {x: 0, y: 0}
-          useID: -1
-          stLuaLoads: 
     - rid: 7557642784103727104
       type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
       data:
