@@ -17,6 +17,7 @@ export function StateDef_1_ID(entity)
     }
     if (CurrentTime == 0)
     {
+        CS.UnityEngine.Debug.Log("Executed Anim");
         verdList.Add(0);
     }
     //Aight, does native JS supports math function?
@@ -28,6 +29,7 @@ export function StateDef_1_ID(entity)
     if(SoundTime){
         verdList.Add(100);
     }
+    //CS.UnityEngine.Debug.Log("Executed");
     return verdList;
 }
 
