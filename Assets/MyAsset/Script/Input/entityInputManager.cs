@@ -945,6 +945,40 @@ public class entityInputManager
                                     break;
                                     */
                                 }
+
+                            //押しっぱなしはsecondsフレーム分で指定された長押しポイントが有るならtrueを返す.
+                            //2フレーム分読み出す.                                
+                            case '~':
+                                {
+                                    int bufferTime = 1;
+                                    if (int.TryParse(seconds, out int psInt))
+                                    {
+                                        bufferTime = Mathf.Max(Mathf.Min(commandBuffer_max, psInt), 0);
+                                        //Debug.Log(bufferTime);
+                                    }
+                                    //押しっぱなしなので, 読み込めないならfalseを返す.
+                                    if (psInt >= commandBuffer_max)
+                                    {
+                                        isButtonChecked = false;
+                                        break;
+                                    }
+                                    for (int pressBuffer = 0; pressBuffer < bufferTime &&
+                                        index + pressBuffer + 1 < commandBuffer_max; pressBuffer++)
+                                        {
+                                            //Debug.Log("cmd check - pressPulse");
+                                            if (commandBuffer_max > bufferTime)
+                                            {
+                                                b_rn = commandBuffer[index + pressBuffer].inputs;
+                                            }
+                                            //設定したCMDが押され続けて無いとFalseを返す.
+                                            if (!(ButtonCheck(b_rn, checker.bitNum) == '+'))
+                                            {
+                                                isButtonChecked = false;
+                                                break;
+                                            }
+                                        }
+                                    break;
+                                }
                             //defaultは入力値のみを見るとして..
                             //1フレのみを計測
                             default:

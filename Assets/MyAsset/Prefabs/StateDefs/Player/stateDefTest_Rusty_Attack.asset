@@ -18,7 +18,7 @@ MonoBehaviour:
     StateDefID: 200
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Attack_Base.mjs
-    preStateVerdictName: StateDef_1_ID
+    preStateVerdictName: StateDef_200_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
     StateDefID: 201
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Attack_Base.mjs
-    preStateVerdictName: StateDef_1_ID
+    preStateVerdictName: StateDef_200_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
     StateDefID: 202
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Attack_Base.mjs
-    preStateVerdictName: StateDef_3_ID
+    preStateVerdictName: StateDef_202_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -62,6 +62,32 @@ MonoBehaviour:
     - rid: 4404388799971590147
     - rid: 1982101230649868297
     - rid: 4404388799971590148
+    Dir: 
+    setCtrl: 0
+  - StateDefName: ComboFinisher 1 Upper
+    StateDefID: 210
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Attack_Base.mjs
+    preStateVerdictName: StateDef_210_ID
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 1814087954197118983
+    - rid: 1814087954197118982
+    Dir: 
+    setCtrl: 0
+  - StateDefName: ComboFinisher 2 RoundKick
+    StateDefID: 220
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
+    preStateVerdictName: StateDef_220_ID
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList: []
     Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
@@ -182,6 +208,36 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1814087954197118982
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Change to init
+        changeTo: 0
+        priority: 0
+    - rid: 1814087954197118983
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Upper Anim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 210
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
     - rid: 1982101096022933504
       type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
       data:

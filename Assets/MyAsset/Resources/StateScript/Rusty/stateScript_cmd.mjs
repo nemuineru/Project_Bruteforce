@@ -17,7 +17,10 @@ export function stateCmd(entity) {
     let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
     //charger for basic 
     let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
+    let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
     let StateDefID = entity.CurrentStateID;
+    let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
+    let chargeVal = entity.status.ChargeTime;
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
@@ -33,6 +36,10 @@ export function stateCmd(entity) {
     if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 201  && selfStTime > 11)
     {
         verdList.Add(202);
+    }
+    if(selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && isChainable && chargeVal >= 0.40)
+    {
+        verdList.Add(210);
     }
 
     //the combo button could charge to the doubleskill - to full skill
