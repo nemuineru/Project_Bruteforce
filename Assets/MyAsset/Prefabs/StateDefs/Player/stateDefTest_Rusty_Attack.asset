@@ -81,13 +81,15 @@ MonoBehaviour:
   - StateDefName: ComboFinisher 2 RoundKick
     StateDefID: 220
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
+    ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_220_ID
     ParamLoadName: 
     stateType: 0
     moveType: 0
     physType: 0
-    StateList: []
+    StateList:
+    - rid: 1814087975545077760
+    - rid: 1814087975545077761
     Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
@@ -225,7 +227,7 @@ MonoBehaviour:
           useLua: 0
           value: 0
           stLuaLoads: 
-        stateControllerSubName: Upper Anim
+        stateControllerSubName: 210 Upper Anim
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
@@ -238,6 +240,36 @@ MonoBehaviour:
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+    - rid: 1814087975545077760
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: 220 On Init Anim
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 220
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+    - rid: 1814087975545077761
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Change to Init
+        changeTo: 0
+        priority: 0
     - rid: 1982101096022933504
       type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
       data:

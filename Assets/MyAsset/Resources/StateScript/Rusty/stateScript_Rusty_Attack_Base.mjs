@@ -75,8 +75,9 @@ export function StateDef_210_ID(entity){
     let SoundTime = entity.attrs.isSoundNotPlayed == 0;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
 
-    if (CurrentAnimTime > 20)
+    if (CurrentAnimTime > 20 && CurrentAnimID == 210)
     {
         verdList.Add(1);
     }
@@ -107,8 +108,9 @@ export function StateDef_220_ID(entity){
     let SoundTime = entity.attrs.isSoundNotPlayed == 0;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
 
-    if (CurrentTime > 60 && CurrentAnimTime > 60)
+    if (CurrentAnimTime > 35 && CurrentAnimID == 220)
     {
         verdList.Add(1);
     }

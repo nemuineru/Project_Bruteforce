@@ -21,6 +21,7 @@ export function stateCmd(entity) {
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
@@ -37,9 +38,17 @@ export function stateCmd(entity) {
     {
         verdList.Add(202);
     }
-    if(selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && isChainable && chargeVal >= 0.40)
+    if(selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && 
+        (isChainable) && chargeVal >= 0.1 && chargeVal < 0.3)
     {
+        CS.UnityEngine.Debug.Log("Charge Attack Test");
         verdList.Add(210);
+    }
+    if(selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && 
+        (isChainable || (StateDefID == 210 && CurrentAnimTime >= 15)) && chargeVal >= 0.3)
+    {
+        CS.UnityEngine.Debug.Log("Charge Attack Test");
+        verdList.Add(220);
     }
 
     //the combo button could charge to the doubleskill - to full skill
