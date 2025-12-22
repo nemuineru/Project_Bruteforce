@@ -19,22 +19,18 @@ public class EnergyGaugeComponent : GaugeComponent
         float Percentage = valueEntity.status.currentEnergy / valueEntity.status.maxEnergy;
         guiText = Mathf.FloorToInt(Percentage * 100.0f).ToString() + "%";
         OverrideShapes.Width = Percentage * BaseShapes.Width;
-        if(Percentage >= 1.0f)
-        {
-            currentFrame += Time.deltaTime;
-        }
-        else
-        {
-            currentFrame = 0;
-            isFlashed = false;
-        }
+        
+        currentFrame = currentFrame >= changeFrame ? 0 : currentFrame + Time.deltaTime;
         if(currentFrame >= changeFrame)
         {
             currentFrame = 0;
             isFlashed = !isFlashed;
         }
         
-        OverrideShapes.Color = isFlashed ? color_2 : color_1;
+        // バーが1/3以上有るならウェポン使用可能にする.
+        // で、100%以上溜まってるなら必殺技を解禁.. メガクラッシュの体力消費もバーに応じてかなり抑える.
+        OverrideShapes.Color = Percentage >= 1.00 && isFlashed ? color_2 : color_1;
+        MarkShaper.Color = Percentage >= .33 ? OverrideShapes.Color  : Color.black;
 
         base.setValues();
     }
