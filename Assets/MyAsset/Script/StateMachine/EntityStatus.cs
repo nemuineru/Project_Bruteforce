@@ -84,8 +84,9 @@ public class EntityStatus
 
     public void setCurrentValue()
     {
-        currentHP = Mathf.Min(currentHP, maxHP);
-        currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
+        float MaxEnergyOverflowValue = 3.0f;
+        currentHP = Mathf.Clamp(currentHP , 0 , maxHP);
+        currentEnergy = Mathf.Clamp(currentEnergy , 0 , maxEnergy * MaxEnergyOverflowValue);
     }
 
     //get CurrentHP. might needs to update current..

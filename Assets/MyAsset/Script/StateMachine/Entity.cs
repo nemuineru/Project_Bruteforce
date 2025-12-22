@@ -260,7 +260,7 @@ public class Entity : MonoBehaviour
         {
             attrs.addCombatStateTime();
         }
-        statusAlign();
+        //statusAlign();
     }
 
     void statusAlign()

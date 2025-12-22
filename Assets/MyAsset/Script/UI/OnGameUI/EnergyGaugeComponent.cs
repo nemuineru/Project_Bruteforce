@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//HealthGauge Checker.
-//the gauge component must be Rectangle.
-public class HealthGaugeComponent : GaugeComponent
+public class EnergyGaugeComponent : GaugeComponent
 {
     [SerializeField]
     internal Shapes.Rectangle BaseShapes;
     [SerializeField]
     internal Shapes.Rectangle OverrideShapes;
+    [SerializeField]
+    internal Shapes.ShapeRenderer MarkShaper;
 
-    
     bool isFlashed = false;
     float currentFrame = 0.0f;
     float changeFrame = 0.04f;
     internal override void setValues()
     {
-        guiText = Mathf.CeilToInt(valueEntity.status.currentHP).ToString();
-        float Percentage = valueEntity.status.currentHP / valueEntity.status.maxHP;
+        float Percentage = valueEntity.status.currentEnergy / valueEntity.status.maxEnergy;
+        guiText = Mathf.FloorToInt(Percentage * 100.0f).ToString() + "%";
         OverrideShapes.Width = Percentage * BaseShapes.Width;
-        
-        if(Percentage <= 0.3f)
+        if(Percentage >= 1.0f)
         {
             currentFrame += Time.deltaTime;
         }
@@ -35,7 +33,9 @@ public class HealthGaugeComponent : GaugeComponent
             currentFrame = 0;
             isFlashed = !isFlashed;
         }
+        
         OverrideShapes.Color = isFlashed ? color_2 : color_1;
+
         base.setValues();
     }
 }
