@@ -78,8 +78,8 @@ public class EntityStatus
     //ダメージを受けたりすると0に戻る.
     //こういう変数はあんまり設定したくないんだよね
     public float ChargeTime = 0f;    
-    internal float setChargeTime_Lv1 = 0.5f;
-    internal float setChargeTime_Lv2 = 1f;
+    internal float setChargeTime_Lv1 = 0.15f;
+    internal float setChargeTime_Lv2 = .4f;
     internal float setChargeTime_End = 2f;
 
     public void setCurrentValue()

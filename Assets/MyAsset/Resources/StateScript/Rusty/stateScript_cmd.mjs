@@ -39,15 +39,15 @@ export function stateCmd(entity) {
         verdList.Add(202);
     }
     if(selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && 
-        (isChainable) && chargeVal >= 0.1 && chargeVal < 0.3)
+        (isChainable) && chargeVal >= 0.15 && chargeVal < 0.4)
     {
-        CS.UnityEngine.Debug.Log("Charge Attack Test");
+        //CS.UnityEngine.Debug.Log("Charge Attack Test");
         verdList.Add(210);
     }
     if(selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && 
-        (isChainable || (StateDefID == 210 && CurrentAnimTime >= 15)) && chargeVal >= 0.3)
+        (isChainable || (StateDefID == 210 && CurrentAnimTime >= 15)) && chargeVal >= 0.4)
     {
-        CS.UnityEngine.Debug.Log("Charge Attack Test");
+        //CS.UnityEngine.Debug.Log("Charge Attack Test");
         verdList.Add(220);
     }
 

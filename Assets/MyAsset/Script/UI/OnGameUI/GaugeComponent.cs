@@ -16,7 +16,7 @@ public class GaugeComponent : MonoBehaviour
 
     //text for showing value
     [SerializeField]
-    TMPro.TMP_Text ShowText;
+    internal TMPro.TMP_Text ShowText;
 
     internal string guiText;
     // Start is called before the first frame update
