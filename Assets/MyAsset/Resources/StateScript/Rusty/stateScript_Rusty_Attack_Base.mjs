@@ -72,10 +72,10 @@ export function StateDef_210_ID(entity){
     
     let verdList = new List_Int();
 
-    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 7 && CurrentAnimID == 210;
 
     if (CurrentAnimTime > 20 && CurrentAnimID == 210)
     {
@@ -105,10 +105,10 @@ export function StateDef_220_ID(entity){
     
     let verdList = new List_Int();
 
-    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 15 && CurrentAnimID == 220;
 
     if (CurrentAnimTime > 35 && CurrentAnimID == 220)
     {

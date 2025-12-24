@@ -76,6 +76,7 @@ MonoBehaviour:
     StateList:
     - rid: 1814087954197118983
     - rid: 1814087954197118982
+    - rid: 1814088090491813888
     Dir: 
     setCtrl: 0
   - StateDefName: ComboFinisher 2 RoundKick
@@ -90,6 +91,7 @@ MonoBehaviour:
     StateList:
     - rid: 1814087975545077760
     - rid: 1814087975545077761
+    - rid: 1814088090491813892
     Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
@@ -270,6 +272,36 @@ MonoBehaviour:
         stateControllerSubName: Change to Init
         changeTo: 0
         priority: 0
+    - rid: 1814088090491813888
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: SwingSnd
+        audio: {fileID: 8300000, guid: 5f517a604b10e3741912ba289ee7d56f, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1814088090491813892
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: OneShotsound
+        audio: {fileID: 8300000, guid: d6f014560f923f848b300e2899fb4d6d, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 1982101096022933504
       type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
       data:
