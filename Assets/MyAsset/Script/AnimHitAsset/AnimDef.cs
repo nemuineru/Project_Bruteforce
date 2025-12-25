@@ -248,8 +248,10 @@ public class MainNodeConfigurator
     //アニメ変更時の挙動.
     //defを代入し、リセットする.
     //この時、MainAnimは代数に変更.
-    public void ChangeAnim(AnimDef def, bool AdditiveIsTrue = false, float timeoffset = 0.0f)
+    public void ChangeAnim(AnimDef def, int selectedSlotID = 0 , bool AdditiveIsTrue = false, float timeoffset = 0.0f, AvatarMask A_MSK = null)
     {
+        //AnimSlotIDが同じものを選択 - 基本値は0.
+
         //接続先で、最も小さい値でソケットが空いているものを選択
         int indexOfEmpty = -1;
         MixAnimNode node;
@@ -265,15 +267,17 @@ public class MainNodeConfigurator
         }
         if (indexOfEmpty >= 0)
         {
+            //AnimSlotIDが同じやつが設定されているなら終了させる.
             foreach (var m in Mixers)
             {
-                if (m != null && !m.isEndTimeSet())
+                if (m != null && !m.isEndTimeSet() && m.AnimSlotID == selectedSlotID)
                 {
                     m.SetEnd(timeoffset);
                 }
             }
             Mixers[indexOfEmpty] = new MixAnimNode();
             node = Mixers[indexOfEmpty];
+            node.AnimSlotID = selectedSlotID;
             node.isAdditive = AdditiveIsTrue;
 
             //DeepCopy defs, so that the Entity itself won't change the property of these.
@@ -289,6 +293,10 @@ public class MainNodeConfigurator
             MainAnimDef = node.def;
             //Additiveに設定するか？
             mixMixer.SetLayerAdditive((uint)indexOfEmpty, AdditiveIsTrue);
+            if(A_MSK != null)
+            {
+                mixMixer.SetLayerMaskFromAvatarMask((uint)indexOfEmpty, A_MSK);
+            }
 
             //接続.
             PrimalGraph.Connect(node.Mixer, 0, mixMixer, indexOfEmpty);

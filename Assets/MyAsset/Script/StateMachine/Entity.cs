@@ -507,7 +507,7 @@ public class Entity : MonoBehaviour
         AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
         if (animFindByID != null)
         {
-            MainAnimMixer.ChangeAnim(animFindByID, default, timeoffset);
+            MainAnimMixer.ChangeAnim(animFindByID, default ,default, timeoffset);
         }
         MainAnimMixer.SetAnim(false);
     }
@@ -518,7 +518,7 @@ public class Entity : MonoBehaviour
         AnimDef animFindByID = controlledEntity.animDefs.Find(x => x.ID == animID);
         if (animFindByID != null)
         {
-            MainAnimMixer.ChangeAnim(animFindByID, default, timeoffset);
+            MainAnimMixer.ChangeAnim(animFindByID, default ,default, timeoffset);
         }
         MainAnimMixer.SetAnim(false);
     }

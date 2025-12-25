@@ -596,6 +596,9 @@ public class scAnimSet : StateController
     [SerializeField]
     stParams<Vector2> animParameter; 
 
+    [SerializeField]
+    AvatarMask mask;
+
     internal override void OnExecute(Entity entity)
     {
         entity.animID = changeAnimID.valueGet(loadParams,entity);
