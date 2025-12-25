@@ -23,6 +23,10 @@ public class MixAnimNode
         public AnimationClipPlayable[] PlayList = new AnimationClipPlayable[0];
         public string[] ParamName;
 
+        //This ID is specifical for exchanger - like 0 for main walk, then 1 for some hand anims
+        //and its different to AnimID, its Anim 'Slot' ID.
+        public int AnimSlotID;
+
         //繋げたAnimの時間設定など. このイベントに応じ、LuaConditionで得られる値も変化する.
         //基本的に、currentAnimTimeをアニメーションの時間の主軸として変更.
         internal float startAnimTime = 0f, currentAnimTime = 0f, endAnimTime = Mathf.Infinity;

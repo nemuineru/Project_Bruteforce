@@ -588,6 +588,10 @@ public class scAnimSet : StateController
 {
     [SerializeField]
     stParams<int> changeAnimID;
+
+    //if it is not set, change 0(main) slot. 
+    [SerializeField]
+    stParams<int> AnimSlot;
     
     [SerializeField]
     stParams<Vector2> animParameter; 
