@@ -10,11 +10,14 @@ public class ChargerGaugeComponent : GaugeComponent
     internal GameObject ParentShapes;
     [SerializeField]
     internal Color color_flash;
+    [SerializeField]
+    internal AudioSource ChargeFull;
 
     
     bool isFlashed = false;
     float currentFrame = 0.0f;
     float changeFrame = 0.012f;
+    bool isSoundPlayed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +56,18 @@ internal override void setValues()
         //guiText = Mathf.FloorToInt(Percentage).ToString();
         BaseShapes.ColorStart = isFlashed ? color_flash : color_1;
         BaseShapes.ColorEnd = isFlashed ? color_flash : color_2;
+
+        
+        if(Percentage >= 2.0 && !isSoundPlayed && ChargeFull != null)
+        {
+            ChargeFull.Play();
+            isSoundPlayed = true;
+        }
+        else if(Percentage < 2.0)
+        {
+            isSoundPlayed = false;
+        }
+
         base.setValues();
     }
 }

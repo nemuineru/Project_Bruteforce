@@ -10,10 +10,14 @@ public class EnergyGaugeComponent : GaugeComponent
     internal Shapes.Rectangle OverrideShapes;
     [SerializeField]
     internal Shapes.ShapeRenderer MarkShaper;
+    [SerializeField]
+    internal AudioSource EnergyFull;
 
     bool isFlashed = false;
     float currentFrame = 0.0f;
     float changeFrame = 0.04f;
+
+    bool isSoundPlayed = false;
     internal override void setValues()
     {
         float Percentage = valueEntity.status.currentEnergy / valueEntity.status.maxEnergy;
@@ -29,8 +33,18 @@ public class EnergyGaugeComponent : GaugeComponent
         
         // バーが1/3以上有るならウェポン使用可能にする.
         // で、100%以上溜まってるなら必殺技を解禁.. メガクラッシュの体力消費もバーに応じてかなり抑える.
-        OverrideShapes.Color = Percentage >= 1.00 && isFlashed ? color_2 : color_1;
+        OverrideShapes.Color = Percentage >= 0.98 && isFlashed ? color_2 : color_1;
         MarkShaper.Color = Percentage >= .33 ? OverrideShapes.Color  : Color.black;
+
+        if(Percentage >= 1.0 && !isSoundPlayed && EnergyFull != null)
+        {
+            EnergyFull.Play();
+            isSoundPlayed = true;
+        }
+        else if(Percentage < 1.0)
+        {
+            isSoundPlayed = false;
+        }
 
         base.setValues();
     }

@@ -18,6 +18,7 @@ export function stateCmd(entity) {
     //charger for basic 
     let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
     let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
+    let AttackCmd_y_isPressed = CS.Elem.CheckButtonPressed(entity, "Weapon");
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
@@ -26,6 +27,7 @@ export function stateCmd(entity) {
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
+    //Ground Attacks - N
     if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 0)
     {
         verdList.Add(200);
@@ -50,6 +52,19 @@ export function stateCmd(entity) {
         //CS.UnityEngine.Debug.Log("Charge Attack Test");
         verdList.Add(220);
     }
+    //Air Attacks - N
+    if(selfOnGrd == false && AttackCmd_x == true && (StateDefID == 50 || (StateDefID == 300 && selfStTime > 15)))
+    {
+        verdList.Add(300);
+    }
+
+    //ここまで通常攻撃
+    //Special Ground Attack
+    if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable)
+    {
+        verdList.Add(250);
+    }
+
 
     //the combo button could charge to the doubleskill - to full skill
     if(AttackCmd_x_isPressed && StateDefID < 5000)

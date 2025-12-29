@@ -1,5 +1,5 @@
-//Knifer states for stateDef 10
-export function StateDef_10_ID(entity)
+//Knifer states for stateDef 250
+export function StateDef_250_ID_Knife(entity)
 { 
     //List<Int>
     let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    

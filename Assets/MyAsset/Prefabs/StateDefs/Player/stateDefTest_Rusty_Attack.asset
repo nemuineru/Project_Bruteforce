@@ -97,9 +97,9 @@ MonoBehaviour:
   - StateDefName: KnifeStab
     StateDefID: 250
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID_Knife
-    ParamLoadName: null
+    ScriptName: stateScript_Rusty_Attack_Gear.mjs
+    preStateVerdictName: StateDef_250_ID_Knife
+    ParamLoadName: 
     stateType: 0
     moveType: 0
     physType: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
     StateDefID: 300
     ScriptDirectory: StateScript/Rusty
     ScriptName: 
-    preStateVerdictName: QueuedStateID_J
+    preStateVerdictName: StateDef_300_ID_JumpKick
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -236,12 +236,19 @@ MonoBehaviour:
           stParamValue: 210
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 1814087975545077760
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -256,12 +263,19 @@ MonoBehaviour:
           stParamValue: 220
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 1814087975545077761
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -461,12 +475,19 @@ MonoBehaviour:
           stParamValue: 200
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 3579423095655497729
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -481,12 +502,19 @@ MonoBehaviour:
           stParamValue: 201
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 3579423095655497732
       type: {class: scColorChange, ns: , asm: Assembly-CSharp}
       data:
@@ -570,12 +598,19 @@ MonoBehaviour:
           stParamValue: 20
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388637674569830
       type: {class: scHitDef, ns: , asm: Assembly-CSharp}
       data:
@@ -615,12 +650,19 @@ MonoBehaviour:
           stParamValue: 250
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388709018370072
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -695,12 +737,19 @@ MonoBehaviour:
           stParamValue: 25
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388709018370090
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -725,12 +774,19 @@ MonoBehaviour:
           stParamValue: 202
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388799971590147
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -780,12 +836,19 @@ MonoBehaviour:
           stParamValue: 100
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7557642759318274049
       type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
       data:
@@ -890,12 +953,19 @@ MonoBehaviour:
           stParamValue: 6
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982028148908752900
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -955,12 +1025,19 @@ MonoBehaviour:
           stParamValue: 7
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982028148908752905
       type: {class: scSetCharge, ns: , asm: Assembly-CSharp}
       data:
