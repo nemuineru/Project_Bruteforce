@@ -194,6 +194,35 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
+    ID: 251
+    Name: Hard_Knifes_V2
+    animClip:
+    - Clip: {fileID: 7400000, guid: 8ab44f59ebaa51e41b053624291097e8, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.12
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - clssType: 1
+        attachTo: kf01
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0, z: 0.75}
+        endPos: {x: 0.24, y: 0, z: -0.15}
+        width: 0.32
+        _lastcalcStartPos: {x: -0.45079607, y: -0.14649418, z: -8.905193}
+        _lastcalcEndPos: {x: -0.108253896, y: 0.6150805, z: -9.31783}
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
     ID: 260
     Name: Hard_LV1_Axes
     animClip:

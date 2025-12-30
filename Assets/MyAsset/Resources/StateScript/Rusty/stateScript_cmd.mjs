@@ -59,11 +59,22 @@ export function stateCmd(entity) {
     }
 
     //ここまで通常攻撃
-    //Special Ground Attack
+    //Special Ground Attack _ Knife c1
     if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable)
     {
         verdList.Add(250);
     }
+    //Special Ground Attack _ Knife c2
+    if(selfOnGrd == true && AttackCmd_y_isPressed && (StateDefID == 250 && selfStTime > 12))
+    {
+        verdList.Add(251);
+    }
+    //Special Air Attack _ Knife c1
+    if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID == 50 ))
+    {
+        verdList.Add(350);
+    }
+
 
 
     //the combo button could charge to the doubleskill - to full skill

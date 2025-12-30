@@ -105,9 +105,25 @@ MonoBehaviour:
     physType: 0
     StateList:
     - rid: 4404388709018370071
-    - rid: 4404388709018370072
     - rid: 4404388709018370073
     - rid: 1982101230649868302
+    - rid: 1814088220477227011
+    Dir: 
+    setCtrl: 0
+  - StateDefName: KnifeStab_V2
+    StateDefID: 251
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Attack_Gear.mjs
+    preStateVerdictName: StateDef_251_ID_KnifeV2
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 1814088220477227008
+    - rid: 1814088220477227009
+    - rid: 1814088220477227010
+    - rid: 1814088220477227012
     Dir: 
     setCtrl: 0
   - StateDefName: AxeSlash
@@ -148,7 +164,7 @@ MonoBehaviour:
   - StateDefName: AirCombo Kicking
     StateDefID: 300
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
+    ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_300_ID_JumpKick
     ParamLoadName: LuaOutput
     stateType: 0
@@ -316,6 +332,93 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
+    - rid: 1814088220477227008
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Anims
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 251
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 1814088220477227009
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: Hitdef
+        hitParams:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue:
+            Damage: 0
+            velset: {x: 0, y: 0, z: 0}
+            hitStopTime: {x: 0, y: 0}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 1
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IA
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 1814088220477227010
+      type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100
+          stLuaLoads: 
+        stateControllerSubName: Snd
+        audio: {fileID: 8300000, guid: d6f014560f923f848b300e2899fb4d6d, type: 3}
+        priority:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1814088220477227011
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Knife_End
+        changeTo: 0
+        priority: 0
+    - rid: 1814088220477227012
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: KnifeV2_End
+        changeTo: 0
+        priority: 0
     - rid: 1982101096022933504
       type: {class: scSetVelocity, ns: , asm: Assembly-CSharp}
       data:
@@ -595,7 +698,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 20
+          stParamValue: 300
           useID: -1
           stLuaLoads: 
         AnimSlot:
@@ -663,16 +766,6 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
-    - rid: 4404388709018370072
-      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 1
-          stLuaLoads: 
-        stateControllerSubName: ChangeInit
-        changeTo: 0
-        priority: 10
     - rid: 4404388709018370073
       type: {class: scHitDef, ns: , asm: Assembly-CSharp}
       data:
