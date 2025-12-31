@@ -65,7 +65,7 @@ export function StateDef_251_ID_KnifeV2(entity)
 }
 
 //Air Knifer states for stateDef 51
-export function StateDef_51_ID(entity)
+export function StateDef_350_AirKnife(entity)
 { 
     //List<Int>
     let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
@@ -77,7 +77,7 @@ export function StateDef_51_ID(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
 
-    let selfOnGrd = CS.Elem.isEntityOnGround(in_entity)
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
 
     if (selfOnGrd)
     {
