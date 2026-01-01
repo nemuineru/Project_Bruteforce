@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateCmdDefs_Grunt
   m_EditorClassIdentifier: 
+  ScriptDirectory: StateScript/Enemy_Default
   stateDefs:
   - StateDefName: Default
     StateDefID: -1
-    LuaAsset: {fileID: -8122155829129254986, guid: 65fd7b4815d6a3444b417f80c6adccb9, type: 3}
+    ScriptDirectory: 
+    ScriptName: statecmd_enemy_def.mjs
     preStateVerdictName: Queue_Cmd
     ParamLoadName: LuaOutput
     stateType: 0
@@ -26,6 +28,7 @@ MonoBehaviour:
     - rid: 4404388709018370078
     - rid: 4404388664824299529
     - rid: 1982101297765023744
+    Dir: 
     setCtrl: 0
   references:
     version: 2

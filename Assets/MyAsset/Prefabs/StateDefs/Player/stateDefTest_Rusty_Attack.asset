@@ -181,8 +181,8 @@ MonoBehaviour:
   - StateDefName: AirHard Knife
     StateDefID: 350
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID_J_Knife
+    ScriptName: stateScript_Rusty_Attack_Gear.mjs
+    preStateVerdictName: StateDef_350_AirKnife
     ParamLoadName: null
     stateType: 0
     moveType: 0
@@ -827,7 +827,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 25
+          stParamValue: 350
           useID: -1
           stLuaLoads: 
         AnimSlot:

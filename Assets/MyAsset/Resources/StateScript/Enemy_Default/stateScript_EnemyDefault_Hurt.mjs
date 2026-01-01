@@ -1,4 +1,4 @@
-//Hurt_Init(5000)
+//Hurt_Init for Default Enemy.(5000)
 export function StateDef_5000_ID(entity)
 { 
     //List<Int>
