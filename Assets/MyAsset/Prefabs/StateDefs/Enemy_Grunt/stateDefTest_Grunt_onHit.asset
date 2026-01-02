@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateDefTest_Grunt_onHit
   m_EditorClassIdentifier: 
+  ScriptDirectory: StateScript/Enemy_Default
   stateDefs:
   - StateDefName: Default
     StateDefID: 1000000
-    LuaAsset: {fileID: -8122155829129254986, guid: ba55e3e82ed4fba4db7d0e1450ce1287, type: 3}
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: 
     preStateVerdictName: QueuedStateID_0
     ParamLoadName: LuaOutput
     stateType: 0
@@ -24,38 +26,42 @@ MonoBehaviour:
     StateList:
     - rid: 3579423253479817227
     - rid: 4404388598234480643
+    Dir: 
     setCtrl: 0
   - StateDefName: OnHit
     StateDefID: 5000
-    LuaAsset: {fileID: -8122155829129254986, guid: ba55e3e82ed4fba4db7d0e1450ce1287, type: 3}
-    preStateVerdictName: QueuedStateID_Hit_Def
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_Hurt.mjs
+    preStateVerdictName: StateDef_5000_ID
     ParamLoadName: LuaOutput
     stateType: 83
     moveType: 72
     physType: 83
     StateList:
-    - rid: 4404388575372902408
     - rid: 4404388569968803840
     - rid: 4404388549547524096
     - rid: 7982028000538132481
+    Dir: 
     setCtrl: 0
   - StateDefName: OnHit_Blow
     StateDefID: 5050
-    LuaAsset: {fileID: -8122155829129254986, guid: ba55e3e82ed4fba4db7d0e1450ce1287, type: 3}
-    preStateVerdictName: QueuedStateID_Hit_Air
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_Hurt.mjs
+    preStateVerdictName: StateDef_5050_ID
     ParamLoadName: LuaOutput
     stateType: 83
     moveType: 72
     physType: 83
     StateList:
     - rid: 4404388637674569735
-    - rid: 4404388575372902408
     - rid: 7982027949219512346
+    Dir: 
     setCtrl: 0
   - StateDefName: OnHit_Fall
     StateDefID: 5100
-    LuaAsset: {fileID: -8122155829129254986, guid: b20a38daf98a7ed479ac6f191b1fe118, type: 3}
-    preStateVerdictName: stID_FallDown
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_Hurt.mjs
+    preStateVerdictName: StateDef_5100_ID
     ParamLoadName: 
     stateType: 76
     moveType: 72
@@ -64,11 +70,13 @@ MonoBehaviour:
     - rid: 7982027949219512332
     - rid: 7982027949219512331
     - rid: 7982028000538132486
+    Dir: 
     setCtrl: 0
   - StateDefName: OnHit_Recover
     StateDefID: 5101
-    LuaAsset: {fileID: -8122155829129254986, guid: b20a38daf98a7ed479ac6f191b1fe118, type: 3}
-    preStateVerdictName: stID_FallRecov
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_Hurt.mjs
+    preStateVerdictName: StateDef_5101_ID
     ParamLoadName: 
     stateType: 76
     moveType: 73
@@ -76,6 +84,7 @@ MonoBehaviour:
     StateList:
     - rid: 7982027949219512334
     - rid: 7982027949219512333
+    Dir: 
     setCtrl: 0
   references:
     version: 2
@@ -94,12 +103,19 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388549547524096
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -124,21 +140,19 @@ MonoBehaviour:
           stParamValue: 5000
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
-    - rid: 4404388575372902408
-      type: {class: scColorChange, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 0
-          stLuaLoads: 
-        stateControllerSubName: Orange Enough
-        color: {r: 1, g: 0.6214301, b: 0.2216981, a: 1}
+        mask: {fileID: 0}
     - rid: 4404388598234480643
       type: {class: scColorChange, ns: , asm: Assembly-CSharp}
       data:
@@ -162,12 +176,19 @@ MonoBehaviour:
           stParamValue: 5050
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512331
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -192,12 +213,19 @@ MonoBehaviour:
           stParamValue: 5100
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512333
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -222,12 +250,19 @@ MonoBehaviour:
           stParamValue: 5101
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512346
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

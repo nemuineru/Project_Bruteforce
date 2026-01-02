@@ -388,6 +388,11 @@ public class StateDef
             {
                 ExecuteStates = executer_stateIDGet(entity);
             }
+            else
+            {
+                Debug.LogWarning(entity.gameObject.name + " loads the script function :" + preStateVerdictName +
+                "but returns not found.");
+            }
             if (executer_stateParamGet != null)
             { 
                 luaOutputParams = executer_stateParamGet(entity);
@@ -407,7 +412,7 @@ public class StateDef
             {
                 //idがステート読み出しリスト内・もしくはステート自体が読み出し処理を行う場合
                 //Debug.LogWarning(entity.gameObject.name + " loads " + state.ID.value.ToString());
-                if (state.isIDValid(ExecuteStates.ToArray(), entity))
+                if (ExecuteStates != null && state.isIDValid(ExecuteStates.ToArray(), entity))
                 {
                     //stateにluaOutputParamsを予め登録.
                     state.loadParams = luaOutputParams;

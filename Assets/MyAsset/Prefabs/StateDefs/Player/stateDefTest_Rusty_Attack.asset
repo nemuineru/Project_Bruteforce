@@ -895,7 +895,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 3
+          value: 10
           stLuaLoads: 
         stateControllerSubName: HitDef_ Kicker
         hitParams:

@@ -12,7 +12,7 @@ export function StateDef_5000_ID(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
     let isOnGround = CS.Elem.isEntityOnGround;
-    let isAlive = entity.attrs.isAlive;
+    let isAlive = entity.attrs.alive;
 
     if (CurrentTime == 0 && CurrentAnimID != 5000)
     {
@@ -48,7 +48,7 @@ export function StateDef_5050_ID(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
     let isOnGround = CS.Elem.isEntityOnGround;
-    let isAlive = entity.attrs.isAlive;
+    let isAlive = entity.attrs.alive;
 
     if (CurrentTime == 0 && CurrentAnimID != 5050)
     {

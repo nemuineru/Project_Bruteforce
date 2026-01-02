@@ -16,9 +16,9 @@ MonoBehaviour:
   stateDefs:
   - StateDefName: Default
     StateDefID: -1
-    ScriptDirectory: 
-    ScriptName: statecmd_enemy_def.mjs
-    preStateVerdictName: Queue_Cmd
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_cmd.mjs
+    preStateVerdictName: stateCmd
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 1
+          value: 200
           stLuaLoads: 
         stateControllerSubName: Combo1 Jab_Cmd
         changeTo: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 20
+          value: 250
           stLuaLoads: 
         stateControllerSubName: JumpCombo Kick_Cmd
         changeTo: 20
@@ -68,7 +68,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 5
+          value: 300
           stLuaLoads: 
         stateControllerSubName: Hard1 GKnife_Cmd
         changeTo: 5

@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateDefTest_Grunt_Base
   m_EditorClassIdentifier: 
+  ScriptDirectory: StateScript/Enemy_Default
   stateDefs:
   - StateDefName: OnInitLoad
     StateDefID: 0
-    LuaAsset: {fileID: -8122155829129254986, guid: 5560abd9d309e4644a56cc96dee9a743, type: 3}
-    preStateVerdictName: QueuedStateID
-    ParamLoadName: LuaOutput
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_main.mjs
+    preStateVerdictName: StateDef_0_ID
+    ParamLoadName: StateDef_0_Param
     stateType: 0
     moveType: 0
     physType: 83
@@ -28,10 +30,12 @@ MonoBehaviour:
     - rid: 3002629528666767591
     - rid: 3579422750824726546
     - rid: 1982101199356952582
+    Dir: 
     setCtrl: 0
   - StateDefName: Combo1 Jab_First
     StateDefID: 1
-    LuaAsset: {fileID: -8122155829129254986, guid: 98010520cf004724ab8d15d12269212c, type: 3}
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_main.mjs
     preStateVerdictName: QueuedStateID
     ParamLoadName: LuaOutput
     stateType: 0
@@ -42,10 +46,12 @@ MonoBehaviour:
     - rid: 3579423095655497736
     - rid: 4404388529659445248
     - rid: 1982101252599447582
+    Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
     StateDefID: 5
-    LuaAsset: {fileID: -8122155829129254986, guid: 6837c7e0416f567428421391c0919233, type: 3}
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: 
     preStateVerdictName: QueuedStateID_Knife
     ParamLoadName: null
     stateType: 0
@@ -55,11 +61,13 @@ MonoBehaviour:
     - rid: 4404388709018370071
     - rid: 4404388709018370072
     - rid: 4404388709018370073
+    Dir: 
     setCtrl: 0
   - StateDefName: Jump
     StateDefID: 50
-    LuaAsset: {fileID: -8122155829129254986, guid: 0bbbf6571014c244498b834896fdd87c, type: 3}
-    preStateVerdictName: QueuedStateID
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_main.mjs
+    preStateVerdictName: StateDef_0_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -68,6 +76,7 @@ MonoBehaviour:
     - rid: 4404389163807801372
     - rid: 4404389163807801374
     - rid: 4404389163807801373
+    Dir: 
     setCtrl: 0
   references:
     version: 2
@@ -129,12 +138,19 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 3002629528666767591
       type: {class: scAnimParamChange, ns: , asm: Assembly-CSharp}
       data:
@@ -178,12 +194,19 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 3579423095655497736
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -233,12 +256,19 @@ MonoBehaviour:
           stParamValue: 5
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388709018370072
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -296,12 +326,19 @@ MonoBehaviour:
           stParamValue: 50
           useID: -1
           stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         animParameter:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404389163807801374
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
