@@ -355,8 +355,10 @@ public class StateDef
     }
 
     //PUERTSの実装を開始する.
-    public void Execute(Entity entity)
+    //あと、実行時に読み出したステート番号をList形式で出力する.
+    public List<int> Execute(Entity entity)
     {
+        List<int> executedStateID = new List<int>();
         //stateTimeが0の時, 恒常設定されたステートパラメータを確認
         if (entity.stateTime == 0)
         {
@@ -422,9 +424,11 @@ public class StateDef
                     //実際に実行.
                     //state.Entityに直接登録すると、別キャラクターが参照するため変更..
                     state.OnExecute(entity);
+                    executedStateID.Add(state.ID.value);
                 }
             }
         }
+        return executedStateID;
     }
 
     public void _Execute(Entity entity)

@@ -44,7 +44,7 @@ export function StateDef_251_ID_KnifeV2(entity)
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
     let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 4 && entity.animID == 251
 
-    if (CurrentTime > 20)
+    if (AnimEndTime - CurrentAnimTime < 4)
     {
         verdList.Add(1);
     }
@@ -53,7 +53,7 @@ export function StateDef_251_ID_KnifeV2(entity)
         verdList.Add(0);
     }
     //Aight, does native JS supports math function?
-    if (Math.abs(CurrentTime - 5) < 2 &&
+    if (Math.abs(CurrentTime - 7) < 2 &&
         entity.attrs.isStateHit == 0)
     {
         verdList.Add(10);
@@ -62,6 +62,28 @@ export function StateDef_251_ID_KnifeV2(entity)
         verdList.Add(100);
     }
     return verdList;
+}
+
+export function StateDef_251_ID_Knife_physics(entity)
+{
+
+    let List_Object =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+    let outs = new List_Object();
+
+    const Vector2 = CS.UnityEngine.Vector2;
+    const Vector3 = CS.UnityEngine.Vector3;
+    let vel2 = new Vector2(0, 0)
+    let vel3 = new Vector3(0,0,0);
+
+    //オブジェクトの正面方向・右方向を考え、Dotで計算.
+    let vel_relate_f = entity.transform.forward;
+    vel3.x = Vector3.ProjectOnPlane(vel_relate_f,Vector3.up).x * 120;
+    vel3.z = Vector3.ProjectOnPlane(vel_relate_f,Vector3.up).z * 120;
+
+    outs.Add(vel3);
+    //CS.UnityEngine.Debug.Log(vel2);
+    return outs
 }
 
 //Air Knifer states for stateDef 51

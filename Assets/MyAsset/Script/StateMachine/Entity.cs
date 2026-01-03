@@ -140,6 +140,10 @@ public class Entity : MonoBehaviour
 
     //カメラ登録時、格納.
     CinemachineOrbitalTransposer transposer;
+
+    //実行済みのステート番号の書き換えなど
+    public List<int> executedStateIDs = new List<int>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -255,6 +259,7 @@ public class Entity : MonoBehaviour
         if (isStateChanged)
         {
             attrs.resetCombatStateTime();
+            executedStateIDs = new List<int>();
         }
         else
         {
@@ -402,7 +407,14 @@ public class Entity : MonoBehaviour
             // + " at time of " + stateTime            
             //the StateDef needs as deepcopy?
 
-            currentState.Execute(this);
+            //実行したSTATEIDを格納. 実行回数はまだ記録してない.
+            foreach(int ID in currentState.Execute(this))
+            {
+                if(!executedStateIDs.Any(i => i == ID))
+                {
+                    executedStateIDs.Add(ID);
+                }
+            }
             //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
             //" " + this.gameObject.name);
         }

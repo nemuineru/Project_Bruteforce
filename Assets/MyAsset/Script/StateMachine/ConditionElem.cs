@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -132,6 +133,11 @@ public class Elem
     public static int CheckStateDefID(Entity et)
     {
         return et.CurrentStateID;
+    }
+
+    public static bool CheckExecutedID(Entity et, int refID)
+    {
+        return et.executedStateIDs.Any(i => i == refID);
     }
 
     public static int CheckAnimID(Entity et)

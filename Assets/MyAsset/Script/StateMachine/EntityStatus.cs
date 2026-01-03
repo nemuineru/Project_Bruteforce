@@ -13,7 +13,8 @@ public class EntityAttr
     //止まってるか？
     public bool isPaused = false;
     public bool isStateChanged = false;
-
+    public bool isGuarded = false;
+    public bool isDamaged = false;
     public bool isFall = false;
 
     public bool isEraseReady = false;
@@ -68,10 +69,19 @@ public class EntityStatus
     public float currentHP = 100f;
     public float maxEnergy = 50f;
     public float currentEnergy = 50f;
+    //ガード値
+    public float currentGuardPoint = 100f;
+    public float maxGuardPoint = 100f;
+    
+    public float guardRecoverRate= .8f;
+    public float guardRecoverParsedTime = 0f;
+    public float GuardRecoverTime = .7f;
+
 
     //100%上限
     public float BaseAttackPerc = 100f;
     public float BaseDefencePerc = 100f;
+    
 
 
     //チャージ. 特殊ボタンの押しっぱなしを判別.

@@ -115,15 +115,16 @@ MonoBehaviour:
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Attack_Gear.mjs
     preStateVerdictName: StateDef_251_ID_KnifeV2
-    ParamLoadName: 
+    ParamLoadName: StateDef_251_ID_Knife_physics
     stateType: 0
     moveType: 0
     physType: 0
     StateList:
     - rid: 1814088220477227008
-    - rid: 1814088220477227009
     - rid: 1814088220477227010
     - rid: 1814088220477227012
+    - rid: 5331018484740521993
+    - rid: 1814088220477227009
     Dir: 
     setCtrl: 0
   - StateDefName: AxeSlash
@@ -371,16 +372,16 @@ MonoBehaviour:
           _setEssential: 0
           loadTypes: 0
           stParamValue:
-            Damage: 0
-            velset: {x: 0, y: 0, z: 0}
-            hitStopTime: {x: 0, y: 0}
-            HitEff: {fileID: 0}
-            ChangeState_Enemy: 5000
+            Damage: 10
+            velset: {x: 0, y: 4, z: 2}
+            hitStopTime: {x: 7, y: 6}
+            HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
+            ChangeState_Enemy: 5050
             maxEntityHits: 1
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
-            HitMoveFlag: IA
+            HitMoveFlag: IAH
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -719,7 +720,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 3
+          value: 10
           stLuaLoads: 
         stateControllerSubName: Air_KickHit
         hitParams:
@@ -796,7 +797,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 3
+          value: 10
           stLuaLoads: 
         stateControllerSubName: Damage
         hitParams:
@@ -915,6 +916,21 @@ MonoBehaviour:
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
+    - rid: 5331018484740521993
+      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: SetVel on First
+        vels:
+          _setEssential: 0
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: 0
+          stLuaLoads: 
+        priority: 0
     - rid: 7557642759318274048
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
