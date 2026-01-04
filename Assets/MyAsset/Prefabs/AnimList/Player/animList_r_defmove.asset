@@ -55,6 +55,26 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
+    ID: 5
+    Name: GuardAnim
+    animClip:
+    - Clip: {fileID: 7400000, guid: db5ee69b58584b54d88e33bb8971304e, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.08
+    blendOutTime: 0.3
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 1
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
     ID: 50
     Name: Jump
     animClip:

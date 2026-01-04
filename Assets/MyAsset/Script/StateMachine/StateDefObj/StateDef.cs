@@ -615,12 +615,14 @@ public class scAnimSet : StateController
     internal override void OnExecute(Entity entity)
     {
         entity.animID = changeAnimID.valueGet(loadParams,entity);
+        int AnimSlotNum = AnimSlot.valueGet(loadParams,entity);
         AnimDef animFindByID = entity.animDefs.ToList().Find
         (x => x.ID == changeAnimID.valueGet(loadParams, entity));
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
-            entity.MainAnimMixer.ChangeAnim(animFindByID);
+            entity.MainAnimMixer.ChangeAnim(animFindByID,AnimSlotNum);
+            //この番号設定はもうちょい考えるべき.. アニメスロット設定が効かないはず
             entity.MainAnimMixer.ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams,entity));
         }
     }
@@ -628,6 +630,7 @@ public class scAnimSet : StateController
 
 
 //アニメーションパラメータの変更.
+//上書き設定とかはいじらない。
 [System.Serializable]
 [SerializeField]
 [SCHiearchy("Animation/AnimParamchange")]
