@@ -599,11 +599,15 @@ public class scAnimSet : StateController
     stParams<int> changeAnimID;
 
     //if it is not set, change 0(main) slot. 
+    //latter Slot must needs to be Additional.
     [SerializeField]
     stParams<int> AnimSlot;
     
     [SerializeField]
     stParams<Vector2> animParameter; 
+
+    [SerializeField]
+    stParams<bool> isAdditional; 
 
     [SerializeField]
     AvatarMask mask;
@@ -634,6 +638,9 @@ public class scAnimParamChange : StateController
     
     [SerializeField]
     stParams<Vector2> animParameter;
+    //first, find Anim paramID then set Animslots.
+    [SerializeField]
+    stParams<int> AnimSlot;
 
     internal override void OnExecute(Entity entity)
     {

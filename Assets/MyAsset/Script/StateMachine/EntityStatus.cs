@@ -70,8 +70,11 @@ public class EntityStatus
     public float maxEnergy = 50f;
     public float currentEnergy = 50f;
     //ガード値
+    //ガード中はこの値を先に減少させてから、適応
     public float currentGuardPoint = 100f;
     public float maxGuardPoint = 100f;
+
+    public float GuardReductDmgrate = 1.0f;
     
     public float guardRecoverRate= .8f;
     public float guardRecoverParsedTime = 0f;
