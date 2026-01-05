@@ -235,7 +235,7 @@ MonoBehaviour:
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 5
           useID: -1
           stLuaLoads: 
         AnimSlot:
@@ -253,16 +253,16 @@ MonoBehaviour:
         isAdditional:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
-        mask: {fileID: 0}
+        mask: {fileID: 31900000, guid: f22fcbaf0d87c9744b0a6c6ed6eb57b0, type: 2}
     - rid: 5331018537749184513
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
-          value: 0
+          value: 1
           stLuaLoads: 
         stateControllerSubName: ChangeState0 to non guarded
         changeTo: 0
