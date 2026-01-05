@@ -35,13 +35,15 @@ MonoBehaviour:
   - StateDefName: Guard
     StateDefID: 5
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: 
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: StateDef_5_ID
     ParamLoadName: 
     stateType: 0
     moveType: 0
     physType: 0
-    StateList: []
+    StateList:
+    - rid: 5331018537749184512
+    - rid: 5331018537749184513
     Dir: 
     setCtrl: 0
   - StateDefName: Jump
@@ -129,6 +131,12 @@ MonoBehaviour:
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         mask: {fileID: 0}
     - rid: 3002629528666767591
       type: {class: scAnimParamChange, ns: , asm: Assembly-CSharp}
@@ -149,6 +157,12 @@ MonoBehaviour:
           loadTypes: 1
           stParamValue: {x: 0, y: 0}
           useID: 0
+          stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
           stLuaLoads: 
     - rid: 3579422750824726546
       type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
@@ -193,6 +207,12 @@ MonoBehaviour:
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         mask: {fileID: 0}
     - rid: 4404389163807801374
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
@@ -204,6 +224,49 @@ MonoBehaviour:
         stateControllerSubName: InitState
         changeTo: 0
         priority: 1
+    - rid: 5331018537749184512
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Animset_Slot_1
+        changeAnimID:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 5331018537749184513
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: ChangeState0 to non guarded
+        changeTo: 0
+        priority: 0
     - rid: 7557642767827468288
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -228,6 +291,12 @@ MonoBehaviour:
           _setEssential: 0
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}

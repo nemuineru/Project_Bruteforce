@@ -54,6 +54,35 @@ export function StateDef_0_ID(entity) {
     return verdList;
 }
 
+//function for Guarding
+export function StateDef_5_ID(entity) {
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0) 
+    }
+
+    //if you release B or non ground..
+    if (!isPressed_B) 
+    { 
+        //change to Idle.
+        verdList.Add(1);
+    }
+    
+    return verdList;
+}
+
 //Function for jump.
 export function StateDef_50_ID(entity) 
 {

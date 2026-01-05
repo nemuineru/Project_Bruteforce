@@ -4,6 +4,7 @@
 // and put the init value lastly.
 
 // We could use List name, if they call variable first.
+/*
 export function StateDef_0_ID(entity) {
     //List<Int>
     let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
@@ -51,6 +52,35 @@ export function StateDef_0_ID(entity) {
         verdList.Add(5100)
     }
     //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+    return verdList;
+}
+
+//function for Guarding
+export function StateDef_5_ID(entity) {
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "b");
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0) 
+    }
+
+    //if you release B or non ground..
+    if (!selfOnGrd || !isPressed_B) 
+    { 
+        //change to Idle.
+        verdList.Add(2);
+    }
+    
     return verdList;
 }
 
@@ -106,3 +136,4 @@ export function StateDef_0_Param(entity) {
     return outs
 }
 
+*/

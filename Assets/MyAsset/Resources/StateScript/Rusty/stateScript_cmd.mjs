@@ -3,6 +3,16 @@
 // put the variable type name after colon,
 // and put the init value lastly.
 
+//
+// 0 - 通常状態
+// 5 - ガード状態
+// 50 - 空中・ジャンプ状態
+// 
+//
+// 200 - 400 キャラクター指定の通常技、必殺技とか
+// 5000 - 基本やられ
+
+
 // We could use List name, if they call variable first.
 export function stateCmd(entity) {
     //CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
@@ -18,7 +28,12 @@ export function stateCmd(entity) {
     //charger for basic 
     let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
     let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
+
     let AttackCmd_y_isPressed = CS.Elem.CheckButtonPressed(entity, "Weapon");
+
+    //長押しで入力中とする.
+    let GuardCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
@@ -73,6 +88,10 @@ export function stateCmd(entity) {
     if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID == 50 ))
     {
         verdList.Add(350);
+    }
+    if(selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0)
+    {        
+        verdList.Add(5);
     }
 
 

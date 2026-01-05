@@ -24,6 +24,7 @@ MonoBehaviour:
     moveType: 0
     physType: 0
     StateList:
+    - rid: 5331018537749184514
     - rid: 1982101323848089607
     - rid: 4404388664824299527
     - rid: 4404388799971590145
@@ -144,6 +145,16 @@ MonoBehaviour:
         stateControllerSubName: 201 Combo2 Jab_2 Cmd
         changeTo: 201
         priority: 1
+    - rid: 5331018537749184514
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 5
+          stLuaLoads: 
+        stateControllerSubName: 5 Guarding
+        changeTo: 5
+        priority: 0
     - rid: 7982027888260546560
       type: {class: scAddCharge, ns: , asm: Assembly-CSharp}
       data:
