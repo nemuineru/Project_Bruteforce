@@ -1,13 +1,5 @@
 
-        window.PUERTS_JS_RESOURCES = {"StateScript/Rusty/_state.mjs": (function(exports, require, module, __filename, __dirname) {
-            "use strict";
-
-//must returns List<int> typeface.
-//currently, its testing.
-function stateID_0() {
-  CS.UnityEngine.Debug.Log("Hello world");
-}
-        }),"StateScript/Rusty/stateScript_cmd.mjs": (function(exports, require, module, __filename, __dirname) {
+        window.PUERTS_JS_RESOURCES = {"StateScript/Enemy_Default/stateScript_enemyDef_cmd.mjs": (function(exports, require, module, __filename, __dirname) {
             "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21,23 +13,156 @@ exports.stateCmd = stateCmd;
 
 // We could use List name, if they call variable first.
 function stateCmd(entity) {
-  CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
+  //CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
   //List<Int>
   const List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
   let verdList = new List_Int();
   let selfOnGrd = CS.Elem.isEntityOnGround(entity);
   //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-  let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "_x");
+  let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
+  //charger for basic 
+  let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
+  let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
+  let AttackCmd_y_isPressed = CS.Elem.CheckButtonPressed(entity, "Weapon");
   let StateDefID = entity.CurrentStateID;
+  let isChainable = StateDefID == 0 || StateDefID >= 200 && StateDefID < 210;
+  let chargeVal = entity.status.ChargeTime;
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
 
   //this must be set as 0.
   let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Ground Attacks - N
   if (selfOnGrd == true && AttackCmd_x == true && StateDefID == 0) {
+    verdList.Add(200);
+  }
+  //Air Attacks - N
+  if (selfOnGrd == false && AttackCmd_x == true && (StateDefID == 50 || StateDefID == 300 && selfStTime > 15)) {
+    verdList.Add(300);
+  }
+
+  //ここまで通常攻撃
+  //Special Ground Attack _ Knife c1
+  if (selfOnGrd == true && AttackCmd_y_isPressed && isChainable) {
+    verdList.Add(250);
+  }
+
+  //the combo button could charge to the doubleskill - to full skill
+  if (AttackCmd_x_isPressed && StateDefID < 5000) {
+    verdList.Add(30);
+  }
+  //for at damaged. the charge is gone to none
+  else if (!AttackCmd_x_isPressed || StateDefID >= 5000 && StateDefID <= 5300) {
+    verdList.Add(31);
+  }
+  return verdList;
+}
+        }),"StateScript/Enemy_Default/stateScript_enemyDef_Hurt.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_5000_ID = StateDef_5000_ID;
+exports.StateDef_5050_ID = StateDef_5050_ID;
+exports.StateDef_5100_ID = StateDef_5100_ID;
+exports.StateDef_5101_ID = StateDef_5101_ID;
+//Hurt_Init for Default Enemy.(5000)
+function StateDef_5000_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0 && CurrentAnimID != 5000) {
+    verdList.Add(0);
+  }
+  if (CurrentTime > 12 && isOnGround) {
+    verdList.Add(1);
+  }
+  if (!isAlive && CurrentTime > 6) {
+    verdList.Add(2);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//Hurt_Blowout(5050)
+function StateDef_5050_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround(entity);
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0 && CurrentAnimID != 5050) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimTime > 6 && CurrentTime > 10 && isOnGround) {
+    verdList.Add(1);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//FallDown(5100)
+function StateDef_5100_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimID == 5100 && isOnGround && AnimEndTime - CurrentAnimTime < 2 && isAlive) {
+    verdList.Add(1);
+  }
+  if (!isAlive) {
+    verdList.Add(2);
+  }
+  return verdList;
+}
+
+//FallDown_Recovery
+function StateDef_5101_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimID == 5101 && AnimEndTime - CurrentAnimTime < 2) {
     verdList.Add(1);
   }
   return verdList;
 }
-        }),"StateScript/Rusty/stateScript_main.mjs": (function(exports, require, module, __filename, __dirname) {
+        }),"StateScript/Enemy_Default/stateScript_enemyDef_main.mjs": (function(exports, require, module, __filename, __dirname) {
             "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57,7 +182,656 @@ function StateDef_0_ID(entity) {
   let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
   let verdList = new List_Int();
   let selfOnGrd = CS.Elem.isEntityOnGround(entity);
-  let isPressed_A = CS.Elem.CheckButtonPressed(entity, "_a");
+  let isPressed_A = CS.Elem.CheckButtonPressed(entity, "a_");
+  let isPressed_B = CS.Elem.CheckButtonPressed(entity, "b_");
+  let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Init.
+  if (selfStTime > 0) {
+    verdList.Add(0);
+  }
+  if (selfOnGrd) {
+    //Idle/Moving
+    verdList.Add(2);
+    //ChangeState To Jump. (stateNo - 3)
+    if (isPressed_A) {
+      verdList.Add(3);
+    }
+  }
+  if (!isPressed_C) {
+    verdList.Add(800);
+  }
+
+  //entityに登録されたmixerの数が0のときは緊急。
+  if (CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0) {
+    //Debug.Log("Init Anim Loaded")
+    verdList.Add(100);
+  }
+  if (!entity.attrs.alive) {
+    verdList.Add(5100);
+  }
+  //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+  return verdList;
+}
+
+//Function for jump.
+function StateDef_50_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
+
+  //On Ground.
+  if (selfStTime > 1 && selfOnGrd_f == true) {
+    verdList.Add(1);
+  }
+
+  //idleのanimを指定する
+  if (selfStTime == 0) {
+    //Debug.Log("Jumping Vect");
+    verdList.Add(50);
+  }
+  return verdList;
+}
+
+// export Parameter @ stateDef 0.
+// not only this function, but those params need to be 
+// returned as GenericList such like List<object>,
+// ..otherwise it fails completely. - N.
+function StateDef_0_Param(entity) {
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let vel2 = new Vector2(0, 0);
+  let vel3 = new Vector3(0, 0, 0);
+
+  //オブジェクトのRigidBodyを取得する.
+  vel3 = entity.rigid.velocity;
+  //オブジェクトの正面方向・右方向を考え、Dotで計算.
+  let vel_relate_f = entity.transform.forward;
+  let vel_relate_r = entity.transform.right;
+  vel2.x = Vector3.Dot(vel3, vel_relate_r);
+  vel2.y = Vector3.Dot(vel3, vel_relate_f);
+  outs.Add(vel2);
+  //CS.UnityEngine.Debug.Log(vel2);
+  return outs;
+}
+        }),"StateScript/Rusty/_state.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+//must returns List<int> typeface.
+//currently, its testing.
+function stateID_0() {
+  CS.UnityEngine.Debug.Log("Hello world");
+}
+        }),"StateScript/Rusty/stateScript_cmd.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stateCmd = stateCmd;
+// any meant as any type.
+// also use 'let' at first declearation,
+// put the variable type name after colon,
+// and put the init value lastly.
+
+//
+// 0 - 通常状態
+// 5 - ガード状態
+// 50 - 空中・ジャンプ状態
+// 
+//
+// 200 - 400 キャラクター指定の通常技、必殺技とか
+// 5000 - 基本やられ
+
+// We could use List name, if they call variable first.
+function stateCmd(entity) {
+  //CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
+  //List<Int>
+  const List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
+  let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
+  //charger for basic 
+  let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
+  let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
+  let AttackCmd_y_isPressed = CS.Elem.CheckButtonPressed(entity, "Weapon");
+
+  //長押しで入力中とする.
+  let GuardCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Guarding");
+  let StateDefID = entity.CurrentStateID;
+  let isChainable = StateDefID == 0 || StateDefID >= 200 && StateDefID < 210;
+  let chargeVal = entity.status.ChargeTime;
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Ground Attacks - N
+  if (selfOnGrd == true && AttackCmd_x == true && StateDefID == 0) {
+    verdList.Add(200);
+  }
+  if (selfOnGrd == true && AttackCmd_x == true && StateDefID == 200 && selfStTime > 8) {
+    verdList.Add(201);
+  }
+  if (selfOnGrd == true && AttackCmd_x == true && StateDefID == 201 && selfStTime > 11) {
+    verdList.Add(202);
+  }
+  if (selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && isChainable && chargeVal >= 0.15 && chargeVal < 0.4) {
+    //CS.UnityEngine.Debug.Log("Charge Attack Test");
+    verdList.Add(210);
+  }
+  if (selfOnGrd == true && AttackCmd_x_isPressed && AttackCmd_x_isReleased && (isChainable || StateDefID == 210 && CurrentAnimTime >= 15) && chargeVal >= 0.4) {
+    //CS.UnityEngine.Debug.Log("Charge Attack Test");
+    verdList.Add(220);
+  }
+  //Air Attacks - N
+  if (selfOnGrd == false && AttackCmd_x == true && (StateDefID == 50 || StateDefID == 300 && selfStTime > 15)) {
+    verdList.Add(300);
+  }
+
+  //ここまで通常攻撃
+  //Special Ground Attack _ Knife c1
+  if (selfOnGrd == true && AttackCmd_y_isPressed && isChainable) {
+    verdList.Add(250);
+  }
+  //Special Ground Attack _ Knife c2
+  if (selfOnGrd == true && AttackCmd_y_isPressed && StateDefID == 250 && selfStTime > 12) {
+    verdList.Add(251);
+  }
+  //Special Air Attack _ Knife c1
+  if (selfOnGrd == false && AttackCmd_y_isPressed == true && StateDefID == 50) {
+    verdList.Add(350);
+  }
+  if (selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0) {
+    verdList.Add(5);
+  }
+
+  //the combo button could charge to the doubleskill - to full skill
+  if (AttackCmd_x_isPressed && StateDefID < 5000) {
+    verdList.Add(30);
+  }
+  //for at damaged. the charge is gone to none
+  else if (!AttackCmd_x_isPressed || StateDefID >= 5000 && StateDefID <= 5300) {
+    verdList.Add(31);
+  }
+  return verdList;
+}
+        }),"StateScript/Rusty/stateScript_main.mjs": (function(exports, require, module, __filename, __dirname) {
+            // any meant as any type.
+// also use 'let' at first declearation,
+// put the variable type name after colon,
+// and put the init value lastly.
+
+// We could use List name, if they call variable first.
+/*
+export function StateDef_0_ID(entity) {
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let isPressed_A = CS.Elem.CheckButtonPressed(entity, "a_");
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "b_");
+    let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime > 0)
+    { 
+        verdList.Add(0) 
+    }
+
+    if (selfOnGrd) 
+    { 
+        //Idle/Moving
+        verdList.Add(2);
+        //ChangeState To Jump. (stateNo - 3)
+        if (isPressed_A)
+        { 
+            verdList.Add(3);
+        }
+    }
+
+    if( !isPressed_C)
+    {
+            verdList.Add(800);
+    }
+    
+    //entityに登録されたmixerの数が0のときは緊急。
+    if( CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0)
+    {
+        //Debug.Log("Init Anim Loaded")
+        verdList.Add(100) 
+    }
+    if(!entity.attrs.alive)
+    {
+        verdList.Add(5100)
+    }
+    //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+    return verdList;
+}
+
+//function for Guarding
+export function StateDef_5_ID(entity) {
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "b");
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0) 
+    }
+
+    //if you release B or non ground..
+    if (!selfOnGrd || !isPressed_B) 
+    { 
+        //change to Idle.
+        verdList.Add(2);
+    }
+    
+    return verdList;
+}
+
+//Function for jump.
+export function StateDef_50_ID(entity) 
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let selfStTime =  CS.Elem.CheckStateTime(entity)
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+
+    //On Ground.
+    if(selfStTime > 1 && selfOnGrd_f == true)
+    {
+        verdList.Add(1);
+    }
+
+    //idleのanimを指定する
+    if(selfStTime == 0)
+    {
+    //Debug.Log("Jumping Vect");
+    verdList.Add(50);
+    }
+    return verdList
+}
+
+// export Parameter @ stateDef 0.
+// not only this function, but those params need to be 
+// returned as GenericList such like List<object>,
+// ..otherwise it fails completely. - N.
+export function StateDef_0_Param(entity) { 
+    let List_Object =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+    let outs = new List_Object();
+
+    const Vector2 = CS.UnityEngine.Vector2;
+    const Vector3 = CS.UnityEngine.Vector3;
+    let vel2 = new Vector2(0, 0)
+    let vel3 = new Vector3(0,0,0);
+
+    //オブジェクトのRigidBodyを取得する.
+    vel3 = entity.rigid.velocity    
+    //オブジェクトの正面方向・右方向を考え、Dotで計算.
+    let vel_relate_f = entity.transform.forward;
+    let vel_relate_r = entity.transform.right;
+    vel2.x = Vector3.Dot(vel3,vel_relate_r)
+    vel2.y = Vector3.Dot(vel3,vel_relate_f)
+
+    outs.Add(vel2);
+    //CS.UnityEngine.Debug.Log(vel2);
+    return outs
+}
+
+*/
+"use strict";
+        }),"StateScript/Rusty/stateScript_Rusty_Attack_Base.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_200_ID = StateDef_200_ID;
+exports.StateDef_202_ID = StateDef_202_ID;
+exports.StateDef_210_ID = StateDef_210_ID;
+exports.StateDef_220_ID = StateDef_220_ID;
+exports.StateDef_300_ID_JumpKick = StateDef_300_ID_JumpKick;
+//puncher states for stateDef 200 and 201
+function StateDef_200_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  if (CurrentTime > 12) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    CS.UnityEngine.Debug.Log("Executed Anim");
+    verdList.Add(0);
+  }
+  //Aight, does native JS supports math function?
+  if (Math.abs(CurrentTime - 4) < 2 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  //CS.UnityEngine.Debug.Log("Executed");
+  return verdList;
+}
+
+//Kick Finisher states for stateDef 202()
+function StateDef_202_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  if (CurrentTime > 14) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  //Aight, does native JS supports math function?
+  //current Animtime needs to be set more than 8
+  if (Math.abs(CurrentTime - 7) < 4 && CurrentAnimTime > 2 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//upper Finisher states for stateDef 210()
+function StateDef_210_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 7 && CurrentAnimID == 210;
+  if (CurrentAnimTime > 20 && CurrentAnimID == 210) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  //Aight, does native JS supports math function?
+  //current Animtime needs to be set more than 8
+  if (Math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//RoundKicker Finisher states for stateDef 220()
+function StateDef_220_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 15 && CurrentAnimID == 220;
+  if (CurrentAnimTime > 35 && CurrentAnimID == 220) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  //Aight, does native JS supports math function?
+  //current Animtime needs to be set more than 8
+  if (Math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//Air Kicker states for stateDef 300()
+function StateDef_300_ID_JumpKick(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimID == 300;
+
+  //Change state on ground.
+  if (selfOnGrd) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  // !CS.Elem.CheckExecutedID(entity,10)
+  //Aight, does native JS supports math function?
+  //current Animtime needs to be set more than 8
+  if (CurrentAnimTime > 4 && CurrentAnimID == 300 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+        }),"StateScript/Rusty/stateScript_Rusty_Attack_Gear.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_250_ID_Knife = StateDef_250_ID_Knife;
+exports.StateDef_251_ID_KnifeV2 = StateDef_251_ID_KnifeV2;
+exports.StateDef_251_ID_Knife_physics = StateDef_251_ID_Knife_physics;
+exports.StateDef_350_AirKnife = StateDef_350_AirKnife;
+//Knifer states for stateDef 250
+function StateDef_250_ID_Knife(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  if (CurrentTime > 20) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  //Aight, does native JS supports math function?
+  if (Math.abs(CurrentTime - 5) < 2 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//Knifer states for stateDef 250
+function StateDef_251_ID_KnifeV2(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 4 && entity.animID == 251;
+  if (AnimEndTime - CurrentAnimTime < 4) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  //Aight, does native JS supports math function?
+  if (Math.abs(CurrentTime - 7) < 2 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+function StateDef_251_ID_Knife_physics(entity) {
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let vel2 = new Vector2(0, 0);
+  let vel3 = new Vector3(0, 0, 0);
+
+  //オブジェクトの正面方向・右方向を考え、Dotで計算.
+  let vel_relate_f = entity.transform.forward;
+  vel3.x = Vector3.ProjectOnPlane(vel_relate_f, Vector3.up).x * 120;
+  vel3.z = Vector3.ProjectOnPlane(vel_relate_f, Vector3.up).z * 120;
+  outs.Add(vel3);
+  //CS.UnityEngine.Debug.Log(vel2);
+  return outs;
+}
+
+//Air Knifer states for stateDef 51
+function StateDef_350_AirKnife(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  if (selfOnGrd) {
+    verdList.Add(1);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (Math.abs(CurrentTime - 7) < 2 && entity.attrs.isStateHit == 0) {
+    verdList.Add(10);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+        }),"StateScript/Rusty/stateScript_Rusty_Hurt.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_5000_ID = StateDef_5000_ID;
+exports.StateDef_5050_ID = StateDef_5050_ID;
+exports.StateDef_5100 = StateDef_5100;
+//Hurt_Init(5000)
+function StateDef_5000_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0 && CurrentAnimID != 5000) {
+    verdList.Add(0);
+  }
+  if (CurrentTime > 12 && isOnGround) {
+    verdList.Add(1);
+  }
+  if (!isAlive && CurrentTime > 6) {
+    verdList.Add(2);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//Hurt_Blowout(5050)
+function StateDef_5050_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0 && CurrentAnimID != 5050) {
+    verdList.Add(0);
+  }
+  if (CurrentTime > 6 && isOnGround) {
+    verdList.Add(1);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//BlowOff(5100)
+function StateDef_5100(entity) {}
+        }),"StateScript/Rusty/stateScript_Rusty_Main.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_0_ID = StateDef_0_ID;
+exports.StateDef_0_Param = StateDef_0_Param;
+exports.StateDef_50_ID = StateDef_50_ID;
+exports.StateDef_5_ID = StateDef_5_ID;
+// any meant as any type.
+// also use 'let' at first declearation,
+// put the variable type name after colon,
+// and put the init value lastly.
+
+// We could use List name, if they call variable first.
+function StateDef_0_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  let isPressed_A = CS.Elem.CheckButtonPressed(entity, "Jump");
   let isPressed_B = CS.Elem.CheckButtonPressed(entity, "_b");
   let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
 
@@ -89,6 +863,30 @@ function StateDef_0_ID(entity) {
     verdList.Add(5100);
   }
   //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+  return verdList;
+}
+
+//function for Guarding
+function StateDef_5_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Init.
+  if (selfStTime == 0) {
+    verdList.Add(0);
+  }
+
+  //if you release B or non ground..
+  if (!isPressed_B) {
+    //change to Idle.
+    verdList.Add(1);
+  }
   return verdList;
 }
 
