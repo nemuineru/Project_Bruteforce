@@ -210,7 +210,7 @@ MonoBehaviour:
         isAdditional:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -241,7 +241,7 @@ MonoBehaviour:
         AnimSlot:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         animParameter:

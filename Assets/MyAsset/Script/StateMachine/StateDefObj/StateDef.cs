@@ -616,12 +616,13 @@ public class scAnimSet : StateController
     {
         entity.animID = changeAnimID.valueGet(loadParams,entity);
         int AnimSlotNum = AnimSlot.valueGet(loadParams,entity);
+        bool _isAdditional = isAdditional.valueGet(loadParams,entity);
         AnimDef animFindByID = entity.animDefs.ToList().Find
         (x => x.ID == changeAnimID.valueGet(loadParams, entity));
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
-            entity.MainAnimMixer.ChangeAnim(animFindByID,AnimSlotNum);
+            entity.MainAnimMixer.ChangeAnim(animFindByID,AnimSlotNum,_isAdditional);
             //この番号設定はもうちょい考えるべき.. アニメスロット設定が効かないはず
             entity.MainAnimMixer.ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams,entity));
         }
