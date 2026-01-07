@@ -432,9 +432,6 @@ public class MainNodeConfigurator
     }   
 }
 
-
-
-
 //animDefには以下を登録 - 
 // アニメーションID, アニメーション名, アニメーションの速度, 
 // アニメーションの基本ブレンド（イン・アウト）タイムなど

@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.kybernetik.animancer": {
+      "version": "file:com.kybernetik.animancer",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.modules.animation": "1.0.0"
+      }
+    },
     "com.tencent.puerts.core": {
       "version": "file:C:/Users/sutea/source/repos/puerts_def_st/puerts_unity_demo/package",
       "depth": 0,
