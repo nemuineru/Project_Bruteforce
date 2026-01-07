@@ -197,6 +197,8 @@ public class MixAnimNode
         }
     }
 
+//このMainNodeConfigratorを変更したい
+//PlayableAPIを直接的に叩くんじゃなくて、Animancerから..
 public class MainNodeConfigurator
 {
     //MainAnimNodeが使うRootTransform
