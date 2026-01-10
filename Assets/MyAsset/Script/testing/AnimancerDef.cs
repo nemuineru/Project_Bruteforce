@@ -7,6 +7,11 @@ using System;
 public class AnimancerDef : MonoBehaviour
 {
     [SerializeField]
+    int ChangeIndex = 0;
+
+    int prevIndex = 0;
+
+    [SerializeField]
     List<Vector2> ParamPos;
     [System.Serializable]
     public class clipSetting
@@ -36,6 +41,9 @@ public class AnimancerDef : MonoBehaviour
 			Free_Directional,
 			Free_Cartestan
 		}
+
+        [SerializeField]
+        internal AvatarMask masker;
     }
     
     [SerializeField]
@@ -57,7 +65,10 @@ public class AnimancerDef : MonoBehaviour
     //StateをGetTypeで取得して、その種類で挙動を変える、っていうのは可能そうね
     
     //ミキシング実験はOK. 次はAdditiveをやってみる.
-    //[State]
+    //[StateLayer]が1以上を対象に、Additiveとして処理.
+
+    //Mixing出来たので次はアレだー。
+    //Layerの自動作成と切り替え..
 
     void Start()
     {
@@ -67,26 +78,60 @@ public class AnimancerDef : MonoBehaviour
     void Update()
     {
         AnimancerLayer Layer1_ = _mainAnimComponent.Layers[0];
-        if (Layer1_ != null)
+        if (Layer1_ != null && prevIndex != ChangeIndex)
         {
-            Type StateType = Layer1_.CurrentState.GetType();
+            MakeAnims(ChangeIndex);
+            //Type StateType = Layer1_.CurrentState.GetType();
             //Layer1_.CurrentState.Parameter = ParamPos;
+            prevIndex = ChangeIndex;
         }
+    }
+
+    void MakeAnims(int selectedAnimID)
+    {
+        AnimancerLayer Layer = _mainAnimComponent.Layers[0];
+        clipGroup SelectedGroup = _clipgroup[ChangeIndex];
+
     }
 
     void ChangeAnims()
     {
-        AnimancerLayer Layer1_ = _mainAnimComponent.Layers[0];
-        
-        AnimancerState st = new DirectionalMixerState();
+        AnimancerLayer Layer_Main = _mainAnimComponent.Layers[0];
 
-        //get first clipGroup, then add the 2D Cartestian State position.
+    }
+    
+    AnimancerState MakeState()
+    {
+        AnimancerState st = new LinearMixerState();
+        return st;
+    }
+
+    void LayerAnims()
+    {
+        AnimancerLayer Layer1_ = _mainAnimComponent.Layers[0];
+        AnimancerLayer Layer2_ = _mainAnimComponent.Layers[1];
+        
+        AnimancerState st_1 = new LinearMixerState();
+        AnimancerState st_2 = new LinearMixerState();
+
+        //get first clipGroup, assign at [0](base), then add the 2D Cartestian State position.
         foreach (clipSetting CLI in _clipgroup[0].clips)
         {
-            ((LinearMixerState)st).Add(CLI.clip, CLI.paramPos.x);            
+            ((LinearMixerState)st_1).Add(CLI.clip, CLI.paramPos.x);            
         }
 
-        Layer1_.Play(st);
+
+        //second clipGroup needs to be assigned at Layer [1] which set as Additive.
+        Layer2_.IsAdditive = true;
+        Layer2_.Weight = 1.0f;
+        Layer2_.Mask = _clipgroup[1].masker;
+        foreach (clipSetting CLI in _clipgroup[1].clips)
+        {
+            ((LinearMixerState)st_2).Add(CLI.clip, CLI.paramPos.x);            
+        }
+
+        Layer1_.Play(st_1);
+        Layer2_.Play(st_2);
 
         //AnimancerState PlayState = new AnimancerState();
         //Layer1_.Play(PlayState);

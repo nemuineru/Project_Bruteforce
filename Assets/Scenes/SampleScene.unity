@@ -752,18 +752,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c79af4de6ee7489b7fc429d8b1aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParamPos: []
   _clipgroup:
   - clips:
     - ClipName: WalkForward
       clip: {fileID: 7400000, guid: 148bd5eb3089d4c47ab1f58fc429dd0c, type: 2}
-      paramPos: {x: 1, y: 0}
-    - ClipName: Idle
-      clip: {fileID: 7400000, guid: 74e1a20f3e753a34e92a2fe82831482e, type: 2}
       paramPos: {x: 0, y: 0}
     - ClipName: WalkBackward
       clip: {fileID: 7400000, guid: 5951a6f484b97db4f8b54d46eba913e4, type: 2}
-      paramPos: {x: -1, y: 0}
-  - clips: []
+      paramPos: {x: 1, y: 0}
+    mixtype: 1
+    masker: {fileID: 0}
+  - clips:
+    - ClipName: Block
+      clip: {fileID: 7400000, guid: db5ee69b58584b54d88e33bb8971304e, type: 2}
+      paramPos: {x: 0, y: 0}
+    - ClipName: BlockHit
+      clip: {fileID: 7400000, guid: f7de5b839819b704283fdc4df7d7e0ec, type: 2}
+      paramPos: {x: 1, y: 0}
+    mixtype: 1
+    masker: {fileID: 31900000, guid: f22fcbaf0d87c9744b0a6c6ed6eb57b0, type: 2}
   _mainAnimComponent: {fileID: 1548564797}
 --- !u!1 &1999011771
 GameObject:
