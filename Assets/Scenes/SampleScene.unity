@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c79af4de6ee7489b7fc429d8b1aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChangeIndex: 0
   ParamPos: []
   _clipgroup:
   - clips:
@@ -765,10 +766,10 @@ MonoBehaviour:
     masker: {fileID: 0}
   - clips:
     - ClipName: Block
-      clip: {fileID: 7400000, guid: db5ee69b58584b54d88e33bb8971304e, type: 2}
+      clip: {fileID: 7400000, guid: df78d3aec4fb10245a4699ee03339e18, type: 2}
       paramPos: {x: 0, y: 0}
     - ClipName: BlockHit
-      clip: {fileID: 7400000, guid: f7de5b839819b704283fdc4df7d7e0ec, type: 2}
+      clip: {fileID: 7400000, guid: 6abb78ce4a9f70e42957498b0dd09dd6, type: 2}
       paramPos: {x: 1, y: 0}
     mixtype: 1
     masker: {fileID: 31900000, guid: f22fcbaf0d87c9744b0a6c6ed6eb57b0, type: 2}

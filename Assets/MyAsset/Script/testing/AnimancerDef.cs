@@ -90,14 +90,17 @@ public class AnimancerDef : MonoBehaviour
     void MakeAnims(int selectedAnimID)
     {
         AnimancerLayer Layer = _mainAnimComponent.Layers[0];
+        if(ChangeIndex < _clipgroup.Count)
+        {
         clipGroup SelectedGroup = _clipgroup[ChangeIndex];
+        
+        }
 
     }
 
     void ChangeAnims()
     {
         AnimancerLayer Layer_Main = _mainAnimComponent.Layers[0];
-
     }
     
     AnimancerState MakeState()
