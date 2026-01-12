@@ -12,7 +12,6 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityDebug;
 using Animancer;
-using UnityEngine.TestTools.Constraints;
 
 //再生ノード組み立て.
 public class MixAnimNode

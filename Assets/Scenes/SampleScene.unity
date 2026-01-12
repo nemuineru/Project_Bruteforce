@@ -403,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -1e-45, y: 0.95806295, z: -0.28655785, w: -3e-45}
+  m_LocalRotation: {x: 0, y: 0.95806295, z: -0.28655785, w: 1e-45}
   m_LocalPosition: {x: 0, y: 1.13, z: 1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -508,7 +508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200982157}
   serializedVersion: 2
-  m_LocalRotation: {x: -1e-45, y: 0.95806295, z: -0.28655785, w: -3e-45}
+  m_LocalRotation: {x: 0, y: 0.95806295, z: -0.28655785, w: 1e-45}
   m_LocalPosition: {x: 0, y: 1.13, z: 1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -753,7 +753,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChangeIndex: 0
-  ParamPos: []
+  ParamPos:
+  - {x: 0, y: 0}
   _clipgroup:
   - clips:
     - ClipName: WalkForward
@@ -773,6 +774,15 @@ MonoBehaviour:
       paramPos: {x: 1, y: 0}
     mixtype: 1
     masker: {fileID: 31900000, guid: f22fcbaf0d87c9744b0a6c6ed6eb57b0, type: 2}
+  - clips:
+    - ClipName: Kick
+      clip: {fileID: 7400000, guid: 418d04f5b5a9f8e429e08773447a79ad, type: 2}
+      paramPos: {x: 0, y: 0}
+    - ClipName: CresKick
+      clip: {fileID: 7400000, guid: 4eb69cf5536fd1a4eafde9294b090d6c, type: 2}
+      paramPos: {x: 1, y: 0}
+    mixtype: 1
+    masker: {fileID: 0}
   _mainAnimComponent: {fileID: 1548564797}
 --- !u!1 &1999011771
 GameObject:
