@@ -622,9 +622,9 @@ public class scAnimSet : StateController
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
-            entity.MainAnimMixer.ChangeAnim(animFindByID,AnimSlotNum,_isAdditional);
+            entity.MainAnimMixer.PA_ChangeAnim(animFindByID,AnimSlotNum,_isAdditional);
             //この番号設定はもうちょい考えるべき.. アニメスロット設定が効かないはず
-            entity.MainAnimMixer.ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams,entity));
+            entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams,entity));
         }
     }
 }
@@ -653,7 +653,7 @@ public class scAnimParamChange : StateController
             AnimDef animFindByID = entity.MainAnimMixer.MainAnimDef;
             if (animFindByID != null)
             {
-                entity.MainAnimMixer.ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
+                entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
             }
         }
         //Sequence Not FoundErrorが出たときのソスコ. 
@@ -1224,8 +1224,8 @@ public class scAnimParentSet : StateController
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
-            entity.MainAnimMixer.ChangeAnim(animFindByID);
-            entity.MainAnimMixer.ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
+            entity.MainAnimMixer.PA_ChangeAnim(animFindByID);
+            entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
         }
     }
 }

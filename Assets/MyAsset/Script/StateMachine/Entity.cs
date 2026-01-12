@@ -10,6 +10,7 @@ using UnityEditor;
 using DG.Tweening;
 using System;
 using BehaviorDesigner.Runtime;
+using Animancer;
 
 public class Entity : MonoBehaviour
 {
@@ -99,6 +100,10 @@ public class Entity : MonoBehaviour
     //アニメーターベース.
     Animator animator;
 
+    //Animancerの利用を考える.
+    AnimancerComponent mainAnimancer;
+
+
     //PlayableOutputとして主力となるものを選択.
     PlayableOutput PrimalPlayableOut;
 
@@ -162,18 +167,9 @@ public class Entity : MonoBehaviour
         //DefList.stateDefs.ForEach(def => def.PriorCondition = def.PriorCondition);
 
         //アニメ設定.
-        PrimalPlayableOut = new PlayableOutput();
-        foreach (AnimlistObject f in animListObject)
-        {
-            animDefs.AddRange(f.animDef.ToList());
-        }
-        if (animListObject != null && animator != null)
-        {
-            MainAnimMixer.SetupGraph(ref animator, ref PrimalPlayableOut);
-            PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
-            ChangeAnim();
-        }
+        initAnimSetting();
         defaultClss.initClss(this);
+
         foreach (StateDefListObject dObj in DefLists)
         {
             foreach (StateDef state in dObj.stateDefs)
@@ -198,6 +194,22 @@ public class Entity : MonoBehaviour
         }
         rigid.useGravity = false;
         selfSource = GetComponent<AudioSource>();
+    }
+
+    void initAnimSetting()
+    {
+        
+        PrimalPlayableOut = new PlayableOutput();
+        foreach (AnimlistObject f in animListObject)
+        {
+            animDefs.AddRange(f.animDef.ToList());
+        }
+        if (animListObject != null && animator != null)
+        {
+            MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
+            PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
+            ChangeAnim();
+        }
     }
 
     internal List<StateDef> loadedDefs = new List<StateDef>();
@@ -482,10 +494,10 @@ public class Entity : MonoBehaviour
 
 
         //SetAnimはHitPauseが0で無い限り毎フレーム更新する.
-        MainAnimMixer.SetAnim((HitPauseTime <= 0));
+        MainAnimMixer.PA_SetAnim((HitPauseTime <= 0));
         
-        animationFrameTime = MainAnimMixer.CurrentAnimTime();
-        animationEndTime = MainAnimMixer.EndAnimTime();
+        animationFrameTime = MainAnimMixer.PA_CurrentAnimTime();
+        animationEndTime = MainAnimMixer.PA_EndAnimTime();
     }
 
     public void entityPhisics()
@@ -519,9 +531,9 @@ public class Entity : MonoBehaviour
         AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
         if (animFindByID != null)
         {
-            MainAnimMixer.ChangeAnim(animFindByID, default ,default, timeoffset);
+            MainAnimMixer.PA_ChangeAnim(animFindByID, default ,default, timeoffset);
         }
-        MainAnimMixer.SetAnim(false);
+        MainAnimMixer.PA_SetAnim(false);
     }
 
     //アニメーション変更 : ステート奪取側..
@@ -530,9 +542,9 @@ public class Entity : MonoBehaviour
         AnimDef animFindByID = controlledEntity.animDefs.Find(x => x.ID == animID);
         if (animFindByID != null)
         {
-            MainAnimMixer.ChangeAnim(animFindByID, default ,default, timeoffset);
+            MainAnimMixer.PA_ChangeAnim(animFindByID, default ,default, timeoffset);
         }
-        MainAnimMixer.SetAnim(false);
+        MainAnimMixer.PA_SetAnim(false);
     }
 
     public bool hitCheck(Entity checkEntity, out Vector3 HitPoint)

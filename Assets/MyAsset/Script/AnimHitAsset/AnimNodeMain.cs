@@ -31,7 +31,7 @@ public class AnimNodeMain : MonoBehaviour
 
         PrimalPlayableOut = new PlayableOutput();
 
-        MainAnimMixer.SetupGraph(ref animator, ref PrimalPlayableOut);
+        MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
         
         PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
         
@@ -59,7 +59,7 @@ public class AnimNodeMain : MonoBehaviour
 
     void Update()
     {
-        MainAnimMixer.SetAnim(true);
+        MainAnimMixer.PA_SetAnim(true);
         MainAnimMixer.PrimalGraph.Play();
         //インプットが入力された時..
         /*
@@ -83,7 +83,7 @@ public class AnimNodeMain : MonoBehaviour
         AnimDef animFindByID = AnimList.animDef.ToList().Find(x => x.ID == currentID);
         if(animFindByID != null)
         {
-            MainAnimMixer.ChangeAnim(animFindByID);
+            MainAnimMixer.PA_ChangeAnim(animFindByID);
         }
     }
 

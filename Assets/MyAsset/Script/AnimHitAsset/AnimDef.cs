@@ -11,6 +11,8 @@ using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityDebug;
+using Animancer;
+using UnityEngine.TestTools.Constraints;
 
 //再生ノード組み立て.
 public class MixAnimNode
@@ -139,7 +141,7 @@ public class MixAnimNode
             // ロード開始時に屈みポーズのままからスタートするので修正が必要..
             // おそらくはwgの値が0となっている際が原因だろうか
             
-            def.ChangeWeight(1f);
+            def._ChangeWeight(1f);
 
             //defで設定したanimclipのMixWeightをここで指定する.
             for (int i = 0; i < PlayList.Length; i++)
@@ -197,8 +199,82 @@ public class MixAnimNode
         }
     }
 
+public class AnimancerManager
+{
+    //AnimancerManagerが取り扱うEntity.
+    public Entity root;
+    public AnimancerComponent mainAnimancer;
+    //Layer[0]で読み出されるメインノード.
+    public AnimDef mainLoadedDef;
+
+    public void TransitLayer
+    (AnimDef animDef, int ID = 0, AvatarMask animMask = null , bool isAdditive = false)
+    {
+        bool isMaskExist = animMask != null;
+        //Layerを指定。余計なことせずに指定して例外が出ないのはやっぱ便利よ
+        AnimancerLayer inserter = mainAnimancer.Layers[ID];
+        AnimancerState MakeState;
+        switch(animDef.mixType)
+        {
+            case AnimDef.MixType.Liner:
+                {
+                    MakeState = new LinearMixerState();
+                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    {
+                        ((LinearMixerState)MakeState).Add
+                        (anims.Clip,anims.mixPosition.x);
+                    }
+                    break;
+                }
+            case AnimDef.MixType.FreeForm2D:
+                {
+                    MakeState = new DirectionalMixerState();
+                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    {
+                        ((DirectionalMixerState)MakeState).Add
+                        (anims.Clip,anims.mixPosition);
+                    }
+                    break;
+                }
+            case AnimDef.MixType.Cartesian2D:
+                {
+                    MakeState = new CartesianMixerState();
+                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    {
+                        ((CartesianMixerState)MakeState).Add
+                        (anims.Clip,anims.mixPosition);
+                    }
+                    break;
+                }
+            case AnimDef.MixType.Direct:
+            default:
+                {
+                    MakeState = new LinearMixerState();
+                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    {
+                        ((LinearMixerState)MakeState).Add
+                        (anims.Clip,anims.mixPosition.x);
+                    }
+                    break;
+                }
+            }
+        
+        if(isMaskExist)
+        {
+            inserter.Mask = animMask;
+        }
+        inserter.IsAdditive = isAdditive;
+
+        inserter.Play(MakeState, animDef.blendOutTime);
+
+
+
+    }
+}
+
 //このMainNodeConfigratorを変更したい
 //PlayableAPIを直接的に叩くんじゃなくて、Animancerから..
+//なら, 別のクラスを利用するか..
 public class MainNodeConfigurator
 {
     //MainAnimNodeが使うRootTransform
@@ -218,7 +294,7 @@ public class MainNodeConfigurator
     //メインDef・アニメーションのノード.
     public AnimDef MainAnimDef;
 
-    public void SetupGraph(ref Animator animator, ref PlayableOutput PrimalPlayableOut)
+    public void PA_SetupGraph(ref Animator animator, ref PlayableOutput PrimalPlayableOut)
     {
         //元のグラフを作成.
         PrimalGraph = PlayableGraph.Create("reference");
@@ -236,7 +312,7 @@ public class MainNodeConfigurator
     }
 
     //AnimIDで検索し、アニメーションのパラメータを変更する.
-    public void ChangeAnimParams(int AnimID, Vector2 paramSet)
+    public void PA_ChangeAnimParams(int AnimID, Vector2 paramSet)
     {
         for (int i = 0; i < Mixers.Length; i++)
         {
@@ -250,7 +326,7 @@ public class MainNodeConfigurator
     //アニメ変更時の挙動.
     //defを代入し、リセットする.
     //この時、MainAnimは代数に変更.
-    public void ChangeAnim(AnimDef def, int selectedSlotID = 0 , bool AdditiveIsTrue = false, float timeoffset = 0.0f, AvatarMask A_MSK = null)
+    public void PA_ChangeAnim(AnimDef def, int selectedSlotID = 0 , bool AdditiveIsTrue = false, float timeoffset = 0.0f, AvatarMask A_MSK = null)
     {
         //AnimSlotIDが同じものを選択 - 基本値は0.
 
@@ -306,7 +382,7 @@ public class MainNodeConfigurator
         }
     }
 
-    public float CurrentAnimTime()
+    public float PA_CurrentAnimTime()
     {
         float val = 0;
         if (MainMixer != null)
@@ -316,7 +392,7 @@ public class MainNodeConfigurator
         return val;
     }
     
-    public float EndAnimTime()
+    public float PA_EndAnimTime()
     {
         float val = 0;
         if (MainMixer != null)
@@ -327,7 +403,7 @@ public class MainNodeConfigurator
         return val;
     }
 
-    public void Tick()
+    public void PA_Tick()
     {
         foreach (MixAnimNode mix in Mixers)
         {
@@ -379,7 +455,7 @@ public class MainNodeConfigurator
     //何かパラメータ値が足りないのだろうか。　トランジションの間に
     //変な屈みポーズが見られる.
     //Additiveに設定されていないなら..という感じだろうか?
-    public void SetAnim(bool TickDef)
+    public void PA_SetAnim(bool TickDef)
     {
         int i = 0;
         float All = 0;
@@ -485,7 +561,20 @@ public class AnimDef
         internal float Angle;
     }
 
+    //ReWrite for Animancer. This gonna be more easier than hit the AnimationAPI directly.
     public void ChangeWeight(float BaseWeight)
+    {
+        //
+        if(animClip.Length <= 1)
+        {
+            animClip[0].MixWeightSet = BaseWeight;
+            return;
+        }
+
+
+    }
+
+    public void _ChangeWeight(float BaseWeight)
     {
         //Debug.Log("Base Weight is " + BaseWeight);
         //AnimClipが1以下ならWeightは1のまま.
@@ -540,7 +629,7 @@ public class AnimDef
 
             //原点を基準に、角度が近い線分同士との原点との距離を求める.
             //現状シンプルじゃないので考える...
-            case MixType.Simple2D:
+            case MixType.Direct:
                 {
                     //角度を0基準でソート.  0でないものを選択..             
                     animPos = animPos.ToList().FindAll(v => v.pos.sqrMagnitude > Mathf.Epsilon)
@@ -729,8 +818,8 @@ public class AnimDef
 
     public enum MixType
     {
+        Direct,
         Liner,
-        Simple2D,
         FreeForm2D,
         Cartesian2D
     }
