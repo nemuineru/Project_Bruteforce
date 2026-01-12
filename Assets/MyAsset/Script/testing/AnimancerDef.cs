@@ -72,12 +72,12 @@ public class AnimancerDef : MonoBehaviour
 
     void Start()
     {
-        ChangeAnims();
+        InitAnims();
     }
 
     void Update()
     {
-        AnimancerLayer Layer1_ = _mainAnimComponent.Layers[0];
+        AnimancerLayer Layer1_ = _mainAnimComponent.Layers[1];
         if (Layer1_ != null && prevIndex != ChangeIndex)
         {
             MakeAnims(ChangeIndex);
@@ -89,23 +89,39 @@ public class AnimancerDef : MonoBehaviour
 
     void MakeAnims(int selectedAnimID)
     {
-        AnimancerLayer Layer = _mainAnimComponent.Layers[0];
+        AnimancerLayer Layer = _mainAnimComponent.Layers[1];
         if(ChangeIndex < _clipgroup.Count)
         {
-        clipGroup SelectedGroup = _clipgroup[ChangeIndex];
-        
+            clipGroup SelectedGroup = _clipgroup[ChangeIndex];
+            for(int i = 0; i < Layer.ChildCount ; i++)
+            {
+                AnimancerState selState = Layer.GetChild(i);
+                if(selState.IsActive == false)
+                {
+                    selState.Destroy();
+                }
+            }
+            //change anim, fade .2 async.
+            Layer.Play(MakeState(SelectedGroup), 0.2f);
+            Layer.Mask = SelectedGroup.masker;
         }
 
     }
 
-    void ChangeAnims()
+    void InitAnims()
     {
         AnimancerLayer Layer_Main = _mainAnimComponent.Layers[0];
+        Layer_Main.Play(MakeState(_clipgroup[0]));
     }
     
-    AnimancerState MakeState()
+    AnimancerState MakeState(clipGroup gr)
     {
         AnimancerState st = new LinearMixerState();
+        foreach (clipSetting CLI in gr.clips)
+        {
+            ((LinearMixerState)st).Add(CLI.clip, CLI.paramPos.x);            
+        }        
+
         return st;
     }
 
