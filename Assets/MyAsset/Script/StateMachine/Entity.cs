@@ -101,6 +101,7 @@ public class Entity : MonoBehaviour
     Animator animator;
 
     //Animancerの利用を考える.
+    [SerializeField]
     AnimancerComponent mainAnimancer;
 
 
@@ -156,6 +157,11 @@ public class Entity : MonoBehaviour
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
         mat = renderers[0].material;
         animator = GetComponent<Animator>();
+
+        
+        mainAnimancer = gameObject.AddComponent<AnimancerComponent>();
+        mainAnimancer.Animator = animator;
+
 
         rigid = GetComponent<Rigidbody>();
         capCol = GetComponent<CapsuleCollider>();
