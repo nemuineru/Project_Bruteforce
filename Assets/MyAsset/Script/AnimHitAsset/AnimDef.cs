@@ -153,38 +153,38 @@ public class MixAnimNode
     }
 
         //現アニメーションの時間を現在時刻に設定。
-        public void Animations(bool TickDef)
+    public void Animations(bool TickDef)
+    {
+    //Time.timeだとpauseが聞かないため..
+        if(TickDef)
         {
-        //Time.timeだとpauseが聞かないため..
-            if(TickDef)
-            {
-                SetCurrentTime(currentAnimTime + Time.fixedDeltaTime);
-            }
-            changeMixerWeight();
-            for (int i = 0; i < PlayList.Length; i++)
-            {
-            //var playClip = def.animClip[i];
-                float f = currentAnimTime - startAnimTime;
-                //Debug.Log("time - " + f);
-                PlayList[i].SetTime(f);
-            }
+            SetCurrentTime(currentAnimTime + Time.fixedDeltaTime);
         }
+        changeMixerWeight();
+        for (int i = 0; i < PlayList.Length; i++)
+        {
+        //var playClip = def.animClip[i];
+            float f = currentAnimTime - startAnimTime;
+            //Debug.Log("time - " + f);
+            PlayList[i].SetTime(f);
+        }
+    }
 
-        public void ChangeAnimTime(ref PlayableGraph addGraphTo, params double[] time)
+    public void ChangeAnimTime(ref PlayableGraph addGraphTo, params double[] time)
+    {
+        //時間設定.
+        for (int i = 0; i < PlayList.Length; i++)
         {
-            //時間設定.
-            for (int i = 0; i < PlayList.Length; i++)
+            var player = PlayList[i];
+            if (time.Length < i)
             {
-                var player = PlayList[i];
-                if (time.Length < i)
-                {
-                    player.SetTime(time[i]);
-                }
+                player.SetTime(time[i]);
             }
         }
-        
-        //マスクの設定.
-        public void ChangeAnimMask(params AvatarMask[] mask)
+    }
+    
+    //マスクの設定.
+    public void ChangeAnimMask(params AvatarMask[] mask)
         {
             //時間設定.
             for (int i = 0; i < PlayList.Length; i++)
@@ -198,50 +198,87 @@ public class MixAnimNode
         }
     }
 
+
+//Animancer版. Animancerで出来る事がいっぱいあるみたいなので一任する
 public class AnimancerManager
 {
     //AnimancerManagerが取り扱うEntity.
     public Entity root;
     public AnimancerComponent mainAnimancer;
     //Layer[0]で読み出されるメインノード.
+    //clssが読み出す当たり判定要素は基本、これを使う.
     public AnimDef mainLoadedDef;
 
+    //mainAnimancerのステート遷移システム
     public void TransitLayer
-    (AnimDef animDef, int ID = 0, AvatarMask animMask = null , bool isAdditive = false)
+    (AnimDef animDef, int LayerID = 0, AvatarMask animMask = null, bool isAdditive = false)
     {
         bool isMaskExist = animMask != null;
         //Layerを指定。余計なことせずに指定して例外が出ないのはやっぱ便利よ
-        AnimancerLayer inserter = mainAnimancer.Layers[ID];
+        AnimancerLayer inserter = mainAnimancer.Layers[LayerID];
+
+        //Transitの指定時、余分なStateを消し飛ばす.
+        for (int i = 0; i < inserter.ChildCount; i++)
+        {
+            AnimancerState selState = inserter.GetChild(i);
+            if (selState.IsActive == false)
+            {
+                selState.Destroy();
+            }
+        }
+
+        //Maskが存在すればそれを適用する.
+        if (isMaskExist)
+        {
+            inserter.Mask = animMask;
+        }
+        //基本値はOverRide.
+        inserter.IsAdditive = isAdditive;
+
+        inserter.Play(MakeState(animDef), animDef.blendOutTime);
+
+        //if the layerID is 0, clss must loaded  via layer 0 so call the order.
+        if (LayerID == 0)
+        {
+            mainLoadedDef = animDef;
+        }
+    }
+
+    //AnimancerStateをanimDefより作成
+    public AnimancerState MakeState(AnimDef animDef)
+    {
+        //Create the state and returns it.
         AnimancerState MakeState;
-        switch(animDef.mixType)
+        //switch for animdef cases. ..which contains the clssDefs
+        switch (animDef.mixType)
         {
             case AnimDef.MixType.Liner:
                 {
                     MakeState = new LinearMixerState();
-                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    foreach (AnimDef.Anims anims in animDef.animClip)
                     {
                         ((LinearMixerState)MakeState).Add
-                        (anims.Clip,anims.mixPosition.x);
+                        (anims.Clip, anims.mixPosition.x);
                     }
                     break;
                 }
             case AnimDef.MixType.FreeForm2D:
                 {
                     MakeState = new DirectionalMixerState();
-                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    foreach (AnimDef.Anims anims in animDef.animClip)
                     {
                         ((DirectionalMixerState)MakeState).Add
-                        (anims.Clip,anims.mixPosition);
+                        (anims.Clip, anims.mixPosition);
                     }
                     break;
                 }
             case AnimDef.MixType.Cartesian2D:
                 {
                     MakeState = new CartesianMixerState();
-                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    foreach (AnimDef.Anims anims in animDef.animClip)
                     {
                         ((CartesianMixerState)MakeState).Add
-                        (anims.Clip,anims.mixPosition);
+                        (anims.Clip, anims.mixPosition);
                     }
                     break;
                 }
@@ -249,25 +286,113 @@ public class AnimancerManager
             default:
                 {
                     MakeState = new LinearMixerState();
-                    foreach(AnimDef.Anims anims in animDef.animClip)
+                    foreach (AnimDef.Anims anims in animDef.animClip)
                     {
                         ((LinearMixerState)MakeState).Add
-                        (anims.Clip,anims.mixPosition.x);
+                        (anims.Clip, anims.mixPosition.x);
                     }
                     break;
                 }
-            }
-        
-        if(isMaskExist)
-        {
-            inserter.Mask = animMask;
         }
-        inserter.IsAdditive = isAdditive;
+        return MakeState;
+    }
 
-        inserter.Play(MakeState, animDef.blendOutTime);
+    //float又はVector2で処理する値を変える.
+    //Layerのパラメータ値を変更..
+    public void AM_AnimParamSet(Vector2 paramVect, int LayerID = 0, int subStateID = -1, float stateParam = -1)
+    {
+        AnimancerLayer processLayer = mainAnimancer.Layers[LayerID];
+        if (processLayer != null)
+        {
+            AnimancerState currentMjState = processLayer.CurrentState;
+            if (subStateID > -1)
+            {
 
+            }
+            switch (currentMjState)
+            {
+                //for linear Mxer, use paramVect.x
+                case LinearMixerState LMix:
+                    {
+                        LMix.Parameter = paramVect.x;
+                        break;
+                    }
+                //Directional and Cartesian is using Vector2
+                case DirectionalMixerState DMix:
+                    {
 
+                        DMix.Parameter = paramVect;
+                        break;
+                    }
+                case CartesianMixerState CMix:
+                    {
+                        CMix.Parameter = paramVect;
+                        break;
+                    }
+                //otherwise, DirectParameter Changer is selected
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+    }
 
+    //時空を操る. ..ということではなくステート遷移を一本で纏めたやつ.
+    //playSpeedを0にすれば、一時的なpauseとなる.
+    public void AM_AnimPlayStateSet(float playTime, float playSpeed = 1.0f, int LayerID = 0, int subStateID = -1)
+    {
+        AnimancerLayer processLayer = mainAnimancer.Layers[LayerID];
+        if (processLayer != null)
+        {
+            AnimancerState currentMjState = processLayer.CurrentState;
+            //subState will selected if the ID is provided.
+            if (subStateID > -1)
+            {
+
+            }
+            else
+            {
+                //get every AnimancerState that mixed as currentMjState. I guess single state will return itself so not bugged?
+                //..if the AnimancerState is Mixer. GetChildState wont work if it is singleton.
+                for (int i = 0 ; i < currentMjState.ChildCount; i++)
+                {
+                    AnimancerState st = currentMjState.GetChild(i);
+                    st.Speed = playSpeed;
+                    st.Time = playTime;
+                }
+            }
+        }
+    }
+
+    //現在の指定レイヤーでの経過時間.
+    public float AM_CurrentAnimTime(int LayerID)
+    {
+        float val = 0;
+        AnimancerLayer refLayer = mainAnimancer.Layers[LayerID];
+        if (refLayer != null)
+        {
+            //val = MainMixer.currentAnimTime / (1 / MainAnimDef.animClip.Average(x => x.Clip.frameRate));
+        }
+        return val;
+    }
+
+    //現在の指定レイヤーの推定終了時刻. 再生速度を考慮する.
+    public float AM_CurrentEndAnimTime(int LayerID)
+    {
+        float val = 0;
+        AnimancerLayer refLayer = mainAnimancer.Layers[LayerID];
+        if (refLayer != null)
+        {
+            //val = MainAnimDef.animClip.Average(x => x.Clip.length) / (1f / MainAnimDef.animClip.Average(x => x.Clip.frameRate));
+            //Debug.Log(val);
+        }
+        return val;
+    }
+
+    public float AM_()
+    { 
+        return 0;
     }
 }
 
