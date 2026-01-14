@@ -204,23 +204,22 @@ public class AnimancerManager
 {
     //AnimancerManagerが取り扱うEntity.
     public Entity root;
-    public AnimancerComponent mainAnimancer;
+    public AnimancerComponent main;
     //Layer[0]で読み出されるメインノード.
     //clssが読み出す当たり判定要素は基本、これを使う.
     public AnimDef mainLoadedDef;
 
     //mainAnimancerのステート遷移システム
-    public void TransitLayer
-    (AnimDef animDef, int LayerID = 0, AvatarMask animMask = null, bool isAdditive = false)
+    public void TransitLayer(AnimDef animDef, int LayerID = 0, float TimeOffset = 0f,AvatarMask animMask = null, bool isAdditive = false)
     {
         bool isMaskExist = animMask != null;
         //Layerを指定。余計なことせずに指定して例外が出ないのはやっぱ便利よ
-        AnimancerLayer inserter = mainAnimancer.Layers[LayerID];
+        AnimancerLayer inserterLayer = main.Layers[LayerID];
 
         //Transitの指定時、余分なStateを消し飛ばす.
-        for (int i = 0; i < inserter.ChildCount; i++)
+        for (int i = 0; i < inserterLayer.ChildCount; i++)
         {
-            AnimancerState selState = inserter.GetChild(i);
+            AnimancerState selState = inserterLayer.GetChild(i);
             if (selState.IsActive == false)
             {
                 selState.Destroy();
@@ -230,12 +229,12 @@ public class AnimancerManager
         //Maskが存在すればそれを適用する.
         if (isMaskExist)
         {
-            inserter.Mask = animMask;
+            inserterLayer.Mask = animMask;
         }
         //基本値はOverRide.
-        inserter.IsAdditive = isAdditive;
+        inserterLayer.IsAdditive = isAdditive;
 
-        inserter.Play(MakeState(animDef), animDef.blendOutTime);
+        inserterLayer.Play(MakeState(animDef), animDef.blendOutTime);
 
         //if the layerID is 0, clss must loaded  via layer 0 so call the order.
         if (LayerID == 0)
@@ -301,7 +300,7 @@ public class AnimancerManager
     //Layerのパラメータ値を変更..
     public void AM_AnimParamSet(Vector2 paramVect, int LayerID = 0, int subStateID = -1, float stateParam = -1)
     {
-        AnimancerLayer processLayer = mainAnimancer.Layers[LayerID];
+        AnimancerLayer processLayer = main.Layers[LayerID];
         if (processLayer != null)
         {
             AnimancerState currentMjState = processLayer.CurrentState;
@@ -342,7 +341,7 @@ public class AnimancerManager
     //playSpeedを0にすれば、一時的なpauseとなる.
     public void AM_AnimPlayStateSet(float playTime, float playSpeed = 1.0f, int LayerID = 0, int subStateID = -1)
     {
-        AnimancerLayer processLayer = mainAnimancer.Layers[LayerID];
+        AnimancerLayer processLayer = main.Layers[LayerID];
         if (processLayer != null)
         {
             AnimancerState currentMjState = processLayer.CurrentState;
@@ -369,7 +368,7 @@ public class AnimancerManager
     public float AM_CurrentAnimTime(int LayerID)
     {
         float val = 0;
-        AnimancerLayer refLayer = mainAnimancer.Layers[LayerID];
+        AnimancerLayer refLayer = main.Layers[LayerID];
         if (refLayer != null)
         {
             //val = MainMixer.currentAnimTime / (1 / MainAnimDef.animClip.Average(x => x.Clip.frameRate));
@@ -381,7 +380,7 @@ public class AnimancerManager
     public float AM_CurrentEndAnimTime(int LayerID)
     {
         float val = 0;
-        AnimancerLayer refLayer = mainAnimancer.Layers[LayerID];
+        AnimancerLayer refLayer = main.Layers[LayerID];
         if (refLayer != null)
         {
             //val = MainAnimDef.animClip.Average(x => x.Clip.length) / (1f / MainAnimDef.animClip.Average(x => x.Clip.frameRate));
@@ -390,8 +389,10 @@ public class AnimancerManager
         return val;
     }
 
-    public float AM_()
-    { 
+    //Set Animancer TickStates.
+    public float AM_Tick()
+    {
+
         return 0;
     }
 }

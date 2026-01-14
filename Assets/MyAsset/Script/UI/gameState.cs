@@ -298,7 +298,7 @@ public class gameState : MonoBehaviour
         //shapepositions
         beatenEntity.transform.DOShakePosition(beatenEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
-        beatenEntity.ChangeAnim(.1f);
+        beatenEntity.ChangeAnim_INITPA(.1f);
 
         //hitpoint damage
         beatenEntity.status.currentHP -= calledEParam.Damage * (atkParams / Mathf.Max(1.0f,beatenEntity.status.BaseDefencePerc));

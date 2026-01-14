@@ -622,9 +622,13 @@ public class scAnimSet : StateController
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
+            //PlayableAPI版. 後でAnimancerに変更する.
+            if(entity.MainAnimMixer.PrimalGraph.IsValid())
+            {
             entity.MainAnimMixer.PA_ChangeAnim(animFindByID,AnimSlotNum,_isAdditional);
             //この番号設定はもうちょい考えるべき.. アニメスロット設定が効かないはず
             entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams,entity));
+            }
         }
     }
 }

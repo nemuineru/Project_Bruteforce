@@ -103,6 +103,7 @@ public class Entity : MonoBehaviour
     //Animancerの利用を考える.
     [SerializeField]
     AnimancerComponent mainAnimancer;
+    public AnimancerManager AM = new AnimancerManager();
 
 
     //PlayableOutputとして主力となるものを選択.
@@ -210,11 +211,18 @@ public class Entity : MonoBehaviour
         {
             animDefs.AddRange(f.animDef.ToList());
         }
+        if (mainAnimancer != null && mainAnimancer != null)
+        {
+            AM.main = mainAnimancer;
+            AM.root = this;
+            ChangeAnim_AM();           
+
+        }
         if (animListObject != null && animator != null)
         {
-            MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
-            PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
-            ChangeAnim();
+            //MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
+            //PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
+            //ChangeAnim_INITPA();
         }
     }
 
@@ -490,7 +498,7 @@ public class Entity : MonoBehaviour
     //アニメーション設定
     void setanimPlay()
     {
-        MainAnimMixer.PrimalGraph.Play();
+        //MainAnimMixer.PrimalGraph.Play();
         if (LoadedBehavior != null)
         {
             BTree.Start();
@@ -498,12 +506,15 @@ public class Entity : MonoBehaviour
 
 
 
-
+        //PlayableAPI版.
         //SetAnimはHitPauseが0で無い限り毎フレーム更新する.
-        MainAnimMixer.PA_SetAnim((HitPauseTime <= 0));
-        
-        animationFrameTime = MainAnimMixer.PA_CurrentAnimTime();
-        animationEndTime = MainAnimMixer.PA_EndAnimTime();
+        if(MainAnimMixer.PrimalGraph.IsValid())
+        {
+            MainAnimMixer.PA_SetAnim((HitPauseTime <= 0));
+            
+            animationFrameTime = MainAnimMixer.PA_CurrentAnimTime();
+            animationEndTime = MainAnimMixer.PA_EndAnimTime();
+        }
     }
 
     public void entityPhisics()
@@ -529,20 +540,28 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void ChangeAnim_AM(float timeoffset = 0.0f)
+    { 
+        AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
+        if (animFindByID != null)
+        {
+            AM.TransitLayer(animFindByID);
+        }
+    }
 
-    //アニメーション変更..
+    //PlayableAPI用アニメーション変更..
     //entityが指定されているときはそのEntityのAnimを呼び出すとする...がまだ未実装.
-    public void ChangeAnim(float timeoffset = 0.0f)
+    public void ChangeAnim_INITPA(float timeoffset = 0.0f)
     {
         AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
         if (animFindByID != null)
         {
-            MainAnimMixer.PA_ChangeAnim(animFindByID, default ,default, timeoffset);
+            MainAnimMixer.PA_ChangeAnim(animFindByID, default, default, timeoffset);
         }
         MainAnimMixer.PA_SetAnim(false);
     }
 
-    //アニメーション変更 : ステート奪取側..
+    //PlayableAPI用アニメーション変更 : ステート奪取側..
     public void ChangeAnim_Parent(float timeoffset = 0.0f)
     {
         AnimDef animFindByID = controlledEntity.animDefs.Find(x => x.ID == animID);
