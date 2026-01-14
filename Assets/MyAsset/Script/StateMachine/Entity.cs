@@ -211,7 +211,7 @@ public class Entity : MonoBehaviour
         {
             animDefs.AddRange(f.animDef.ToList());
         }
-        if (mainAnimancer != null && mainAnimancer != null)
+        if (mainAnimancer != null && animator != null)
         {
             AM.main = mainAnimancer;
             AM.root = this;
@@ -220,9 +220,9 @@ public class Entity : MonoBehaviour
         }
         if (animListObject != null && animator != null)
         {
-            //MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
-            //PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
-            //ChangeAnim_INITPA();
+            // MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
+            // PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
+            // ChangeAnim_INITPA();
         }
     }
 
@@ -270,6 +270,12 @@ public class Entity : MonoBehaviour
         isStateChanged = false;
         entityPhisics();
         setanimPlay();
+
+        if (LoadedBehavior != null)
+        {
+            BTree.Start();
+        }
+
         setViewCams();
         mat.SetColor("_Color", CurColor);
 
@@ -495,21 +501,23 @@ public class Entity : MonoBehaviour
         }
     }
 
-    //アニメーション設定
+    //アニメーション更新操作・設定.
     void setanimPlay()
     {
-        //MainAnimMixer.PrimalGraph.Play();
-        if (LoadedBehavior != null)
+        //Animancer版.
+        if(mainAnimancer != null)
         {
-            BTree.Start();
+            AM.Tick();
+            animationFrameTime = AM.AM_AnimCurrentTime(0);
+            animationEndTime = AM.AM_AnimEndTime(0);
         }
-
-
 
         //PlayableAPI版.
         //SetAnimはHitPauseが0で無い限り毎フレーム更新する.
         if(MainAnimMixer.PrimalGraph.IsValid())
         {
+            MainAnimMixer.PrimalGraph.Play();
+
             MainAnimMixer.PA_SetAnim((HitPauseTime <= 0));
             
             animationFrameTime = MainAnimMixer.PA_CurrentAnimTime();
