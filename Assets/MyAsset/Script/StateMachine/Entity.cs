@@ -507,7 +507,7 @@ public class Entity : MonoBehaviour
         //Animancer版.
         if(mainAnimancer != null)
         {
-            AM.Tick();
+            AM.Tick((HitPauseTime <= 0));
             animationFrameTime = AM.AM_AnimCurrentTime(0);
             animationEndTime = AM.AM_AnimEndTime(0);
         }

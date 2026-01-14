@@ -207,7 +207,7 @@ public class AnimancerManager
     public AnimancerComponent main;
     //Layer[0]で読み出されるメインノード.
     //clssが読み出す当たり判定要素は基本、これを使う.
-    public AnimDef mainDef;
+    public AnimDef primaryAnimDef;
 
     //mainAnimancerのステート遷移システム
     public void TransitLayer(AnimDef animDef, int LayerID = 0, float TimeOffset = 0f,AvatarMask animMask = null, bool isAdditive = false)
@@ -239,7 +239,7 @@ public class AnimancerManager
         //if the layerID is 0, clss must loaded  via layer 0 so call the order.
         if (LayerID == 0)
         {
-            mainDef = animDef;
+            primaryAnimDef = animDef;
         }
     }
 
@@ -390,13 +390,26 @@ public class AnimancerManager
     }
 
     //Set Animancer TickStates.
-    public float Tick()
+    public float Tick(bool isPause)
     {
-        if(mainDef != null)
+        float resumeSpeed = 1.0f;
+        foreach(AnimancerLayer lA in main.Layers)
+        {
+            if(isPause)
+            {
+                lA.Speed = 0;
+            }
+            else
+            {
+                lA.Speed = resumeSpeed;
+            }
+        }
+
+        if(primaryAnimDef != null)
         {
             //update Capsule Positions.
-            mainDef.initEntityAt(root);
-            mainDef.checkClssCapsule();
+            primaryAnimDef.initEntityAt(root);
+            primaryAnimDef.checkClssCapsule();
         }
         return 0;
     }
