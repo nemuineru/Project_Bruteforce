@@ -371,7 +371,10 @@ public class AnimancerManager
         AnimancerLayer refLayer = main.Layers[LayerID];
         if (refLayer != null)
         {
-            //val = MainMixer.currentAnimTime / (1 / MainAnimDef.animClip.Average(x => x.Clip.frameRate));
+            List<AnimationClip> cls = new List<AnimationClip>();
+            refLayer.CurrentState.GatherAnimationClips(cls);
+            float frametime = cls.Average(t => t.frameRate);
+            val = refLayer.CurrentState.Time * frametime;
         }
         return val;
     }
@@ -383,7 +386,10 @@ public class AnimancerManager
         AnimancerLayer refLayer = main.Layers[LayerID];
         if (refLayer != null)
         {
-            //val = MainAnimDef.animClip.Average(x => x.Clip.length) / (1f / MainAnimDef.animClip.Average(x => x.Clip.frameRate));
+            List<AnimationClip> cls = new List<AnimationClip>();
+            refLayer.CurrentState.GatherAnimationClips(cls);
+            float frametime = cls.Average(t => t.frameRate);
+            val = refLayer.CurrentState.Length * frametime;;
             //Debug.Log(val);
         }
         return val;
@@ -392,7 +398,7 @@ public class AnimancerManager
     //Set Animancer TickStates.
     public float Tick(bool isPause)
     {
-        float resumeSpeed = 1.0f;
+        float resumeSpeed = 1f;
         foreach (AnimancerLayer lA in main.Layers)
         {
             if (isPause)
