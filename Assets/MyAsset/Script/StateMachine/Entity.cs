@@ -212,6 +212,7 @@ public class Entity : MonoBehaviour
         }
         if (mainAnimancer != null && animator != null)
         {
+            Debug.Log("init Animancer");
             animancerManager = new AnimancerManager();
             animancerManager.main = mainAnimancer;
             animancerManager.root = this;
@@ -511,10 +512,9 @@ public class Entity : MonoBehaviour
             animationFrameTime = animancerManager.AM_AnimCurrentTime(0);
             animationEndTime = animancerManager.AM_AnimEndTime(0);
         }
-
         //PlayableAPI版.
         //SetAnimはHitPauseが0で無い限り毎フレーム更新する.
-        if(MainAnimMixer.PrimalGraph.IsValid())
+        else if(MainAnimMixer.PrimalGraph.IsValid())
         {
             MainAnimMixer.PrimalGraph.Play();
 
@@ -591,6 +591,10 @@ public class Entity : MonoBehaviour
         if (animFindByID != null)
         {
             animancerManager.TransitLayer(animFindByID);
+        }
+        else
+        {
+            Debug.Log("anim id not found @ Animancer");
         }
     }
 

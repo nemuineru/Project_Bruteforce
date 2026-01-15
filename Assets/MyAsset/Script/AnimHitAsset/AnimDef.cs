@@ -397,11 +397,11 @@ public class AnimancerManager
         {
             if (isPause)
             {
-                lA.Speed = 0;
+                lA.Speed = resumeSpeed;
             }
             else
             {
-                lA.Speed = resumeSpeed;
+                lA.Speed = 0;
             }
         }
 
