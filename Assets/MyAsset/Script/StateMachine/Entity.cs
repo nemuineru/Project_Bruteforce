@@ -103,7 +103,7 @@ public class Entity : MonoBehaviour
     //Animancerの利用を考える.
     [SerializeField]
     AnimancerComponent mainAnimancer;
-    public AnimancerManager AM = new AnimancerManager();
+    internal AnimancerManager animancerManager;
 
 
     //PlayableOutputとして主力となるものを選択.
@@ -206,23 +206,23 @@ public class Entity : MonoBehaviour
     void initAnimSetting()
     {
         
-        PrimalPlayableOut = new PlayableOutput();
         foreach (AnimlistObject f in animListObject)
         {
             animDefs.AddRange(f.animDef.ToList());
         }
         if (mainAnimancer != null && animator != null)
         {
-            AM.main = mainAnimancer;
-            AM.root = this;
+            animancerManager = new AnimancerManager();
+            animancerManager.main = mainAnimancer;
+            animancerManager.root = this;
             ChangeAnim_AM();           
-
         }
-        if (animListObject != null && animator != null)
+        else if (animListObject != null && animator != null)
         {
-            // MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
-            // PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
-            // ChangeAnim_INITPA();
+            PrimalPlayableOut = new PlayableOutput();
+            //MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
+            //PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
+            //ChangeAnim_INITPA();
         }
     }
 
@@ -505,11 +505,11 @@ public class Entity : MonoBehaviour
     void setanimPlay()
     {
         //Animancer版.
-        if(mainAnimancer != null)
+        if(animancerManager != null)
         {
-            AM.Tick((HitPauseTime <= 0));
-            animationFrameTime = AM.AM_AnimCurrentTime(0);
-            animationEndTime = AM.AM_AnimEndTime(0);
+            animancerManager.Tick((HitPauseTime <= 0));
+            animationFrameTime = animancerManager.AM_AnimCurrentTime(0);
+            animationEndTime = animancerManager.AM_AnimEndTime(0);
         }
 
         //PlayableAPI版.
@@ -522,6 +522,30 @@ public class Entity : MonoBehaviour
             
             animationFrameTime = MainAnimMixer.PA_CurrentAnimTime();
             animationEndTime = MainAnimMixer.PA_EndAnimTime();
+        }
+    }
+    
+    public void ChangeAnim()
+    {
+        if (mainAnimancer != null && animator != null)
+        {
+            ChangeAnim_AM();
+        }
+        else if (animListObject != null && animator != null)
+        {
+            ChangeAnim_INITPA();
+        }
+    }
+
+    public void ChangeAnim_fromParent()
+    {         
+        if (mainAnimancer != null && animator != null)
+        {
+            ChangeAnim_AM(default, parentEntity);
+        }
+        if (animListObject != null && animator != null)
+        {
+            ChangeAnim_Parent();
         }
     }
 
@@ -548,12 +572,25 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void ChangeAnim_AM(float timeoffset = 0.0f)
-    { 
+    public void ChangeAnimParam()
+    {
+        if (mainAnimancer != null && animator != null)
+        {
+            //();
+        }
+        if (animListObject != null && animator != null)
+        {
+            //();
+        }
+    }
+
+    public void ChangeAnim_AM(float timeoffset = 0.0f, Entity refEntity = null)
+    {
+        List<AnimDef> findDef = refEntity != null ? refEntity.animDefs : animDefs;
         AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
         if (animFindByID != null)
         {
-            AM.TransitLayer(animFindByID);
+            animancerManager.TransitLayer(animFindByID);
         }
     }
 

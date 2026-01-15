@@ -210,7 +210,7 @@ public class AnimancerManager
     public AnimDef primaryAnimDef;
 
     //mainAnimancerのステート遷移システム
-    public void TransitLayer(AnimDef animDef, int LayerID = 0, float TimeOffset = 0f,AvatarMask animMask = null, bool isAdditive = false)
+    public void TransitLayer(AnimDef animDef, int LayerID = 0, float TimeOffset = 0f, AvatarMask animMask = null, bool isAdditive = false)
     {
         bool isMaskExist = animMask != null;
         //Layerを指定。余計なことせずに指定して例外が出ないのはやっぱ便利よ
@@ -354,7 +354,7 @@ public class AnimancerManager
             {
                 //get every AnimancerState that mixed as currentMjState. I guess single state will return itself so not bugged?
                 //..if the AnimancerState is Mixer. GetChildState wont work if it is singleton.
-                for (int i = 0 ; i < currentMjState.ChildCount; i++)
+                for (int i = 0; i < currentMjState.ChildCount; i++)
                 {
                     AnimancerState st = currentMjState.GetChild(i);
                     st.Speed = playSpeed;
@@ -393,9 +393,9 @@ public class AnimancerManager
     public float Tick(bool isPause)
     {
         float resumeSpeed = 1.0f;
-        foreach(AnimancerLayer lA in main.Layers)
+        foreach (AnimancerLayer lA in main.Layers)
         {
-            if(isPause)
+            if (isPause)
             {
                 lA.Speed = 0;
             }
@@ -405,7 +405,7 @@ public class AnimancerManager
             }
         }
 
-        if(primaryAnimDef != null)
+        if (primaryAnimDef != null)
         {
             //update Capsule Positions.
             primaryAnimDef.initEntityAt(root);
