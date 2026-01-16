@@ -572,11 +572,11 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void ChangeAnimParam()
+    public void ChangeAnimParam(Vector2 animParamValue, int LayerID = 0)
     {
         if (mainAnimancer != null && animator != null)
         {
-            //();
+            animancerManager.AM_AnimParamSet(animParamValue, LayerID);
         }
         if (animListObject != null && animator != null)
         {

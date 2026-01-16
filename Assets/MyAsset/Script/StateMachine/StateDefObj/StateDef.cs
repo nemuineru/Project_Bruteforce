@@ -659,7 +659,14 @@ public class scAnimParamChange : StateController
 
     internal override void OnExecute(Entity entity)
     {
-        if (entity.MainAnimMixer.Mixers.Count() > 0)
+        //Animancer版.
+        if (entity.animancerManager != null)
+        {
+            entity.ChangeAnimParam
+            (animParameter.valueGet(loadParams, entity), 
+            AnimSlot.valueGet(loadParams, entity));
+        }
+        else if (entity.MainAnimMixer.Mixers.Count() > 0)
         {
             AnimDef animFindByID = entity.MainAnimMixer.MainAnimDef;
             if (animFindByID != null)
