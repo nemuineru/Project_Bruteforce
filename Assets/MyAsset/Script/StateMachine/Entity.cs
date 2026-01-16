@@ -105,13 +105,6 @@ public class Entity : MonoBehaviour
     AnimancerComponent mainAnimancer;
     internal AnimancerManager animancerManager;
 
-
-    //PlayableOutputとして主力となるものを選択.
-    PlayableOutput PrimalPlayableOut;
-
-    [SerializeField]
-    public MainNodeConfigurator MainAnimMixer = new MainNodeConfigurator();
-
     public Color CurColor;
 
     //地上判定.
@@ -217,13 +210,6 @@ public class Entity : MonoBehaviour
             animancerManager.main = mainAnimancer;
             animancerManager.root = this;
             ChangeAnim_AM();           
-        }
-        else if (animListObject != null && animator != null)
-        {
-            PrimalPlayableOut = new PlayableOutput();
-            //MainAnimMixer.PA_SetupGraph(ref animator, ref PrimalPlayableOut);
-            //PrimalPlayableOut.SetSourcePlayable(MainAnimMixer.mixMixer);
-            //ChangeAnim_INITPA();
         }
     }
 
@@ -512,17 +498,6 @@ public class Entity : MonoBehaviour
             animationFrameTime = animancerManager.AM_AnimCurrentTime(0);
             animationEndTime = animancerManager.AM_AnimEndTime(0);
         }
-        //PlayableAPI版.
-        //SetAnimはHitPauseが0で無い限り毎フレーム更新する.
-        else if(MainAnimMixer.PrimalGraph.IsValid())
-        {
-            MainAnimMixer.PrimalGraph.Play();
-
-            MainAnimMixer.PA_SetAnim((HitPauseTime <= 0));
-            
-            animationFrameTime = MainAnimMixer.PA_CurrentAnimTime();
-            animationEndTime = MainAnimMixer.PA_EndAnimTime();
-        }
     }
     
     public void ChangeAnim()
@@ -531,10 +506,6 @@ public class Entity : MonoBehaviour
         {
             ChangeAnim_AM();
         }
-        else if (animListObject != null && animator != null)
-        {
-            ChangeAnim_INITPA();
-        }
     }
 
     public void ChangeAnim_fromParent()
@@ -542,10 +513,6 @@ public class Entity : MonoBehaviour
         if (mainAnimancer != null && animator != null)
         {
             ChangeAnim_AM(default, parentEntity);
-        }
-        if (animListObject != null && animator != null)
-        {
-            ChangeAnim_Parent();
         }
     }
 
@@ -598,39 +565,19 @@ public class Entity : MonoBehaviour
         }
     }
 
-    //PlayableAPI用アニメーション変更..
-    //entityが指定されているときはそのEntityのAnimを呼び出すとする...がまだ未実装.
-    public void ChangeAnim_INITPA(float timeoffset = 0.0f)
-    {
-        AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
-        if (animFindByID != null)
-        {
-            MainAnimMixer.PA_ChangeAnim(animFindByID, default, default, timeoffset);
-        }
-        MainAnimMixer.PA_SetAnim(false);
-    }
-
-    //PlayableAPI用アニメーション変更 : ステート奪取側..
-    public void ChangeAnim_Parent(float timeoffset = 0.0f)
-    {
-        AnimDef animFindByID = controlledEntity.animDefs.Find(x => x.ID == animID);
-        if (animFindByID != null)
-        {
-            MainAnimMixer.PA_ChangeAnim(animFindByID, default ,default, timeoffset);
-        }
-        MainAnimMixer.PA_SetAnim(false);
-    }
-
+    //2026-01-17
+    //Animancer
     public bool hitCheck(Entity checkEntity, out Vector3 HitPoint)
     {
         bool resl = false;
-        clssSetting cEnemy = checkEntity.MainAnimMixer.MainAnimDef.clssSetting;
+        clssSetting cEnemy = checkEntity.animancerManager.primaryAnimDef.clssSetting;
+        clssSetting cSelf = animancerManager.primaryAnimDef.clssSetting;
         HitPoint = Vector3.zero;
-        if (cEnemy != null && MainAnimMixer.MainAnimDef.clssSetting != null)
+        if (cEnemy != null && cSelf != null)
         {
 
             //比較対象のentityの時間が取れてなーい！！
-            resl = MainAnimMixer.MainAnimDef.clssSetting.clssCollided
+            resl = cSelf.clssCollided
             (out Vector3 v1, out Vector3 v2, out float d,
             clssDef.ClssType.Attack, cEnemy, 0.1f);
             HitPoint = (v1 + v2) / 2f;

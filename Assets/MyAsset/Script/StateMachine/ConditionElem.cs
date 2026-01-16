@@ -147,9 +147,11 @@ public class Elem
 
 
     //Checker for MainAnimDef's registered list.
+    //it is now returns 0, because Im using the Animancer.
     public static int CheckAnimationsListNum(Entity et)
     {
-        return et.MainAnimMixer.Mixers.Length;
+        return 0;
+        //return et.MainAnimMixer.Mixers.Length;
     }
 
     public static Transform getEntityBoneTransform(Entity et, string BoneName)

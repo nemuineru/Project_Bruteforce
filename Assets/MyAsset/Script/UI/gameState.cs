@@ -206,7 +206,7 @@ public class gameState : MonoBehaviour
                 Vector3 HitPt = Vector3.zero;
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
-                clssSetting cEnemy = e.MainAnimMixer.MainAnimDef.clssSetting;
+                clssSetting cEnemy = e.animancerManager.primaryAnimDef.clssSetting;
                 f = sets.clssCollided(out var v1, out var v2, out var dist, clssDef.ClssType.Attack, cEnemy, .1f);
                 //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
                 if (f == true)
@@ -298,7 +298,7 @@ public class gameState : MonoBehaviour
         //shapepositions
         beatenEntity.transform.DOShakePosition(beatenEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
-        beatenEntity.ChangeAnim_INITPA(.1f);
+        beatenEntity.ChangeAnim_AM(.1f);
 
         //hitpoint damage
         beatenEntity.status.currentHP -= calledEParam.Damage * (atkParams / Mathf.Max(1.0f,beatenEntity.status.BaseDefencePerc));

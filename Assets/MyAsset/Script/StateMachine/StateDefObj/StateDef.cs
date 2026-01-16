@@ -628,14 +628,6 @@ public class scAnimSet : StateController
             {
                 entity.ChangeAnim();
             }
-
-            //PlayableAPI版. 後でAnimancerに変更する.
-            if (entity.MainAnimMixer.PrimalGraph.IsValid())
-            {
-                entity.MainAnimMixer.PA_ChangeAnim(animFindByID, AnimSlotNum, _isAdditional);
-                //この番号設定はもうちょい考えるべき.. アニメスロット設定が効かないはず
-                entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
-            }
         }
     }
 }
@@ -665,14 +657,6 @@ public class scAnimParamChange : StateController
             entity.ChangeAnimParam
             (animParameter.valueGet(loadParams, entity), 
             AnimSlot.valueGet(loadParams, entity));
-        }
-        else if (entity.MainAnimMixer.Mixers.Count() > 0)
-        {
-            AnimDef animFindByID = entity.MainAnimMixer.MainAnimDef;
-            if (animFindByID != null)
-            {
-                entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
-            }
         }
         //Sequence Not FoundErrorが出たときのソスコ. 
         //今も特定のアニメ再生時そこで止まるので解決が必須
@@ -1236,14 +1220,14 @@ public class scAnimParentSet : StateController
 
     internal override void OnExecute(Entity entity)
     {
-        entity.animID = changeAnimID.valueGet(loadParams, entity);
+        //entity.parentEntity.animID = changeAnimID.valueGet(loadParams, entity);
         AnimDef animFindByID = entity.controlledEntity.animDefs.Find
         (x => x.ID == changeAnimID.valueGet(loadParams, entity));
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
-            entity.MainAnimMixer.PA_ChangeAnim(animFindByID);
-            entity.MainAnimMixer.PA_ChangeAnimParams(entity.animID, animParameter.valueGet(loadParams, entity));
+            //entity.ChangeAnim_fromParent();
+            entity.ChangeAnimParam(animParameter.valueGet(loadParams, entity));
         }
     }
 }
