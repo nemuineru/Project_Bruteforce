@@ -40,8 +40,7 @@ export function StateDef_0_ID(entity) {
             verdList.Add(800);
     }
     
-    //entityに登録されたmixerの数が0のときは緊急。
-    if( CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0)
+    if( CS.Elem.CheckStateTime(entity) == 1)
     {
         //Debug.Log("Init Anim Loaded")
         verdList.Add(100) 

@@ -209,7 +209,7 @@ public class Entity : MonoBehaviour
             animancerManager = new AnimancerManager();
             animancerManager.main = mainAnimancer;
             animancerManager.root = this;
-            ChangeAnim_AM();           
+            ChangeAnim();           
         }
     }
 
@@ -500,19 +500,29 @@ public class Entity : MonoBehaviour
         }
     }
     
-    public void ChangeAnim()
+    //基本はAnimDefを呼び出し.
+    //多分これでChangeAnimFromParantでも行けるはず
+    public void ChangeAnim(AnimDef animDef = null, float timeoffset = 0.0f, Entity refEntity = null)
     {
         if (mainAnimancer != null && animator != null)
         {
-            ChangeAnim_AM();
+            if (animDef != null)
+            {
+                animID = animDef.ID;
+                animancerManager.TransitLayer(animDef);
+            }
+            else
+            {
+                Debug.Log("anim id not found @ Animancer");
+            }
         }
     }
-
-    public void ChangeAnim_fromParent()
-    {         
+    
+    public void ChangeAnimParam(Vector2 animParamValue, int LayerID = 0)
+    {
         if (mainAnimancer != null && animator != null)
         {
-            ChangeAnim_AM(default, parentEntity);
+            animancerManager.AM_AnimParamSet(animParamValue, LayerID);
         }
     }
 
@@ -539,31 +549,6 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void ChangeAnimParam(Vector2 animParamValue, int LayerID = 0)
-    {
-        if (mainAnimancer != null && animator != null)
-        {
-            animancerManager.AM_AnimParamSet(animParamValue, LayerID);
-        }
-        if (animListObject != null && animator != null)
-        {
-            //();
-        }
-    }
-
-    public void ChangeAnim_AM(float timeoffset = 0.0f, Entity refEntity = null)
-    {
-        List<AnimDef> findDef = refEntity != null ? refEntity.animDefs : animDefs;
-        AnimDef animFindByID = animDefs.Find(x => x.ID == animID);
-        if (animFindByID != null)
-        {
-            animancerManager.TransitLayer(animFindByID);
-        }
-        else
-        {
-            Debug.Log("anim id not found @ Animancer");
-        }
-    }
 
     //2026-01-17
     //Animancer

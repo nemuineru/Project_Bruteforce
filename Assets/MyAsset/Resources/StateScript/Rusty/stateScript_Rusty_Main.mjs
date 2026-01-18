@@ -17,6 +17,7 @@ export function StateDef_0_ID(entity) {
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
+    let currentAnimID =  CS.Elem.CheckAnimID(entity);
 
     //Init.
     if (selfStTime > 0)
@@ -41,11 +42,12 @@ export function StateDef_0_ID(entity) {
     }
     
     //entityに登録されたmixerの数が0のときは緊急。
-    if( CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0)
+    if( CS.Elem.CheckStateTime(entity) == 0 && currentAnimID != 0)
     {
         //Debug.Log("Init Anim Loaded")
         verdList.Add(100) 
     }
+
     if(!entity.attrs.alive)
     {
         verdList.Add(5100)

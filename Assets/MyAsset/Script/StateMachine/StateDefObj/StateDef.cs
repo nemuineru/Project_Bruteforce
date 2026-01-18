@@ -588,8 +588,8 @@ public class StateController
 }
 
 
-//アニメーションの変更.
-//ジェネリックメソッドの導入実験も兼ねて、やってみる.
+//アニメーションの変更.　このステートマシンではステート奪取状態かどうかに関わらず
+//ベースのアニメーションを再生する.
 [System.Serializable]
 [SerializeField]
 [SCHiearchy("Animation/AnimSet")]
@@ -614,7 +614,6 @@ public class scAnimSet : StateController
 
     internal override void OnExecute(Entity entity)
     {
-        entity.animID = changeAnimID.valueGet(loadParams,entity);
         int AnimSlotNum = AnimSlot.valueGet(loadParams,entity);
         bool _isAdditional = isAdditional.valueGet(loadParams,entity);
         AnimDef animFindByID = entity.animDefs.ToList().Find
@@ -623,11 +622,7 @@ public class scAnimSet : StateController
         //ここでAnimIDが設定されているため、entityからChangeAnimを呼び出せば簡易に変えられるはず.
         if (animFindByID != null)
         {
-            //Animancer版.
-            if (entity.animancerManager != null)
-            {
-                entity.ChangeAnim();
-            }
+            entity.ChangeAnim();
         }
     }
 }
@@ -661,6 +656,29 @@ public class scAnimParamChange : StateController
     }
 }
 
+[SCHiearchy("Animation/AnimChange from Parent")]
+//ステート奪取された"親"のアニメを再生する.
+public class scAnimParentSet : StateController
+{
+    [SerializeField]
+    stParams<int> changeAnimID;
+
+    [SerializeField]
+    stParams<Vector2> animParameter;
+
+    internal override void OnExecute(Entity entity)
+    {
+        //entity.parentEntity.animID = changeAnimID.valueGet(loadParams, entity);
+        AnimDef animFindByID = entity.controlledEntity.animDefs.Find
+        (x => x.ID == changeAnimID.valueGet(loadParams, entity));
+        //設定されたIDが見つかれば、そのParameterと同様に設定..
+        if (animFindByID != null)
+        {
+            //entity.ChangeAnim_fromParent();
+            entity.ChangeAnimParam(animParameter.valueGet(loadParams, entity));
+        }
+    }
+}
 
 [System.Serializable]
 [SerializeField]
@@ -1189,29 +1207,6 @@ public class scPlayOneshotSound : StateController
     }
 }
 
-[SCHiearchy("Animation/AnimChange from Parent")]
-//ステート奪取された"親"のアニメを再生する.
-public class scAnimParentSet : StateController
-{
-    [SerializeField]
-    stParams<int> changeAnimID;
-
-    [SerializeField]
-    stParams<Vector2> animParameter;
-
-    internal override void OnExecute(Entity entity)
-    {
-        //entity.parentEntity.animID = changeAnimID.valueGet(loadParams, entity);
-        AnimDef animFindByID = entity.controlledEntity.animDefs.Find
-        (x => x.ID == changeAnimID.valueGet(loadParams, entity));
-        //設定されたIDが見つかれば、そのParameterと同様に設定..
-        if (animFindByID != null)
-        {
-            //entity.ChangeAnim_fromParent();
-            entity.ChangeAnimParam(animParameter.valueGet(loadParams, entity));
-        }
-    }
-}
 
 //set the entity collision. it resets after 1 frames.
 [SCHiearchy("Physics/Entity Collision Ignore for 1 frame")]

@@ -48,7 +48,7 @@ public class AnimancerManager
         //基本値はOverRide.
         inserterLayer.IsAdditive = isAdditive;
 
-        inserterLayer.Play(MakeState(animDef), animDef.blendOutTime);
+        inserterLayer.Play(MakeState(animDef), animDef.blendInTime);
 
         //if the layerID is 0, clss must loaded  via layer 0 so call the order.
         if (LayerID == 0)
