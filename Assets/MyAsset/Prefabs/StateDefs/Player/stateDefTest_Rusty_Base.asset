@@ -253,7 +253,7 @@ MonoBehaviour:
         isAdditional:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 31900000, guid: f22fcbaf0d87c9744b0a6c6ed6eb57b0, type: 2}

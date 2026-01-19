@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -183,6 +185,7 @@ public class AnimancerManager
     {
         float val = 0;
         AnimancerLayer refLayer = main.Layers[LayerID];
+        AnimancerState findState = refLayer.CurrentState;
         if (refLayer != null)
         {
             List<AnimationClip> cls = new List<AnimationClip>();
@@ -198,6 +201,7 @@ public class AnimancerManager
     {
         float val = 0;
         AnimancerLayer refLayer = main.Layers[LayerID];
+        AnimancerState findState = refLayer.CurrentState;
         if (refLayer != null)
         {
             List<AnimationClip> cls = new List<AnimationClip>();
@@ -207,6 +211,18 @@ public class AnimancerManager
             //Debug.Log(val);
         }
         return val;
+    }
+
+    //レイヤーのフェードアウト.
+    //作成したレイヤーは基本的に消去不可能なので、ベースレイヤー以外はウェイト0に設定する.
+    public void AM_FadeLayer(int LayerID = 0, float fadeTime = 0)
+    {
+        AnimancerLayer refLayer = main.Layers[LayerID];
+        if (refLayer != null)
+        {
+            refLayer.StartFade(fadeTime);
+            //Debug.Log(val);
+        }
     }
 
     //Set Animancer TickStates.

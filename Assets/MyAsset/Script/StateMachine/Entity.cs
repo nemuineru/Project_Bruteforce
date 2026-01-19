@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -144,7 +146,19 @@ public class Entity : MonoBehaviour
     //実行済みのステート番号の書き換えなど
     public List<int> executedStateIDs = new List<int>();
 
-    // Start is called before the first frame update
+    internal List<StateDef> loadedDefs = new List<StateDef>();
+
+    string verd_1;
+    [SerializeField]
+    Vector3 raycenter = Vector3.down * 0.5f;
+
+    Vector3 pausedVel = Vector3.zero;
+
+    //CMDList for command buffering, and checks @ .mjs file
+    [SerializeField]
+    internal List<entityInputManager.entityInput_Buffers> cmdList;
+
+    //first init.
     void Awake()
     {
         allChildTransforms = GetComponentsInChildren<Transform>(true);
@@ -213,18 +227,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    internal List<StateDef> loadedDefs = new List<StateDef>();
-
-    string verd_1;
-    [SerializeField]
-    Vector3 raycenter = Vector3.down * 0.5f;
-
-    Vector3 pausedVel = Vector3.zero;
-
-    //CMDList for command buffering, and checks @ .mjs file
-    [SerializeField]
-    internal List<entityInputManager.entityInput_Buffers> cmdList;
-
+    // Start is called before the first frame update
     //Awake後に設定される. UIとか指定したい.
     void Start()
     {
@@ -350,11 +353,13 @@ public class Entity : MonoBehaviour
 
     void executeStates()
     {
-
+        //ChangeStateを実行した直後フレームの、その時のステートIDを読み出す..
+        int prevStateID = -100000;
         if (CListQueue.Count > 0)
         {
             //Most Primal Queue is Most Biggest Number.
             CListQueue.Sort((CQ_L, CQ_M) => CQ_M.priority - CQ_L.priority);
+            prevStateID = CurrentStateID;
             CurrentStateID = CListQueue[0].stateDefID;
             attrs.resetCombatStateTime();
             CListQueue.Clear();
@@ -368,7 +373,7 @@ public class Entity : MonoBehaviour
         if (AutoState_2 != null)
         {
             //Debug.Log("auto checking -1 state");
-            AutoState_2.Execute(this);
+            AutoState_2.Execute(this, false);
         }
 
         //-1はステート奪取されているなら実行しない.
@@ -377,7 +382,7 @@ public class Entity : MonoBehaviour
         if (AutoState_1 != null && controlledEntity == null)
         {
             //Debug.Log("auto checking -1 state");
-            AutoState_1.Execute(this);
+            AutoState_1.Execute(this, false);
         }
 
 
@@ -409,10 +414,13 @@ public class Entity : MonoBehaviour
             //state実行.. これは一つだけに実行されるはず.
             //ステート奪取したときの値を実行..
             StateDef currentState = null;
+            StateDef prevState = null;
         if (controlledEntity == null)
         {
             currentState =
             loadedDefs.Find(stDef => stDef.StateDefID == CurrentStateID);
+            prevState = 
+            loadedDefs.Find(stDef => stDef.StateDefID == prevStateID);
         }
         else
         {
@@ -420,27 +428,35 @@ public class Entity : MonoBehaviour
             StateDef findDef = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID).Clone();
             currentState = findDef;
         }
-        if (currentState != null)
+        if (prevState != null)
         {
-            //Debug.Log("Executing stateDef - " + CurrentStateID + " at state time of - " + Time.frameCount + stateTime);
-            // + " at time of " + stateTime            
-            //the StateDef needs as deepcopy?
-
-            //実行したSTATEIDを格納. 実行回数はまだ記録してない.
-            foreach(int ID in currentState.Execute(this))
+            //過去のStateを実行
+            foreach (int ID in prevState.Execute(this, true))
             {
-                if(!executedStateIDs.Any(i => i == ID))
-                {
-                    executedStateIDs.Add(ID);
-                }
+
             }
-            //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
-            //" " + this.gameObject.name);
         }
-        else
-        {
-            //Debug.LogError("Loaded State is null : " + CurrentStateID);
-        }
+        if (currentState != null)
+            {
+                //Debug.Log("Executing stateDef - " + CurrentStateID + " at state time of - " + Time.frameCount + stateTime);
+                // + " at time of " + stateTime            
+                //the StateDef needs as deepcopy?
+
+                //実行したSTATEIDを格納. 実行回数はまだ記録してない.
+                foreach (int ID in currentState.Execute(this, false))
+                {
+                    if (!executedStateIDs.Any(i => i == ID))
+                    {
+                        executedStateIDs.Add(ID);
+                    }
+                }
+                //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
+                //" " + this.gameObject.name);
+            }
+            else
+            {
+                //Debug.LogError("Loaded State is null : " + CurrentStateID);
+            }
     }
 
     void onGameFinished()
@@ -502,18 +518,27 @@ public class Entity : MonoBehaviour
     
     //基本はAnimDefを呼び出し.
     //多分これでChangeAnimFromParantでも行けるはず
-    public void ChangeAnim(AnimDef animDef = null, float timeoffset = 0.0f, Entity refEntity = null)
+    public void ChangeAnim(AnimDef animDef = null, int LayerID = 0, 
+    float timeoffset = 0.0f, Entity refEntity = null, AvatarMask mask = null, bool isAdditive = false)
     {
         if (mainAnimancer != null && animator != null)
         {
             if (animDef != null)
             {
                 animID = animDef.ID;
-                animancerManager.TransitLayer(animDef);
+                animancerManager.TransitLayer(animDef, LayerID, timeoffset, mask, isAdditive);
             }
             else
             {
-                Debug.Log("anim id not found @ Animancer");
+                AnimDef initDef = animDefs.Find(fs => fs.ID == animID);
+                if(initDef != null)
+                {
+                    animancerManager.TransitLayer(initDef, LayerID, timeoffset, mask, isAdditive);
+                }
+                else
+                {
+                    Debug.Log("anim id not found @ Animancer");
+                }
             }
         }
     }
@@ -524,6 +549,15 @@ public class Entity : MonoBehaviour
         {
             animancerManager.AM_AnimParamSet(animParamValue, LayerID);
         }
+    }
+
+    public void FadeAnim(int LayerID = 0, float fadeTime = 0)
+    { 
+        if (mainAnimancer != null && animator != null)
+        {
+            animancerManager.AM_FadeLayer(LayerID,fadeTime);
+        }
+
     }
 
     public void entityPhisics()

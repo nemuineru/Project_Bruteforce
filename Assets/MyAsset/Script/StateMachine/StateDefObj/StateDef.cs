@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -356,9 +358,11 @@ public class StateDef
 
     //PUERTSの実装を開始する.
     //あと、実行時に読み出したステート番号をList形式で出力する.
-    public List<int> Execute(Entity entity)
+    public List<int> Execute(Entity entity, bool willPrevLoad)
     {
         List<int> executedStateID = new List<int>();
+        List<StateController> selectLoad = StateList.FindAll(stB => stB.doLoadAfterChangeState == willPrevLoad);
+        
         //stateTimeが0の時, 恒常設定されたステートパラメータを確認
         if (entity.stateTime == 0)
         {
@@ -370,7 +374,7 @@ public class StateDef
             OnInitDef();
         } 
 
-        if (ScriptDirectory != null)
+        if (ScriptDirectory != null && selectLoad.Count > 0)
         {     
             
             executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
@@ -410,7 +414,7 @@ public class StateDef
                 }
                 //Debug.Log(executingStr); 
             }
-            foreach (StateController state in StateList)
+            foreach (StateController state in selectLoad)
             {
                 //idがステート読み出しリスト内・もしくはステート自体が読み出し処理を行う場合
                 //Debug.LogWarning(entity.gameObject.name + " loads " + state.ID.value.ToString());
@@ -429,123 +433,7 @@ public class StateDef
             }
         }
         return executedStateID;
-    }
-
-    public void _Execute(Entity entity)
-    {
-        //stateTimeが0の時, 恒常設定されたステートパラメータを確認
-        if (entity.stateTime == 0)
-        {
-            entityTypeSet(entity);
-        }
-
-        // if (_stateLoadTables == null)
-        OnInitDef();
-        //メインのLUA仮想マシンに読み出すテキストを以下に記述.
-        if (ScriptDirectory != null)
-        {
-            //env.DoString(LuaAsset.text);
-
-            //QueueStateIDの呼び出し. _stateLoadTableに登録値を呼び出す.
-            // env.DoString(LuaAsset.text, preStateVerdictName, _stateLoadTables);
-
-            //読み出しのQueueStateIDを記述するためのメソッドを作成
-            lua_Read.CalcValues.QueuedStateID stateVerd = null;
-            // _stateLoadTables.Get<lua_Read.CalcValues.QueuedStateID>(preStateVerdictName);
-            //env.Global.Get<lua_Read.CalcValues.QueuedStateID>(preStateVerdictName);
-
-            //ParamTablesの呼び出し. _stateParamTablesにパラメータ値を呼び出す.
-            // env.DoString(LuaAsset.text, ParamLoadName, _stateParamTables);
-
-            //ステート宣言パラメータのメソッド作成
-            // lua_Read.CalcValues.luaOutParams stateDefParams =
-            // _stateParamTables.Get<lua_Read.CalcValues.luaOutParams>(ParamLoadName);
-            //env.Global.Get<lua_Read.CalcValues.luaOutParams>(ParamLoadName);
-
-            //executeStateIDsにはQueuedStateIDの値を入力
-
-
-            int[] ExecuteStateIDs;
-
-            //読み出し時のEntityで、登録重複が見られる場合の誤作動をなんとかしなければ
-            //LuaTableの別々の読み出しにしたいが、なんかおかしい..
-            //StateDef自体をSingleTonにするべきか..
-            if (stateVerd != null)
-            {
-                //xLUAの読み出しでなーぜーかー別のstateIDのスクリプト読み出し結果が呼び出されて追加項目になってる.
-                //クソぉ！！
-                //...しょーがないのでLight11氏のhttps://light11.hatenadiary.com/entry/2021/08/17/195914
-                // を参考にリベイクしてみるか..
-
-                ExecuteStateIDs = stateVerd.Invoke(entity);
-                // if (stateDefParams != null && entity != null)
-                // {
-                //     luaOutputParams = stateDefParams.Invoke(entity).ToList();
-                // }
-
-
-
-
-                string executingStr = "";
-                if (ExecuteStateIDs != null)
-                {
-                    for (int i = 0; i < ExecuteStateIDs.Count(); i++)
-                    {
-                        executingStr += ExecuteStateIDs[i] + " , ";
-                    }
-                }
-                //Debug.Log("State Def - " + StateDefID + " State List #s - " + StateList.Count);
-                //def中にあるstateを全部リストアップ
-                foreach (StateController state in StateList)
-                {
-                    //idがステート読み出しリスト内・もしくはステート自体が読み出し処理を行う場合
-                    //Debug.LogWarning(entity.gameObject.name + " loads " + state.ID.value.ToString());
-                    if (state.isIDValid(ExecuteStateIDs, entity))
-                    {
-                        //stateにluaOutputParamsを予め登録.
-                        state.loadParams = luaOutputParams;
-
-                        //実際に実行.
-                        //state.Entityに直接登録すると、別キャラクターが参照するため変更..
-                        state.OnExecute(entity);
-                    }
-                }
-                //Debug.Log(entity.gameObject.name + " executes stateID " + executingStr + " at the stateDef of " + StateDefID);
-            }
-            else
-            {
-                //Debug.LogError("Execute ID/stateVerd is NULL!");
-            }
-
-
-
-
-            //stateID内にLuaの設定値をセットアップ.
-
-            /*
-            if (ExecuteStateIDs.Count() > 0)
-            {
-                //def中にあるstateを全部リストアップ
-                foreach (StateController state in StateList)
-                {
-                    state.entity = entity;
-                    // Debug.Log("Finding stateID " + state.stateID + "," + state.ToString());
-
-                    //Lua設定値の中から..という
-                    if (ExecuteStateIDs.Any(i => state.isIDValid(i)))
-                    {
-                        state.loadParams = luaOutputParams;
-                        Debug.Log("Executed " + state.ToString());
-                        state.OnExecute();
-                    }
-                }
-            }
-            */
-
-            // env.Tick();
-        }
-
-    }
+    }    
 }
 
 
@@ -573,6 +461,10 @@ public class StateController
         return this.ID.valueGet(ID, entity);
     }
     public string stateControllerSubName;
+
+    //ChangeState後にPrevStateとして読み出すか?
+    public bool doLoadAfterChangeState = false;
+
     internal static string stControllerName = null;
     
 
@@ -622,8 +514,29 @@ public class scAnimSet : StateController
         //ここでAnimIDが設定されているため、entityからChangeAnimを呼び出せば簡易に変えられるはず.
         if (animFindByID != null)
         {
-            entity.ChangeAnim();
+            entity.ChangeAnim(animFindByID,AnimSlotNum,animFindByID.blendInTime
+            ,null,mask,_isAdditional);
         }
+    }
+}
+
+//指定したアニメーションレイヤーのアニメを停止・消去する.
+[System.Serializable]
+[SerializeField]
+[SCHiearchy("Animation/End the animation via select Layer")]
+public class scAnimEnd : StateController
+{
+    //if it is not set, change 0(main) slot. 
+    //latter Slot must needs to be Additional.
+    [SerializeField]
+    stParams<int> AnimSlot;
+    [SerializeField]
+    stParams<float> fadeTime;
+    internal override void OnExecute(Entity entity)
+    {
+        int AnimSlotNum = AnimSlot.valueGet(loadParams, entity);
+        float fading = fadeTime.valueGet(loadParams, entity);
+        entity.FadeAnim(AnimSlotNum, fading);
     }
 }
 
