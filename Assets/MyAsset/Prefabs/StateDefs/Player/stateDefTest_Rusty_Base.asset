@@ -43,6 +43,7 @@ MonoBehaviour:
     physType: 0
     StateList:
     - rid: 5331018537749184512
+    - rid: 5331018854245859337
     - rid: 5331018537749184513
     Dir: 
     setCtrl: 0
@@ -85,6 +86,7 @@ MonoBehaviour:
           value: 5300
           stLuaLoads: 
         stateControllerSubName: set it death if it is dead
+        doLoadAfterChangeState: 0
         changeTo: 5300
         priority: 0
     - rid: 3002629213760520200
@@ -95,6 +97,7 @@ MonoBehaviour:
           value: 3
           stLuaLoads: 
         stateControllerSubName: ChangeState To Jumping
+        doLoadAfterChangeState: 0
         changeTo: 50
         priority: 1
     - rid: 3002629213760520201
@@ -105,6 +108,7 @@ MonoBehaviour:
           value: 2
           stLuaLoads: 
         stateControllerSubName: Move_Auto
+        doLoadAfterChangeState: 0
     - rid: 3002629528666767590
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -113,6 +117,7 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: AnimSetter
+        doLoadAfterChangeState: 0
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
@@ -146,6 +151,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: AnimParamChanger
+        doLoadAfterChangeState: 0
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
@@ -172,6 +178,7 @@ MonoBehaviour:
           value: 800
           stLuaLoads: 
         stateControllerSubName: rotate
+        doLoadAfterChangeState: 0
         RotateWeight: 0.5
     - rid: 4404389163807801372
       type: {class: scJump, ns: , asm: Assembly-CSharp}
@@ -181,6 +188,7 @@ MonoBehaviour:
           value: 50
           stLuaLoads: 
         stateControllerSubName: JumpAnimVel
+        doLoadAfterChangeState: 0
     - rid: 4404389163807801373
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -189,6 +197,7 @@ MonoBehaviour:
           value: 50
           stLuaLoads: 
         stateControllerSubName: JumpAnim
+        doLoadAfterChangeState: 0
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
@@ -210,7 +219,7 @@ MonoBehaviour:
         isAdditional:
           _setEssential: 0
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -222,6 +231,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: InitState
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 1
     - rid: 5331018537749184512
@@ -232,6 +242,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Animset_Slot_1
+        doLoadAfterChangeState: 0
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
@@ -265,8 +276,30 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: ChangeState0 to non guarded
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
+    - rid: 5331018854245859337
+      type: {class: scAnimEnd, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimEnd
+        doLoadAfterChangeState: 1
+        AnimSlot:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fadeTime:
+          _setEssential: 0
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 7557642767827468288
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -275,6 +308,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Animset_winningPose
+        doLoadAfterChangeState: 0
         changeAnimID:
           _setEssential: 0
           loadTypes: 0
