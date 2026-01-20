@@ -55,9 +55,14 @@ public class EntityAttr
 public class EntityFlag
 {
     public string flagName;
+    //isEternal Meant as not erasing if it beyonds flagDefault
     public bool isEternal;
     public int flagDefaultTime;
-    internal int flagElapsedTime;
+    internal int flagElapsedTime = 0;
+    public void Tick()
+    {
+        flagElapsedTime++;
+    }
 }
 
 

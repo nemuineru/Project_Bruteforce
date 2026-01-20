@@ -214,7 +214,7 @@ public class gameState : MonoBehaviour
                     Debug.LogWarning("Proj Collided");
                     HitPt = (v1 + v2) / 2f;
                     ret = true;
-                    hitDefApply(e, trfs, useParam, HitPt);
+                    hitDef_proj_Apply(e, trfs, useParam, HitPt);
                     //当てた分キャラ指定の値が減少..
                     refNumRemaining--;
                 }
@@ -258,7 +258,7 @@ public class gameState : MonoBehaviour
         }
     }
 
-    void hitDefApply(Entity beatenEntity, Transform calledPoint,
+    void hitDef_proj_Apply(Entity beatenEntity, Transform calledPoint,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
         //stateChangeを設定..
@@ -287,7 +287,11 @@ public class gameState : MonoBehaviour
         ((calledEParam.HitEff != null ? calledEParam.HitEff : defaultEff), hitContactPoint, Quaternion.identity);
     }
 
+    int returnHitStateDefID()
+    {
 
+        return 0;
+    }
 
     void DamageApply(Entity beatenEntity, Vector3 HitVect, hitDefParams calledEParam, float atkParams)
     {
@@ -429,6 +433,9 @@ public class hitDefParams
 
     //どういう動きに当たるか？　など やられ判定のときに追撃しないようにしたりとか.
     public string HitMoveFlag = "IA";
+    
+
+    public string AnimType = "";
 
     public List<int> HitExcludeList;
 }
