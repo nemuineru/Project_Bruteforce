@@ -434,9 +434,22 @@ public class hitDefParams
     //どういう動きに当たるか？　など やられ判定のときに追撃しないようにしたりとか.
     public string HitMoveFlag = "IA";
     
-
+    //Anim設定. この設定に基づき、ステート・アニメの変更先を変える.
     public string AnimType = "";
 
     public List<int> HitExcludeList;
+
+    //ステート番号をEntityから読み出し.
+    public int ReturnStateNum(Entity refEntity)
+    {
+
+        return 0;
+    }
+
+    //読み出しAnim番号をEntityから読み出し.
+    public int ReturnAnimNum(Entity refEntity)
+    {
+        return 0;
+    }
 }
 
