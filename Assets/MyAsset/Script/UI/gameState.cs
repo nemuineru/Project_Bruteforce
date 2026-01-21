@@ -405,10 +405,12 @@ public class gameState : MonoBehaviour
 
 //後々にこのhitDefParamsの項目を表示・非表示設定可能にしたい
 //非表示にした項目は値未設定ならデフォルト値を使用
+//あと、hitDefParamsは攻撃を当てた相手がその値を読み出せるように..
 [SerializeField]
 [System.Serializable]
 public class hitDefParams
 {
+    public int hitID;
     public float Damage;
     public Vector3 velset;
     [SerializeField]
@@ -420,6 +422,9 @@ public class hitDefParams
 
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
+
+    //ダウン設定.
+    public int fallTime = 0;
 
     //敵がプレイヤーのステート名を参照するか？
     public bool enemyRefsPlayerNum = false;
@@ -435,21 +440,67 @@ public class hitDefParams
     public string HitMoveFlag = "IA";
     
     //Anim設定. この設定に基づき、ステート・アニメの変更先を変える.
+    //L -> Light, M -> Middle, H -> Heavy, U -> Up, D -> Down, A -> Air, C -> Crouch, B -> Blow
+    //基本はULのみのアニメで対応可能.
+    // - 5000(弱ダメージ), 5050(吹き飛び), 5100(地上ダウン), 5200(ダウン回復).
+
     public string AnimType = "";
 
     public List<int> HitExcludeList;
 
     //ステート番号をEntityから読み出し.
+    //仕様書からどういうStateNumに変更するかを決定する..
     public int ReturnStateNum(Entity refEntity)
     {
+        //基本立ち喰らいアニメ
+        int retID = 5000;
+        if(ChangeState_Enemy > -1)
+        {
+            retID = ChangeState_Enemy;
+        }
+        else
+        {
+            int DamageType = 0;
+            int HitType = 0;
+            //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
+            //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
+            //if文祭りじゃ.
+            if(AnimType.Contains('L'))
+            {
+                DamageType = 0;
+            }
+            else if(AnimType.Contains('M'))
+            {
+                DamageType = 1;
+            }
+            else if(AnimType.Contains('H'))
+            {
+                DamageType = 2;
+            }
 
-        return 0;
-    }
-
-    //読み出しAnim番号をEntityから読み出し.
-    public int ReturnAnimNum(Entity refEntity)
-    {
-        return 0;
+            if(fallTime > 0)
+            {
+                HitType = 50;
+            }
+            else if(AnimType.Contains('U'))
+            {
+                HitType = 0;
+            }
+            else if(AnimType.Contains('D'))
+            {
+                HitType = 10;
+            }
+            else if(AnimType.Contains('C'))
+            {
+                HitType = 20;
+            }
+            else if(AnimType.Contains('A'))
+            {
+                HitType = 30;
+            }
+            retID += DamageType;
+        }
+        return retID;
     }
 }
 
