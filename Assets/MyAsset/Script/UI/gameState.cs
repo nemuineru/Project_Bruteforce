@@ -465,20 +465,7 @@ public class hitDefParams
             //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
             //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
             //if文祭りじゃ.
-            if(AnimType.Contains('L'))
-            {
-                DamageType = 0;
-            }
-            else if(AnimType.Contains('M'))
-            {
-                DamageType = 1;
-            }
-            else if(AnimType.Contains('H'))
-            {
-                DamageType = 2;
-            }
-
-            if(fallTime > 0)
+            if(fallTime > 0 && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
             }
@@ -486,19 +473,32 @@ public class hitDefParams
             {
                 HitType = 0;
             }
-            else if(AnimType.Contains('D'))
+            else if(AnimType.Contains('D') && refEntity.loadedDefs.Any(a => a.StateDefID == 5010))
             {
                 HitType = 10;
             }
-            else if(AnimType.Contains('C'))
+            else if(AnimType.Contains('C') && refEntity.loadedDefs.Any(a => a.StateDefID == 5020))
             {
                 HitType = 20;
             }
-            else if(AnimType.Contains('A'))
+            else if(AnimType.Contains('A') && refEntity.loadedDefs.Any(a => a.StateDefID == 5030))
             {
                 HitType = 30;
             }
-            retID += DamageType;
+            
+            if(AnimType.Contains('L'))
+            {
+                DamageType = 0;
+            }
+            else if(AnimType.Contains('M') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 1))
+            {
+                DamageType = 1;
+            }
+            else if(AnimType.Contains('H') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 2))
+            {
+                DamageType = 2;
+            }
+            retID += DamageType + HitType;
         }
         return retID;
     }
