@@ -70,8 +70,10 @@ public class stParams<Type>
     //必須値以外は隠せるようにしたい.
 
     //この値が設定されているなら, Inspector上では隠されるようになる.. 右クリックのメニューで解除される.
-    bool _setHidden = true;
+    public bool _setHidden = true;
 
+    [ContextMenuItem("Hide","toggleHidden")]
+    [MultiLine(8)]
     private void toggleHidden()
     {
         _setHidden = !_setHidden;
