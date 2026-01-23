@@ -406,15 +406,40 @@ public class gameState : MonoBehaviour
 //後々にこのhitDefParamsの項目を表示・非表示設定可能にしたい
 //非表示にした項目は値未設定ならデフォルト値を使用
 //あと、hitDefParamsは攻撃を当てた相手がその値を読み出せるように..
+//2026-01-23: StateDef自体に表示・非表示設定を適応して..って感じのほうが良いかも.
+//stParamsにshowAtInspectorフラグを適応して右クリックメニューで編集できるように..
 [SerializeField]
 [System.Serializable]
 public class hitDefParams
 {
     public int hitID;
+
+    //通常ダメージ・ガード時ダメージ
     public float Damage;
+    public float GuardDamage;
+    //ガードポイント減少/通常とガード時
+    public float GuardBreakPoint;
+    public float GuardBreakPoint_OnGuard;
+
+    public bool GuardOnKill;
+
+    //敵の移動
+    //攻撃を当てた際の動作方向設定
     public Vector3 velset;
+    //ガード時の動作方向設定
+    public Vector3 guard_velset;
+
+    //プレイヤーの移動
+    //攻撃を当てた際の動作方向設定
+    public Vector3 pl_velset;
+    //ガード時の動作方向設定
+    public Vector3 pl_guard_velset;
+    
+    //ガード時と通常時のヒットストップ時刻
     [SerializeField]
     public Vector2 hitStopTime;
+    [SerializeField]
+    public Vector2 guard_hitStopTime;
     [SerializeField]
     public GameObject HitEff;
     //当てた敵のステート変更情報(負の数以下で変更しない)
@@ -465,36 +490,46 @@ public class hitDefParams
             //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
             //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
             //if文祭りじゃ.
+            
+            //基本として、LightHit用のStateDefは入っていないと問題外.
+            //Fall hit
             if(fallTime > 0 && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
             }
+            //Up hit
             else if(AnimType.Contains('U'))
             {
                 HitType = 0;
             }
-            else if(AnimType.Contains('D') && refEntity.loadedDefs.Any(a => a.StateDefID == 5010))
+            //Down hit
+            if(AnimType.Contains('D') && refEntity.loadedDefs.Any(a => a.StateDefID == 5010))
             {
                 HitType = 10;
             }
+            //Crouch hit
             else if(AnimType.Contains('C') && refEntity.loadedDefs.Any(a => a.StateDefID == 5020))
             {
                 HitType = 20;
             }
+            //Air hit
             else if(AnimType.Contains('A') && refEntity.loadedDefs.Any(a => a.StateDefID == 5030))
             {
                 HitType = 30;
             }
-            
+
+            //Light Hit
             if(AnimType.Contains('L'))
             {
                 DamageType = 0;
             }
-            else if(AnimType.Contains('M') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 1))
+            //Middle hit
+            if(AnimType.Contains('M') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 1))
             {
                 DamageType = 1;
             }
-            else if(AnimType.Contains('H') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 2))
+            //Heavy hit
+            if(AnimType.Contains('H') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 2))
             {
                 DamageType = 2;
             }
