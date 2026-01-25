@@ -358,35 +358,34 @@ public class StateContDrawer : PropertyDrawer
     void Unexpand() { activeProperty.isExpanded = false; }
     */
 
-    //右クリック時、Property内のstParamで取得できるisHidden値を取得し、トグルスイッチを作成..
-    void OnPropertyContextMenu(GenericMenu menu, SerializedProperty property)
-    {
-        menu.AddItem(new GUIContent("menu " + property.name), false, () =>
-        {
-            
-        });
-    }
-
     //Debug.Logの記録ではproperty.propertyPath == 
     //stateDefs.Array.data[x].StateList.Array.data[n].. ManagedReference..と表示される.
     //(x -> stateDefの数値, n -> stateの登録配列)
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        //Debug.Log(property.propertyPath + " " + property.propertyType);
-        EditorApplication.contextualPropertyMenu += (menu, property) =>
+        var propertyCopy = property.serializedObject.FindProperty(property.propertyPath).Copy();  
+        var fieldRect = position;
+        using ( new EditorGUI.PropertyScope(fieldRect, label, propertyCopy))
         {
-            var propertyCopy = property.serializedObject.FindProperty(property.propertyPath);
-            Debug.Log(propertyCopy.propertyPath + " " + propertyCopy.propertyType);
-            int i = 0;
-            while(propertyCopy.NextVisible(false))
-            {
-                menu.AddItem(new GUIContent("menu " + propertyCopy.propertyPath + i), false, () =>
+            var content = propertyCopy.NextVisible(true);            
+            EditorApplication.contextualPropertyMenu += (menu, propertyCopy) =>
+            {          
+                //Debug.Log(propertyCopy.propertyPath + " " + propertyCopy.propertyType);
+                if(propertyCopy != null)
                 {
-                });
-                i++;
-            }
+                //Debug.Log(propertyCopy.propertyPath + " " + propertyCopy.propertyType);
+                int i = 0;  
+                while(propertyCopy.NextVisible(true))
+                    {
+                        menu.AddItem(new GUIContent("menu " + propertyCopy.propertyPath + i), false, () =>
+                        {
+                        });
+                        i++;
+                    }
+                }
         };
+        }
         PropertyDrawerUtility.DrawDefaultGUI(position, property, label);
         return;
     }
