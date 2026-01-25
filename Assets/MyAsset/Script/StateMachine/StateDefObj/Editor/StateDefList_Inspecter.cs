@@ -9,6 +9,8 @@ using System.Linq;
 using UnityEditor.UIElements;
 using UnityEditorInternal;
 using Unity.Properties;
+using System.Runtime.Remoting.Contexts;
+using Unity.VisualScripting;
 
 [CustomEditor(typeof(StateDefListObject))]
 public class StateDefList_Inspector : Editor
@@ -348,11 +350,29 @@ public class StateDefList_Inspector : Editor
 [CustomPropertyDrawer(typeof(StateController), true)]
 public class StateContDrawer : PropertyDrawer
 {
+    //from https://discussions.unity.com/t/create-a-propertydrawer-context-menu/710243/2
+    //create Context property for this ProperyDrawer.
+    /*
+    SerializedProperty activeProperty;
+    void Expand () { activeProperty.isExpanded = true;  }
+    void Unexpand() { activeProperty.isExpanded = false; }
+    */
+
+    void OnPropertyContextMenu(GenericMenu menu, SerializedProperty property)
+    {
+        var propertyCopy = property.Copy();
+        menu.AddItem(new GUIContent("Randomize Vector"), false, () =>
+        {
+        });
+    }
+
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        EditorApplication.contextualPropertyMenu += OnPropertyContextMenu;
         PropertyDrawerUtility.DrawDefaultGUI(position, property, label);
         return;
     }
+    
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         return PropertyDrawerUtility.GetDefaultPropertyHeight(property, label);
