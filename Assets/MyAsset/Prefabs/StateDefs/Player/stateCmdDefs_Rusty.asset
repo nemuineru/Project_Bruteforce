@@ -25,16 +25,16 @@ MonoBehaviour:
     physType: 0
     StateList:
     - rid: 5331018537749184514
-    - rid: 1982101323848089607
-    - rid: 4404388664824299527
-    - rid: 4404388799971590145
     - rid: 4404388664824299528
+    - rid: 1982101323848089607
     - rid: 1814087929669091328
     - rid: 1814087929669091329
     - rid: 4404388709018370078
     - rid: 1814088220477227017
     - rid: 4404388709018370091
     - rid: 7982028180311244820
+    - rid: 4404388664824299527
+    - rid: 4404388799971590145
     - rid: 7982028180311244821
     - rid: 7982027888260546560
     - rid: 7982027949219512324
@@ -53,6 +53,7 @@ MonoBehaviour:
           value: 210
           stLuaLoads: 
         stateControllerSubName: 210 ComboFinisher_LV1 Upper
+        doLoadAfterChangeState: 0
         changeTo: 210
         priority: 0
     - rid: 1814087929669091329
@@ -63,6 +64,7 @@ MonoBehaviour:
           value: 220
           stLuaLoads: 
         stateControllerSubName: 220 ComboFinisher_LV2 RoundKick
+        doLoadAfterChangeState: 0
         changeTo: 220
         priority: 0
     - rid: 1814088220477227017
@@ -73,6 +75,7 @@ MonoBehaviour:
           value: 251
           stLuaLoads: 
         stateControllerSubName: 250 Hard1 GKnifeV2_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 251
         priority: 0
     - rid: 1982101323848089607
@@ -83,6 +86,7 @@ MonoBehaviour:
           value: 50
           stLuaLoads: 
         stateControllerSubName: 50 Jump/JumpCancel
+        doLoadAfterChangeState: 0
         changeTo: 50
         priority: 0
     - rid: 4404388664824299527
@@ -93,6 +97,7 @@ MonoBehaviour:
           value: 200
           stLuaLoads: 
         stateControllerSubName: 200 Combo1 Jab_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 200
         priority: 0
     - rid: 4404388664824299528
@@ -103,6 +108,7 @@ MonoBehaviour:
           value: 202
           stLuaLoads: 
         stateControllerSubName: 202 Combo3 Kick_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 202
         priority: 2
     - rid: 4404388664824299529
@@ -113,6 +119,7 @@ MonoBehaviour:
           value: 300
           stLuaLoads: 
         stateControllerSubName: 300 JumpCombo Kick_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 300
         priority: 0
     - rid: 4404388709018370078
@@ -123,6 +130,7 @@ MonoBehaviour:
           value: 250
           stLuaLoads: 
         stateControllerSubName: 250 Hard1 GKnife_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 250
         priority: 1
     - rid: 4404388709018370091
@@ -133,6 +141,7 @@ MonoBehaviour:
           value: 350
           stLuaLoads: 
         stateControllerSubName: 350 JumpHard AKnife_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 350
         priority: 1
     - rid: 4404388799971590145
@@ -143,6 +152,7 @@ MonoBehaviour:
           value: 201
           stLuaLoads: 
         stateControllerSubName: 201 Combo2 Jab_2 Cmd
+        doLoadAfterChangeState: 0
         changeTo: 201
         priority: 1
     - rid: 5331018537749184514
@@ -153,6 +163,7 @@ MonoBehaviour:
           value: 5
           stLuaLoads: 
         stateControllerSubName: 5 Guarding
+        doLoadAfterChangeState: 0
         changeTo: 5
         priority: 0
     - rid: 7982027888260546560
@@ -163,6 +174,7 @@ MonoBehaviour:
           value: 30
           stLuaLoads: 
         stateControllerSubName: 30 Auto_Def_Charge
+        doLoadAfterChangeState: 0
         value: 1
         priority: 0
     - rid: 7982027949219512324
@@ -173,6 +185,7 @@ MonoBehaviour:
           value: 31
           stLuaLoads: 
         stateControllerSubName: 31 Auto_Def_Reset
+        doLoadAfterChangeState: 0
         value: 0
         priority: 0
     - rid: 7982028180311244820
@@ -183,6 +196,7 @@ MonoBehaviour:
           value: 400
           stLuaLoads: 
         stateControllerSubName: 400 Grd_Special
+        doLoadAfterChangeState: 0
         changeTo: 400
         priority: 0
     - rid: 7982028180311244821
@@ -193,6 +207,7 @@ MonoBehaviour:
           value: 405
           stLuaLoads: 
         stateControllerSubName: 405 Air_Special
+        doLoadAfterChangeState: 0
         changeTo: 405
         priority: 0
     - rid: 7982028315445428230
@@ -200,8 +215,9 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 10
+          value: 1010101
           stLuaLoads: 
-        stateControllerSubName: 10 throw
+        stateControllerSubName: 1010101 throw
+        doLoadAfterChangeState: 0
         changeTo: 10
         priority: -1
