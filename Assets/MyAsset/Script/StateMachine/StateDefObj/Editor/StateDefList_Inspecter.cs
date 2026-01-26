@@ -11,6 +11,7 @@ using UnityEditorInternal;
 using Unity.Properties;
 using System.Runtime.Remoting.Contexts;
 using Unity.VisualScripting;
+using Codice.CM.Common.Merge;
 
 [CustomEditor(typeof(StateDefListObject))]
 public class StateDefList_Inspector : Editor
@@ -361,9 +362,12 @@ public class StateContDrawer : PropertyDrawer
     //Debug.Logの記録ではproperty.propertyPath == 
     //stateDefs.Array.data[x].StateList.Array.data[n].. ManagedReference..と表示される.
     //(x -> stateDefの数値, n -> stateの登録配列)
-
+    
+    //DrawDefaultGUIの設定項目を考えるにあたり..
+    //GenericMenuの設定などを考えると..
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        /*
         var propertyCopy = property.serializedObject.FindProperty(property.propertyPath).Copy();  
         var fieldRect = position;
         using ( new EditorGUI.PropertyScope(fieldRect, label, propertyCopy))
@@ -384,15 +388,110 @@ public class StateContDrawer : PropertyDrawer
                         i++;
                     }
                 }
-        };
+            };
         }
         PropertyDrawerUtility.DrawDefaultGUI(position, property, label);
+        */
+        property = property.serializedObject.FindProperty(property.propertyPath);
+        var fieldRect = position;
+        fieldRect.height = EditorGUIUtility.singleLineHeight;
+        var FirstRect = fieldRect;
+        GenericMenu TogglePopupOptions = new GenericMenu();
+        int popupIndex = 0;
+        GenericMenu gMenu = new GenericMenu();
+
+        using ( new EditorGUI.PropertyScope(fieldRect, label, property)) 
+        {
+            if (property.hasChildren) {
+                // 子要素があれば折り畳み表示
+                property.isExpanded = EditorGUI.Foldout (fieldRect, property.isExpanded, label);
+            }
+            else {
+                // 子要素が無ければラベルだけ表示
+                EditorGUI.LabelField(fieldRect, label);
+                return;
+            }
+            fieldRect.y += EditorGUIUtility.singleLineHeight;
+            fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+
+            if (property.isExpanded) {
+
+                using (new EditorGUI.IndentLevelScope()) 
+                {
+                    // 最初の要素を描画
+                    property.NextVisible(true);
+                    var depth = property.depth;
+                    EditorGUI.PropertyField(fieldRect, property, true);
+                    fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                    fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+
+                    int i = 0;
+
+                    // それ以降の要素を描画
+                    while(property.NextVisible(false)) {
+                        
+                        // depthが最初の要素と同じもののみ処理
+                        if (property.depth != depth) {
+                            break;
+                        }
+                        //ここでstParams<?>が取得できる. stParams<?>の ? 内容がわからないので..
+                        object FinderProps = PropertyDrawerUtility.GetTargetObjectOfProperty(property);
+                        Type ta = FinderProps.GetType();
+
+                        //Debug.Log(ta.ToString());
+
+                        EditorGUI.PropertyField(fieldRect, property, true);
+                        //FinderPropsがstParamsで判別できた.. あと、genericTypeDefenitionを登録することで、
+                        //stParamsの内容かどうかを判別できた.
+                        if(ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))
+                        {
+                            var Args = ta.GetGenericArguments();
+                            Type firstType = Args[0];
+                            Debug.Log("stParams Found " + i + ta.ToString() + " Args : " + Args[0].ToString());
+
+                            PropertyInfo prop = firstType.GetProperty("_setHidden");
+                            object value = prop.GetValue(FinderProps);
+
+                            TogglePopupOptions.AddItem
+                            (new GUIContent(ta.ToString() + i), (bool)value, null ,FinderProps);
+                            i++;
+                            /*
+                                if(ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))
+                                {
+                                    Debug.Log(ta.ToString());
+                                    EditorApplication.contextualPropertyMenu += (menu, FinderProps) =>
+                                    {
+                                        menu.AddItem
+                                        (
+                                            new GUIContent(ta.ToString() + i), false, () => {Debug.Log("Clicked " + i);
+                                        });
+                                    };
+                                    i++;
+                                }
+                            */
+                        }
+                        fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                        fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+                    }
+                    
+                    if(i > 0 && EditorGUI.DropdownButton( FirstRect,new GUIContent("Param Visiblity.."),FocusType.Keyboard))
+                    {
+                        TogglePopupOptions.DropDown(FirstRect);
+                    }
+                }
+            }
+        }
         return;
     }
     
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         return PropertyDrawerUtility.GetDefaultPropertyHeight(property, label);
+    }
+
+    public void togglestParamVisiblity(SerializedObject obj)
+    {
+        
     }
 }
 
@@ -446,6 +545,21 @@ public static class PropertyDrawerUtility
                 }
             }
         }
+    }
+
+    
+    public static object GetValue(this SerializedProperty property)
+    {
+        System.Type parentType = property.serializedObject.targetObject.GetType();
+        System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);  
+        return fi.GetValue(property.serializedObject.targetObject);
+    }
+
+    public static void SetValue(this SerializedProperty property,object value)
+    {
+        System.Type parentType = property.serializedObject.targetObject.GetType();
+        System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);//this FieldInfo contains the type.
+        fi.SetValue(property.serializedObject.targetObject, value);
     }
 
     public static float GetDefaultPropertyHeight(SerializedProperty property, GUIContent label)

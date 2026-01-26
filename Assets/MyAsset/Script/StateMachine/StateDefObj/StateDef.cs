@@ -72,6 +72,11 @@ public class stParams<Type>
     //この値が設定されているなら, Inspector上では隠されるようになる.. 右クリックのメニューで解除される.
     public bool _setHidden = true;
 
+    public bool isHidden()
+    {
+        return _setHidden;
+    }
+
     private void toggleHidden()
     {
         _setHidden = !_setHidden;
