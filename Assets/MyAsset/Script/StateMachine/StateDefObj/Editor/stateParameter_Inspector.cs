@@ -99,9 +99,23 @@ public class sParams_Drawer : PropertyDrawer
         //PropertyDrawerUtility.DrawDefaultGUI(position, property, label);
         return;
     }
+    
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return EditorGUIUtility.singleLineHeight * (1 + property.CountInProperty()) * 1.05f;
+        float Lines = 10f; 
+        Lines = EditorGUIUtility.singleLineHeight * (1 + 1) * 1.05f;
+        //Lines = EditorGUIUtility.singleLineHeight * (1 + property.CountInProperty()) * 1.0f;
+        //Lines = PropertyDrawerUtility.GetDefaultPropertyHeight(property,label);
+        bool isHidden = false;
+        SerializedProperty PropHidden = property.FindPropertyRelative("_setHidden");
+        SerializedProperty PropEssential = property.FindPropertyRelative("_setEssential");
+        //Debug.Log(property.propertyPath);
+        if(PropHidden != null && PropEssential != null && 
+        PropHidden.boolValue && !PropEssential.boolValue)
+        {
+            Lines = 0;
+        }
+        return Lines;
     }
 }
 

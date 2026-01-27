@@ -40,37 +40,46 @@ public class stParams<Type>
     //必須等設定されている場合
     public stParams(Type defValue, bool setEssential)
     {
-        defaultValue = defValue;
+        stParamValue = defValue;
         _setEssential = setEssential;
-        _setHidden = false;
+        _MenuName = "Base";
+        _setHidden = true;
+        _setEssential = false;
     }
 
     //デフォルト値が設定されている場合なら初期は隠す.
     public stParams(Type defValue)
     {
-        defaultValue = defValue;
-        _setEssential = false;
+        stParamValue = defValue;
         _setHidden = true;
+        _setEssential = false;
+        _MenuName = "Base";
     }
 
     //何も設定されていない際...
     //はTypeの新規インスタンス作成時になんか不具合起こしそう..でもない？
     public stParams()
     {
-        _setEssential = false;
         _setHidden = true;
+        _setEssential = false;
+        _MenuName = "Base";        
     }
     
-    //この値が設定されているなら, "必ず"隠されない.
-    [SerializeField]
-    bool _setEssential = false;
 
 
     //MUGENのHITDEFをそのまま移植するとInspectorが大変なことになるので、
     //必須値以外は隠せるようにしたい.
 
     //この値が設定されているなら, Inspector上では隠されるようになる.. 右クリックのメニューで解除される.
+    [SerializeField]
     public bool _setHidden = true;
+
+    [SerializeField]
+    //この値が設定されているなら, "必ず"隠されない.
+    public bool _setEssential = true;
+
+    [SerializeField]
+    public string _MenuName = "Base";
 
     public bool isHidden()
     {
@@ -498,7 +507,10 @@ public class scAnimSet : StateController
     //if it is not set, change 0(main) slot. 
     //latter Slot must needs to be Additional.
     [SerializeField]
-    stParams<int> AnimSlot;
+    stParams<int> AnimSlot =
+    new stParams<int>{
+        _setEssential = true
+    };
     
     [SerializeField]
     stParams<Vector2> animParameter; 
@@ -664,6 +676,41 @@ public class scSetVelocity : StateController
 [SCHiearchy("Attack/HitDef")]
 public class scHitDef : StateController
 {
+    [SerializeField]
+    stParams<int> hitID = new stParams<int>
+    {
+        _setEssential = true
+    };
+
+    [SerializeField]
+    stParams<float> Damage = new stParams<float>(0f)
+    {
+        _setEssential = true,
+        _MenuName = "Damages"
+    };
+    
+
+    [SerializeField]
+    stParams<float> GuardDamage = new stParams<float>(0f)
+    {
+        _setEssential = false,
+        _MenuName = "Damages",
+        
+    };
+    
+    [SerializeField]
+    stParams<float> GuardBreakPoint = new stParams<float>(0f)
+    {
+        _setEssential = false,
+        _MenuName = "Damages"
+    };
+    
+    [SerializeField]
+    stParams<float> GuardBreakPoint_OnGuard = new stParams<float>(5f)
+    {
+        _setEssential = false,
+        _MenuName = "Damages"
+    };
 
     [SerializeField]
     stParams<hitDefParams> hitParams;

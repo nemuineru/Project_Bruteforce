@@ -397,7 +397,6 @@ public class StateContDrawer : PropertyDrawer
         fieldRect.height = EditorGUIUtility.singleLineHeight;
         var FirstRect = fieldRect;
         GenericMenu TogglePopupOptions = new GenericMenu();
-        int popupIndex = 0;
         GenericMenu gMenu = new GenericMenu();
 
         using ( new EditorGUI.PropertyScope(fieldRect, label, property)) 
@@ -429,49 +428,80 @@ public class StateContDrawer : PropertyDrawer
 
                     // それ以降の要素を描画
                     while(property.NextVisible(false)) {
-                        
+                        bool propShow = false;
+                        bool propEssential = false;                       
                         // depthが最初の要素と同じもののみ処理
                         if (property.depth != depth) {
                             break;
                         }
                         //ここでstParams<?>が取得できる. stParams<?>の ? 内容がわからないので..
                         object FinderProps = PropertyDrawerUtility.GetTargetObjectOfProperty(property);
-                        Type ta = FinderProps.GetType();
-
-                        //Debug.Log(ta.ToString());
-
-                        EditorGUI.PropertyField(fieldRect, property, true);
-                        //FinderPropsがstParamsで判別できた.. あと、genericTypeDefenitionを登録することで、
-                        //stParamsの内容かどうかを判別できた.
-                        if(ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))
+                        if(FinderProps != null)
                         {
-                            var Args = ta.GetGenericArguments();
-                            Type firstType = Args[0];
-                            Debug.Log("stParams Found " + i + ta.ToString() + " Args : " + Args[0].ToString());
+                            Type ta = FinderProps.GetType();
+                            //Debug.Log(ta.ToString());
+                            //FinderPropsがstParamsで判別できた.. あと、genericTypeDefenitionを登録することで、
+                            //stParamsの内容かどうかを判別できた.
+                            if(ta != null && ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))
+                            {
+                                var Args = ta.GetGenericArguments();
+                                Type firstType = Args[0];
 
-                            PropertyInfo prop = firstType.GetProperty("_setHidden");
-                            object value = prop.GetValue(FinderProps);
+                                propShow = property.FindPropertyRelative("_setHidden").boolValue; 
+                                propEssential = property.FindPropertyRelative("_setEssential").boolValue; 
+                                string MenuFamily = property.FindPropertyRelative("_MenuName").stringValue + "/";
 
-                            TogglePopupOptions.AddItem
-                            (new GUIContent(ta.ToString() + i), (bool)value, null ,FinderProps);
-                            i++;
-                            /*
-                                if(ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))
+                                if(propEssential == false)
                                 {
-                                    Debug.Log(ta.ToString());
-                                    EditorApplication.contextualPropertyMenu += (menu, FinderProps) =>
+                                    TogglePopupOptions.AddItem
+                                    (new GUIContent(MenuFamily + property.displayName.ToString() + string.Format(" [{0}]",i)), 
+                                    !propShow, 
+                                    (propStr) =>
                                     {
-                                        menu.AddItem
-                                        (
-                                            new GUIContent(ta.ToString() + i), false, () => {Debug.Log("Clicked " + i);
-                                        });
-                                    };
+                                        string pStr = propStr as string;
+                                        SerializedObject currnetObj = property.serializedObject;
+                                        SerializedProperty ChangeProps = currnetObj.FindProperty(pStr);
+                                        SerializedProperty sProps = ChangeProps.FindPropertyRelative("_setHidden");
+                                        Debug.Log(pStr);
+                                        if(ChangeProps != null)
+                                        {             
+                                            currnetObj.Update();
+                                            sProps.boolValue = !propShow;
+                                            Debug.Log(sProps.propertyPath);
+                                            currnetObj.ApplyModifiedProperties();
+                                            //ChangeProps.FindPropertyRelative("_setHidden").boolValue = !propShow;
+                                            //ChangeProps.FindPropertyRelative("_setHidden").SetValue(!propShow);
+                                        }
+                                        /*
+                                        Debug.Log("stParams Found " + i + ta.ToString() + " Args : " + Args[0].ToString() + "\n" + 
+                                        "Showing : " + propShow + " is Essential : " + propEssential);
+                                        */
+                                    }, property.propertyPath);
                                     i++;
+                                    /*
+                                        if(ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))
+                                        {
+                                            Debug.Log(ta.ToString());
+                                            EditorApplication.contextualPropertyMenu += (menu, FinderProps) =>
+                                            {
+                                                menu.AddItem
+                                                (
+                                                    new GUIContent(ta.ToString() + i), false, () => {Debug.Log("Clicked " + i);
+                                                });
+                                            };
+                                            i++;
+                                        }
+                                    */
                                 }
-                            */
+                            }
                         }
-                        fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
-                        fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+
+                        if (!propShow || propEssential)
+                        {               
+                            EditorGUI.PropertyField(fieldRect, property, true);     
+                            fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                            fieldRect.y += EditorGUIUtility.standardVerticalSpacing;        
+                        }
                     }
                     
                     if(i > 0 && EditorGUI.DropdownButton( FirstRect,new GUIContent("Param Visiblity.."),FocusType.Keyboard))
@@ -500,6 +530,14 @@ public class StateContDrawer : PropertyDrawer
 //https://light11.hatenadiary.com/entry/2019/05/13/215814
 public static class PropertyDrawerUtility
 {
+    public static IEnumerable<Type> GetSubClasses(Type type)
+    {
+        var t = Assembly.GetAssembly(type)
+            .GetTypes()
+            .Where(m => m.IsSubclassOf(type) && !m.IsAbstract);
+        return t;
+    }
+
     public static void DrawDefaultGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         property = property.serializedObject.FindProperty(property.propertyPath);
