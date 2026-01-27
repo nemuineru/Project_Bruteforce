@@ -706,7 +706,7 @@ public class scHitDef : StateController
     };
     
     [SerializeField]
-    stParams<float> GuardBreakPoint_OnGuard = new stParams<float>(5f)
+    stParams<float> GuardBreakPoint_OnGuard = new stParams<float>(0f)
     {
         _setEssential = false,
         _MenuName = "Damages"

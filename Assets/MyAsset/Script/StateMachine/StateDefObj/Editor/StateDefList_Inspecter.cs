@@ -462,12 +462,12 @@ public class StateContDrawer : PropertyDrawer
                                         SerializedObject currnetObj = property.serializedObject;
                                         SerializedProperty ChangeProps = currnetObj.FindProperty(pStr);
                                         SerializedProperty sProps = ChangeProps.FindPropertyRelative("_setHidden");
-                                        Debug.Log(pStr);
+                                        //Debug.Log(pStr);
                                         if(ChangeProps != null)
                                         {             
                                             currnetObj.Update();
                                             sProps.boolValue = !propShow;
-                                            Debug.Log(sProps.propertyPath);
+                                            //Debug.Log(sProps.propertyPath);
                                             currnetObj.ApplyModifiedProperties();
                                             //ChangeProps.FindPropertyRelative("_setHidden").boolValue = !propShow;
                                             //ChangeProps.FindPropertyRelative("_setHidden").SetValue(!propShow);
