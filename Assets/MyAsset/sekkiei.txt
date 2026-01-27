@@ -21,3 +21,11 @@
 
 >>statedefAsset内 single-stateの右クリックメニュー登録..
 DrawDefaultGUIの内容を流用..。
+Typeの生成は出来たが、それをそのまま流用して指定Paramのキャストに使用することが不可能なので,
+Reflection技術(Type.MakeGenericType(Type[]) or IEnumerable<Type> GetSubClasses..)を流用 - 
+https://qiita.com/Egliss/items/4dc40c2d752e76e1d9c0,
+https://qiita.com/dolls/items/c7b3cf2520baae158a3a,
+https://qiita.com/TsuyoshiUshio@github/items/b77b465a21a9e8d84239,
+https://qiita.com/Binary_number/items/4c459216dd4b760c1719 を参考に.
+
+入手できた値のsetHiddenをsingel-state-contextMenuに登録させ、どうにかする..
