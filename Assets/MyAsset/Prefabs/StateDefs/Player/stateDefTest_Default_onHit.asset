@@ -125,6 +125,7 @@ MonoBehaviour:
           value: 2
           stLuaLoads: 
         stateControllerSubName: On Death
+        doLoadAfterChangeState: 0
         changeTo: 5300
         priority: 0
     - rid: 1982100752660430871
@@ -135,6 +136,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Set To Blowout
+        doLoadAfterChangeState: 0
         changeTo: 5100
         priority: 0
     - rid: 1982101199356952584
@@ -145,6 +147,7 @@ MonoBehaviour:
           value: 2
           stLuaLoads: 
         stateControllerSubName: send 5300 if damage is beyond
+        doLoadAfterChangeState: 0
         changeTo: 5100
         priority: 0
     - rid: 3579423253479817227
@@ -155,18 +158,40 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: default
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388549547524096
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -175,6 +200,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Recov
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 4404388569968803840
@@ -185,18 +211,40 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: DamageAnim_Def
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 5000
           useID: -1
           stLuaLoads: 
-        animParameter:
+        AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 4404388575372902408
       type: {class: scColorChange, ns: , asm: Assembly-CSharp}
       data:
@@ -205,6 +253,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Orange Enough
+        doLoadAfterChangeState: 0
         color: {r: 1, g: 0.6214301, b: 0.2216981, a: 1}
     - rid: 4404388598234480643
       type: {class: scColorChange, ns: , asm: Assembly-CSharp}
@@ -214,6 +263,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: 
+        doLoadAfterChangeState: 0
         color: {r: 0.5577163, g: 0.77340966, b: 0.7830189, a: 1}
     - rid: 4404388637674569735
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
@@ -223,18 +273,40 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: DamageAnim_Blow
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 5050
           useID: -1
           stLuaLoads: 
-        animParameter:
+        AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512321
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -243,18 +315,40 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: DamageAnim_BlowDown
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 5100
           useID: -1
           stLuaLoads: 
-        animParameter:
+        AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512322
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -263,18 +357,40 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: DamageAnim_Recover
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 5101
           useID: -1
           stLuaLoads: 
-        animParameter:
+        AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512326
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -283,6 +399,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Transit to Idle
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 7982027949219512328
@@ -293,6 +410,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Transit to Recover
+        doLoadAfterChangeState: 0
         changeTo: 5101
         priority: 0
     - rid: 7982027949219512329
@@ -303,18 +421,40 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: 
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
     - rid: 7982027949219512330
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -323,5 +463,6 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: 
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0

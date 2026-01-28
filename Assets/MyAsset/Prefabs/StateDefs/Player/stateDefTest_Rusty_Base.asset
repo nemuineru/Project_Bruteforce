@@ -119,25 +119,33 @@ MonoBehaviour:
         stateControllerSubName: AnimSetter
         doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         isAdditional:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -153,19 +161,25 @@ MonoBehaviour:
         stateControllerSubName: AnimParamChanger
         doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: 0
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0}
           useID: 0
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -199,25 +213,33 @@ MonoBehaviour:
         stateControllerSubName: JumpAnim
         doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 50
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         isAdditional:
+          _setHidden: 0
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -244,25 +266,33 @@ MonoBehaviour:
         stateControllerSubName: Animset_Slot_1
         doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 5
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 1
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         isAdditional:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -289,13 +319,17 @@ MonoBehaviour:
         stateControllerSubName: AnimEnd
         doLoadAfterChangeState: 1
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 1
           useID: -1
           stLuaLoads: 
         fadeTime:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -310,25 +344,33 @@ MonoBehaviour:
         stateControllerSubName: Animset_winningPose
         doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 180
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         isAdditional:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1

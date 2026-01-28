@@ -29,6 +29,7 @@ MonoBehaviour:
     - rid: 3579423095655497736
     - rid: 1982101230649868288
     - rid: 4404388529659445248
+    - rid: 5331019034393313356
     Dir: 
     setCtrl: 0
   - StateDefName: Combo2 Jab_Second
@@ -71,7 +72,7 @@ MonoBehaviour:
     preStateVerdictName: StateDef_210_ID
     ParamLoadName: 
     stateType: 0
-    moveType: 0
+    moveType: 49
     physType: 0
     StateList:
     - rid: 1814087954197118983
@@ -86,8 +87,8 @@ MonoBehaviour:
     preStateVerdictName: StateDef_220_ID
     ParamLoadName: 
     stateType: 0
-    moveType: 0
-    physType: 0
+    moveType: 540
+    physType: 540
     StateList:
     - rid: 1814087975545077760
     - rid: 1814087975545077761
@@ -133,8 +134,8 @@ MonoBehaviour:
     ScriptName: 
     preStateVerdictName: QueuedStateID_Axe
     ParamLoadName: Accel_Start
-    stateType: 0
-    moveType: 0
+    stateType: 52
+    moveType: 51
     physType: 0
     StateList:
     - rid: 7982028148908752899
@@ -168,8 +169,8 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_300_ID_JumpKick
     ParamLoadName: LuaOutput
-    stateType: 0
-    moveType: 0
+    stateType: 48
+    moveType: 68
     physType: 0
     StateList:
     - rid: 3579423095655497732
@@ -186,8 +187,8 @@ MonoBehaviour:
     preStateVerdictName: StateDef_350_AirKnife
     ParamLoadName: null
     stateType: 0
-    moveType: 0
-    physType: 0
+    moveType: 80
+    physType: 70
     StateList:
     - rid: 4404388709018370089
     - rid: 4404388709018370090
@@ -220,10 +221,11 @@ MonoBehaviour:
     ScriptName: 
     preStateVerdictName: 
     ParamLoadName: 
-    stateType: 0
-    moveType: 0
+    stateType: 67
+    moveType: 68
     physType: 0
-    StateList: []
+    StateList:
+    - rid: 5331019034393313656
     Dir: 
     setCtrl: 0
   references:
@@ -237,6 +239,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Change to init
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 1814087954197118983
@@ -247,22 +250,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: 210 Upper Anim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 210
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -274,22 +292,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: 220 On Init Anim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 220
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -301,6 +334,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Change to Init
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 1814088090491813888
@@ -311,9 +345,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: SwingSnd
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 5f517a604b10e3741912ba289ee7d56f, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -326,9 +363,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: OneShotsound
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: d6f014560f923f848b300e2899fb4d6d, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -341,22 +381,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Anims
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 251
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -368,20 +423,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: Hitdef
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 10
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 0, y: 4, z: 2}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 7, y: 6}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
             ChangeState_Enemy: 5050
             maxEntityHits: 1
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -393,9 +502,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: Snd
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: d6f014560f923f848b300e2899fb4d6d, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -408,6 +520,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Knife_End
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 1814088220477227012
@@ -418,6 +531,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: KnifeV2_End
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 1982101096022933504
@@ -428,8 +542,11 @@ MonoBehaviour:
           value: 3
           stLuaLoads: 
         stateControllerSubName: Accels
+        doLoadAfterChangeState: 0
         vels:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
           useID: 0
@@ -443,9 +560,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: whoosh1
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 1138d641ce050584190279ce15310706, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -458,9 +578,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: whoosh2
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 1138d641ce050584190279ce15310706, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -473,9 +596,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: whooshF
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 95768d7a054056c4faf1607e55843824, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -488,9 +614,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: knife1
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 60b4d2b19538feb4bb472fa4649535fc, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -503,9 +632,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: swooshsnd
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 902bff6a8c7aaf640a805954d4c00fda, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -518,9 +650,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: heavSwoosh
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 0910dbd1d178e924aa8826fd0c74346a, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -533,9 +668,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: shootsound
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: 1138d641ce050584190279ce15310706, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -548,9 +686,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: knifefast
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: eb9e83790a6812d47a66dbb922a7143e, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -563,6 +704,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Change To init
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 1
     - rid: 3579423065411158016
@@ -573,22 +715,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: AnimSet_Jab
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 0
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 200
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 0
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 0
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 0
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -600,22 +757,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: AnimSet RHandJab
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 201
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -627,6 +799,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: SO RED
+        doLoadAfterChangeState: 0
         color: {r: 1, g: 0.6273585, b: 0.6273585, a: 1}
     - rid: 3579423095655497736
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
@@ -636,6 +809,7 @@ MonoBehaviour:
           value: 3
           stLuaLoads: 
         stateControllerSubName: SelfState Change
+        doLoadAfterChangeState: 0
         changeTo: 1
         priority: 0
     - rid: 4404388529659445248
@@ -646,20 +820,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: JabHit
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 0
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 0
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 20
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 1.5, y: 0, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 1, y: 8}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -671,20 +899,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: JabHit
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 20
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 1.8, y: 0.7, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 3, y: 9}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -696,22 +978,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Air Kick Anims
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 300
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -723,20 +1020,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: Air_KickHit
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 9
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 3.1, y: 0.3, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 7, y: 4}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 6
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -748,22 +1099,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Knifes Anim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 250
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -775,20 +1141,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: Damages
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 80
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 1, y: 2, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 3, y: 10}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: 763c35982e678ac4bbc44144c42c505f, type: 3}
             ChangeState_Enemy: 5000
             maxEntityHits: 2
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -800,20 +1220,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: Damage
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 65
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 4, y: 0, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 12, y: 25}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SAL
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -825,22 +1299,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: AirKnifeAnim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 350
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -852,6 +1341,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Init
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 4404388799971590146
@@ -862,22 +1352,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: AnimSet_Combo_Finisher Kick
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 202
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -889,6 +1394,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Change to Init
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 4404388799971590148
@@ -899,20 +1405,74 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: HitDef_ Kicker
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 30
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 3, y: 4, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 10, y: 14}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             ChangeState_Enemy: 5050
             maxEntityHits: 8
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -924,13 +1484,137 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: SetVel on First
+        doLoadAfterChangeState: 0
         vels:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
           useID: 0
           stLuaLoads: 
         priority: 0
+    - rid: 5331019034393313356
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 5331019034393313656
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue:
+            hitID: 0
+            Damage: 0
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
+            velset: {x: 0, y: 0, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
+            hitStopTime: {x: 0, y: 0}
+            guard_hitStopTime: {x: 0, y: 0}
+            HitEff: {fileID: 0}
+            ChangeState_Enemy: 5000
+            maxEntityHits: 1
+            fallTime: 0
+            enemyRefsPlayerNum: 0
+            ChangeState_Player: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IA
+            AnimType: 
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
     - rid: 7557642759318274048
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -939,22 +1623,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: init anim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 100
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -966,9 +1665,12 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Burst Anim
+        doLoadAfterChangeState: 0
         audio: {fileID: 0}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -981,20 +1683,74 @@ MonoBehaviour:
           value: 2
           stLuaLoads: 
         stateControllerSubName: Hits
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 25
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 4, y: 1, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 7, y: 7}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             ChangeState_Enemy: 5050
             maxEntityHits: 8
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 88130000ba130000bb130000
           useID: -1
           stLuaLoads: 
@@ -1006,6 +1762,7 @@ MonoBehaviour:
           value: 10
           stLuaLoads: 
         stateControllerSubName: Change To Inits
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 7557642759318274052
@@ -1016,6 +1773,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Set Energy Drain for 25
+        doLoadAfterChangeState: 0
         value: -25
         priority: 0
     - rid: 7557642759318274113
@@ -1026,8 +1784,11 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: setVel
+        doLoadAfterChangeState: 0
         vels:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
           useID: 0
@@ -1041,9 +1802,12 @@ MonoBehaviour:
           value: 100
           stLuaLoads: 
         stateControllerSubName: playShot
+        doLoadAfterChangeState: 0
         audio: {fileID: 8300000, guid: dce5cb2d1a1063c4887673091463b147, type: 3}
         priority:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
@@ -1056,22 +1820,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: Axe Anim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 6
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -1083,6 +1862,7 @@ MonoBehaviour:
           value: 2
           stLuaLoads: 
         stateControllerSubName: Change state at end anim
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 7982028148908752901
@@ -1093,6 +1873,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: ResetCharge
+        doLoadAfterChangeState: 0
         value: 0
         priority: 0
     - rid: 7982028148908752902
@@ -1103,20 +1884,74 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Damages
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 70
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 0.8, y: 7, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: d21f96766665f5b4591b1c012ae59e31, type: 3}
             ChangeState_Enemy: 5050
             maxEntityHits: 3
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
@@ -1128,22 +1963,37 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: HammerAnim
+        doLoadAfterChangeState: 0
         changeAnimID:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 7
           useID: -1
           stLuaLoads: 
         AnimSlot:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
@@ -1155,6 +2005,7 @@ MonoBehaviour:
           value: 0
           stLuaLoads: 
         stateControllerSubName: reset Charge
+        doLoadAfterChangeState: 0
         value: 0
         priority: 0
     - rid: 7982028148908752906
@@ -1165,6 +2016,7 @@ MonoBehaviour:
           value: 2
           stLuaLoads: 
         stateControllerSubName: End at end of anims
+        doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
     - rid: 7982028148908752907
@@ -1175,20 +2027,74 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Damage
-        hitParams:
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Damage:
+          _setHidden: 1
+          _setEssential: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardDamage:
+          _setHidden: 1
           _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        GuardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _MenuName: Base
           loadTypes: 0
           stParamValue:
+            hitID: 0
             Damage: 100
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            GuardOnKill: 0
             velset: {x: 0, y: 0, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
+            guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             ChangeState_Enemy: 5100
             maxEntityHits: 5
+            fallTime: 0
             enemyRefsPlayerNum: 0
             ChangeState_Player: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            AnimType: 
             HitExcludeList: 
           useID: -1
           stLuaLoads: 

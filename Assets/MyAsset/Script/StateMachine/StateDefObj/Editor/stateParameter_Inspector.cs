@@ -28,6 +28,7 @@ public class sParams_Drawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         SerializedProperty constantModel = property.FindPropertyRelative("stParamValue");
+        SerializedProperty isReadable = property.FindPropertyRelative("_isReadable");
         SerializedProperty loadTypes = property.FindPropertyRelative("loadTypes");
         SerializedProperty toggleLoadLua = property.FindPropertyRelative("useID");
         SerializedProperty luaLoadString = property.FindPropertyRelative("stLuaLoads");
@@ -50,48 +51,56 @@ public class sParams_Drawer : PropertyDrawer
         GUIStyle labStyle = GUIStyle.none;
 
         //PopUp調整
-
+        
+        int TogglerForEditable = 120;
         popUpPos.x += labStyle.CalcSize(label).x + 12f;
-        popUpPos.width -= labStyle.CalcSize(label).x + 12f;
+        popUpPos.width -= labStyle.CalcSize(label).x + 12f + TogglerForEditable;
+        Rect togglerPos = popUpPos;
+        togglerPos.x += popUpPos.width - 8f; 
+        
 
         loadTypes.enumValueIndex = EditorGUI.Popup(popUpPos, loadTypes.enumValueIndex, options);
+        isReadable.boolValue = EditorGUI.ToggleLeft(togglerPos,"IsValued",isReadable.boolValue);
 
         //選択後のドロワーの高さなどを表記.
 
         Rect DrawerPos = position;
         DrawerPos.y = popUpPos.y + EditorGUIUtility.singleLineHeight + 2f;
-        switch (loadTypes.enumValueIndex)
+        if(isReadable.boolValue == true)
         {
-            // ConstantValueの使用時.
-            case 0:
-                {
-                    GUIContent lab1 = new GUIContent(constantModel.propertyType.ToString());
-                    //propertyDrawerUtilityが使えないためこのまま..
-                    //PropertyDrawerUtility.DrawDefaultGUI(DrawerPos, constantModel, label);
-                    //labelも同様に表記.
-                    EditorGUI.PropertyField(DrawerPos, constantModel, lab1, true);
-                }
-                break;
-            // Conditionの使用時.
-            case 1:
-                {
-                    GUIContent lab1 = new GUIContent("Lua Output ID");
-                    //statedef中のLuaから呼び出すfunction名を登録する. 
-                    toggleLoadLua.intValue = EditorGUI.IntField(DrawerPos, lab1, toggleLoadLua.intValue);
-                }
-                break;
-            // Calclationの使用時.
-            case 2:
-                {
-                    GUIContent lab1 = new GUIContent("Lua function Name");
-                    //statedef中のLuaから呼び出すfunction名を登録する.          
-                    //現状だとエラーが発生するため　改善必須.          
-                    luaLoadString.stringValue = EditorGUI.TextField(DrawerPos, lab1, luaLoadString.stringValue);
-                }
-                break;
-            default:
-                break;
+            switch (loadTypes.enumValueIndex)
+            {
+                // ConstantValueの使用時.
+                case 0:
+                    {
+                        GUIContent lab1 = new GUIContent(constantModel.propertyType.ToString());
+                        //propertyDrawerUtilityが使えないためこのまま..
+                        //PropertyDrawerUtility.DrawDefaultGUI(DrawerPos, constantModel, label);
+                        //labelも同様に表記.
+                        EditorGUI.PropertyField(DrawerPos, constantModel, lab1, true);
+                    }
+                    break;
+                // Conditionの使用時.
+                case 1:
+                    {
+                        GUIContent lab1 = new GUIContent("Lua Output ID");
+                        //statedef中のLuaから呼び出すfunction名を登録する. 
+                        toggleLoadLua.intValue = EditorGUI.IntField(DrawerPos, lab1, toggleLoadLua.intValue);
+                    }
+                    break;
+                // Calclationの使用時.
+                case 2:
+                    {
+                        GUIContent lab1 = new GUIContent("Lua function Name");
+                        //statedef中のLuaから呼び出すfunction名を登録する.          
+                        //現状だとエラーが発生するため　改善必須.          
+                        luaLoadString.stringValue = EditorGUI.TextField(DrawerPos, lab1, luaLoadString.stringValue);
+                    }
+                    break;
+                default:
+                    break;
 
+            }
         }
 
         //position.y -= EditorGUIUtility.singleLineHeight;
@@ -103,18 +112,24 @@ public class sParams_Drawer : PropertyDrawer
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         float Lines = 10f; 
-        Lines = EditorGUIUtility.singleLineHeight * (1 + 1) * 1.05f;
+        int muls = 2;
         //Lines = EditorGUIUtility.singleLineHeight * (1 + property.CountInProperty()) * 1.0f;
         //Lines = PropertyDrawerUtility.GetDefaultPropertyHeight(property,label);
         bool isHidden = false;
         SerializedProperty PropHidden = property.FindPropertyRelative("_setHidden");
         SerializedProperty PropEssential = property.FindPropertyRelative("_setEssential");
+        SerializedProperty isReadable = property.FindPropertyRelative("_isReadable");
         //Debug.Log(property.propertyPath);
         if(PropHidden != null && PropEssential != null && 
         PropHidden.boolValue && !PropEssential.boolValue)
         {
-            Lines = 0;
+            muls = 0;
         }
+        else if(isReadable.boolValue == false)
+        {
+            muls = 1;
+        }
+        Lines = EditorGUIUtility.singleLineHeight * muls * 1.05f;
         return Lines;
     }
 }

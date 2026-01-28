@@ -1,5 +1,6 @@
 
 
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,17 @@ public class stParams<Type>
     //デフォルト値の設定.
     //stParamsを設定する際は必ず初期化を行うとする.
     internal Type defaultValue;
+
+
+    //必須等設定されている場合
+    public stParams(Type defValue, bool setEssential, bool setReadable)
+    {
+        stParamValue = defValue;
+        _setEssential = setEssential;
+        _isReadable = setReadable;
+        _MenuName = "Base";
+        _setHidden = true;
+    }
 
     //必須等設定されている場合
     public stParams(Type defValue, bool setEssential)
@@ -78,6 +90,11 @@ public class stParams<Type>
     //この値が設定されているなら, "必ず"隠されない.
     public bool _setEssential = true;
 
+    [SerializeField]
+    //この値がfalse設定されているなら, 返却値はnullを返す. 
+    public bool _isReadable = true;
+
+    //inspectorで隠すかどうかの設定項目のメニュー位置.
     [SerializeField]
     public string _MenuName = "Base";
 
@@ -161,7 +178,15 @@ public class stParams<Type>
                 break;
 
         }
-        return retValue;
+        if(_isReadable)
+        {
+            return retValue;
+        }
+        else
+        //this will returns null I guess..
+        {
+            return default(Type);
+        }
     }
 
     //LuaEnvで実行されたLuaEnvの登録値を読み出して、それをvalueSetに実行.
@@ -676,42 +701,146 @@ public class scSetVelocity : StateController
 [SCHiearchy("Attack/HitDef")]
 public class scHitDef : StateController
 {
+    //GethitDefを検索する際に登録されるID
     [SerializeField]
     stParams<int> hitID = new stParams<int>
     {
         _setEssential = true
     };
 
+    //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
     [SerializeField]
-    stParams<float> Damage = new stParams<float>(0f)
+    stParams<float> damage = new stParams<float>(0f,true,true)
     {
         _setEssential = true,
         _MenuName = "Damages"
     };
     
 
+    //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
     [SerializeField]
-    stParams<float> GuardDamage = new stParams<float>(0f)
+    stParams<string> hitPhysFlag = new stParams<string>("SA",true,true)
+    {
+        _setEssential = true,
+        _MenuName = "Damages"
+    };    
+
+    //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
+    [SerializeField]
+    stParams<string> hitMoveFlag = new stParams<string>("IA",true,true)
+    {
+        _setEssential = true,
+        _MenuName = "Damages"
+    };
+
+    [SerializeField]
+    stParams<float> guardDamage = new stParams<float>(0f,false,false)
     {
         _setEssential = false,
         _MenuName = "Damages",
-        
+
     };
-    
+
     [SerializeField]
-    stParams<float> GuardBreakPoint = new stParams<float>(0f)
-    {
-        _setEssential = false,
-        _MenuName = "Damages"
-    };
-    
-    [SerializeField]
-    stParams<float> GuardBreakPoint_OnGuard = new stParams<float>(0f)
+    stParams<float> guardBreakPoint = new stParams<float>(0f,false,false)
     {
         _setEssential = false,
         _MenuName = "Damages"
     };
 
+    [SerializeField]
+    stParams<float> guardBreakPoint_OnGuard = new stParams<float>(0f,false,false)
+    {
+        _setEssential = false,
+        _MenuName = "Damages"
+    };
+
+    //基本ダメージ・ガード時の削りで倒せるか？
+    [SerializeField]
+    stParams<bool> Kill = new stParams<bool>(true,false,false)
+    {
+        _MenuName = "Damages"
+    };
+
+    [SerializeField]
+    stParams<bool> guardOnKill = new stParams<bool>(false,false,false)
+    {
+        _MenuName = "Damages"
+    };
+
+    //ノックバック速度設定.
+    [SerializeField]
+    stParams<Vector3> hitVelSet = new stParams<Vector3>(Vector3.zero, false, true)
+    { 
+        _MenuName = "Physics"
+    };
+
+    [SerializeField]
+    stParams<Vector3> guardhitVelSet = new stParams<Vector3>(Vector3.zero, false, false)
+    { 
+        _MenuName = "Physics"
+    };
+
+    //プレイヤーノックバック速度設定.
+    [SerializeField]
+    stParams<Vector3> player_hitVelSet = new stParams<Vector3>(Vector3.zero, false, false)
+    { 
+        _MenuName = "Physics"
+    };
+
+    [SerializeField]
+    stParams<Vector3> player_GuardhitVelSet = new stParams<Vector3>(Vector3.zero, false, false)
+    { 
+        _MenuName = "Physics"
+    };
+
+    
+    [SerializeField]
+    stParams<string> hitAnimType = new stParams<string>("", false, false)
+    { 
+        _MenuName = "Animation"
+    };
+
+    //HitStopに関しては x -> 当てた対象, y -> 当てた本人 の時間として Vector2で管理する.
+    [SerializeField]
+    stParams<Vector2> hitStopTime = new stParams<Vector2>(Vector2.zero, false, false)
+    {
+        _MenuName = "Animation"
+    }; 
+    
+    [SerializeField]
+    stParams<Vector2> guardHitStopTime = new stParams<Vector2>(Vector2.zero, false, false)
+    {
+        _MenuName = "Animation"
+    }; 
+
+    [SerializeField]
+    stParams<GameObject> hitEffect = new stParams<GameObject>(null,false,false)
+    {
+        _MenuName = "Animation"
+    };
+    
+    [SerializeField]
+    stParams<GameObject> guardhitEffect = new stParams<GameObject>(null,false,false)
+    {
+        _MenuName = "Animation"
+    };
+
+    //投げとか、ステート飛ばしを実行する際に呼び出し.
+    //MenuNameを考え中.. 敵を拘束するのでController
+    [SerializeField]
+    stParams<int> ChangeState_EnemyStateID = new stParams<int>(-1,false,false)
+    {
+        _MenuName = "Controller"
+    };
+
+    [SerializeField]
+    stParams<int> ChangeState_PlayerStateID = new stParams<int>(-1,false,false)
+    {
+        _MenuName = "Controller"
+    };
+
+    //旧Param. これはReferenceのため取っておく..
     [SerializeField]
     stParams<hitDefParams> hitParams;
 

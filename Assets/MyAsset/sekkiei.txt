@@ -29,3 +29,4 @@ https://qiita.com/TsuyoshiUshio@github/items/b77b465a21a9e8d84239,
 https://qiita.com/Binary_number/items/4c459216dd4b760c1719 を参考に.
 
 入手できた値のsetHiddenをsingel-state-contextMenuに登録させ、どうにかする..
+どうにかした！
