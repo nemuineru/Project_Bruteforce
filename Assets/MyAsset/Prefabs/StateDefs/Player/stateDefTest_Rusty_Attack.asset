@@ -225,7 +225,7 @@ MonoBehaviour:
     moveType: 68
     physType: 0
     StateList:
-    - rid: 5331019034393313656
+    - rid: 5331019055452913782
     Dir: 
     setCtrl: 0
   references:
@@ -254,6 +254,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 210
@@ -262,6 +263,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -270,6 +272,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -278,6 +281,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -296,6 +300,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 220
@@ -304,6 +309,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -312,6 +318,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -320,6 +327,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -350,6 +358,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -368,6 +377,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -385,6 +395,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 251
@@ -393,6 +404,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -401,6 +413,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -409,6 +422,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -427,46 +441,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -483,6 +665,7 @@ MonoBehaviour:
             hitStopTime: {x: 7, y: 6}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5050
             maxEntityHits: 1
             fallTime: 0
@@ -507,6 +690,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -546,6 +730,7 @@ MonoBehaviour:
         vels:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
@@ -565,6 +750,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -583,6 +769,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -601,6 +788,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -619,6 +807,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -637,6 +826,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -655,6 +845,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -673,6 +864,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -691,6 +883,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -719,6 +912,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 0
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 200
@@ -727,6 +921,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 0
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -735,6 +930,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 0
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -743,6 +939,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 0
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -761,6 +958,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 201
@@ -769,6 +967,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -777,6 +976,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -785,6 +985,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -824,46 +1025,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
-          _setHidden: 0
-          _setEssential: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        guardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
-          _setHidden: 0
+          _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -880,6 +1249,7 @@ MonoBehaviour:
             hitStopTime: {x: 1, y: 8}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
             fallTime: 0
@@ -903,46 +1273,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -959,6 +1497,7 @@ MonoBehaviour:
             hitStopTime: {x: 3, y: 9}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
             fallTime: 0
@@ -982,6 +1521,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 300
@@ -990,6 +1530,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -998,6 +1539,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1006,6 +1548,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1024,46 +1567,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1080,6 +1791,7 @@ MonoBehaviour:
             hitStopTime: {x: 7, y: 4}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 6
             fallTime: 0
@@ -1103,6 +1815,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 250
@@ -1111,6 +1824,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1119,6 +1833,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1127,6 +1842,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1145,46 +1861,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1201,6 +2085,7 @@ MonoBehaviour:
             hitStopTime: {x: 3, y: 10}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: 763c35982e678ac4bbc44144c42c505f, type: 3}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 2
             fallTime: 0
@@ -1224,46 +2109,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1280,6 +2333,7 @@ MonoBehaviour:
             hitStopTime: {x: 12, y: 25}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
             fallTime: 0
@@ -1303,6 +2357,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 350
@@ -1311,6 +2366,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1319,6 +2375,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1327,6 +2384,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1356,6 +2414,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 202
@@ -1364,6 +2423,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1372,6 +2432,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1380,6 +2441,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1409,46 +2471,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1465,6 +2695,7 @@ MonoBehaviour:
             hitStopTime: {x: 10, y: 14}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5050
             maxEntityHits: 8
             fallTime: 0
@@ -1488,6 +2719,7 @@ MonoBehaviour:
         vels:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
@@ -1506,6 +2738,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1514,6 +2747,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1522,6 +2756,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1530,13 +2765,14 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
-    - rid: 5331019034393313656
+    - rid: 5331019055452913782
       type: {class: scHitDef, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -1548,46 +2784,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1604,6 +3008,7 @@ MonoBehaviour:
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5000
             maxEntityHits: 1
             fallTime: 0
@@ -1627,6 +3032,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 100
@@ -1635,6 +3041,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1643,6 +3050,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1651,6 +3059,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1670,6 +3079,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1687,46 +3097,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1743,6 +3321,7 @@ MonoBehaviour:
             hitStopTime: {x: 7, y: 7}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5050
             maxEntityHits: 8
             fallTime: 0
@@ -1788,6 +3367,7 @@ MonoBehaviour:
         vels:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
@@ -1807,6 +3387,7 @@ MonoBehaviour:
         priority:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1824,6 +3405,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 6
@@ -1832,6 +3414,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1840,6 +3423,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1848,6 +3432,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1888,46 +3473,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -1944,6 +3697,7 @@ MonoBehaviour:
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: d21f96766665f5b4591b1c012ae59e31, type: 3}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5050
             maxEntityHits: 3
             fallTime: 0
@@ -1967,6 +3721,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 7
@@ -1975,6 +3730,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -1983,6 +3739,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -1991,6 +3748,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -2031,46 +3789,214 @@ MonoBehaviour:
         hitID:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        Damage:
+        damage:
           _setHidden: 1
           _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardDamage:
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IA
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint:
+        guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        GuardBreakPoint_OnGuard:
+        guardBreakPoint_OnGuard:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: KnockBack
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        ChangeState_EnemyStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_PlayerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        refsPlayerStateIDonHit:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue:
@@ -2087,6 +4013,7 @@ MonoBehaviour:
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
             ChangeState_Enemy: 5100
             maxEntityHits: 5
             fallTime: 0

@@ -442,6 +442,9 @@ public class hitDefParams
     public Vector2 guard_hitStopTime;
     [SerializeField]
     public GameObject HitEff;
+    
+    [SerializeField]
+    public GameObject GuardHitEff;
     //当てた敵のステート変更情報(負の数以下で変更しない)
     public int ChangeState_Enemy = 5000;
 
@@ -449,7 +452,7 @@ public class hitDefParams
     public int maxEntityHits = 1;
 
     //ダウン設定.
-    public int fallTime = 0;
+    public float fallTime = 0;
 
     //敵がプレイヤーのステート名を参照するか？
     public bool enemyRefsPlayerNum = false;

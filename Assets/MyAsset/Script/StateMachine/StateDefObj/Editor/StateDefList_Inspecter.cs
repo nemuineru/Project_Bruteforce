@@ -452,7 +452,7 @@ public class StateContDrawer : PropertyDrawer
                                 string MenuFamily = property.FindPropertyRelative("_MenuName").stringValue + "/";
 
                                 if(propEssential == false)
-                                {
+                                {                    
                                     TogglePopupOptions.AddItem
                                     (new GUIContent(MenuFamily + property.displayName.ToString() + string.Format(" [{0}]",i)), 
                                     !propShow, 
@@ -476,7 +476,35 @@ public class StateContDrawer : PropertyDrawer
                                         Debug.Log("stParams Found " + i + ta.ToString() + " Args : " + Args[0].ToString() + "\n" + 
                                         "Showing : " + propShow + " is Essential : " + propEssential);
                                         */
-                                    }, property.propertyPath);
+                                    }, property.propertyPath);        
+                                    //表示されているヤツは別口として..                                     
+                                    if(!propShow)
+                                    {
+                                        TogglePopupOptions.AddItem
+                                        (new GUIContent(property.displayName.ToString() + string.Format(" [{0}]",i)), 
+                                        !propShow, 
+                                        (propStr) =>
+                                        {
+                                            string pStr = propStr as string;
+                                            SerializedObject currnetObj = property.serializedObject;
+                                            SerializedProperty ChangeProps = currnetObj.FindProperty(pStr);
+                                            SerializedProperty sProps = ChangeProps.FindPropertyRelative("_setHidden");
+                                            //Debug.Log(pStr);
+                                            if(ChangeProps != null)
+                                            {             
+                                                currnetObj.Update();
+                                                sProps.boolValue = !propShow;
+                                                //Debug.Log(sProps.propertyPath);
+                                                currnetObj.ApplyModifiedProperties();
+                                                //ChangeProps.FindPropertyRelative("_setHidden").boolValue = !propShow;
+                                                //ChangeProps.FindPropertyRelative("_setHidden").SetValue(!propShow);
+                                            }
+                                            /*
+                                            Debug.Log("stParams Found " + i + ta.ToString() + " Args : " + Args[0].ToString() + "\n" + 
+                                            "Showing : " + propShow + " is Essential : " + propEssential);
+                                            */
+                                        }, property.propertyPath);
+                                    }
                                     i++;
                                     /*
                                         if(ta.IsGenericType && ta.GetGenericTypeDefinition() == typeof(stParams<>))

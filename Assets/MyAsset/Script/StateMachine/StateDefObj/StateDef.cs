@@ -839,6 +839,24 @@ public class scHitDef : StateController
     {
         _MenuName = "Controller"
     };
+    
+    [SerializeField]
+    stParams<bool> refsPlayerStateIDonHit = new stParams<bool>(false,false,false)
+    {
+        _MenuName = "Controller"
+    };
+
+    [SerializeField]
+    stParams<int> maxEntityHits = new stParams<int>(1,false,false)
+    {
+        _MenuName = "Controller"
+    };
+    
+    [SerializeField]
+    stParams<float> fallTime = new stParams<float>(1,false,false)
+    {
+        _MenuName = "Controller"
+    };
 
     //旧Param. これはReferenceのため取っておく..
     [SerializeField]
@@ -847,6 +865,40 @@ public class scHitDef : StateController
 
     internal override void OnExecute(Entity entity)
     {
+        //on execute, register this monstrous parameters..
+        hitDefParams HitDef = new hitDefParams()
+        {
+            hitID = hitID.valueGet(loadParams, entity), //essential!
+            //damages
+            Damage = damage.valueGet(loadParams, entity), //essential!
+            GuardDamage = guardDamage.valueGet(loadParams, entity),
+            GuardBreakPoint = guardBreakPoint.valueGet(loadParams, entity),
+            GuardBreakPoint_OnGuard = guardBreakPoint_OnGuard.valueGet(loadParams, entity),
+            GuardOnKill = guardOnKill.valueGet(loadParams,entity),
+
+            //damages, for hitting
+            HitMoveFlag = hitMoveFlag.valueGet(loadParams,entity), //essential!
+            HitPhysFlag = hitPhysFlag.valueGet(loadParams,entity), //essential!
+
+            //hit vect set
+            velset = hitVelSet.valueGet(loadParams,entity),
+            guard_velset = guardhitVelSet.valueGet(loadParams,entity),
+            pl_velset = player_hitVelSet.valueGet(loadParams,entity),
+            pl_guard_velset = player_GuardhitVelSet.valueGet(loadParams,entity),
+            //Animation types
+            AnimType = hitAnimType.valueGet(loadParams,entity),
+            hitStopTime = hitStopTime.valueGet(loadParams,entity),
+            guard_hitStopTime = guardHitStopTime.valueGet(loadParams,entity),
+            HitEff = hitEffect.valueGet(loadParams,entity),
+            GuardHitEff = guardhitEffect.valueGet(loadParams,entity),
+            //Controller for state executions
+            ChangeState_Enemy = ChangeState_EnemyStateID.valueGet(loadParams,entity),
+            ChangeState_Player = ChangeState_PlayerStateID.valueGet(loadParams,entity),
+            enemyRefsPlayerNum = refsPlayerStateIDonHit.valueGet(loadParams, entity),
+            maxEntityHits = maxEntityHits.valueGet(loadParams,entity),
+            fallTime = fallTime.valueGet(loadParams,entity)
+        };
+
         if(gameState.self.ProvokeHitDef_Entity(entity, hitParams.valueGet(loadParams, entity)))
         {
             //HitCheckを行う.
