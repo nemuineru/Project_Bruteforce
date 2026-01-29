@@ -448,13 +448,14 @@ public class StateContDrawer : PropertyDrawer
                                 Type firstType = Args[0];
 
                                 propShow = property.FindPropertyRelative("_setHidden").boolValue; 
+                                bool propisReadable = property.FindPropertyRelative("_isReadable").boolValue; 
                                 propEssential = property.FindPropertyRelative("_setEssential").boolValue; 
                                 string MenuFamily = property.FindPropertyRelative("_MenuName").stringValue + "/";
 
                                 if(propEssential == false)
                                 {                    
                                     TogglePopupOptions.AddItem
-                                    (new GUIContent(MenuFamily + property.displayName.ToString() + string.Format(" [{0}]",i)), 
+                                    (new GUIContent(MenuFamily + (propisReadable ? "*" : "") +  property.displayName.ToString() + string.Format(" [{0}]",i)), 
                                     !propShow, 
                                     (propStr) =>
                                     {
@@ -481,7 +482,7 @@ public class StateContDrawer : PropertyDrawer
                                     if(!propShow)
                                     {
                                         TogglePopupOptions.AddItem
-                                        (new GUIContent(property.displayName.ToString() + string.Format(" [{0}]",i)), 
+                                        (new GUIContent((propisReadable ? "*" : "") +property.displayName.ToString() + string.Format(" [{0}]",i)), 
                                         !propShow, 
                                         (propStr) =>
                                         {

@@ -727,7 +727,7 @@ public class scHitDef : StateController
 
     //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
     [SerializeField]
-    stParams<string> hitMoveFlag = new stParams<string>("IA",true,true)
+    stParams<string> hitMoveFlag = new stParams<string>("IAH",true,true)
     {
         _setEssential = true,
         _MenuName = "Damages"
@@ -803,7 +803,7 @@ public class scHitDef : StateController
 
     //HitStopに関しては x -> 当てた対象, y -> 当てた本人 の時間として Vector2で管理する.
     [SerializeField]
-    stParams<Vector2> hitStopTime = new stParams<Vector2>(Vector2.zero, false, false)
+    stParams<Vector2> hitStopTime = new stParams<Vector2>(Vector2.zero, true, true)
     {
         _MenuName = "Animation"
     }; 
@@ -858,6 +858,12 @@ public class scHitDef : StateController
         _MenuName = "Controller"
     };
 
+    [SerializeField]
+    stParams<string> StateIDExcluder = new stParams<string>("",false,false)
+    {
+        _MenuName = "Controller"
+    };
+
     //旧Param. これはReferenceのため取っておく..
     [SerializeField]
     stParams<hitDefParams> hitParams;
@@ -865,41 +871,73 @@ public class scHitDef : StateController
 
     internal override void OnExecute(Entity entity)
     {
+        List<int> excluder = new List<int>();
+        string exc = StateIDExcluder.valueGet(loadParams,entity);
+        if(exc != null && exc.Length > 0)
+        {
+            foreach(string strs in exc.Split(","))
+            {
+                if(int.TryParse(strs, out int resl))
+                {
+                excluder.Add(resl);
+                }
+            }
+        }
         //on execute, register this monstrous parameters..
         hitDefParams HitDef = new hitDefParams()
         {
             hitID = hitID.valueGet(loadParams, entity), //essential!
             //damages
             Damage = damage.valueGet(loadParams, entity), //essential!
-            GuardDamage = guardDamage.valueGet(loadParams, entity),
-            GuardBreakPoint = guardBreakPoint.valueGet(loadParams, entity),
-            GuardBreakPoint_OnGuard = guardBreakPoint_OnGuard.valueGet(loadParams, entity),
-            GuardOnKill = guardOnKill.valueGet(loadParams,entity),
+            GuardDamage = 
+            guardDamage._isReadable ? guardDamage.valueGet(loadParams, entity) : 0,
+            GuardBreakPoint = 
+            guardBreakPoint._isReadable ? guardBreakPoint.valueGet(loadParams, entity) : 0,
+            GuardBreakPoint_OnGuard = 
+            guardBreakPoint._isReadable ? guardBreakPoint_OnGuard.valueGet(loadParams, entity) : 0,
+            
+            Kill = Kill._isReadable ? Kill.valueGet(loadParams,entity) : true,
+            GuardOnKill = guardOnKill._isReadable ? guardOnKill.valueGet(loadParams,entity) : false,
 
             //damages, for hitting
             HitMoveFlag = hitMoveFlag.valueGet(loadParams,entity), //essential!
             HitPhysFlag = hitPhysFlag.valueGet(loadParams,entity), //essential!
 
             //hit vect set
-            velset = hitVelSet.valueGet(loadParams,entity),
-            guard_velset = guardhitVelSet.valueGet(loadParams,entity),
-            pl_velset = player_hitVelSet.valueGet(loadParams,entity),
-            pl_guard_velset = player_GuardhitVelSet.valueGet(loadParams,entity),
+            velset = 
+            hitVelSet._isReadable ? hitVelSet.valueGet(loadParams,entity) : Vector3.zero,
+            guard_velset = 
+            guardhitVelSet._isReadable ? guardhitVelSet.valueGet(loadParams,entity) : Vector3.zero,
+            pl_velset = 
+            player_hitVelSet._isReadable ? player_hitVelSet.valueGet(loadParams,entity) : Vector3.zero,
+            pl_guard_velset = 
+            player_GuardhitVelSet._isReadable ? player_GuardhitVelSet.valueGet(loadParams,entity) : Vector3.zero,
+
             //Animation types
-            AnimType = hitAnimType.valueGet(loadParams,entity),
-            hitStopTime = hitStopTime.valueGet(loadParams,entity),
-            guard_hitStopTime = guardHitStopTime.valueGet(loadParams,entity),
-            HitEff = hitEffect.valueGet(loadParams,entity),
-            GuardHitEff = guardhitEffect.valueGet(loadParams,entity),
+            AnimType = 
+            hitAnimType._isReadable ? hitAnimType.valueGet(loadParams,entity) : "L",
+            hitStopTime = 
+            hitStopTime._isReadable ? hitStopTime.valueGet(loadParams,entity) : Vector2.zero,
+            guard_hitStopTime = 
+            guardHitStopTime._isReadable ? guardHitStopTime.valueGet(loadParams,entity) : Vector2.zero,
+            HitEff = hitEffect._isReadable ? hitEffect.valueGet(loadParams,entity) : null,
+            GuardHitEff = 
+            guardhitEffect._isReadable ? guardhitEffect.valueGet(loadParams,entity) : null,
             //Controller for state executions
-            ChangeState_Enemy = ChangeState_EnemyStateID.valueGet(loadParams,entity),
-            ChangeState_Player = ChangeState_PlayerStateID.valueGet(loadParams,entity),
-            enemyRefsPlayerNum = refsPlayerStateIDonHit.valueGet(loadParams, entity),
-            maxEntityHits = maxEntityHits.valueGet(loadParams,entity),
-            fallTime = fallTime.valueGet(loadParams,entity)
+            ChangeState_Enemy = 
+            ChangeState_EnemyStateID._isReadable ? ChangeState_EnemyStateID.valueGet(loadParams,entity) : -1,
+            ChangeState_Player = 
+            ChangeState_PlayerStateID._isReadable ? ChangeState_PlayerStateID.valueGet(loadParams,entity) : -1,
+            enemyRefsPlayerNum =
+            refsPlayerStateIDonHit._isReadable ? refsPlayerStateIDonHit.valueGet(loadParams, entity) : false,
+
+            maxEntityHits = 
+            maxEntityHits._isReadable ? maxEntityHits.valueGet(loadParams,entity) : 1,
+            fallTime = fallTime._isReadable ? fallTime.valueGet(loadParams,entity) : 0,
+            HitExcludeList = excluder
         };
 
-        if(gameState.self.ProvokeHitDef_Entity(entity, hitParams.valueGet(loadParams, entity)))
+        if(gameState.self.ProvokeHitDef_Entity(entity, HitDef))
         {
             //HitCheckを行う.
             entity.attrs.isStateHit = entity.attrs.isStateHit > 0 ? entity.attrs.isStateHit : 1;

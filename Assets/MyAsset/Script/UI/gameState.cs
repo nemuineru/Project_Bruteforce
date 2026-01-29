@@ -177,6 +177,7 @@ public class gameState : MonoBehaviour
                 //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
                 if (f == true && isContactable)
                 {
+                    Debug.Log("HitID" + useParam.hitID);
                     ret = true;
                     hitDefApply(e, calledEntity, useParam, HitPt);
                     //当てた分キャラ指定の値が減少..
@@ -231,7 +232,7 @@ public class gameState : MonoBehaviour
 
         //一先ず、プレースホルダーとして入れる
         //stateTimeをリセット.
-        beatenEntity.CurrentStateID = calledEParam.ChangeState_Enemy;
+        beatenEntity.CurrentStateID = calledEParam.ReturnStateNum(beatenEntity);
         beatenEntity.stateTime = 0;
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
         //設定されたEntityはselfStateが読み出されない限り読み出す.
@@ -253,6 +254,7 @@ public class gameState : MonoBehaviour
         //playerのchangestateが0以上なら変更.
         if (calledEParam.ChangeState_Player > -1)
         {
+            Debug.Log("PlayerState Changed");
             calledEntity.isStateChanged = true;
             calledEntity.CurrentStateID = calledEParam.ChangeState_Player;
         }
@@ -421,6 +423,7 @@ public class hitDefParams
     public float GuardBreakPoint;
     public float GuardBreakPoint_OnGuard;
 
+    public bool Kill;
     public bool GuardOnKill;
 
     //敵の移動
