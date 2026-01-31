@@ -2615,7 +2615,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 1.8, y: 1.9, z: 0}
+          stParamValue: {x: 1.8, y: 2, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -2660,7 +2660,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 10, y: 10}
+          stParamValue: {x: 7, y: 10}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -3059,7 +3059,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 0
+          value: 10
           stLuaLoads: 
         stateControllerSubName: UpperElems HitDef
         doLoadAfterChangeState: 0
@@ -3145,12 +3145,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitVelSet:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Physics
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 0.9, y: 4, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -3253,7 +3253,7 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 0
           _MenuName: Controller
@@ -3262,12 +3262,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         fallTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 8
           useID: -1
           stLuaLoads: 
         StateIDExcluder:
