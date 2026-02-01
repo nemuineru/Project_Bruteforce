@@ -20,19 +20,34 @@ public class HintDialog_On_Inspect : MonoBehaviour
     OneshotDialog dialogCurrentShowing;
 
     [SerializeField]
+    AudioSource InspectSound;
+
+    [SerializeField]
     string text;
 
     //if trigger is entered : 
     void OnTriggerEnter()
     {
-        
+        dialogCurrentShowing = prepDialog();
     }
     
+    //MainUI is called : 
     OneshotDialog prepDialog()
     {
+        if(InspectSound != null)
+        {
+            InspectSound.Play();
+        }
+        if(dialogCurrentShowing != null)
+        {
+            Destroy(dialogCurrentShowing.gameObject);
+        }
         if(dialogPrefab != null)
         {
-            return null;
+            OneshotDialog retPrefab = Instantiate(dialogPrefab).GetComponent<OneshotDialog>();
+            retPrefab.transform.SetParent(GameObject.FindGameObjectWithTag("UI").transform,false);
+            retPrefab.textBase = text;
+            return retPrefab;
         }
         else
         {

@@ -496,45 +496,51 @@ public class hitDefParams
             //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
             //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
             //if文祭りじゃ.
-            
+            int refID = refEntity.CurrentStateID;
             //基本として、LightHit用のStateDefは入っていないと問題外.
-            //Fall hit
-            if(fallTime > 0 && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
+            //Fall hit - FallTimeが0以上、またはFall中に攻撃を加えたとき
+            if(((fallTime > 0 ) || (5050 <= refID && refID <= 5059)) 
+            && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
             }
-            //Up hit
+            //Up hit - 5000 to 5009
             else if(AnimType.Contains('U'))
             {
                 HitType = 0;
             }
-            //Down hit
+            //Down hit - 5010 to 5019
             if(AnimType.Contains('D') && refEntity.loadedDefs.Any(a => a.StateDefID == 5010))
             {
                 HitType = 10;
             }
-            //Crouch hit
+            //Crouch hit - 5020 to 5029
             else if(AnimType.Contains('C') && refEntity.loadedDefs.Any(a => a.StateDefID == 5020))
             {
                 HitType = 20;
             }
-            //Air hit
+            //Air hit - 5030 to 5039
             else if(AnimType.Contains('A') && refEntity.loadedDefs.Any(a => a.StateDefID == 5030))
             {
                 HitType = 30;
             }
+            //Takedown Hit
+            else if(AnimType.Contains('T') && refEntity.loadedDefs.Any(a => a.StateDefID == 5040))
+            {
+                HitType = 40;
+            }
 
-            //Light Hit
+            //Light Hit - On Light Hit, 0 is called
             if(AnimType.Contains('L'))
             {
                 DamageType = 0;
             }
-            //Middle hit
+            //Middle hit as + 1
             if(AnimType.Contains('M') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 1))
             {
                 DamageType = 1;
             }
-            //Heavy hit
+            //Heavy hit as + 1
             if(AnimType.Contains('H') && refEntity.loadedDefs.Any(a => a.StateDefID == retID + HitType + 2))
             {
                 DamageType = 2;
