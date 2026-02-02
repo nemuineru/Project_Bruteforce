@@ -30,3 +30,9 @@ https://qiita.com/Binary_number/items/4c459216dd4b760c1719 を参考に.
 
 入手できた値のsetHiddenをsingel-state-contextMenuに登録させ、どうにかする..
 どうにかした！
+
+
+>> 作業用シーンの作成・初期セットアップ用に色々詰め込んだコンポーネント一式の準備..
+ - MainEntity(プレイヤーキャラ)
+ - MainCinemachine(プレイヤー追随カメラ)
+ - メインUI(体力、シーン推移等)
