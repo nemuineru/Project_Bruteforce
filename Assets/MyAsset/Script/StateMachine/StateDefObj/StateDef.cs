@@ -640,9 +640,12 @@ public class scAnimParentSet : StateController
 [SCHiearchy("Physics/Move_Simple")]
 public class scMove : StateController
 {
+    //velocityで設定してたので、これを別のやつにする..
+    //ハマったとき、抜けなくなるので..
     internal override void OnExecute(Entity entity)
     {
-        entity.rigid.velocity = entity.wishingVect * 100.0f * Time.fixedDeltaTime;
+        //entity.rigid.velocity = entity.wishingVect * 100.0f * Time.fixedDeltaTime;
+        entity.rigid.AddForce(entity.wishingVect * 10.0f, ForceMode.Force);
     }
 
     public override string typeGet()

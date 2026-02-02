@@ -54,6 +54,7 @@ public class EWaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //ウェーブ変化時にエンティティオブジェクト生成.
         if (isWaveChanged == false)
         {
@@ -127,6 +128,7 @@ public class EWaveManager : MonoBehaviour
             currentSpawnSec += Time.fixedDeltaTime;
         }
         LevelUI.text = currentLevel != 0 ? "Wave " + (currentLevel).ToString() + " / " + MaxLevel.ToString() : "Practice";
+        */
     }
 }
 

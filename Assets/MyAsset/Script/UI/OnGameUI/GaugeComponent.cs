@@ -29,7 +29,10 @@ public class GaugeComponent : MonoBehaviour
     //onUpdate, Set those gauges to what value.
     void Update()
     {        
-        setValues();
+        if(valueEntity != null)
+        {
+            setValues();
+        }
         if(ShowText != null)
         {
             ShowText.text = guiText;

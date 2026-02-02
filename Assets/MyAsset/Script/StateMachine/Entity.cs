@@ -165,7 +165,6 @@ public class Entity : MonoBehaviour
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
         mat = renderers[0].material;
         animator = GetComponent<Animator>();
-
         
         mainAnimancer = gameObject.AddComponent<AnimancerComponent>();
         mainAnimancer.Animator = animator;
@@ -201,12 +200,7 @@ public class Entity : MonoBehaviour
             BTree = gameObject.AddComponent<BehaviorTree>();
             BTree.ExternalBehavior = LoadedBehavior;
         }
-
-        if (vCam != null)
-        {
-            transposer = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-        }
-        rigid.useGravity = false;
+        rigid.useGravity = true;
         selfSource = GetComponent<AudioSource>();
     }
 
@@ -232,18 +226,28 @@ public class Entity : MonoBehaviour
     void Start()
     {
         //プレイヤーとか指定されたタグに設定されていないなら、HP用のUI表示.
-        if (gameObject.tag != "Player" && gameState.self.HPUI != null)
+        if (gameObject.tag != "Player" && gameState.self.EnemyHPUI != null)
         {
-            StatusBar_Minimal min = Instantiate(gameState.self.HPUI).GetComponent<StatusBar_Minimal>();
+            StatusBar_Minimal min = Instantiate(gameState.self.EnemyHPUI).GetComponent<StatusBar_Minimal>();
             min.SetEntity(this);
             min.transform.parent = transform;
             min.transform.localPosition = Vector3.up;
         }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(gameObject.tag == "Player" && vCam == null)
+        {
+            vCam = GameObject.FindGameObjectWithTag("Virtual_MainCamera").GetComponent<CinemachineVirtualCamera>();
+        }
+        if (vCam != null && transposer == null)
+        {
+            Debug.Log("Finding Transposer");
+            transposer = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        }
         //check each cmds. and buffers it.
         foreach (var cmds in cmdList)
         {
@@ -397,7 +401,8 @@ public class Entity : MonoBehaviour
                 //BOLD tagging gamechanger system that I hate to implement.
                 if (gameObject.tag == "Player")
                 {
-                    gameState.self.gDesc = gameState.GameStateDesc.GameOver;
+                    //
+                    //gameState.self.gDesc = gameState.GameStateDesc.GameOver;
                 }
             }
             attrs.alive = false;
@@ -462,11 +467,13 @@ public class Entity : MonoBehaviour
     void onGameFinished()
     {
         //プレイヤーなら、ゲームクリア時にこのステートに戻す.
-        //180はMUGENでいうと勝利ポーズ.
+        //180はMUGENでいうと勝利ポーズ..
+        /*
         if (gameObject.tag == "Player" && gameState.self.gDesc == gameState.GameStateDesc.Finished)
         {
             CurrentStateID = 180;
         }
+        */
 
     }
 
@@ -480,8 +487,9 @@ public class Entity : MonoBehaviour
                                                              //Debug.Log(entityInput.commandBuffer[0].MoveAxis);
 
         //Vcamが設定されているなら、Camera設定に従いfwを設定する.
-        if (vCam != null)
+        if (vCam != null && transposer != null)
         {
+            Debug.Log("Transpose Camera setting..");
             targetTo_fw = Vector3.ProjectOnPlane(vCam.transform.forward, Vector3.up).normalized;
             transposer.m_XAxis.Value += look.x * 3.0f;
         }
@@ -566,7 +574,7 @@ public class Entity : MonoBehaviour
         if (physicsType != _PhysicsType.N)
         {
             //set gravity.
-            rigid.velocity += Physics.gravity * Time.fixedDeltaTime;
+            //rigid.velocity += Physics.gravity * Time.fixedDeltaTime;
         }
         bool isPaused = (HitPauseTime > 0);
         if (isPaused)
@@ -654,7 +662,7 @@ public class Entity : MonoBehaviour
             //アニメーションとかを切断して、消し飛ばす.
             if (destroTime_Current >= destroTime_Max)
             {
-                gameState.self.AddKillValue();
+                //gameState.self.AddKillValue();
                 Destroy(gameObject);
             }
         }

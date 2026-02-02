@@ -21,6 +21,5 @@ public class _placeHolderKOCountUP : MonoBehaviour
     {
         CountNow += Time.fixedDeltaTime;
         CountNow = Mathf.Min(CountNow,CountUpMaxNum);
-        tms.text = Mathf.CeilToInt(gameState.self.KillValue * Mathf.Pow(CountNow/CountUpMaxNum,0.65f)).ToString();
     }
 }

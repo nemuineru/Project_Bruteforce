@@ -8,43 +8,37 @@ using System.Linq;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class gameState : MonoBehaviour
 {
     //操作対象のEntity.
     internal Entity Player;
 
-    [SerializeField]
-    TMP_Text WaveBigName;
-
     //全部のスクリプトからアクセスするように.
     //
     static public gameState self;
 
     //敵のHP管理バー.
-    public GameObject HPUI;
+    public GameObject EnemyHPUI;
 
     public GameObject defaultEff;
     public GameObject defaultDeathEff;
 
-    [SerializeField]
-    TMP_Text KillValue_Text;
-    internal int KillValue = 0;
 
     public AudioSource inGameAuds;
 
-    //ゲーム前かゲーム中かそうでないか
-    internal enum GameStateDesc
-    {
-        PreGame,
-        InGame,
-        GameOver,
-        Finished,
-        PauseMenu
-    }
-    [SerializeField]
-    internal GameStateDesc gDesc = GameStateDesc.InGame;
+    public Status_MainUI MainGUI;
+    public GameObject Player_Instantiate;
 
+    public CinemachineVirtualCamera Player_Vcam;
+
+    public List<Entity> entityList;
+
+    public Transform InitSpawnPos;
+
+
+    internal float elapsedTime = 0f;
     void Awake()
     {
         if (self == null)
@@ -55,102 +49,29 @@ public class gameState : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Player = GameObject.FindWithTag("Player").GetComponent<Entity>();
+        Player = Instantiate(Player_Instantiate,InitSpawnPos.position,Quaternion.identity).GetComponent<Entity>();
+        MainGUI.SetComponent(Player);
+
+        GameObject objs = Instantiate(MainGUI.gameObject);
+        GameObject GUI_Top = GameObject.FindGameObjectWithTag("UI");
+        if(Player_Vcam != null)
+        {
+            CinemachineVirtualCamera cams = Instantiate(Player_Vcam);
+            cams.LookAt = Player.transform;
+            cams.Follow = Player.transform;
+        }
+        objs.transform.SetParent(GUI_Top.transform, false);
     }
 
-    //ゲームスタート・ゲームオーバーの時
-    bool isGameStartUIShown = false;
-    bool isGameOverUIShown = false;
-
-    float GameStartBy = 3.0f;
-
-    public float elapsedTime = 0;
     void Update()
     {
+        elapsedTime += Time.fixedDeltaTime;
         entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
         .OrderBy(t => !t.attrs.alive)
         .ThenBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
         .ToList();
-        GameDescApply();
     }
 
-    void GameDescApply()
-    {
-        switch (gDesc)
-        {
-            case GameStateDesc.PreGame:
-                {
-                    PreGameUI.SetActive(true);
-                    GameStartBy -= Time.deltaTime;
-                    if (GameStartBy < 0)
-                    {
-                        gDesc = GameStateDesc.InGame;
-                    }
-                    break;
-                }
-            case GameStateDesc.InGame:
-                {
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
-                    GameOverCams.enabled = false;
-                    pauseGameUI.SetActive(false);
-                    PreGameUI.SetActive(false);
-                    InGameUI.SetActive(true);
-                    if(inGameAuds != null)
-                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);
-                    elapsedTime += Time.deltaTime;
-                    break;
-                }
-            case GameStateDesc.GameOver:
-                {
-                    InGameUI.SetActive(false);
-                    pauseGameUI.SetActive(false);
-                    GameOverCams.enabled = true;
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.001f, 0.025f);
-                    if (!isGameOverUIShown)
-                    {
-                        GameOverUI.SetActive(true);
-                        isGameOverUIShown = true;
-                    }
-                    if(inGameAuds != null)
-                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.001f, 0.025f);
-                    break;
-                }
-            case GameStateDesc.Finished:
-                {
-                    InGameUI.SetActive(false);
-                    pauseGameUI.SetActive(false);
-                    FinishedCams.enabled = true;
-                    if (!isGameOverUIShown)
-                    {
-                        FinishedUI.SetActive(true);
-                        isGameOverUIShown = true;
-                    }
-                    break;
-                }
-            case GameStateDesc.PauseMenu:
-                {
-                    InGameUI.SetActive(false);
-                    pauseGameUI.SetActive(true);
-                    GameOverCams.enabled = true;
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.00f, 0.025f);
-                    if(inGameAuds != null)
-                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.00f, 0.025f);
-                    break;
-                }
-        }
-
-    }
-
-    public GameObject PreGameUI;
-    public GameObject InGameUI;
-    public GameObject GameOverUI;
-    public GameObject pauseGameUI;
-    public GameObject FinishedUI;
-
-    public Cinemachine.CinemachineVirtualCamera GameOverCams;
-    public Cinemachine.CinemachineVirtualCamera FinishedCams;
-
-    public List<Entity> entityList;
 
     //HitDefを発火する際のイベント
     public bool ProvokeHitDef_Entity(Entity calledEntity, hitDefParams hitDefParams)
@@ -289,12 +210,6 @@ public class gameState : MonoBehaviour
         ((calledEParam.HitEff != null ? calledEParam.HitEff : defaultEff), hitContactPoint, Quaternion.identity);
     }
 
-    int returnHitStateDefID()
-    {
-
-        return 0;
-    }
-
     void DamageApply(Entity beatenEntity, Vector3 HitVect, hitDefParams calledEParam, float atkParams)
     {
         //SetSpeed
@@ -327,12 +242,6 @@ public class gameState : MonoBehaviour
         }
     }
 
-    internal void AddKillValue()
-    {
-        KillValue++;
-        KillValue_Text.text = KillValue.ToString();
-    }
-
     bool checkHit(string checkState, Entity checkEntity)
     {
         bool ret = false;
@@ -352,54 +261,6 @@ public class gameState : MonoBehaviour
             remTime += Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Lerp(0.0f, 1f, Mathf.Min(1f, MathF.Pow(remTime / remTimeMax, 2.0f)));
             yield return 0;
-        }
-    }
-
-    public IEnumerator ShowWaveNames(string Names)
-    {
-        if (WaveBigName != null)
-        {
-            WaveBigName.enabled = true;
-            float remTimeMax = 3f;
-            float remTime = remTimeMax;
-            while (remTime > 0)
-            {
-                int WaveNameIndexes = Mathf.Max(0, Mathf.CeilToInt((Names.Length) * ((remTimeMax - remTime) / (remTimeMax * 0.5f))));
-                WaveNameIndexes = Mathf.Min(WaveNameIndexes, Names.Length);
-                WaveBigName.text = Names.Substring(0, WaveNameIndexes);
-                remTime -= Time.fixedDeltaTime;
-                yield return 0;
-                if (remTime <= 0.8f)
-                {
-                    WaveBigName.enabled = !WaveBigName.enabled;
-                }
-            }
-            WaveBigName.enabled = false;
-        }
-    }
-
-
-    //ゲームダンジョンに間に合わせるためのポーズメニュー設定.
-    //後で消そう..
-    public void TogglePauseMode()
-    {
-        if (gDesc == GameStateDesc.InGame)
-        {
-            gDesc = GameStateDesc.PauseMenu;
-        }
-        else if (gDesc == GameStateDesc.PauseMenu)
-        { 
-            gDesc = GameStateDesc.InGame;
-        }
-    }
-
-    //ゲームダンジョンに間に合わせるためのメニュー呼び出し設定.
-    //後で消そう..
-    public void ReturnToMainMenu()
-    {
-        if (gDesc != GameStateDesc.InGame && gDesc != GameStateDesc.PreGame)
-        {
-            SceneManager.LoadScene("Title");
         }
     }
 }
