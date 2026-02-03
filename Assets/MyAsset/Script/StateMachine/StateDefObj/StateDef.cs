@@ -644,8 +644,33 @@ public class scMove : StateController
     //ハマったとき、抜けなくなるので..
     internal override void OnExecute(Entity entity)
     {
+        float speed = 5f;
+        float forceMean = 40f;
         //entity.rigid.velocity = entity.wishingVect * 100.0f * Time.fixedDeltaTime;
-        entity.rigid.AddForce(entity.wishingVect * 10.0f, ForceMode.Force);
+        Vector3 wishVect = entity.GroundNormal != Vector3.zero ? Vector3.ProjectOnPlane(entity.wishingVect, entity.GroundNormal) : entity.wishingVect;
+
+        //POnPlaneが0になるのだけは防ぐ
+        Vector3 CurrentVect = Vector3.ProjectOnPlane(entity.rigid.velocity + entity.transform.forward * 0.0001f , entity.GroundNormal);
+        Vector3 RightLeftVect = (Quaternion.AngleAxis(90f, entity.GroundNormal) * CurrentVect);
+        
+        //このLimiterが1以上あるなら、その速度を加算しない、と考える..
+        //プレイヤーの一定速度値を超えた際は1以上を与える..
+        float ForwardMean = 
+        Vector3.Dot(wishVect, CurrentVect.normalized);
+        float RightMean = 
+        Vector3.Dot(wishVect, RightLeftVect.normalized);
+
+        //wishingVectのSpeedMaxを考慮したMean値
+        Vector3 FWMean = CurrentVect.normalized * ForwardMean * (1.001f - Mathf.Clamp((CurrentVect.magnitude * Mathf.Sign(ForwardMean)) / speed, -Mathf.Infinity, 1f )) * forceMean;
+        Vector3 RGMean = RightLeftVect.normalized * RightMean * forceMean; //(1.001f - Mathf.Clamp((RightLeftVect.magnitude * Mathf.Sign(RightMean)) / speed, -Mathf.Infinity , 1f)) * 
+        
+
+        //ひとまず、CurrentVect値の速度を演算
+        //速度以上のwishVectが加算された場合はごく僅かな値を加算する
+        //角速度も考えるかぁ..
+        Vector3 ManipFW = FWMean + RGMean;
+        entity.rigid.AddForce(ManipFW, ForceMode.Force);
+        //entity.rigid.AddTorque(Vector3.up * rightMean / forceMean ,ForceMode.Force);
     }
 
     public override string typeGet()

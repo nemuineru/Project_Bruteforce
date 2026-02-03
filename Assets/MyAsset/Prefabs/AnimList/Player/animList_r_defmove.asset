@@ -95,6 +95,26 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
+    ID: 55
+    Name: Falling
+    animClip:
+    - Clip: {fileID: 7400000, guid: 8e45b996a6f40ce4a8cd1e40b1436583, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.1
+    blendOutTime: 0
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
     ID: 5000
     Name: Damaged
     animClip:

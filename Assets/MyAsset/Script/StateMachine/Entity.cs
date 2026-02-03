@@ -154,6 +154,8 @@ public class Entity : MonoBehaviour
 
     Vector3 pausedVel = Vector3.zero;
 
+    internal Vector3 GroundNormal = Vector3.zero;
+
     //CMDList for command buffering, and checks @ .mjs file
     [SerializeField]
     internal List<entityInputManager.entityInput_Buffers> cmdList;
@@ -312,6 +314,8 @@ public class Entity : MonoBehaviour
         //Physics.Raycast(ray, out hitInfo, Mathf.Max(0.01f, -rigid.velocity.y * Time.fixedDeltaTime), LayerMask.GetMask("Terrain"));
 
         //get Capsule Normals
+        float minimumLength = 0.001f;
+        float down_Add = 0.03f;
         Vector3 norm =
             new Vector3
             (capCol.direction == 0 ? 1 : 0,
@@ -319,26 +323,48 @@ public class Entity : MonoBehaviour
             capCol.direction == 2 ? 1 : 0);
 
         //カプセル一端の組み合わせ
+        //pos1が上側. pos2が下側.
         Vector3 pos_1 =
-            transform.position + Vector3.up * 0.001f + transform.rotation * (capCol.center + norm * (capCol.height / 2f - capCol.radius));
+            transform.position + Vector3.up * minimumLength + transform.rotation * (capCol.center + norm * (capCol.height / 2f - capCol.radius));
         Vector3 pos_2 =
-            transform.position + Vector3.up * 0.001f + transform.rotation * (capCol.center - norm * (capCol.height / 2f - capCol.radius));
+            transform.position + Vector3.up * (minimumLength + down_Add) + transform.rotation * (capCol.center - norm * (capCol.height / 2f - capCol.radius));
+        float MaxLength = Mathf.Max(0.1f, -rigid.velocity.y * Time.fixedDeltaTime);
 
         //カプセルレイ.
         bool isCapsuleHit =
             Physics.CapsuleCast
             (pos_1, pos_2,
-            capCol.radius, Vector3.down,
-            out hitInfo, Mathf.Max(0.005f, -rigid.velocity.y * Time.fixedDeltaTime), LayerMask.GetMask("Terrain"));
+            capCol.radius - minimumLength, Vector3.down,
+            out hitInfo, MaxLength , LayerMask.GetMask("Terrain"));
 
         //Debug.Log(isCapsuleHit + " - capsuleSet?");
 
         //キャラと地形の当たり判定表示
         //clssDef.DrawCapsuleGizmo_Tool(pos_1,pos_2,capCol.radius,Color.cyan);
 
-
         isOnGround = (hitInfo.collider != null);
+        //なにもぶつからないと平面方向上を値として考える
+        GroundNormal = (hitInfo.collider != null) ? hitInfo.normal : Vector3.up;
         setDestroy();
+        /*        
+        //カプセル一端の組み合わせ
+        //pos1が上側. pos2が下側.
+        Vector3 pos_1 =
+            transform.position + Vector3.up * minimal + transform.rotation * (capCol.center + norm * (capCol.height / 2f - capCol.radius));
+        Vector3 pos_2 =
+            transform.position + Vector3.up * minimal + transform.rotation * (capCol.center - norm * (capCol.height / 2f - capCol.radius));
+        
+        float RayDist = Mathf.Max(detections, -rigid.velocity.y * Time.fixedDeltaTime);
+
+        //カプセルレイ.
+        bool isCapsuleHit =
+            Physics.CapsuleCast
+            (pos_1, pos_2,
+            capCol.radius - minimal, Vector3.down,
+            out hitInfo, RayDist , LayerMask.GetMask("Terrain"));
+        Debug.DrawLine(pos_1,pos_2,Color.red);
+        Debug.DrawLine(pos_2,pos_2 + Vector3.down * (RayDist + capCol.radius - minimal),Color.cyan);
+        */
     }
 
     //ステータスの変更作業など
@@ -432,7 +458,7 @@ public class Entity : MonoBehaviour
             Debug.LogWarning("Parent Entity Loaded");
             StateDef findDef = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID).Clone();
             currentState = findDef;
-        }
+        }        
         if (prevState != null)
         {
             //過去のStateを実行
@@ -489,7 +515,7 @@ public class Entity : MonoBehaviour
         //Vcamが設定されているなら、Camera設定に従いfwを設定する.
         if (vCam != null && transposer != null)
         {
-            Debug.Log("Transpose Camera setting..");
+            //Debug.Log("Transpose Camera setting..");
             targetTo_fw = Vector3.ProjectOnPlane(vCam.transform.forward, Vector3.up).normalized;
             transposer.m_XAxis.Value += look.x * 3.0f;
         }
@@ -579,15 +605,21 @@ public class Entity : MonoBehaviour
         bool isPaused = (HitPauseTime > 0);
         if (isPaused)
         {
-            pausedVel = pausedVel == Vector3.zero ? rigid.velocity : pausedVel;
+            if(!rigid.isKinematic)
+            {
+                pausedVel = rigid.velocity;
+            }
             rigid.isKinematic = isPaused;
         }
-        else if (pausedVel != Vector3.zero)
+        else
         {
-            rigid.isKinematic = isPaused;
-            //Debug.Log("unpaused");
-            rigid.velocity = pausedVel;
-            pausedVel = Vector3.zero;
+            rigid.isKinematic = false;
+            if (pausedVel != Vector3.zero)
+            {
+                //Debug.Log("unpaused");
+                rigid.velocity = pausedVel;
+                pausedVel = Vector3.zero;
+            }
         }
     }
 

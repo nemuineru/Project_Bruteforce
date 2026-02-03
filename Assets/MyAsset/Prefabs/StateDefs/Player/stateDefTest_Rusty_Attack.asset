@@ -471,7 +471,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: IA
+          stParamValue: IAH
           useID: -1
           stLuaLoads: 
         guardDamage:
@@ -1114,12 +1114,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitVelSet:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 1.8, y: 0.1, z: 0}
+          stParamValue: {x: 0.8, y: 3.2, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -1159,12 +1159,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitStopTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 3, y: 9}
+          stParamValue: {x: 4, y: 6}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -1931,7 +1931,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: IA
+          stParamValue: IAH
           useID: -1
           stLuaLoads: 
         guardDamage:

@@ -14,6 +14,7 @@ export function StateDef_0_ID(entity) {
     let isPressed_A = CS.Elem.CheckButtonPressed(entity, "Jump");
     let isPressed_B = CS.Elem.CheckButtonPressed(entity, "_b");
     let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
@@ -51,6 +52,11 @@ export function StateDef_0_ID(entity) {
     if(!entity.attrs.alive)
     {
         verdList.Add(5100)
+    }
+    //falling state.
+    if(!selfOnGrd_f)
+    {
+        verdList.Add(55)
     }
     //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
     return verdList;
@@ -96,7 +102,7 @@ export function StateDef_50_ID(entity)
     let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
 
     //On Ground.
-    if(selfStTime > 1 && selfOnGrd_f == true)
+    if(selfStTime > 18)
     {
         verdList.Add(1);
     }
@@ -104,10 +110,60 @@ export function StateDef_50_ID(entity)
     //idleのanimを指定する
     if(selfStTime == 0)
     {
-    //Debug.Log("Jumping Vect");
-    verdList.Add(50);
+        //Debug.Log("Jumping Vect");
+        verdList.Add(50);
     }
     return verdList
+}
+
+//Function for falling.
+export function StateDef_55_ID(entity) 
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let selfStTime =  CS.Elem.CheckStateTime(entity)
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+
+    //idleのanimを指定する
+    if(selfStTime == 0)
+    {
+        //Debug.Log("Jumping Vect");
+        verdList.Add(0);
+    }
+    //On Ground.
+    if(selfStTime > 1 && selfOnGrd_f == true)
+    {
+        CS.UnityEngine.Debug.Log("Jumping Vect");        
+        verdList.Add(1);
+    }
+    return verdList
+}
+
+//Function for landing.
+export function StateDef_60_ID(entity) 
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList_F = new List_Int();
+    let selfStTime =  CS.Elem.CheckStateTime(entity)
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+
+    //On Ground.
+    if(selfStTime > 1 && selfOnGrd_f == true)
+    {
+        verdList_F.Add(1);
+    }
+
+    //idleのanimを指定する
+    if(selfStTime == 0)
+    {
+        //Debug.Log("Jumping Vect");
+        verdList_F.Add(50);
+    }
+    return verdList_F
 }
 
 // export Parameter @ stateDef 0.
