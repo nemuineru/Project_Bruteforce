@@ -35,6 +35,8 @@ public class gameState : MonoBehaviour
 
     public List<Entity> entityList;
 
+    public List<Props> propList;
+
     public Transform InitSpawnPos;
 
 
@@ -70,6 +72,10 @@ public class gameState : MonoBehaviour
         .OrderBy(t => !t.attrs.alive)
         .ThenBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
         .ToList();
+
+        propList = FindObjectsByType<Props>(FindObjectsSortMode.None)
+        .OrderBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
+        .ToList();
     }
 
 
@@ -78,12 +84,16 @@ public class gameState : MonoBehaviour
     {
         bool ret = false;
         int refNumRemaining;
-        hitDefParams useParam = new hitDefParams();
+        hitDefParams useParam = new hitDefParams();        
         if (hitDefParams != null)
         {
             useParam = hitDefParams;
         }
+
+        useParam.hitEntity = calledEntity;
+
         refNumRemaining = useParam.maxEntityHits;
+
         foreach (Entity e in entityList)
         {
             //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
@@ -107,6 +117,24 @@ public class gameState : MonoBehaviour
                 }
             }
         }
+        foreach(Props prop in propList)
+        {
+            if(calledEntity.hitCheck(prop.hitBox, out Vector3 hits))
+            {
+                if(prop.isHit == false && prop.isPausable())
+                {
+                    //雑ぅ. でもひとまずこれでなんとかなるか..
+                    prop.OnHit(hitDefParams);
+                    Instantiate
+                    ((hitDefParams.HitEff != null ? hitDefParams.HitEff : defaultEff), hits, Quaternion.identity);
+                    //onHit, entity will stop. but props wont.
+                    //I'll set high pause for each.
+                    (calledEntity.HitPauseTime , prop.disableTime) = (4, 30);
+                }
+                prop.isHit = true;
+            }
+        }
+
         return ret;
     }
 
@@ -339,6 +367,9 @@ public class hitDefParams
     public string AnimType = "";
 
     public List<int> HitExcludeList;
+
+    //このHitDefを呼び出した本体..
+    internal Entity hitEntity;
 
     //ステート番号をEntityから読み出し.
     //仕様書からどういうStateNumに変更するかを決定する..

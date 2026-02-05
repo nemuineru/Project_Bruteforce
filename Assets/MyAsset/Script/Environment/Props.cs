@@ -6,21 +6,47 @@ using UnityEngine;
 public class Props : MonoBehaviour
 {
     [SerializeField]
-    clssDef hitBox;
+    internal clssSetting hitBox;
+    Rigidbody rigid;
 
-    void OnHit()
+    public bool isHit;
+
+    public float disableTime = 0;
+
+    internal void OnHit(hitDefParams hitParam)
     {
-        
+        Transform selectedTrfm = hitParam.hitEntity.transform;
+        rigid.velocity = 
+        Vector3.Normalize(selectedTrfm.forward) * hitParam.velset.x +
+        Vector3.Normalize(selectedTrfm.up) * hitParam.velset.y +
+        Vector3.Normalize(selectedTrfm.right) * hitParam.velset.z;
+        disableTime += hitParam.hitStopTime.y;
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigid = GetComponent<Rigidbody>();
+        hitBox.initClss(transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(clssDef Clsses in hitBox.clssDefs)
+        {
+            Clsses.getGlobalPos();
+            Clsses.DrawCapsule();
+        }        
+        if(isHit == false)
+        {
+            disableTime -= 1f;
+        }
+        isHit = false;
+    }
+
+    public bool isPausable()
+    {
+        return disableTime <= 0;
     }
 }

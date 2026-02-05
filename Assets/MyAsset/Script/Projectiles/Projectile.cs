@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         clssDef def = new clssDef();
-        def.setTransform(this.transform);
+        def.initTransform(this.transform);
         def.startPos = pos_1;
         def.endPos = pos_2;
         def.clssType = clssDef.ClssType.Attack;

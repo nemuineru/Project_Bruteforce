@@ -410,11 +410,25 @@ public class clssSetting
     //entityで読み出すclssにentityを用意する.
     public void initClss(Entity entity)
     {
-        root = entity;
-        foreach (clssDef c in clssDefs)
+        if(entity != null)
+        {            
+            root = entity;
+            foreach (clssDef c in clssDefs)
+            {
+                c._entity = root;
+                c.initTransform(c._entity);
+            }
+        }  
+    }
+
+    public void initClss(Transform trfm)
+    {
+        if(trfm != null)
         {
-            c._entity = root;
-            c.initTransform(c._entity);
+            foreach (clssDef c in clssDefs)
+            {
+                c.initTransform(trfm);
+            }
         }
     }
 
@@ -636,7 +650,7 @@ public class clssDef
 
     //当たり判定指定
     //Entityが無いやつに関して..
-    public void setTransform(Transform tfm)
+    public void initTransform(Transform tfm)
     {
         attachTransform = tfm;
     }

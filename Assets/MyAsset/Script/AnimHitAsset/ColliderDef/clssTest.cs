@@ -16,7 +16,7 @@ public class clssTest : MonoBehaviour
         {
             if (c.showGizmo == true)
             {
-                c.setTransform(this.transform);
+                c.initTransform(this.transform);
                 c.getGlobalPos();
                 c.DrawCapsule();
             }
@@ -29,7 +29,7 @@ public class clssTest : MonoBehaviour
 
         foreach (clssDef c in clssSetting.clssDefs)
         {
-            c.setTransform(this.transform);
+            c.initTransform(this.transform);
         }
     }
 

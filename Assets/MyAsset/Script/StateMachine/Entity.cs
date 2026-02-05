@@ -634,11 +634,32 @@ public class Entity : MonoBehaviour
         HitPoint = Vector3.zero;
         if (cEnemy != null && cSelf != null)
         {
-
             //比較対象のentityの時間が取れてなーい！！
             resl = cSelf.clssCollided
             (out Vector3 v1, out Vector3 v2, out float d,
             clssDef.ClssType.Attack, cEnemy, 0.1f);
+            HitPoint = (v1 + v2) / 2f;
+        }
+        else
+        {
+            Debug.Log("cant find enemy Clss!");
+        }
+        return resl;
+    }
+    
+    //2026-01-17
+    //Animancer
+    public bool hitCheck(clssSetting checkerSetting, out Vector3 HitPoint)
+    {
+        bool resl = false;
+        clssSetting cSelf = animancerManager.primaryAnimDef.clssSetting;
+        HitPoint = Vector3.zero;
+        if (checkerSetting != null && cSelf != null)
+        {
+            //比較対象のentityの時間が取れてなーい！！
+            resl = cSelf.clssCollided
+            (out Vector3 v1, out Vector3 v2, out float d,
+            clssDef.ClssType.Attack, checkerSetting, 0.1f);
             HitPoint = (v1 + v2) / 2f;
         }
         else
