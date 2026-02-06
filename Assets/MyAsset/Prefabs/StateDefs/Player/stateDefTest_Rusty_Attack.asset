@@ -1395,7 +1395,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 1.5, y: 0, z: 0}
+          stParamValue: {x: 1.5, y: 0.77, z: 0}
           useID: -1
           stLuaLoads: 
         player_GuardhitVelSet:

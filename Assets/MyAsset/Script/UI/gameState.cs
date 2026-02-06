@@ -124,7 +124,7 @@ public class gameState : MonoBehaviour
                 if(prop.isHit == false && prop.isPausable())
                 {
                     //雑ぅ. でもひとまずこれでなんとかなるか..
-                    prop.OnHit(hitDefParams);
+                    prop.OnHit(hitDefParams, hits);
                     Instantiate
                     ((hitDefParams.HitEff != null ? hitDefParams.HitEff : defaultEff), hits, Quaternion.identity);
                     //onHit, entity will stop. but props wont.
