@@ -97,7 +97,7 @@ public class Props : MonoBehaviour
         {
             //Pops off.
             GameObject instObj = Instantiate(onDestroyInstantiate,transform.position,Quaternion.identity);
-            instObj.GetComponent<Rigidbody>().velocity = Vector3.up * 5f;
+            instObj.GetComponent<Rigidbody>().velocity = Vector3.up * 6.2f;
         }
 
         //and add time

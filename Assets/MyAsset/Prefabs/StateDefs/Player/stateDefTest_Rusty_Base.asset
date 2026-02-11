@@ -48,6 +48,18 @@ MonoBehaviour:
     - rid: 5331018537749184513
     Dir: 
     setCtrl: 0
+  - StateDefName: Rolling
+    StateDefID: 20
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: 
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList: []
+    Dir: 
+    setCtrl: 0
   - StateDefName: Jump
     StateDefID: 50
     ScriptDirectory: StateScript/Rusty
@@ -75,6 +87,18 @@ MonoBehaviour:
     StateList:
     - rid: 3324167878465552384
     - rid: 3324167878465552385
+    Dir: 
+    setCtrl: 0
+  - StateDefName: Crouch
+    StateDefID: 60
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: 
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList: []
     Dir: 
     setCtrl: 0
   - StateDefName: Winning Pose

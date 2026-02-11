@@ -91,6 +91,62 @@ export function StateDef_5_ID(entity) {
     return verdList;
 }
 
+//function for Guarding_GettingHurt - and also set non damage
+export function StateDef_6_ID(entity){    
+    
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0); 
+    }
+
+    //after taking hits.
+    //if you release B or non ground.. change to init.
+    if(CurrentAnimTime >= 10)
+    {
+        if (!isPressed_B) 
+        { 
+            //change to Idle.
+            verdList.Add(1);
+        }
+        //if not, continue and changestate to guarding.
+        else
+        {
+            verdList.Add(2);
+        }
+    }
+    return verdList;
+}
+
+//function for Rolling.
+//currently the Clss is gone for while.
+export function StateDef_20_ID(entity)
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    let selfStTime =  CS.Elem.CheckStateTime(entity)
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+
+    //if the WishingVect exists, it rolls towards there.
+    if(selfStTime > 0)
+    {
+        verdList.Add(0);
+    }
+}
+
 //Function for jump.
 export function StateDef_50_ID(entity) 
 {

@@ -48,6 +48,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      propertyPath: m_DirtyAABB
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.26613498
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.00011655688
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.2531459
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.32890618
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.25326246
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       propertyPath: m_Name
       value: dr01
@@ -127,6 +151,8 @@ MonoBehaviour:
     eraseAllClss: 0
   isHit: 0
   disableTime: 0
+  onDestroyInstantiate: {fileID: 0}
+  HP: 10
 --- !u!64 &8249159046548184714
 MeshCollider:
   m_ObjectHideFlags: 0

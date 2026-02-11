@@ -49,6 +49,15 @@ public class EntityAttr
         isStateReversed = 0;       
         isSoundNotPlayed = 0;
     }
+
+    public List<EntityFlag> flags = new List<EntityFlag>();
+    public void flagUpdate()
+    {
+        foreach(EntityFlag flagSel in flags)
+        {
+            flagSel.Tick();
+        }
+    }
 }
 
 //キャラクターの特殊フラッグ指定管理..

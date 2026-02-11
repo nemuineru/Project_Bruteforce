@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7549482059179364789}
   - component: {fileID: 467753986256162735}
   - component: {fileID: 8086756564425328180}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 6351248415420602688}
   - component: {fileID: 1721142116829914441}
   - component: {fileID: 1735963765127944643}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 347380598510153590}
   - component: {fileID: 4310441920727036557}
   - component: {fileID: 4612381209942936556}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5116,11 +5116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7029948723529949830, guid: 008da8eeade596a429f1875c2b326058, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3207342449725258118, guid: 008da8eeade596a429f1875c2b326058, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 008da8eeade596a429f1875c2b326058, type: 3}
       propertyPath: m_Name
@@ -5128,7 +5128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 008da8eeade596a429f1875c2b326058, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5146,6 +5146,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 008da8eeade596a429f1875c2b326058, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1840677306202847771}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 008da8eeade596a429f1875c2b326058, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8693112169366956557}
   m_SourcePrefab: {fileID: 100100000, guid: 008da8eeade596a429f1875c2b326058, type: 3}
 --- !u!1 &1417491729890410178 stripped
 GameObject:
@@ -5161,8 +5164,8 @@ Rigidbody:
   m_GameObject: {fileID: 1417491729890410178}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5194,14 +5197,27 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.26
-  m_Height: 0.71
+  m_Radius: 0.17
+  m_Height: 0.37115127
   m_Direction: 1
-  m_Center: {x: 0, y: 0.34498706, z: 0}
+  m_Center: {x: 0, y: 0.17556271, z: 0}
+--- !u!114 &8693112169366956557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417491729890410178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9ce296b46ffa242a96d9029809c669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getEffect: {fileID: 105942, guid: ff672eaca96d32c419d7a1f1b0346e8d, type: 3}
 --- !u!4 &1792469602414601336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 008da8eeade596a429f1875c2b326058, type: 3}
