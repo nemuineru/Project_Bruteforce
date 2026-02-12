@@ -29,7 +29,19 @@ public class EntityAttr
 
     public int isSoundNotPlayed = 0;
 
-    public void addCombatStateTime()
+    public void updateCombatStates(bool willReset)
+    {
+        if(willReset)
+        {
+            resetting();
+        }
+        else
+        {
+            updating();
+        }
+    }
+
+    void updating()
     {
         if (!isPaused)
         {
@@ -41,7 +53,7 @@ public class EntityAttr
         isSoundNotPlayed += isSoundNotPlayed != 0 ? 1 : 0;
     }
 
-    public void resetCombatStateTime()
+    void resetting()
     { 
         isStateHit = 0;
         isStateContact = 0;

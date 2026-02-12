@@ -87,6 +87,9 @@ export function StateDef_5_ID(entity) {
         //change to Idle.
         verdList.Add(1);
     }
+
+    //Guarding State is continued.
+    verdList.Add(10);
     
     return verdList;
 }

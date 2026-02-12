@@ -275,6 +275,9 @@ public class Entity : MonoBehaviour
         setViewCams();
         mat.SetColor("_Color", CurColor);
 
+        //GuardFlag is discarded when the updation called.
+        attrs.isGuarded = false;
+
         executeStates();
 
         capsuleRaydraw();
@@ -283,15 +286,12 @@ public class Entity : MonoBehaviour
 
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
         stateTime = isStateChanged ? 0 : HitPauseTime >= 0 ? stateTime : stateTime + 1;
+
+        attrs.updateCombatStates(isStateChanged);
         //ステートが変更されなければそのまま.
         if (isStateChanged)
         {
-            attrs.resetCombatStateTime();
             executedStateIDs = new List<int>();
-        }
-        else
-        {
-            attrs.addCombatStateTime();
         }
         //statusAlign();
     }
@@ -391,7 +391,10 @@ public class Entity : MonoBehaviour
             CListQueue.Sort((CQ_L, CQ_M) => CQ_M.priority - CQ_L.priority);
             prevStateID = CurrentStateID;
             CurrentStateID = CListQueue[0].stateDefID;
-            attrs.resetCombatStateTime();
+
+            //resets at update
+            attrs.updateCombatStates(true);
+
             CListQueue.Clear();
         }
 

@@ -1343,6 +1343,25 @@ public class scSetStateMovetype : StateController
     }
 }
 
+
+//ガード状態に設定するか?
+//この設定はinit更新時、自動的にfalseとなる.
+[System.Serializable]
+[SerializeField]
+[SCHiearchy("System/set Guarding flags")]
+public class scSetMoveGuarding : StateController
+{
+    
+    [SerializeField]
+    stParams<bool> willGuardFlagSet = new stParams<bool>(true,true,true);
+
+    internal override void OnExecute(Entity entity)
+    {
+        entity.attrs.isGuarded = willGuardFlagSet.valueGet(loadParams, entity);
+    }
+}
+
+
 //set position for absolute value.
 [System.Serializable]
 [SerializeField]

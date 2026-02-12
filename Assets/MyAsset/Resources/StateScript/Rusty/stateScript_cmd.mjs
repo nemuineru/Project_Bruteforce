@@ -42,6 +42,12 @@ export function stateCmd(entity) {
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
+    //ガード状態.
+    if(selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0)
+    {        
+        verdList.Add(100);
+    }
+
     //Ground Attacks - N
     if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 0)
     {
@@ -74,6 +80,7 @@ export function stateCmd(entity) {
     }
 
     //ここまで通常攻撃
+
     //Special Ground Attack _ Knife c1
     if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable)
     {
@@ -88,10 +95,6 @@ export function stateCmd(entity) {
     if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID == 50 ))
     {
         verdList.Add(350);
-    }
-    if(selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0)
-    {        
-        verdList.Add(5);
     }
 
 

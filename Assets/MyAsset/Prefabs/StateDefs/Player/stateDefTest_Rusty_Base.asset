@@ -46,6 +46,22 @@ MonoBehaviour:
     - rid: 5331018537749184512
     - rid: 5331018854245859337
     - rid: 5331018537749184513
+    - rid: 3324168081673289731
+    Dir: 
+    setCtrl: 0
+  - StateDefName: Guard HitDefs contacted
+    StateDefID: 6
+    ScriptDirectory: 
+    ScriptName: 
+    preStateVerdictName: 
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 3324168081673289733
+    - rid: 3324168081673289732
+    - rid: 3324168081673289734
     Dir: 
     setCtrl: 0
   - StateDefName: Rolling
@@ -298,6 +314,99 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 55
         priority: 0
+    - rid: 3324168081673289731
+      type: {class: scSetMoveGuarding, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Set Guarding
+        doLoadAfterChangeState: 0
+        willGuardFlagSet:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+    - rid: 3324168081673289732
+      type: {class: scSetMoveGuarding, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Guarding is continued.
+        doLoadAfterChangeState: 0
+        willGuardFlagSet:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+    - rid: 3324168081673289733
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Animation - Guarding is continued.
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 6
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 3324168081673289734
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 2
+          stLuaLoads: 
+        stateControllerSubName: On Animation Ends. Change to guarding(5)
+        doLoadAfterChangeState: 0
+        changeTo: 0
+        priority: 0
     - rid: 3579422750824726546
       type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
       data:
@@ -398,7 +507,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         animParameter:
