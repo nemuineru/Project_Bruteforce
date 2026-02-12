@@ -173,6 +173,7 @@ public class gameState : MonoBehaviour
         return ret;
     }
 
+    //hitdefApply is called for everything.. 
     void hitDefApply(Entity beatenEntity, Entity calledEntity,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
