@@ -1130,6 +1130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5081649798993669841, guid: 3da703e1b6d29fb42862bde1661eac31, type: 3}
+      propertyPath: attrs.alive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8303098067474246970, guid: 3da703e1b6d29fb42862bde1661eac31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.9329305
@@ -1173,6 +1177,10 @@ PrefabInstance:
     - target: {fileID: 8678813750892476288, guid: 3da703e1b6d29fb42862bde1661eac31, type: 3}
       propertyPath: m_Name
       value: BZ01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678813750892476288, guid: 3da703e1b6d29fb42862bde1661eac31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1920,6 +1928,10 @@ PrefabInstance:
     - target: {fileID: 6503030713478505041, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
       propertyPath: m_Name
       value: Grunt
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503030713478505041, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

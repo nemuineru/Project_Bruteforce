@@ -24,9 +24,9 @@ MonoBehaviour:
     moveType: 0
     physType: 0
     StateList:
+    - rid: 1982101323848089607
     - rid: 5331018537749184514
     - rid: 4404388664824299528
-    - rid: 1982101323848089607
     - rid: 1814087929669091328
     - rid: 1814087929669091329
     - rid: 4404388709018370078
@@ -160,11 +160,11 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 5
+          value: 100
           stLuaLoads: 
-        stateControllerSubName: 5 Guarding
+        stateControllerSubName: 100 Guarding
         doLoadAfterChangeState: 0
-        changeTo: 5
+        changeTo: 100
         priority: 0
     - rid: 7982027888260546560
       type: {class: scAddCharge, ns: , asm: Assembly-CSharp}

@@ -33,38 +33,7 @@ MonoBehaviour:
     - rid: 3324167878465552386
     Dir: 
     setCtrl: 0
-  - StateDefName: Guard
-    StateDefID: 5
-    ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_Rusty_Main.mjs
-    preStateVerdictName: StateDef_5_ID
-    ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
-    StateList:
-    - rid: 5331018537749184512
-    - rid: 5331018854245859337
-    - rid: 5331018537749184513
-    - rid: 3324168081673289731
-    Dir: 
-    setCtrl: 0
-  - StateDefName: Guard HitDefs contacted
-    StateDefID: 6
-    ScriptDirectory: 
-    ScriptName: 
-    preStateVerdictName: 
-    ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
-    StateList:
-    - rid: 3324168081673289733
-    - rid: 3324168081673289732
-    - rid: 3324168081673289734
-    Dir: 
-    setCtrl: 0
-  - StateDefName: Rolling
+  - StateDefName: Dashing
     StateDefID: 20
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Main.mjs
@@ -115,6 +84,37 @@ MonoBehaviour:
     moveType: 0
     physType: 0
     StateList: []
+    Dir: 
+    setCtrl: 0
+  - StateDefName: Guard
+    StateDefID: 100
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: StateDef_5_ID
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 5331018537749184512
+    - rid: 5331018854245859337
+    - rid: 5331018537749184513
+    - rid: 3324168081673289731
+    Dir: 
+    setCtrl: 0
+  - StateDefName: Guard HitDefs contacted
+    StateDefID: 105
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: 
+    preStateVerdictName: 
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 3324168081673289733
+    - rid: 3324168081673289732
+    - rid: 3324168081673289734
     Dir: 
     setCtrl: 0
   - StateDefName: Winning Pose
@@ -319,7 +319,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 0
+          value: 10
           stLuaLoads: 
         stateControllerSubName: Set Guarding
         doLoadAfterChangeState: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 6
+          stParamValue: 105
           useID: -1
           stLuaLoads: 
         AnimSlot:
@@ -498,7 +498,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 5
+          stParamValue: 100
           useID: -1
           stLuaLoads: 
         AnimSlot:
@@ -528,7 +528,7 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        mask: {fileID: 31900000, guid: f22fcbaf0d87c9744b0a6c6ed6eb57b0, type: 2}
+        mask: {fileID: 0}
     - rid: 5331018537749184513
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
