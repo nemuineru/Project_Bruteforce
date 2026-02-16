@@ -80,7 +80,33 @@ public class hitDefParams
     public List<int> HitExcludeList;
 
     //このHitDefを呼び出した本体..
+    internal Entity ownerEntity;
+
+    //このHitDefの対象先.
     internal Entity hitEntity;
+
+    //このHitDefを呼び出した時のHit
+    internal float HitSec;
+    internal float HitPar;
+    
+    //isContacted = true でぶつかり判定は生成した
+    internal bool isContacted = false;
+    //GetHitVarで呼び出される時のMovesetレジスタ関数. ガードされていたりしたら変更.
+    internal bool isGuarded = false;
+    
+    
+
+    //ガードされたかどうかに関わらず、当たってからの経過時間を考える.
+    //一番近い時間としてソートして..という形で.
+    public float GetHitTime()
+    {
+        float f = 0;
+        if(gameState.self != null)
+        {
+            f = gameState.self.elapsedTime - HitSec;
+        }
+        return f;
+    }
 
     //ステート番号をEntityから読み出し.
     //仕様書からどういうStateNumに変更するかを決定する..
@@ -154,7 +180,7 @@ public class hitDefParams
             //ガードブレイクを超えるなら..とか考えなければ.
             if(refEntity.attrs.isGuarded == true && refEntity.status.currentGuardPoint >= 0)
             {
-                retID = 105;
+                bool isEntityHit = true;
             }
         }
         return retID;

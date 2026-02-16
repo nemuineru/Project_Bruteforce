@@ -25,7 +25,7 @@ public class Props : MonoBehaviour
 
     internal void OnHit(hitDefParams hitParam,Vector3 hitPos)
     {
-        Transform selectedTrfm = hitParam.hitEntity.transform;
+        Transform selectedTrfm = hitParam.ownerEntity.transform;
         Vector3 AddVelocity = 
         Vector3.Normalize(selectedTrfm.forward) * hitParam.velset.x +
         Vector3.Normalize(selectedTrfm.up) * hitParam.velset.y +

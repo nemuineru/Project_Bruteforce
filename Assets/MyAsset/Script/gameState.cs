@@ -80,7 +80,7 @@ public class gameState : MonoBehaviour
 
 
     //HitDefを発火する際のイベント
-    public bool ProvokeHitDef_Entity(Entity calledEntity, hitDefParams hitDefParams)
+    public bool ProvokeHitDef_Entity(Entity provokerEntity, hitDefParams hitDefParams)
     {
         bool ret = false;
         int refNumRemaining;
@@ -90,18 +90,18 @@ public class gameState : MonoBehaviour
             useParam = hitDefParams;
         }
 
-        useParam.hitEntity = calledEntity;
+        useParam.ownerEntity = provokerEntity;
 
         refNumRemaining = useParam.maxEntityHits;
 
         foreach (Entity e in entityList)
         {
             //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
-            if (e != calledEntity && e.tag != calledEntity.tag && refNumRemaining > 0)
+            if (e != provokerEntity && e.tag != provokerEntity.tag && refNumRemaining > 0)
             {
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
-                bool f = calledEntity.hitCheck(e, out Vector3 HitPt);
+                bool f = provokerEntity.hitCheck(e, out Vector3 HitPt);
                 bool isContactable = hitDefParams.HitMoveFlag.Contains(e.moveType.ToString()) &&
                 hitDefParams.HitPhysFlag.Contains(e.physicsType.ToString()) &&
                 !hitDefParams.HitExcludeList.Contains(e.CurrentStateID);
@@ -110,16 +110,16 @@ public class gameState : MonoBehaviour
                 {
                     Debug.Log("HitID" + useParam.hitID);
                     ret = true;
-                    hitDefApply(e, calledEntity, useParam, HitPt);
+                    hitDefApply(e, provokerEntity, useParam, HitPt);
                     //当てた分キャラ指定の値が減少..
                     refNumRemaining--;
-                    calledEntity.status.currentEnergy += 3;
+                    provokerEntity.status.currentEnergy += 3;
                 }
             }
         }
         foreach(Props prop in propList)
         {
-            if(calledEntity.hitCheck(prop.hitBox, out Vector3 hits))
+            if(provokerEntity.hitCheck(prop.hitBox, out Vector3 hits))
             {
                 if(prop.isHit == false && prop.isPausable())
                 {
@@ -129,7 +129,7 @@ public class gameState : MonoBehaviour
                     ((hitDefParams.HitEff != null ? hitDefParams.HitEff : defaultEff), hits, Quaternion.identity);
                     //onHit, entity will stop. but props wont.
                     //I'll set high pause for each.
-                    (calledEntity.HitPauseTime , prop.disableTime) = (4, 30);
+                    (provokerEntity.HitPauseTime , prop.disableTime) = (4, 30);
                 }
                 prop.isHit = true;
             }
@@ -177,6 +177,9 @@ public class gameState : MonoBehaviour
     void hitDefApply(Entity beatenEntity, Entity calledEntity,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
+        hitDefParams fPar= new hitDefParams();
+        fPar = calledEParam;
+        
         //stateChangeを設定..
         beatenEntity.isStateChanged = true;
 
@@ -260,6 +263,7 @@ public class gameState : MonoBehaviour
             //hitpoint damage(if not guarded.)
             beatenEntity.status.currentHP -= calledEParam.Damage * (atkParams / Mathf.Max(1.0f,beatenEntity.status.BaseDefencePerc));
         }
+        
 
         //placeholder for rotation
         beatenEntity.transform.rotation =
