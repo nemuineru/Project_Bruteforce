@@ -37,7 +37,7 @@ public class hitDefParams
     public Vector3 pl_velset;
     //ガード時の動作方向設定
     public Vector3 pl_guard_velset;
-    
+
     //ガード時と通常時のヒットストップ時刻
     [SerializeField]
     public Vector2 hitStopTime;
@@ -48,8 +48,9 @@ public class hitDefParams
     
     [SerializeField]
     public GameObject GuardHitEff;
+
     //当てた敵のステート変更情報(負の数以下で変更しない)
-    public int ChangeState_Enemy = 5000;
+    public int ChangeState_Enemy = -1;
 
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
@@ -85,32 +86,77 @@ public class hitDefParams
     //このHitDefの対象先.
     internal Entity hitEntity;
 
-    //このHitDefを呼び出した時のHit
-    internal float HitSec;
-    internal float HitPar;
+    //このHitDefを呼び出した時のgameStateの時間を登録.
+    internal float HitRegisterTime = 0;
     
-    //isContacted = true でぶつかり判定は生成した
-    internal bool isContacted = false;
+    //isContacted = true でぶつかり判定は生成した、とする.
+    //多分、このhitDefParamがEntityにレジスタされる時点でContact判定とかは考えなくて良いのでは？
+    //と思ったけどHitDefレジスタ時に更新をすればなんとか..?
+    internal bool MoveContact = false;
+
     //GetHitVarで呼び出される時のMovesetレジスタ関数. ガードされていたりしたら変更.
-    internal bool isGuarded = false;
+    internal bool MoveGuarded = false;
+
+    internal Vector3 ContactPoint = Vector3.zero;
+
+    /*
+    //MoveReversed..は今は考えない(難しくなりそー。)
+    */
     
     
 
     //ガードされたかどうかに関わらず、当たってからの経過時間を考える.
     //一番近い時間としてソートして..という形で.
-    public float GetHitTime()
+    public float GetRegisteredTime()
     {
         float f = 0;
         if(gameState.self != null)
         {
-            f = gameState.self.elapsedTime - HitSec;
+            f = gameState.self.elapsedTime - HitRegisterTime;
         }
         return f;
     }
 
+    //ownerEntityのパラメータを用いて、hitEntityのダメージ、及びにVelocitySetを計算する.
+    //また、registeredHitDefsに登録作業を行う.
+    public void SetStatus()
+    {
+        //基本的に当たったものとする.
+        MoveContact = true;
+        //ガードが入ってるか？
+        MoveGuarded = hitEntity.attrs.isGuarded == true && hitEntity.status.currentGuardPoint >= 0;
+        //プレイヤー方向とか色々..        
+        Vector3 HitVect = Vector3.ProjectOnPlane
+        (hitEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
+
+        hitEntity.CurrentStateID = ReturnStateIDs(ownerEntity);
+
+        
+        //ダメージ・ノックバック・ヒットストップ計算.
+        DamageCalc();
+
+        //当てた相手は問答無用でstateTimeを0にする.
+        hitEntity.stateTime = 0;
+        //stateChangeを設定.
+        hitEntity.isStateChanged = true;
+        
+        //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
+        //設定されたEntityはselfStateが読み出されない限り読み出す.
+        if(enemyRefsPlayerNum)
+        {
+            
+        }
+        if(ChangeState_Player > -1)
+        {
+            ownerEntity.isStateChanged = true;
+            ownerEntity.CurrentStateID = ChangeState_Player;
+        }
+    }
+
     //ステート番号をEntityから読み出し.
     //仕様書からどういうStateNumに変更するかを決定する..
-    public int ReturnStateNum(Entity refEntity)
+    //ここではstateTimeなどの変更は無し.
+    public int ReturnStateIDs(Entity refEntity)
     {
         //基本立ち喰らいアニメ
         int retID = 5000;
@@ -125,10 +171,10 @@ public class hitDefParams
             //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
             //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
             //if文祭りじゃ.
-            int refID = refEntity.CurrentStateID;
+            int referenceID = refEntity.CurrentStateID;
             //基本として、LightHit用のStateDefは入っていないと問題外.
             //Fall hit - FallTimeが0以上、またはFall中に攻撃を加えたとき
-            if(((fallTime > 0 ) || (5050 <= refID && refID <= 5059)) 
+            if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
             && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
@@ -175,15 +221,21 @@ public class hitDefParams
                 DamageType = 2;
             }
             retID += DamageType + HitType;
-            //いずれにせよ、Guardingが設定されているなら105に飛ばす.
-            //また、Entityのガード設定値が0以下となるなら110(ガードブレイク.)
-            //ガードブレイクを超えるなら..とか考えなければ.
-            if(refEntity.attrs.isGuarded == true && refEntity.status.currentGuardPoint >= 0)
+            //いずれにせよ、Guardingが設定されているなら双方に登録される関数値を考える.
+            //entityとhitIDが同じヤツは二重に登録しない筈
+            if(MoveGuarded)
             {
-                bool isEntityHit = true;
+                retID = referenceID;
             }
         }
         return retID;
+    }
+
+    public void DamageCalc()
+    {
+        
+        //hitpause
+        (ownerEntity.HitPauseTime, hitEntity.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
     }
 }
 

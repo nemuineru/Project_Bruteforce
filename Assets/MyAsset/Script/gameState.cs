@@ -174,19 +174,32 @@ public class gameState : MonoBehaviour
     }
 
     //hitdefApply is called for everything.. 
+    //Projectileも同様に管理したい.
     void hitDefApply(Entity beatenEntity, Entity calledEntity,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
-        hitDefParams fPar= new hitDefParams();
-        fPar = calledEParam;
+        hitDefParams generatedParam = new hitDefParams();
+
+        //call Parameter for damages..
+        generatedParam = calledEParam;
+
+        generatedParam.ownerEntity = calledEntity;
+        generatedParam.hitEntity = beatenEntity;
+        generatedParam.ContactPoint = hitContactPoint;
+
+        //ステータス設定.
+        generatedParam.SetStatus();
+        //
+
         
-        //stateChangeを設定..
+        //stateChangeを設定.. ガード時は実行しない.
         beatenEntity.isStateChanged = true;
 
         //一先ず、プレースホルダーとして入れる
         //stateTimeをリセット.
-        beatenEntity.CurrentStateID = calledEParam.ReturnStateNum(beatenEntity);        
+        beatenEntity.CurrentStateID = calledEParam.ReturnStateIDs(beatenEntity);        
         beatenEntity.stateTime = 0;
+
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
         //設定されたEntityはselfStateが読み出されない限り読み出す.
         if (calledEParam.enemyRefsPlayerNum == true)

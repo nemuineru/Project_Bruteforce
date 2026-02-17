@@ -160,6 +160,11 @@ public class Entity : MonoBehaviour
     [SerializeField]
     internal List<entityInputManager.entityInput_Buffers> cmdList;
 
+    //GetHitDef/GetAttackDefで管理されるHitParams.
+    //当てたプレイヤー本人のガード等を鑑みて..
+
+    internal List<hitDefParams> registeredHitDefs;
+
     //first init.
     void Awake()
     {
