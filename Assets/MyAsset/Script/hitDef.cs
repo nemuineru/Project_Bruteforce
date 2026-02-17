@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 //using UnityEditor.SearchService;
 using System.Linq;
+using DG.Tweening;
 
 //後々にこのhitDefParamsの項目を表示・非表示設定可能にしたい
 //非表示にした項目は値未設定ならデフォルト値を使用
@@ -98,6 +99,7 @@ public class hitDefParams
     internal bool MoveGuarded = false;
 
     internal Vector3 ContactPoint = Vector3.zero;
+    Vector3 PushVector = Vector3.zero;
 
     /*
     //MoveReversed..は今は考えない(難しくなりそー。)
@@ -126,31 +128,11 @@ public class hitDefParams
         //ガードが入ってるか？
         MoveGuarded = hitEntity.attrs.isGuarded == true && hitEntity.status.currentGuardPoint >= 0;
         //プレイヤー方向とか色々..        
-        Vector3 HitVect = Vector3.ProjectOnPlane
+        PushVector = Vector3.ProjectOnPlane
         (hitEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
 
-        hitEntity.CurrentStateID = ReturnStateIDs(ownerEntity);
-
-        
-        //ダメージ・ノックバック・ヒットストップ計算.
+        SetStates();
         DamageCalc();
-
-        //当てた相手は問答無用でstateTimeを0にする.
-        hitEntity.stateTime = 0;
-        //stateChangeを設定.
-        hitEntity.isStateChanged = true;
-        
-        //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
-        //設定されたEntityはselfStateが読み出されない限り読み出す.
-        if(enemyRefsPlayerNum)
-        {
-            
-        }
-        if(ChangeState_Player > -1)
-        {
-            ownerEntity.isStateChanged = true;
-            ownerEntity.CurrentStateID = ChangeState_Player;
-        }
     }
 
     //ステート番号をEntityから読み出し.
@@ -231,11 +213,67 @@ public class hitDefParams
         return retID;
     }
 
-    public void DamageCalc()
+    //ダメージ・ノックバック・ヒットストップ計算,Instantiate等..
+    void DamageCalc()
     {
-        
+        //スピード設定.
+        hitEntity.rigid.velocity = PushVector.normalized * velset.x + Vector3.up * velset.y;
+        //shapepositions. 後でこれも設定できるようにしたい.
+        hitEntity.transform.DOShakePosition(hitEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
+        //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
+
+        if(MoveGuarded)
+        {            
+            //hitpoint damage("on" Guarded)
+            hitEntity.status.currentHP -= GuardDamage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,hitEntity.status.BaseDefencePerc));
+        }
+        else
+        {
+            //hitpoint damage(if not guarded.)
+            hitEntity.status.currentHP -= Damage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,hitEntity.status.BaseDefencePerc));
+        }
+
+        //placeholder for rotation
+        ownerEntity.transform.rotation =
+        Quaternion.Lerp(ownerEntity.transform.rotation, Quaternion.LookRotation(-PushVector, Vector3.up), 0.6f);
+        Debug.Log("Hit : " + ownerEntity.gameObject.name);
+
         //hitpause
         (ownerEntity.HitPauseTime, hitEntity.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
+        
+        //ダメージエフェクトの生成はselfから発動する.
+        GameObject instanceEff = HitEff != null ? HitEff : gameState.self.defaultEff;
+        if(MoveGuarded)
+        {
+            instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultEff;
+        }
+        
+        gameState.self.GenerateEffect(instanceEff, ContactPoint, Quaternion.identity);
+    }
+
+    void SetStates()
+    {
+        hitEntity.CurrentStateID = ReturnStateIDs(ownerEntity);
+
+        //当てた相手は問答無用でstateTimeを0にする.
+        hitEntity.stateTime = 0;
+        //stateChangeを設定.
+        hitEntity.isStateChanged = true;
+        hitEntity.ChangeAnim();
+        
+        //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
+        //設定されたEntityはselfStateが読み出されない限り読み出す.
+        if(enemyRefsPlayerNum)
+        {
+            hitEntity.controlledEntity = ownerEntity;
+        }
+
+        //当てた側のChangeStateが0以上なら変更. ChangeStateも行う.
+        if(ChangeState_Player > -1)
+        {
+            ownerEntity.isStateChanged = true;
+            ownerEntity.CurrentStateID = ChangeState_Player;
+        }
     }
 }
 

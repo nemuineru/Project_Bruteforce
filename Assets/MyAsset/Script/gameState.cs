@@ -317,4 +317,10 @@ public class gameState : MonoBehaviour
             yield return 0;
         }
     }
+
+    public void GenerateEffect(GameObject obj, Vector3 pos, Quaternion rot)
+    {
+        Instantiate(obj, pos, rot);
+    }
+
 }
