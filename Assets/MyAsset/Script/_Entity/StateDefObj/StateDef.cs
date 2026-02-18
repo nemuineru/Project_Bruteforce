@@ -965,6 +965,8 @@ public class scHitDef : StateController
             HitExcludeList = excluder
         };
 
+        //HitDefをこの時点で呼び出すのはちょっとな―..
+        //GameStateに登録させておきたい.
         if(gameState.self.ProvokeHitDef_Entity(entity, HitDef))
         {
             //HitCheckを行う.

@@ -163,7 +163,7 @@ public class Entity : MonoBehaviour
     //GetHitDef/GetAttackDefで管理されるHitParams.
     //当てたプレイヤー本人のガード等を鑑みて..
 
-    internal List<hitDefParams> registeredHitDefs;
+    internal List<hitDefParams> registeredHitDefs = new List<hitDefParams>();
 
     //first init.
     void Awake()
@@ -196,7 +196,7 @@ public class Entity : MonoBehaviour
             {
                 //set ScriptDirectory for Load.
                 state.ScriptDirectory = dObj.ScriptDirectory;
-                Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
+                //Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
                 loadedDefs.Add(state.Clone());
             }
         }

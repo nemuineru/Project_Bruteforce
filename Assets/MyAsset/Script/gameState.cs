@@ -182,6 +182,8 @@ public class gameState : MonoBehaviour
 
         //call Parameter for damages..
         generatedParam = calledEParam;
+        
+        generatedParam.HitRegisterTime = elapsedTime;
 
         generatedParam.ownerEntity = calledEntity;
         generatedParam.hitEntity = beatenEntity;
@@ -189,41 +191,6 @@ public class gameState : MonoBehaviour
 
         //ステータス設定.
         generatedParam.SetStatus();
-        //
-
-        
-        //stateChangeを設定.. ガード時は実行しない.
-        beatenEntity.isStateChanged = true;
-
-        //一先ず、プレースホルダーとして入れる
-        //stateTimeをリセット.
-        beatenEntity.CurrentStateID = calledEParam.ReturnStateIDs(beatenEntity);        
-        beatenEntity.stateTime = 0;
-
-        //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
-        //設定されたEntityはselfStateが読み出されない限り読み出す.
-        if (calledEParam.enemyRefsPlayerNum == true)
-        {
-            beatenEntity.controlledEntity = calledEntity;
-        }
-        //placeholder for velocity
-        //currently its barebone
-        Vector3 HitVect = Vector3.ProjectOnPlane
-        (beatenEntity.transform.position - calledEntity.transform.position, Vector3.up);
-
-        //hitpause
-        (calledEntity.HitPauseTime, beatenEntity.HitPauseTime) = (calledEParam.hitStopTime.x, calledEParam.hitStopTime.y);
-        DamageApply(beatenEntity, HitVect, calledEParam, calledEntity.status.BaseAttackPerc);
-        Instantiate
-        ((calledEParam.HitEff != null ? calledEParam.HitEff : defaultEff), hitContactPoint, Quaternion.identity);
-
-        //playerのchangestateが0以上なら変更.
-        if (calledEParam.ChangeState_Player > -1)
-        {
-            Debug.Log("PlayerState Changed");
-            calledEntity.isStateChanged = true;
-            calledEntity.CurrentStateID = calledEParam.ChangeState_Player;
-        }
     }
 
     void hitDef_proj_Apply(Entity beatenEntity, Transform calledPoint,
@@ -250,39 +217,14 @@ public class gameState : MonoBehaviour
 
         //hitpause
         (beatenEntity.HitPauseTime) = (calledEParam.hitStopTime.y);
+
+        /*
         DamageApply(beatenEntity, HitVect, calledEParam, 100f);
         Instantiate
         ((calledEParam.HitEff != null ? calledEParam.HitEff : defaultEff), hitContactPoint, Quaternion.identity);
+        */
     }
 
-    void DamageApply(Entity beatenEntity, Vector3 HitVect, hitDefParams calledEParam, float atkParams)
-    {
-        //SetSpeed
-        beatenEntity.rigid.velocity = HitVect.normalized * calledEParam.velset.x + Vector3.up * calledEParam.velset.y;
-
-
-        //shapepositions
-        beatenEntity.transform.DOShakePosition(beatenEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
-        //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
-        beatenEntity.ChangeAnim();
-
-        if(beatenEntity.attrs.isGuarded)
-        {            
-            //hitpoint damage("on" Guarded)
-            beatenEntity.status.currentHP -= calledEParam.GuardDamage * (atkParams / Mathf.Max(1.0f,beatenEntity.status.BaseDefencePerc));
-        }
-        else
-        {
-            //hitpoint damage(if not guarded.)
-            beatenEntity.status.currentHP -= calledEParam.Damage * (atkParams / Mathf.Max(1.0f,beatenEntity.status.BaseDefencePerc));
-        }
-        
-
-        //placeholder for rotation
-        beatenEntity.transform.rotation =
-        Quaternion.Lerp(beatenEntity.transform.rotation, Quaternion.LookRotation(-HitVect, Vector3.up), 0.6f);
-        Debug.Log("Hit : " + beatenEntity.gameObject.name);
-    }
 
     internal void ClearChars()
     {
@@ -320,7 +262,9 @@ public class gameState : MonoBehaviour
 
     public void GenerateEffect(GameObject obj, Vector3 pos, Quaternion rot)
     {
-        Instantiate(obj, pos, rot);
+        if(obj != null)
+        {
+            Instantiate(obj, pos, rot);
+        }
     }
-
 }

@@ -133,7 +133,25 @@ public class hitDefParams
 
         SetStates();
         DamageCalc();
+        if(hitEntity != null)
+            registerDef(hitEntity);
+        if(ownerEntity != null)
+            registerDef(ownerEntity);
     }
+
+    //registered index - last index is latest.
+    void registerDef(Entity entity)
+    {
+        //if not find, -1 is outputted.
+        int getDupedID = entity.registeredHitDefs.FindIndex(fParam => fParam.hitID == hitID && fParam.ownerEntity == ownerEntity);
+        //remove the duped HitDef, and renew it.
+        if(getDupedID >= 0)
+        {
+            entity.registeredHitDefs.RemoveAt(getDupedID);
+        }
+        entity.registeredHitDefs.Add(this);
+    }
+
 
     //ステート番号をEntityから読み出し.
     //仕様書からどういうStateNumに変更するかを決定する..
@@ -234,9 +252,9 @@ public class hitDefParams
         }
 
         //placeholder for rotation
-        ownerEntity.transform.rotation =
-        Quaternion.Lerp(ownerEntity.transform.rotation, Quaternion.LookRotation(-PushVector, Vector3.up), 0.6f);
-        Debug.Log("Hit : " + ownerEntity.gameObject.name);
+        hitEntity.transform.rotation =
+        Quaternion.Lerp(hitEntity.transform.rotation, Quaternion.LookRotation(-PushVector, Vector3.up), 0.6f);
+        //Debug.Log("Hit : " + ownerEntity.gameObject.name);
 
         //hitpause
         (ownerEntity.HitPauseTime, hitEntity.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
@@ -247,7 +265,6 @@ public class hitDefParams
         {
             instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultEff;
         }
-        
         gameState.self.GenerateEffect(instanceEff, ContactPoint, Quaternion.identity);
     }
 
