@@ -130,6 +130,9 @@ public class hitDefParams
         //プレイヤー方向とか色々..        
         PushVector = Vector3.ProjectOnPlane
         (hitEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
+        
+        //攻撃を"当てた側"のisStateHitを変更.
+        ownerEntity.attrs.isStateHit = ownerEntity.attrs.isStateHit > 0 ? ownerEntity.attrs.isStateHit : 1;
 
         SetStates();
         DamageCalc();

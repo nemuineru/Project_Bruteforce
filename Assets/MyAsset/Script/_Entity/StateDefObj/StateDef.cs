@@ -969,8 +969,6 @@ public class scHitDef : StateController
         //GameStateに登録させておきたい.
         if(gameState.self.ProvokeHitDef_Entity(entity, HitDef))
         {
-            //HitCheckを行う.
-            entity.attrs.isStateHit = entity.attrs.isStateHit > 0 ? entity.attrs.isStateHit : 1;
         }
     }
 
