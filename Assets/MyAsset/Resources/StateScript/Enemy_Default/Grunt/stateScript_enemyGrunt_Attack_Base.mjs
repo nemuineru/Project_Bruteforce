@@ -11,21 +11,24 @@ export function StateDef_200_ID(entity)
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
 
-    if (CurrentTime > 12)
+    if (CurrentTime > 16)
     {
-        verdList.Add(1);
+        verdList.Add(3);
     }
     if (CurrentTime == 0)
     {
         CS.UnityEngine.Debug.Log("Executed Anim");
         verdList.Add(0);
     }
-    //Aight, does native JS supports math function?
+    
+    //HitDef Generate.
     if (Math.abs(CurrentTime - 4) < 2 &&
         entity.attrs.isStateHit == 0)
     {
         verdList.Add(10);
     }
+
+    //Sounddefs..
     if(SoundTime){
         verdList.Add(100);
     }

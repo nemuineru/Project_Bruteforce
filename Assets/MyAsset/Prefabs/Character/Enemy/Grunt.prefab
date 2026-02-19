@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.93811
+      value: 3.103966
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.00999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.2929974
+      value: 1.8344674
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalRotation.w
@@ -143,11 +143,18 @@ MonoBehaviour:
       _lastcalcEndPos: {x: 0, y: 0, z: 0}
     disableClssList: []
     root: {fileID: 0}
+    eraseAllClss: 0
   status:
     maxHP: 115
     currentHP: 115
     maxEnergy: 50
     currentEnergy: 50
+    currentGuardPoint: 100
+    maxGuardPoint: 100
+    GuardReductDmgrate: 1
+    guardRecoverRate: 0.8
+    guardRecoverParsedTime: 0
+    GuardRecoverTime: 0.7
     BaseAttackPerc: 60
     BaseDefencePerc: 100
     ChargeTime: 0
@@ -156,6 +163,8 @@ MonoBehaviour:
     alive: 1
     isPaused: 0
     isStateChanged: 0
+    isGuarded: 0
+    isDamaged: 0
     isFall: 0
     isEraseReady: 0
     isStateHit: 0
@@ -169,6 +178,7 @@ MonoBehaviour:
   animListObject:
   - {fileID: 11400000, guid: fa3e95b17fea8fc4e9b0432af0719e70, type: 2}
   - {fileID: 11400000, guid: 3db77d8c7cba0184481a96a264d79e28, type: 2}
+  mainAnimancer: {fileID: 0}
   CurColor: {r: 0.51744395, g: 0.58047223, b: 0.7169812, a: 0}
   isOnGround: 1
   isStateChanged: 0
@@ -176,10 +186,13 @@ MonoBehaviour:
   DefLists:
   - {fileID: 11400000, guid: 8bcf0ad01b4f0e0458eeb5ae6b601662, type: 2}
   - {fileID: 11400000, guid: f099bc9f38964c1409c7e7d95bde40ae, type: 2}
+  - {fileID: 11400000, guid: d192fa1327fe04c4ba6d4341259a7832, type: 2}
   - {fileID: 11400000, guid: 2dd91936676db4b429fc722fbd829625, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: c1470366b3bea504686d9b6beddfeb49, type: 2}
+  executedStateIDs: 
   raycenter: {x: 0, y: 0, z: 0}
+  cmdList: []
 --- !u!136 &7960206234810124181
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ MonoBehaviour:
           value: 5000
           stLuaLoads: 
         stateControllerSubName: set Dead
+        doLoadAfterChangeState: 0
         changeTo: 5000
         priority: 0
     - rid: 4404388664824299527
@@ -51,7 +52,8 @@ MonoBehaviour:
           value: 200
           stLuaLoads: 
         stateControllerSubName: Combo1 Jab_Cmd
-        changeTo: 1
+        doLoadAfterChangeState: 0
+        changeTo: 200
         priority: 0
     - rid: 4404388664824299529
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
@@ -61,6 +63,7 @@ MonoBehaviour:
           value: 250
           stLuaLoads: 
         stateControllerSubName: JumpCombo Kick_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 20
         priority: 0
     - rid: 4404388709018370078
@@ -71,5 +74,6 @@ MonoBehaviour:
           value: 300
           stLuaLoads: 
         stateControllerSubName: Hard1 GKnife_Cmd
+        doLoadAfterChangeState: 0
         changeTo: 5
         priority: 1

@@ -1929,8 +1929,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grunt
       objectReference: {fileID: 0}
-    - target: {fileID: 6503030713478505041, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: cmdList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: cmdList.Array.data[0].Command
+      value: _b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: cmdList.Array.data[0].readLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: cmdList.Array.data[0].CommandName
+      value: Basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: cmdList.Array.data[0].bufferMaxTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: cmdList.Array.data[0].currentBufferTime
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

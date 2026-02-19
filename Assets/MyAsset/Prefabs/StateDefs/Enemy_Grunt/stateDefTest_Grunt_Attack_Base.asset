@@ -16,9 +16,9 @@ MonoBehaviour:
   stateDefs:
   - StateDefName: Combo1 Jab_First
     StateDefID: 200
-    ScriptDirectory: StateScript/Enemy_Default
-    ScriptName: stateScript_enemyGrunt_Attack.mjs
-    preStateVerdictName: QueuedStateID
+    ScriptDirectory: StateScript/Enemy_Default/Grunt
+    ScriptName: stateScript_enemyGrunt_Attack_Base.mjs
+    preStateVerdictName: StateDef_200_ID
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -245,12 +245,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitStopTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 10, y: 10}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
