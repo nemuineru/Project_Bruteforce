@@ -22,16 +22,17 @@ export function StateDef_200_ID(entity)
     }
     
     //HitDef Generate.
-    if (Math.abs(CurrentTime - 4) < 2 &&
+    if (Math.abs(CurrentAnimTime - 9) < 2 &&
         entity.attrs.isStateHit == 0)
     {
+        //Sounddefs..
+        if(SoundTime)
+        {
+            verdList.Add(100);
+        }
         verdList.Add(10);
     }
 
-    //Sounddefs..
-    if(SoundTime){
-        verdList.Add(100);
-    }
     //CS.UnityEngine.Debug.Log("Executed");
     return verdList;
 }
