@@ -158,4 +158,18 @@ public class Elem
     {
         return et.getBoneTransform(BoneName);
     }
+
+    //GetLatest hitParams. check for owners/get beaten by.
+    public static hitDefParams getHitParam(Entity et, bool isOwner)
+    {
+
+        return null;
+    }
+    
+    //Get selected hitParams. check for owners/get beaten by.
+    public static hitDefParams getHitParam(Entity et, bool isOwner, int hitID)
+    {
+
+        return null;
+    }
 }

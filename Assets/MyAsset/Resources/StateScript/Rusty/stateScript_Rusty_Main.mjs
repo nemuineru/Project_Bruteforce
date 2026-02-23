@@ -62,77 +62,6 @@ export function StateDef_0_ID(entity) {
     return verdList;
 }
 
-//function for Guarding
-export function StateDef_5_ID(entity) {
-    //List<Int>
-    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
-    
-    let verdList = new List_Int();
-
-    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
-    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
-
-    //this must be set as 0.
-    let selfStTime = CS.Elem.CheckStateTime(entity) 
-
-    //Init.
-    if (selfStTime == 0)
-    { 
-        verdList.Add(0) 
-    }
-
-    //if you release B or non ground..
-    if (!isPressed_B) 
-    { 
-        //change to Idle.
-        verdList.Add(1);
-    }
-
-    //Guarding State is continued.
-    verdList.Add(10);
-    
-    return verdList;
-}
-
-//function for Guarding_GettingHurt - and also set non damage
-export function StateDef_6_ID(entity){    
-    
-    //List<Int>
-    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
-    
-    let verdList = new List_Int();
-    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
-
-    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
-    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
-
-    //this must be set as 0.
-    let selfStTime = CS.Elem.CheckStateTime(entity) 
-
-    //Init.
-    if (selfStTime == 0)
-    { 
-        verdList.Add(0); 
-    }
-
-    //after taking hits.
-    //if you release B or non ground.. change to init.
-    if(CurrentAnimTime >= 10)
-    {
-        if (!isPressed_B) 
-        { 
-            //change to Idle.
-            verdList.Add(1);
-        }
-        //if not, continue and changestate to guarding.
-        else
-        {
-            verdList.Add(2);
-        }
-    }
-    return verdList;
-}
-
 //function for Rolling.
 //currently the Clss is gone for while.
 export function StateDef_20_ID(entity)
@@ -250,4 +179,76 @@ export function StateDef_0_Param(entity) {
     outs.Add(vel2);
     //CS.UnityEngine.Debug.Log(vel2);
     return outs
+}
+
+
+//function for Guarding
+export function StateDef_100_ID(entity) {
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0) 
+    }
+
+    //if you release B or non ground..
+    if (!isPressed_B) 
+    { 
+        //change to Idle.
+        verdList.Add(1);
+    }
+
+    //Guarding State is continued.
+    verdList.Add(10);
+    
+    return verdList;
+}
+
+//function for Guarding_GettingHurt - and also set non damage
+export function StateDef_105_ID(entity){    
+    
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0); 
+    }
+
+    //after taking hits.
+    //if you release B or non ground.. change to init.
+    if(CurrentAnimTime >= 10)
+    {
+        if (!isPressed_B) 
+        { 
+            //change to Idle.
+            verdList.Add(1);
+        }
+        //if not, continue and changestate to guarding.
+        else
+        {
+            verdList.Add(2);
+        }
+    }
+    return verdList;
 }

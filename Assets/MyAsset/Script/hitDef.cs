@@ -229,6 +229,7 @@ public class hitDefParams
             if(MoveGuarded)
             {
                 retID = referenceID;
+                Debug.Log("MoveGuarded To " + referenceID);
             }
         }
         return retID;
@@ -273,7 +274,7 @@ public class hitDefParams
 
     void SetStates()
     {
-        hitEntity.CurrentStateID = ReturnStateIDs(ownerEntity);
+        hitEntity.CurrentStateID = ReturnStateIDs(hitEntity);
 
         //当てた相手は問答無用でstateTimeを0にする.
         hitEntity.stateTime = 0;
