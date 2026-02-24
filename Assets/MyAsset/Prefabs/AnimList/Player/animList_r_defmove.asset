@@ -55,46 +55,6 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 5
-    Name: GuardAnim
-    animClip:
-    - Clip: {fileID: 7400000, guid: db5ee69b58584b54d88e33bb8971304e, type: 2}
-      speed: 0
-      startFrame: 0
-      cycleOffset: 0
-      mixPosition: {x: 0, y: 0}
-    blendInTime: 0.08
-    blendOutTime: 0.3
-    useDefaultClss: 0
-    clssSetting:
-      clssDefs: []
-      disableClssList:
-      - head
-      root: {fileID: 0}
-      eraseAllClss: 1
-  - mixType: 1
-    MixParamName: 
-    CurrentParamPos: {x: 0, y: 0}
-    ID: 20
-    Name: Rolling
-    animClip:
-    - Clip: {fileID: 7400000, guid: a1e18afdfc55d624e97233022612ea5b, type: 2}
-      speed: 0
-      startFrame: 0
-      cycleOffset: 0
-      mixPosition: {x: 0, y: 0}
-    blendInTime: 0
-    blendOutTime: 0.4
-    useDefaultClss: 0
-    clssSetting:
-      clssDefs: []
-      disableClssList:
-      - head
-      root: {fileID: 0}
-      eraseAllClss: 1
-  - mixType: 0
-    MixParamName: 
-    CurrentParamPos: {x: 0, y: 0}
     ID: 50
     Name: Jump
     animClip:
@@ -112,6 +72,66 @@ MonoBehaviour:
       - head
       root: {fileID: 0}
       eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 100
+    Name: GuardAnim
+    animClip:
+    - Clip: {fileID: 7400000, guid: db5ee69b58584b54d88e33bb8971304e, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.08
+    blendOutTime: 0.3
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 105
+    Name: GuardAnim_OnHit
+    animClip:
+    - Clip: {fileID: 7400000, guid: f7de5b839819b704283fdc4df7d7e0ec, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.01
+    blendOutTime: 0.2
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 1
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 120
+    Name: Rolling
+    animClip:
+    - Clip: {fileID: 7400000, guid: a1e18afdfc55d624e97233022612ea5b, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.4
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 1
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -156,8 +176,8 @@ MonoBehaviour:
         startPos: {x: 0, y: 0, z: 0}
         endPos: {x: 0, y: 0, z: 0}
         width: 0
-        _lastcalcStartPos: {x: 0, y: 0, z: 0}
-        _lastcalcEndPos: {x: 0, y: 0, z: 0}
+        _lastcalcStartPos: {x: -2.5684123, y: 0.6817984, z: 3.8977401}
+        _lastcalcEndPos: {x: -2.5684123, y: 0.6817984, z: 3.8977401}
       disableClssList: []
       root: {fileID: 0}
       eraseAllClss: 0

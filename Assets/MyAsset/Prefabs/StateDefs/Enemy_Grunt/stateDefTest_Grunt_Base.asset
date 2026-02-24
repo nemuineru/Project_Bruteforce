@@ -416,9 +416,9 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitStopTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
           stParamValue: {x: 0, y: 0}

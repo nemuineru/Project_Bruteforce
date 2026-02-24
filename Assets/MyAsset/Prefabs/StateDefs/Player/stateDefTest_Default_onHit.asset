@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateDefTest_Default_onHit
   m_EditorClassIdentifier: 
-  ScriptDirectory: 
+  ScriptDirectory: StateScript/Rusty
   stateDefs:
   - StateDefName: OnHit
     StateDefID: 5000
-    ScriptDirectory: 
+    ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Hurt.mjs
     preStateVerdictName: StateDef_5000_ID
     ParamLoadName: LuaOutput
@@ -24,7 +24,6 @@ MonoBehaviour:
     moveType: 0
     physType: 0
     StateList:
-    - rid: 4404388575372902408
     - rid: 4404388549547524096
     - rid: 4404388569968803840
     - rid: 1982101199356952584
@@ -32,7 +31,7 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: OnHit_Blow
     StateDefID: 5050
-    ScriptDirectory: 
+    ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Hurt.mjs
     preStateVerdictName: StateDef_5050_ID
     ParamLoadName: LuaOutput
@@ -47,8 +46,8 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: OnHit_BlowRecov
     StateDefID: 5055
-    ScriptDirectory: 
-    ScriptName: 
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Hurt.mjs
     preStateVerdictName: 
     ParamLoadName: 
     stateType: 0
@@ -59,9 +58,9 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Blow_Down
     StateDefID: 5100
-    ScriptDirectory: 
-    ScriptName: 
-    preStateVerdictName: stID_FallDown
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Hurt.mjs
+    preStateVerdictName: StateDef_5100_ID
     ParamLoadName: 
     stateType: 76
     moveType: 0
@@ -74,9 +73,9 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Blow_Recovery
     StateDefID: 5101
-    ScriptDirectory: 
-    ScriptName: 
-    preStateVerdictName: stID_FallRecov
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Hurt.mjs
+    preStateVerdictName: StateDef_5101_ID
     ParamLoadName: 
     stateType: 76
     moveType: 0
@@ -88,7 +87,7 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Dead
     StateDefID: 5300
-    ScriptDirectory: 
+    ScriptDirectory: StateScript/Rusty
     ScriptName: 
     preStateVerdictName: Dead
     ParamLoadName: 
@@ -102,7 +101,7 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Default
     StateDefID: 1000000
-    ScriptDirectory: 
+    ScriptDirectory: StateScript/Rusty
     ScriptName: 
     preStateVerdictName: QueuedStateID_0
     ParamLoadName: LuaOutput
@@ -162,6 +161,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -186,6 +188,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -215,6 +218,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 5000
@@ -223,6 +227,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -231,6 +236,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -239,6 +245,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -277,6 +284,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 5050
@@ -285,6 +293,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -293,6 +302,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -301,6 +311,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -319,6 +330,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 5100
@@ -327,6 +339,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -335,6 +348,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -343,6 +357,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -361,6 +376,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 5101
@@ -369,6 +385,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -377,6 +394,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -385,6 +403,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -425,6 +444,7 @@ MonoBehaviour:
         changeAnimID:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -433,6 +453,7 @@ MonoBehaviour:
         AnimSlot:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
@@ -441,6 +462,7 @@ MonoBehaviour:
         animParameter:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0, y: 0}
@@ -449,6 +471,7 @@ MonoBehaviour:
         isAdditional:
           _setHidden: 1
           _setEssential: 0
+          _isReadable: 1
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0

@@ -92,12 +92,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHPUI: {fileID: 5796236684719510868, guid: 7ece561a808804d48bf22e8a54aa1169, type: 3}
   defaultEff: {fileID: 160696, guid: 87baefee9e5cfdc479cdaa171c175d94, type: 3}
+  defaultGuardEff: {fileID: 7762261308885696574, guid: b72c396cb9ac03e448c3370ff2d914ba, type: 3}
   defaultDeathEff: {fileID: 1753279311565200, guid: 511cac9145c412541a8c9d61b1d2e989, type: 3}
   inGameAuds: {fileID: 0}
   MainGUI: {fileID: -7190158956765176505, guid: 9d2ebac75025d0148a15a84c51f714ca, type: 3}
   Player_Instantiate: {fileID: 5363911462208269289, guid: ec8b87b1159a8094cada66e23e93ca94, type: 3}
   Player_Vcam: {fileID: 2734087261546195747, guid: 5d4e0cbfa01a3d547a5de077a276cad4, type: 3}
   entityList: []
+  propList: []
+  InitSpawnPos: {fileID: 0}
 --- !u!1 &6313645169451291611
 GameObject:
   m_ObjectHideFlags: 0

@@ -90,7 +90,7 @@ MonoBehaviour:
     StateDefID: 100
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Main.mjs
-    preStateVerdictName: StateDef_5_ID
+    preStateVerdictName: StateDef_100_ID
     ParamLoadName: 
     stateType: 0
     moveType: 0
@@ -105,8 +105,8 @@ MonoBehaviour:
   - StateDefName: Guard HitDefs contacted
     StateDefID: 105
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: 
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: StateDef_105_ID
     ParamLoadName: 
     stateType: 0
     moveType: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
     StateList:
     - rid: 3324168081673289733
     - rid: 3324168081673289732
+    - rid: 3324168328257470479
     - rid: 3324168081673289734
     Dir: 
     setCtrl: 0
@@ -337,7 +338,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 1
+          value: 10
           stLuaLoads: 
         stateControllerSubName: Guarding is continued.
         doLoadAfterChangeState: 0
@@ -403,7 +404,18 @@ MonoBehaviour:
           useLua: 0
           value: 2
           stLuaLoads: 
-        stateControllerSubName: On Animation Ends. Change to guarding(5)
+        stateControllerSubName: pressed to Change to guarding(100)
+        doLoadAfterChangeState: 0
+        changeTo: 100
+        priority: 0
+    - rid: 3324168328257470479
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Set Init for non Guard
         doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0

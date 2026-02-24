@@ -23,6 +23,7 @@ public class gameState : MonoBehaviour
     public GameObject EnemyHPUI;
 
     public GameObject defaultEff;
+    public GameObject defaultGuardEff;
     public GameObject defaultDeathEff;
 
 

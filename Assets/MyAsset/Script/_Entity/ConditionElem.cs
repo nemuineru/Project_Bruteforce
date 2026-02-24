@@ -162,8 +162,22 @@ public class Elem
     //GetLatest hitParams. check for owners/get beaten by.
     public static hitDefParams getHitParam(Entity et, bool isOwner)
     {
-
-        return null;
+        hitDefParams retParam = null;
+        List<hitDefParams> findParamList;
+        //一番最後の項目が最新の筈なので
+        if(isOwner)
+        {
+            findParamList = et.registeredHitDefs.FindAll(par => par.hitEntity == et);
+        }
+        else
+        {
+            findParamList = et.registeredHitDefs.FindAll(par => par.ownerEntity == et);
+        }
+        if(findParamList != null)
+        {
+            retParam = findParamList.Last();
+        }
+        return retParam;
     }
     
     //Get selected hitParams. check for owners/get beaten by.

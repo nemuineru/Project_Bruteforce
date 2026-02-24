@@ -225,10 +225,11 @@ public class hitDefParams
             }
             retID += DamageType + HitType;
             //いずれにせよ、Guardingが設定されているなら双方に登録される関数値を考える.
-            //entityとhitIDが同じヤツは二重に登録しない筈
+            //entityとhitIDが同じヤツは二重に登録しない筈.
+            //OnGuardedStateの105に移動させる.
             if(MoveGuarded)
             {
-                retID = referenceID;
+                retID = 105;
                 Debug.Log("MoveGuarded To " + referenceID);
             }
         }
@@ -267,9 +268,9 @@ public class hitDefParams
         GameObject instanceEff = HitEff != null ? HitEff : gameState.self.defaultEff;
         if(MoveGuarded)
         {
-            instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultEff;
+            instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardEff;
         }
-        gameState.self.GenerateEffect(instanceEff, ContactPoint, Quaternion.identity);
+        gameState.self.GenerateEffect(instanceEff, ContactPoint, hitEntity.transform.rotation);
     }
 
     void SetStates()
