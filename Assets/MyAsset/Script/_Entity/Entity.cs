@@ -677,6 +677,52 @@ public class Entity : MonoBehaviour
         return resl;
     }
 
+    //entityの基本加速値とか、ステータスを決定しなければ..
+    //ソフト　な加速度を実現するためのヤツ.
+    public Vector3 softVelocity(Vector3 ManipVect, Vector3 speed, Vector3 forceMean)
+    {
+        //entity.rigid.velocity = entity.wishingVect * 100.0f * Time.fixedDeltaTime;
+        Vector3 wishVect = GroundNormal != Vector3.zero ? Vector3.ProjectOnPlane(ManipVect, GroundNormal) : ManipVect;
+
+        //POnPlaneが0になるのだけは防ぐ
+        //現在の速度を地上法線方向で考える.  (プレイヤー前向きとなる移動値 + プレイヤー右向きの移動値)
+        Vector3 CurrentForwardVect = Vector3.ProjectOnPlane(rigid.velocity + transform.forward * 0.0001f , GroundNormal);
+        Vector3 CurrentRightVect = (Quaternion.AngleAxis(90f, GroundNormal) * CurrentForwardVect);
+        
+        //このLimiterが1以上あるなら、その速度を加算しない、と考える..
+        //プレイヤーの一定速度値を超えた際は1以上を与える.
+        //MoveAxisInputを考慮して、異常な加速を抑える.
+        //また、wishingVectが0ならDotも0となるので..
+        float ForwardMean = 
+        Vector3.Dot(wishVect, CurrentForwardVect.normalized);
+        float RightMean = 
+        Vector3.Dot(wishVect, CurrentRightVect.normalized);
+
+        //wishingVectのSpeedMaxを考慮したMean値.
+        Vector3 FWMean = CurrentForwardVect.normalized * ForwardMean * 
+        (1.001f - Mathf.Clamp((CurrentForwardVect.magnitude * Mathf.Sign(ForwardMean)) / speed.x, -Mathf.Infinity, 1f )) * forceMean.x;
+        //これが無いと方向転換が不可能.
+        Vector3 RGMean = CurrentRightVect.normalized * RightMean * 
+        (1.001f - Mathf.Clamp((CurrentRightVect.magnitude * Mathf.Sign(RightMean)) / speed.z, -Mathf.Infinity , 1f)) * forceMean.z; 
+        
+
+        //ひとまず、CurrentVect値の速度を演算
+        //速度以上のwishVectが加算された場合はごく僅かな値を加算する
+        //角速度も考えるかぁ..
+        Vector3 ManipFW = FWMean + RGMean;
+        return ManipFW;
+    }
+
+    //細かいことを考えずに繰り出すヤツ.
+    //yは必ずvector up.
+    public Vector3 hardVelocity(Vector3 ManipVect)
+    {
+        Vector3 fws = Vector3.ProjectOnPlane(transform.forward, GroundNormal).normalized * ManipVect.x;
+        Vector3 rws = Vector3.ProjectOnPlane(transform.right, GroundNormal).normalized * ManipVect.z;
+        Vector3 ups = Vector3.up * ManipVect.y;
+        return fws + rws + ups;
+    }
+
     internal List<ChangeStateQueue> CListQueue = new List<ChangeStateQueue>();
 
     internal struct ChangeStateQueue

@@ -110,6 +110,11 @@ public class EntityStatus
     //100%上限
     public float BaseAttackPerc = 100f;
     public float BaseDefencePerc = 100f;
+
+    //スピードとかの設定.
+    public Vector3 BaseMoveVelocityParam = new Vector3(5f,4f,5f);
+    //スピードとかの設定.
+    public Vector3 BaseAccelParam = new Vector3(40f,40f,40f);
     
 
 

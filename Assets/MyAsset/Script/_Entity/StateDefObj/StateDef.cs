@@ -635,47 +635,58 @@ public class scAnimParentSet : StateController
     }
 }
 
+//Groundに設定された法線方向に移動させる.
 [System.Serializable]
 [SerializeField]
-[SCHiearchy("Physics/Move_Simple")]
-public class scMove : StateController
+[SCHiearchy("Physics/Basic Controllable movement")]
+public class scBasicInputMove : StateController
 {
+    [SerializeField]
+    stParams<float> MutipleVelocity = new stParams<float>(1f, true, true);
+
+    [SerializeField]
+    stParams<Vector3> MutipleMoveVelocity = new stParams<Vector3>(new Vector3(1f,1f,1f), true, true);
+
     //velocityで設定してたので、これを別のやつにする..
     //ハマったとき、抜けなくなるので..
     internal override void OnExecute(Entity entity)
     {
-        float speed = 5f;
-        float forceMean = 40f;
-        //entity.rigid.velocity = entity.wishingVect * 100.0f * Time.fixedDeltaTime;
-        Vector3 wishVect = entity.GroundNormal != Vector3.zero ? Vector3.ProjectOnPlane(entity.wishingVect, entity.GroundNormal) : entity.wishingVect;
-
-        //POnPlaneが0になるのだけは防ぐ
-        Vector3 CurrentVect = Vector3.ProjectOnPlane(entity.rigid.velocity + entity.transform.forward * 0.0001f , entity.GroundNormal);
-        Vector3 RightLeftVect = (Quaternion.AngleAxis(90f, entity.GroundNormal) * CurrentVect);
-        
-        //このLimiterが1以上あるなら、その速度を加算しない、と考える..
-        //プレイヤーの一定速度値を超えた際は1以上を与える..
-        float ForwardMean = 
-        Vector3.Dot(wishVect, CurrentVect.normalized);
-        float RightMean = 
-        Vector3.Dot(wishVect, RightLeftVect.normalized);
-
-        //wishingVectのSpeedMaxを考慮したMean値
-        Vector3 FWMean = CurrentVect.normalized * ForwardMean * (1.001f - Mathf.Clamp((CurrentVect.magnitude * Mathf.Sign(ForwardMean)) / speed, -Mathf.Infinity, 1f )) * forceMean;
-        Vector3 RGMean = RightLeftVect.normalized * RightMean * forceMean; //(1.001f - Mathf.Clamp((RightLeftVect.magnitude * Mathf.Sign(RightMean)) / speed, -Mathf.Infinity , 1f)) * 
+        Vector3 MVels = MutipleMoveVelocity.valueGet(loadParams,entity);
         
 
-        //ひとまず、CurrentVect値の速度を演算
-        //速度以上のwishVectが加算された場合はごく僅かな値を加算する
-        //角速度も考えるかぁ..
-        Vector3 ManipFW = FWMean + RGMean;
-        entity.rigid.AddForce(ManipFW, ForceMode.Force);
+        entity.rigid.AddForce(entity.softVelocity(entity.wishingVect * MutipleVelocity.valueGet(loadParams, entity), 
+        new Vector3(entity.status.BaseMoveVelocityParam.x * MVels.x,entity.status.BaseMoveVelocityParam.y * MVels.y,entity.status.BaseMoveVelocityParam.z * MVels.z), 
+        entity.status.BaseAccelParam), ForceMode.Force);
         //entity.rigid.AddTorque(Vector3.up * rightMean / forceMean ,ForceMode.Force);
     }
 
     public override string typeGet()
     {
         return "scMove";
+    }
+}
+
+//Groundに設定された法線方向に移動させる.
+[System.Serializable]
+[SerializeField]
+[SCHiearchy("Physics/Basic movement Axisied by Fw-Face")]
+public class scBasicForwardMove : StateController
+{    
+    [SerializeField]
+    stParams<Vector3> MoveVelocity = new stParams<Vector3>(new Vector3(10f,0f,0f), true);
+
+    [SerializeField]
+    stParams<bool> isSpeedstatAffect = new stParams<bool>(false,true);
+
+
+    //velocityで設定してたので、これを別のやつにする..
+    //ハマったとき、抜けなくなるので..
+    internal override void OnExecute(Entity entity)
+    {
+        Vector3 MVels = MoveVelocity.valueGet(loadParams,entity);
+        MVels *= isSpeedstatAffect.valueGet(loadParams,entity) ? entity.status.BaseMoveVelocityParam.x : 1f;
+        entity.rigid.AddForce(entity.hardVelocity(MVels), ForceMode.Force);
+        //entity.rigid.AddTorque(Vector3.up * rightMean / forceMean ,ForceMode.Force);
     }
 }
 
@@ -1451,4 +1462,3 @@ public class scIgnoreEntityCollisions : StateController
         entity.ignoreCollider();
     }
 }
-
