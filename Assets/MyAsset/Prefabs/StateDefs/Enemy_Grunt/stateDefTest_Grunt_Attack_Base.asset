@@ -28,6 +28,7 @@ MonoBehaviour:
     - rid: 3579423095655497736
     - rid: 4404388529659445248
     - rid: 1982101252599447582
+    - rid: 3324168377381683230
     Dir: 
     setCtrl: 0
   references:
@@ -50,6 +51,33 @@ MonoBehaviour:
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 3324168377381683230
+      type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: OneShot Vect
+        doLoadAfterChangeState: 0
+        MoveVelocity:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 50, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        isSpeedstatAffect:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
     - rid: 3579423065411158016

@@ -26,11 +26,11 @@ MonoBehaviour:
     StateList:
     - rid: 3002629528666767590
     - rid: 3002629213760520200
-    - rid: 3002629213760520201
     - rid: 3002629528666767591
     - rid: 3579422750824726546
     - rid: 1982101199356952583
     - rid: 3324167878465552386
+    - rid: 3324168377381683222
     Dir: 
     setCtrl: 0
   - StateDefName: Dashing
@@ -156,15 +156,6 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 50
         priority: 1
-    - rid: 3002629213760520201
-      type: {class: scMove, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 2
-          stLuaLoads: 
-        stateControllerSubName: Move_Auto
-        doLoadAfterChangeState: 0
     - rid: 3002629528666767590
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:
@@ -419,6 +410,33 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 0
         priority: 0
+    - rid: 3324168377381683222
+      type: {class: scBasicInputMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Input Basic Movement
+        doLoadAfterChangeState: 0
+        MutipleVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        MutipleMoveVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 1, y: 1, z: 1}
+          useID: -1
+          stLuaLoads: 
     - rid: 3579422750824726546
       type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
       data:
