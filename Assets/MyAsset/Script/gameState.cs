@@ -55,6 +55,7 @@ public class gameState : MonoBehaviour
         Transform tr = InitSpawnPos != null ? InitSpawnPos : gameObject.transform;
         Quaternion qt = Quaternion.LookRotation(tr.forward);
         Player = Instantiate(Player_Instantiate,tr.position,qt).GetComponent<Entity>();
+        
         MainGUI.SetComponent(Player);
 
         GameObject objs = Instantiate(MainGUI.gameObject);
@@ -66,6 +67,7 @@ public class gameState : MonoBehaviour
             cams.Follow = Player.transform;
             //生成位置の後ろ側を指定.
             cams.ForceCameraPosition(tr.position - tr.transform.forward + Vector3.up,qt);
+            Player.vCam = GameObject.FindGameObjectWithTag("Virtual_MainCamera").GetComponent<CinemachineVirtualCamera>();
         }
         objs.transform.SetParent(GUI_Top.transform, false);
     }

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.103966
+      value: 4.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.8344674
+      value: 4.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_TagString
@@ -157,6 +157,8 @@ MonoBehaviour:
     GuardRecoverTime: 0.7
     BaseAttackPerc: 60
     BaseDefencePerc: 100
+    BaseMoveVelocityParam: {x: 3, y: 3, z: 1}
+    BaseAccelParam: {x: 40, y: 40, z: 40}
     ChargeTime: 0
   attrs:
     ctrl: 1
@@ -192,7 +194,12 @@ MonoBehaviour:
   LoadedBehavior: {fileID: 11400000, guid: c1470366b3bea504686d9b6beddfeb49, type: 2}
   executedStateIDs: 
   raycenter: {x: 0, y: 0, z: 0}
-  cmdList: []
+  cmdList:
+  - CommandName: Basic
+    Command: _b
+    currentBufferTime: 1
+    bufferMaxTime: 1
+    readLength: 1
 --- !u!136 &7960206234810124181
 CapsuleCollider:
   m_ObjectHideFlags: 0

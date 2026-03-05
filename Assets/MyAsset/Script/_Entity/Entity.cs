@@ -246,10 +246,6 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(gameObject.tag == "Player" && vCam == null)
-        {
-            vCam = GameObject.FindGameObjectWithTag("Virtual_MainCamera").GetComponent<CinemachineVirtualCamera>();
-        }
         if (vCam != null && transposer == null)
         {
             Debug.Log("Finding Transposer");

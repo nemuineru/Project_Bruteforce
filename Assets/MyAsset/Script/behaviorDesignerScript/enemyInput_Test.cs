@@ -144,6 +144,10 @@ public class enemyInput_LookTest : Action
     //これ、仮想で1fと設定する.
     [SerializeField]
     SharedVector2[] virtualStickInput;
+    
+    //これ、仮想で1fと設定する.
+    [SerializeField]
+    SharedFloat stickInputSteepNess;
     //動かすEntity. これが付いたExternalBehaviorは必ずこれが付いてるはず
     Entity AIEntity;
 
@@ -163,9 +167,9 @@ public class enemyInput_LookTest : Action
         float AngleDiff = Vector3.SignedAngle(AIEntity.targetTo_fw, solution, Vector3.up);
 
         commandPallette cmdRegisterOneFrame = new commandPallette();
-        //スティックを前に(y = 0)
+        //右スティックにあたるやつを右・左に倒して、視点移動を行う.
         virtualSticks rstc =
-        new virtualSticks(Vector2.right * AngleDiff * 0.01f,0,1);
+        new virtualSticks(Vector2.right * AngleDiff * stickInputSteepNess.Value,0,1);
 
         cmdRegisterOneFrame.LookAxisVecs.Add(rstc);
         cmdRegisterOneFrame.CommandLength = 0;

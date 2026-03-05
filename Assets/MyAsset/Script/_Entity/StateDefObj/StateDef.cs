@@ -1078,7 +1078,6 @@ public class scChangeState : StateController
 }
 
 //移動方向に回転を加える.
-//現在はカメラ方向に向けるとしている
 [System.Serializable]
 [SerializeField]
 [SCHiearchy("Physics/RotateToSpeed")]
@@ -1092,14 +1091,27 @@ public class scRotateTowards : StateController
         if (vect.sqrMagnitude > 0.01f)
         {
             Quaternion RotateTowards = Quaternion.LookRotation(vect.normalized, Vector3.up);
-            entity.transform.rotation = Quaternion.Lerp(entity.transform.rotation, RotateTowards, RotateWeight);
-            //カメラ方向に回転.
-            //Quaternion RotateTowards = Quaternion.LookRotation(entity.targetTo_fw, Vector3.up);
-            //entity.transform.rotation = Quaternion.Lerp(entity.transform.rotation, RotateTowards, RotateWeight);
-            
+            entity.transform.rotation = Quaternion.Lerp(entity.transform.rotation, RotateTowards, RotateWeight);            
         }
     }
 }
+
+
+//移動方向に回転を加える.
+[System.Serializable]
+[SerializeField]
+[SCHiearchy("Physics/RotateToLookTo")]
+public class scRotateLookTo : StateController
+{
+    public float RotateWeight = 0;
+    internal override void OnExecute(Entity entity)
+    {
+        //カメラ方向に回転.
+        Quaternion RotateTowards = Quaternion.LookRotation(entity.targetTo_fw, Vector3.up);
+        entity.transform.rotation = Quaternion.Lerp(entity.transform.rotation, RotateTowards, RotateWeight);
+    }
+}
+
 
 
 //設定位置にエフェクトを放出する.
