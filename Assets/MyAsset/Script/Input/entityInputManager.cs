@@ -49,7 +49,7 @@ public class commandPallette
         Vector3 solution = Vector3.ProjectOnPlane(MoveDirection.Value, Vector3.up).normalized;
         //y軸周りの角度を取得. 視線方向を考える
         float AngleDiff = Vector3.SignedAngle(et.targetTo_fw, solution, Vector3.up);
-        Debug.Log(AngleDiff + " Deg.");
+        //Debug.Log(AngleDiff + " Deg.");
         List<virtualSticks> retVt = new List<virtualSticks>();
         foreach (virtualSticks vir in MovAxisVecs)
         {
@@ -62,12 +62,12 @@ public class commandPallette
             new Vector2(vir.axis.x * Mathf.Cos(AngleDiff * Mathf.Deg2Rad) + vir.axis.y * Mathf.Sin(AngleDiff * Mathf.Deg2Rad),
             vir.axis.y * Mathf.Cos(AngleDiff * Mathf.Deg2Rad) + vir.axis.x * Mathf.Sin(AngleDiff * Mathf.Deg2Rad));
             
-            Debug.DrawLine
-            (et.transform.position, et.transform.position + new Vector3(changed.axis.x, 0f, changed.axis.y) * 10f,
-            Color.red);
-            Debug.DrawLine
-            (et.transform.position, et.transform.position + new Vector3(vir.axis.x, 0f, vir.axis.y) * 10f,
-            Color.cyan);
+            // Debug.DrawLine
+            // (et.transform.position, et.transform.position + new Vector3(changed.axis.x, 0f, changed.axis.y) * 10f,
+            // Color.red);
+            // Debug.DrawLine
+            // (et.transform.position, et.transform.position + new Vector3(vir.axis.x, 0f, vir.axis.y) * 10f,
+            // Color.cyan);
             retVt.Add(changed);
             //Debug.Log("changed to " + changed.axis);
         }

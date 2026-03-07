@@ -161,6 +161,8 @@ public class stParams<Type>
             case loadType.Condition:
                 {
                     if(loadParams.Count > useID && useID >= 0)
+                    Debug.Log(entity.gameObject.name + " tries envs " 
+                    + loadParams[useID].GetType() + "to match " + retValue.GetType());
                     retValue = (Type)loadParams[useID];
                     break;
                 }

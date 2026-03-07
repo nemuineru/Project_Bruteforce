@@ -17,7 +17,6 @@ export function StateDef_200_ID(entity)
     }
     if (CurrentTime == 0)
     {
-        CS.UnityEngine.Debug.Log("Executed Anim");
         verdList.Add(0);
     }
     
