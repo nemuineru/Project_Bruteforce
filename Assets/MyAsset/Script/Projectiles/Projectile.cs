@@ -42,11 +42,11 @@ public class Projectile : MonoBehaviour
             c.getGlobalPos();
             c.DrawCapsule();
         }
-        // if (gameState.self.ProvokeHitDef_Projs(proj_Controller, cSet, transform, hitDefParams))
-        // {
-        //     Debug.Log("HIT!");
-        //     destroyEmit();
-        // }
+        if (gameState.self.ProvokeHitDef_Projs(proj_Controller, cSet, hitDefParams))
+        {
+            Debug.Log("HIT!");
+            destroyEmit();
+        }
     }
 
     void OnTriggerEnter(Collider other)

@@ -47,9 +47,9 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 1
+          value: 200
           stLuaLoads: 
         stateControllerSubName: bottle Thrower
         doLoadAfterChangeState: 0
-        changeTo: 1
+        changeTo: 200
         priority: 0

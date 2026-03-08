@@ -85,8 +85,7 @@ public class gameState : MonoBehaviour
         .ToList();
     }
 
-
-    //HitDefを発火する際のイベント
+    //HitDefを発火する際のイベント - プレイヤー設定の際..
     public bool ProvokeHitDef_Entity(Entity provokerEntity, hitDefParams hitDefParams)
     {
         bool ret = false;
@@ -145,7 +144,7 @@ public class gameState : MonoBehaviour
         return ret;
     }
 
-    public bool ProvokeHitDef_Projs(Entity calledEntity, clssSetting sets, Transform trfs, hitDefParams H_params)
+    public bool ProvokeHitDef_Projs(Entity ownerEntity, clssSetting sets, hitDefParams H_params)
     {
         bool ret = false; int refNumRemaining;
         hitDefParams useParam = new hitDefParams();
@@ -157,7 +156,7 @@ public class gameState : MonoBehaviour
         foreach (Entity e in entityList)
         {
             //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
-            if ((calledEntity == null || (e != calledEntity && e.tag != calledEntity.tag)) && refNumRemaining > 0)
+            if ((ownerEntity == null || (e != ownerEntity && e.tag != ownerEntity.tag)) && refNumRemaining > 0)
             {
                 bool f = false;
                 Vector3 HitPt = Vector3.zero;
@@ -171,7 +170,7 @@ public class gameState : MonoBehaviour
                     Debug.LogWarning("Proj Collided");
                     HitPt = (v1 + v2) / 2f;
                     ret = true;
-                    hitDef_proj_Apply(e, trfs, useParam, HitPt);
+                    hitDefApply(e, ownerEntity, useParam, HitPt);
                     //当てた分キャラ指定の値が減少..
                     refNumRemaining--;
                 }
@@ -200,16 +199,27 @@ public class gameState : MonoBehaviour
         generatedParam.SetStatus();
     }
 
-    void hitDef_proj_Apply(Entity beatenEntity, Transform calledPoint,
+    void hitDef_proj_Apply(Entity hitEntity, Entity ownerEntity, Transform calledPoint,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
+        hitDefParams generatedParam = new hitDefParams();
+
+        //call Parameter for damages..
+        generatedParam = calledEParam;
+        
+        generatedParam.HitRegisterTime = elapsedTime;
+
+        generatedParam.ownerEntity = null;
+        generatedParam.hitEntity = hitEntity;
+        generatedParam.ContactPoint = hitContactPoint;
+
         //stateChangeを設定..
-        beatenEntity.isStateChanged = true;
+        hitEntity.isStateChanged = true;
 
         //一先ず、プレースホルダーとして入れる
         //stateTimeをリセット.
-        beatenEntity.CurrentStateID = calledEParam.ChangeState_Enemy;
-        beatenEntity.stateTime = 0;
+        hitEntity.CurrentStateID = calledEParam.ChangeState_Enemy;
+        hitEntity.stateTime = 0;
 
         //現状、Projectileに関してはステート奪取を考えないことにする.
         // if (calledEParam.enemyRefsPlayerNum == true)
@@ -220,10 +230,10 @@ public class gameState : MonoBehaviour
         //placeholder for velocity
         //currently its barebone
         Vector3 HitVect = Vector3.ProjectOnPlane
-        (beatenEntity.transform.position - calledPoint.position, Vector3.up);
+        (hitEntity.transform.position - calledPoint.position, Vector3.up);
 
         //hitpause
-        (beatenEntity.HitPauseTime) = (calledEParam.hitStopTime.y);
+        (hitEntity.HitPauseTime) = (calledEParam.hitStopTime.y);
 
         /*
         DamageApply(beatenEntity, HitVect, calledEParam, 100f);

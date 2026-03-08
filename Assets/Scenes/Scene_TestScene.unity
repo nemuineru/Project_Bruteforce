@@ -784,6 +784,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: cmdList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: DefLists.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: DefLists.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 077150c2f5d6d674dac15ec1d9dd56c9, type: 2}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: cmdList.Array.data[0].Command
+      value: _b
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
       propertyPath: status.BaseMoveVelocityParam.x
       value: 2
       objectReference: {fileID: 0}
@@ -794,6 +810,22 @@ PrefabInstance:
     - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
       propertyPath: status.BaseMoveVelocityParam.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: cmdList.Array.data[0].readLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: cmdList.Array.data[0].CommandName
+      value: Basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: cmdList.Array.data[0].bufferMaxTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
+      propertyPath: cmdList.Array.data[0].currentBufferTime
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3733266165441710177, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
       propertyPath: m_LocalPosition.x

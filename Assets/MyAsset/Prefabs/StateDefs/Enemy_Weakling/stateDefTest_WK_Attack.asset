@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateDefTest_WK_Attack
   m_EditorClassIdentifier: 
-  ScriptDirectory: StateScript/Enemy_Default
+  ScriptDirectory: StateScript/Enemy_Default/Weaker
   stateDefs:
   - StateDefName: Throw Bottles
     StateDefID: 200
-    ScriptDirectory: StateScript/Enemy_Default
-    ScriptName: 
-    preStateVerdictName: QueuedStateID
+    ScriptDirectory: StateScript/Enemy_Default/Weaker
+    ScriptName: stateScript_enemyWeaker_Attack_Base.mjs
+    preStateVerdictName: StateDef_200_ID
     ParamLoadName: ThrowPos
     stateType: 0
     moveType: 0
@@ -89,21 +89,21 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         projs: {fileID: 5354473868157599039, guid: 38285fd282f99c1438237f117fc493ea, type: 3}
         InstDirection:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
           loadTypes: 1
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 1.12, y: 0.91, z: 0}
           useID: 0
           stLuaLoads: 
         InstPosition:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
           loadTypes: 1
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 0, y: 1.01, z: 0}
           useID: 1
           stLuaLoads: 
     - rid: 1982100731693105159
