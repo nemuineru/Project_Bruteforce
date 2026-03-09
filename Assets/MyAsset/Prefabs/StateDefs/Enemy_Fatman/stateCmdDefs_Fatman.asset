@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateCmdDefs_Fatman
   m_EditorClassIdentifier: 
+  ScriptDirectory: StateScript/Enemy_Default/FatMan
   stateDefs:
   - StateDefName: Default
     StateDefID: -1
-    LuaAsset: {fileID: -8122155829129254986, guid: fd815696446cfe54fadc1bcf55aac6f9, type: 3}
-    preStateVerdictName: Queue_Cmd
+    ScriptDirectory: StateScript/Enemy_Default/FatMan
+    ScriptName: stateScript_FatMan_cmd.mjs
+    preStateVerdictName: stateCmd
     ParamLoadName: LuaOutput
     stateType: 0
     moveType: 0
@@ -25,6 +27,7 @@ MonoBehaviour:
     - rid: 4404388664824299527
     - rid: 4404388709018370078
     - rid: 1982101297765023745
+    Dir: 
     setCtrl: 0
   references:
     version: 2
@@ -37,6 +40,7 @@ MonoBehaviour:
           value: 5000
           stLuaLoads: 
         stateControllerSubName: set Dead
+        doLoadAfterChangeState: 0
         changeTo: 5000
         priority: 0
     - rid: 4404388664824299527
@@ -47,6 +51,7 @@ MonoBehaviour:
           value: 1
           stLuaLoads: 
         stateControllerSubName: Attack_heavy
+        doLoadAfterChangeState: 0
         changeTo: 1
         priority: 0
     - rid: 4404388709018370078
@@ -57,5 +62,6 @@ MonoBehaviour:
           value: 5
           stLuaLoads: 
         stateControllerSubName: Grabber
+        doLoadAfterChangeState: 0
         changeTo: 5
         priority: 1
