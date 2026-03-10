@@ -59,9 +59,9 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 5
+          value: 210
           stLuaLoads: 
         stateControllerSubName: Grabber
         doLoadAfterChangeState: 0
-        changeTo: 5
+        changeTo: 210
         priority: 1

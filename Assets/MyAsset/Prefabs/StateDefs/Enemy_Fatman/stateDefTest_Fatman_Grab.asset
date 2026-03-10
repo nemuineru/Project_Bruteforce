@@ -17,7 +17,7 @@ MonoBehaviour:
   - StateDefName: Throw_Start
     StateDefID: 210
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: 
+    ScriptName: stateScript_FatMan_GrabState.mjs
     preStateVerdictName: QueuedStateID_Throw_Start
     ParamLoadName: Accel_Start
     stateType: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   - StateDefName: Throw_Player State Start
     StateDefID: 211
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: 
+    ScriptName: stateScript_FatMan_GrabState.mjs
     preStateVerdictName: QueuedStateID_ThrowHit_Player_OnProcess
     ParamLoadName: ChokerSped
     stateType: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   - StateDefName: Throw_Player State End
     StateDefID: 212
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: 
+    ScriptName: stateScript_FatMan_GrabState.mjs
     preStateVerdictName: QueuedStateID_ThrowHit_Player_EndProcess
     ParamLoadName: 
     stateType: 0
@@ -63,11 +63,11 @@ MonoBehaviour:
   - StateDefName: Throw_Enemy State Start
     StateDefID: 215
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: 
+    ScriptName: stateScript_FatMan_GrabState.mjs
     preStateVerdictName: QueuedStateID_ThrowHit_Enemy_OnProcess
     ParamLoadName: ChockAnim_Track
     stateType: 0
-    moveType: 0
+    moveType: 72
     physType: 78
     StateList:
     - rid: 7982028498543837196
@@ -80,11 +80,11 @@ MonoBehaviour:
   - StateDefName: Throw_Enemy State End
     StateDefID: 216
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: 
+    ScriptName: stateScript_FatMan_GrabState.mjs
     preStateVerdictName: QueuedStateID_ThrowHit_Enemy_EndProcess
     ParamLoadName: ChockAnim_Track
     stateType: 0
-    moveType: 0
+    moveType: 72
     physType: 83
     StateList:
     - rid: 1982100910739292230
@@ -442,7 +442,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: IAH
+          stParamValue: IA
           useID: -1
           stLuaLoads: 
         guardDamage:
@@ -571,31 +571,31 @@ MonoBehaviour:
           stParamValue: {fileID: 0}
           useID: -1
           stLuaLoads: 
-        ChangeState_EnemyStateID:
-          _setHidden: 1
+        ChangeState_OwnerStateID:
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: -1
+          stParamValue: 211
           useID: -1
           stLuaLoads: 
-        ChangeState_PlayerStateID:
-          _setHidden: 1
+        ChangeState_TargetStateID:
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: -1
+          stParamValue: 215
           useID: -1
           stLuaLoads: 
-        refsPlayerStateIDonHit:
-          _setHidden: 1
+        isTargetRefsOwnerID:
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         maxEntityHits:
@@ -647,11 +647,11 @@ MonoBehaviour:
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
-            ChangeState_Enemy: 8
+            ChangeState_Target: -1
             maxEntityHits: 1
             fallTime: 0
-            enemyRefsPlayerNum: 1
-            ChangeState_Player: 6
+            TargetRefsOwnerNum: 0
+            ChangeState_Owner: -1
             HitPhysFlag: SA
             HitMoveFlag: IA
             AnimType: 
@@ -782,7 +782,7 @@ MonoBehaviour:
         stateControllerSubName: QueuedStateID_ThrowHit_Enemy
         doLoadAfterChangeState: 0
         changeAnimID:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base

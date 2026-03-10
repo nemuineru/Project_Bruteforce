@@ -167,7 +167,7 @@ public class Elem
         //一番最後の項目が最新の筈なので
         if(isOwner)
         {
-            findParamList = et.registeredHitDefs.FindAll(par => par.hitEntity == et);
+            findParamList = et.registeredHitDefs.FindAll(par => par.targetEntity == et);
         }
         else
         {

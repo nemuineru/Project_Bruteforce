@@ -181,7 +181,7 @@ public class gameState : MonoBehaviour
 
     //hitdefApply is called for everything.. 
     //Projectileも同様に管理したい.
-    void hitDefApply(Entity beatenEntity, Entity calledEntity,
+    void hitDefApply(Entity target, Entity calledEntity,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
         hitDefParams generatedParam = new hitDefParams();
@@ -192,14 +192,14 @@ public class gameState : MonoBehaviour
         generatedParam.HitRegisterTime = elapsedTime;
 
         generatedParam.ownerEntity = calledEntity;
-        generatedParam.hitEntity = beatenEntity;
+        generatedParam.targetEntity = target;
         generatedParam.ContactPoint = hitContactPoint;
 
         //ステータス設定.
         generatedParam.SetStatus();
     }
 
-    void hitDef_proj_Apply(Entity hitEntity, Entity ownerEntity, Transform calledPoint,
+    void hitDef_proj_Apply(Entity target, Entity owner, Transform calledPoint,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
         hitDefParams generatedParam = new hitDefParams();
@@ -210,30 +210,29 @@ public class gameState : MonoBehaviour
         generatedParam.HitRegisterTime = elapsedTime;
 
         generatedParam.ownerEntity = null;
-        generatedParam.hitEntity = hitEntity;
+        generatedParam.targetEntity = target;
         generatedParam.ContactPoint = hitContactPoint;
 
         //stateChangeを設定..
-        hitEntity.isStateChanged = true;
+        target.isStateChanged = true;
 
         //一先ず、プレースホルダーとして入れる
         //stateTimeをリセット.
-        hitEntity.CurrentStateID = calledEParam.ChangeState_Enemy;
-        hitEntity.stateTime = 0;
+        target.CurrentStateID = calledEParam.ChangeState_Target;
+        target.stateTime = 0;
 
-        //現状、Projectileに関してはステート奪取を考えないことにする.
-        // if (calledEParam.enemyRefsPlayerNum == true)
-        // {
-        //     beatenEntity.controlledEntity = calledEntity;
-        // }
+        if (calledEParam.TargetRefsOwnerNum == true)
+        {
+            target.controlledEntity = owner;
+        }
 
         //placeholder for velocity
         //currently its barebone
         Vector3 HitVect = Vector3.ProjectOnPlane
-        (hitEntity.transform.position - calledPoint.position, Vector3.up);
+        (target.transform.position - calledPoint.position, Vector3.up);
 
         //hitpause
-        (hitEntity.HitPauseTime) = (calledEParam.hitStopTime.y);
+        (target.HitPauseTime) = (calledEParam.hitStopTime.y);
 
         /*
         DamageApply(beatenEntity, HitVect, calledEParam, 100f);

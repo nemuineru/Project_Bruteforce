@@ -51,7 +51,7 @@ public class hitDefParams
     public GameObject GuardHitEff;
 
     //当てた敵のステート変更情報(負の数以下で変更しない)
-    public int ChangeState_Enemy = -1;
+    public int ChangeState_Target = -1;
 
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
@@ -60,10 +60,10 @@ public class hitDefParams
     public float fallTime = 0;
 
     //敵がプレイヤーのステート名を参照するか？
-    public bool enemyRefsPlayerNum = false;
+    public bool TargetRefsOwnerNum = false;
 
     //プレイヤーのステート変更情報(負の数以下で変更しない)
-    public int ChangeState_Player = -1;
+    public int ChangeState_Owner = -1;
 
     //どういう姿勢に当たるか？　など. "S"tanding "A"ir, "L"aying の頭文字指定
     //また、"F"は Fall状態のフラッグがあるキャラにHit, "E"veryはフラッグ問わず全部当たる.
@@ -85,7 +85,7 @@ public class hitDefParams
     internal Entity ownerEntity;
 
     //このHitDefの対象先.
-    internal Entity hitEntity;
+    internal Entity targetEntity;
 
     //このHitDefを呼び出した時のgameStateの時間を登録.
     internal float HitRegisterTime = 0;
@@ -126,18 +126,18 @@ public class hitDefParams
         //基本的に当たったものとする.
         MoveContact = true;
         //ガードが入ってるか？
-        MoveGuarded = hitEntity.attrs.isGuarded == true && hitEntity.status.currentGuardPoint >= 0;
+        MoveGuarded = targetEntity.attrs.isGuarded == true && targetEntity.status.currentGuardPoint >= 0;
         //プレイヤー方向とか色々..        
         PushVector = Vector3.ProjectOnPlane
-        (hitEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
+        (targetEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
         
         //攻撃を"当てた側"のisStateHitを変更.
         ownerEntity.attrs.isStateHit = ownerEntity.attrs.isStateHit > 0 ? ownerEntity.attrs.isStateHit : 1;
 
         SetStates();
         DamageCalc();
-        if(hitEntity != null)
-            registerDef(hitEntity);
+        if(targetEntity != null)
+            registerDef(targetEntity);
         if(ownerEntity != null)
             registerDef(ownerEntity);
     }
@@ -163,9 +163,9 @@ public class hitDefParams
     {
         //基本立ち喰らいアニメ
         int retID = 5000;
-        if(ChangeState_Enemy > -1)
+        if(ChangeState_Target > -1)
         {
-            retID = ChangeState_Enemy;
+            retID = ChangeState_Target;
         }
         else
         {
@@ -240,29 +240,29 @@ public class hitDefParams
     void DamageCalc()
     {
         //スピード設定.
-        hitEntity.rigid.velocity = PushVector.normalized * velset.x + Vector3.up * velset.y;
+        targetEntity.rigid.velocity = PushVector.normalized * velset.x + Vector3.up * velset.y;
         //shapepositions. 後でこれも設定できるようにしたい.
-        hitEntity.transform.DOShakePosition(hitEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
+        targetEntity.transform.DOShakePosition(targetEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
 
         if(MoveGuarded)
         {            
             //hitpoint damage("on" Guarded)
-            hitEntity.status.currentHP -= GuardDamage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,hitEntity.status.BaseDefencePerc));
+            targetEntity.status.currentHP -= GuardDamage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
         }
         else
         {
             //hitpoint damage(if not guarded.)
-            hitEntity.status.currentHP -= Damage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,hitEntity.status.BaseDefencePerc));
+            targetEntity.status.currentHP -= Damage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
         }
 
         //placeholder for rotation
-        hitEntity.transform.rotation =
-        Quaternion.Lerp(hitEntity.transform.rotation, Quaternion.LookRotation(-PushVector, Vector3.up), 0.6f);
+        targetEntity.transform.rotation =
+        Quaternion.Lerp(targetEntity.transform.rotation, Quaternion.LookRotation(-PushVector, Vector3.up), 0.6f);
         //Debug.Log("Hit : " + ownerEntity.gameObject.name);
 
         //hitpause
-        (ownerEntity.HitPauseTime, hitEntity.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
+        (ownerEntity.HitPauseTime, targetEntity.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
         
         //ダメージエフェクトの生成はselfから発動する.
         GameObject instanceEff = HitEff != null ? HitEff : gameState.self.defaultEff;
@@ -270,31 +270,31 @@ public class hitDefParams
         {
             instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardEff;
         }
-        gameState.self.GenerateEffect(instanceEff, ContactPoint, hitEntity.transform.rotation);
+        gameState.self.GenerateEffect(instanceEff, ContactPoint, targetEntity.transform.rotation);
     }
 
     void SetStates()
     {
-        hitEntity.CurrentStateID = ReturnStateIDs(hitEntity);
+        targetEntity.CurrentStateID = ReturnStateIDs(targetEntity);
 
         //当てた相手は問答無用でstateTimeを0にする.
-        hitEntity.stateTime = 0;
+        targetEntity.stateTime = 0;
         //stateChangeを設定.
-        hitEntity.isStateChanged = true;
-        hitEntity.ChangeAnim();
+        targetEntity.isStateChanged = true;
+        targetEntity.ChangeAnim();
         
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
         //設定されたEntityはselfStateが読み出されない限り読み出す.
-        if(enemyRefsPlayerNum)
+        if(TargetRefsOwnerNum)
         {
-            hitEntity.controlledEntity = ownerEntity;
+            targetEntity.controlledEntity = ownerEntity;
         }
 
         //当てた側のChangeStateが0以上なら変更. ChangeStateも行う.
-        if(ChangeState_Player > -1)
+        if(ChangeState_Owner > -1)
         {
             ownerEntity.isStateChanged = true;
-            ownerEntity.CurrentStateID = ChangeState_Player;
+            ownerEntity.CurrentStateID = ChangeState_Owner;
         }
     }
 }

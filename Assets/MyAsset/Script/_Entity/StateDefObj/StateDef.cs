@@ -868,21 +868,21 @@ public class scHitDef : StateController
     };
 
     //投げとか、ステート飛ばしを実行する際に呼び出し.
-    //MenuNameを考え中.. 敵を拘束するのでController
     [SerializeField]
-    stParams<int> ChangeState_EnemyStateID = new stParams<int>(-1,false,false)
+    stParams<int> ChangeState_OwnerStateID = new stParams<int>(-1,false,false)
     {
         _MenuName = "Controller"
     };
 
+    //MenuNameを考え中.. ステート奪取するならbool
     [SerializeField]
-    stParams<int> ChangeState_PlayerStateID = new stParams<int>(-1,false,false)
+    stParams<int> ChangeState_TargetStateID = new stParams<int>(-1,false,false)
     {
         _MenuName = "Controller"
     };
     
     [SerializeField]
-    stParams<bool> refsPlayerStateIDonHit = new stParams<bool>(false,false,false)
+    stParams<bool> isTargetRefsOwnerID = new stParams<bool>(false,false,false)
     {
         _MenuName = "Controller"
     };
@@ -964,13 +964,14 @@ public class scHitDef : StateController
             HitEff = hitEffect._isReadable ? hitEffect.valueGet(loadParams,entity) : null,
             GuardHitEff = 
             guardhitEffect._isReadable ? guardhitEffect.valueGet(loadParams,entity) : null,
+
             //Controller for state executions
-            ChangeState_Enemy = 
-            ChangeState_EnemyStateID._isReadable ? ChangeState_EnemyStateID.valueGet(loadParams,entity) : -1,
-            ChangeState_Player = 
-            ChangeState_PlayerStateID._isReadable ? ChangeState_PlayerStateID.valueGet(loadParams,entity) : -1,
-            enemyRefsPlayerNum =
-            refsPlayerStateIDonHit._isReadable ? refsPlayerStateIDonHit.valueGet(loadParams, entity) : false,
+            ChangeState_Target = 
+            ChangeState_OwnerStateID._isReadable ? ChangeState_OwnerStateID.valueGet(loadParams,entity) : -1,
+            ChangeState_Owner = 
+            ChangeState_TargetStateID._isReadable ? ChangeState_TargetStateID.valueGet(loadParams,entity) : -1,
+            TargetRefsOwnerNum =
+            isTargetRefsOwnerID._isReadable ? isTargetRefsOwnerID.valueGet(loadParams, entity) : false,
 
             maxEntityHits = 
             maxEntityHits._isReadable ? maxEntityHits.valueGet(loadParams,entity) : 1,

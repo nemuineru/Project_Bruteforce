@@ -14,7 +14,7 @@ export function stateCmd(entity) {
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity);
     //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-    let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Basic");
+    let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Grab");
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
@@ -23,10 +23,10 @@ export function stateCmd(entity) {
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
-    //Ground Attacks - N
+    //Ground Grabbing strikes.
     if(selfOnGrd == true && AttackCmd_b == true && StateDefID == 0)
     {
-        verdList.Add(200);
+        verdList.Add(210);
     }
     return verdList;
 }
