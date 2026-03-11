@@ -23,10 +23,10 @@ export function stateCmd(entity) {
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
-    //Ground Attacks - N
-    // if(selfOnGrd == true && AttackCmd_b == true && StateDefID == 0)
-    // {
-    //     verdList.Add(200);
-    // }
+    //Ground Grabbing strikes.
+    if(selfOnGrd == true && AttackCmd_b == true && StateDefID == 0)
+    {
+        verdList.Add(210);
+    }
     return verdList;
 }

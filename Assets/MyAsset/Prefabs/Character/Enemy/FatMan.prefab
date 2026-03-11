@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: af31e80c5c9aada47bc15a07d62d6211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.272
+      value: 4.3366623
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af31e80c5c9aada47bc15a07d62d6211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.009999752
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af31e80c5c9aada47bc15a07d62d6211, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.823
+      value: 0.25523257
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af31e80c5c9aada47bc15a07d62d6211, type: 3}
       propertyPath: m_LocalRotation.w
@@ -156,19 +156,30 @@ MonoBehaviour:
       _lastcalcEndPos: {x: 0, y: 0, z: 0}
     disableClssList: []
     root: {fileID: 0}
+    eraseAllClss: 0
   status:
     maxHP: 280
     currentHP: 280
     maxEnergy: 50
     currentEnergy: 50
+    currentGuardPoint: 100
+    maxGuardPoint: 100
+    GuardReductDmgrate: 1
+    guardRecoverRate: 0.8
+    guardRecoverParsedTime: 0
+    GuardRecoverTime: 0.7
     BaseAttackPerc: 60
     BaseDefencePerc: 100
+    BaseMoveVelocityParam: {x: 5, y: 4, z: 5}
+    BaseAccelParam: {x: 40, y: 40, z: 40}
     ChargeTime: 0
   attrs:
     ctrl: 1
     alive: 1
     isPaused: 0
     isStateChanged: 0
+    isGuarded: 0
+    isDamaged: 0
     isFall: 0
     isEraseReady: 0
     isStateHit: 0
@@ -182,6 +193,7 @@ MonoBehaviour:
   animListObject:
   - {fileID: 11400000, guid: 6167ec558867151419a9c140a0036791, type: 2}
   - {fileID: 11400000, guid: 11f908f9dc396004d86e6a84997326b4, type: 2}
+  mainAnimancer: {fileID: 0}
   CurColor: {r: 0, g: 0, b: 0, a: 0}
   isOnGround: 1
   isStateChanged: 0
@@ -193,7 +205,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ffa158c97f6d314e8a757128ad9aa8e, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: 13d0a8e99653251479e2569ec5924640, type: 2}
+  executedStateIDs: 
   raycenter: {x: 0, y: -0.5, z: 0}
+  cmdList:
+  - CommandName: Basic
+    Command: '"_b"'
+    currentBufferTime: 0
+    bufferMaxTime: 2
+    readLength: 2
 --- !u!54 &2337383671416232423
 Rigidbody:
   m_ObjectHideFlags: 0
