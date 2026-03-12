@@ -265,7 +265,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 3
+          value: 2
           stLuaLoads: 
         stateControllerSubName: Start on Accel
         doLoadAfterChangeState: 0
@@ -709,7 +709,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 2
+          value: 100
           stLuaLoads: 
         stateControllerSubName: Change to 0 init state for non-connected hit
         doLoadAfterChangeState: 0

@@ -2522,30 +2522,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FatMan
       objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: cmdList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: cmdList.Array.data[0].Command
-      value: b
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: cmdList.Array.data[0].readLength
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: cmdList.Array.data[0].CommandName
-      value: Basic
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: cmdList.Array.data[0].bufferMaxTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: cmdList.Array.data[0].currentBufferTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.3366623
