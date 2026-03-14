@@ -31,6 +31,11 @@ export function StateDef_210_ID(entity) {
     {
         verdList.Add(2) 
     }
+    //hitDefs Register    
+    if(CurrentAnimTime > 7 && CurrentAnimTime < 18 && CurrentAnimID == 2)
+    {
+        verdList.Add(1) 
+    }
     //ChangeState on AnimEnd
     if( AnimEndTime - CurrentAnimTime < 4 && CurrentAnimID == 2)
     {
@@ -40,6 +45,7 @@ export function StateDef_210_ID(entity) {
     return verdList;
 }
 
+//params for accelation
 export function Accel_Start(entity)
 {
     let List_Object =
@@ -63,6 +69,156 @@ export function Accel_Start(entity)
     //CS.UnityEngine.Debug.Log(vel2);
     return outs
 }
+
+//stateDef 211 (Grab Process State) 
+export function StateDef_211_OwnerGrabProcess_ID(entity)
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+    //ChangeAnim
+    if( CurrentTime == 0)
+    {
+        verdList.Add(0);
+    }
+    // change to idle. also damage them and check the rest frametime
+    if(  CurrentAnimTime > 4 && CurrentAnimTime < 5 && selfOnGrd == true)
+    {
+        verdList.Add(1);
+    }
+    if(AnimEndTime - CurrentAnimTime < 1 && selfOnGrd == true && CurrentAnimID == 3)
+    {
+        verdList.Add(2);
+    }
+
+    return verdList;
+}
+
+//stateDef 212 (Grab Ending State) 
+export function StateDef_212_OwnerGrabEnd_ID(entity)
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+    //ChangeAnim
+    if( CurrentTime == 0)
+    {
+        verdList.Add(0);
+    }
+    // change to idle. also damage them and check the rest frametime
+    if(AnimEndTime - CurrentAnimTime < 7 && CurrentAnimID == 4)
+    {
+        verdList.Add(1);
+    }
+
+    return verdList;
+}
+
+
+//stateDef 213 (Grab Process State) 
+export function StateDef_213_TargetGrabProcess_ID(entity)
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+    //loads the owner entity.
+    let ControlledEntity = in_entity.controlledEntity
+    let Enemy_C_EntityStateID = CS.Elem.CheckStateDefID(ControlledEntity)
+
+    //ChangeAnim
+    if( CurrentTime == 0)
+    {
+        verdList.Add(0);
+    }
+    // change to idle. also damage them and check the rest frametime
+    if(  Enemy_C_EntityStateID == 7 )
+    {
+        verdList.Add(1);
+    }
+    else
+    {
+        verdList.Add(2);
+    }
+
+    return verdList;
+}
+
+//stateDef 214 (Grab Ending State) 
+export function StateDef_214_TargetGrabEnd_ID(entity)
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    
+    let ControlledEntity = in_entity.controlledEntity
+    let Enemy_C_EntityStateID = CS.Elem.CheckStateDefID(ControlledEntity)
+    let Enemy_C_animTime = CS.Elem.CheckAnimTime(ControlledEntity)
+    let Enemy_AnimEndTime = CS.Elem.CheckAnimEndTime(ControlledEntity)
+
+    //ChangeAnim
+    if( CurrentTime == 0)
+    {
+        verdList.Add(0);
+    }
+    // change to idle. also damage them and check the rest frametime
+    if( selfStTime > 15) 
+    {
+        verdList.Add(1);        
+    }
+    else 
+    {
+        verdList.Add(2);
+    }
+    return verdList;
+}
+
 
 // export Parameter @ stateDef 0.
 // not only this function, but those params need to be 

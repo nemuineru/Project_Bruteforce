@@ -442,7 +442,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 
+          stParamValue: IA
           useID: -1
           stLuaLoads: 
         guardDamage:
