@@ -282,14 +282,17 @@ public class hitDefParams
         gameState.self.GenerateEffect(instanceEff, ContactPoint, targetEntity.transform.rotation);
     }
 
+    //CListQueueに追加する.
     void SetStates()
     {
-        targetEntity.CurrentStateID = ReturnStateIDs(targetEntity);
+        //targetEntity.CurrentStateID = ReturnStateIDs(targetEntity);
 
         //当てた相手は問答無用でstateTimeを0にする.
         targetEntity.stateTime = 0;
         //stateChangeを設定.
-        targetEntity.isStateChanged = true;
+        //targetEntity.isStateChanged = true;
+
+        targetEntity.CListQueue.Add(new Entity.ChangeStateQueue(){stateDefID = ReturnStateIDs(targetEntity), priority = 100});
         targetEntity.ChangeAnim();
         
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
