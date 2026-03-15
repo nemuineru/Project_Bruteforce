@@ -620,19 +620,36 @@ public class scAnimParentSet : StateController
     [SerializeField]
     stParams<int> changeAnimID;
 
+    //if it is not set, change 0(main) slot. 
+    //latter Slot must needs to be Additional.
     [SerializeField]
-    stParams<Vector2> animParameter;
+    stParams<int> AnimSlot =
+    new stParams<int>{
+        _setEssential = true
+    };
+    
+    [SerializeField]
+    stParams<Vector2> animParameter; 
 
+    [SerializeField]
+    stParams<bool> isAdditional; 
+
+    [SerializeField]
+    AvatarMask mask;
+
+    //Parent Version.
     internal override void OnExecute(Entity entity)
     {
+        int AnimSlotNum = AnimSlot.valueGet(loadParams,entity);
+        bool _isAdditional = isAdditional.valueGet(loadParams,entity);
         //entity.parentEntity.animID = changeAnimID.valueGet(loadParams, entity);
         AnimDef animFindByID = entity.controlledEntity.animDefs.Find
         (x => x.ID == changeAnimID.valueGet(loadParams, entity));
         //設定されたIDが見つかれば、そのParameterと同様に設定..
         if (animFindByID != null)
         {
-            //entity.ChangeAnim_fromParent();
-            entity.ChangeAnimParam(animParameter.valueGet(loadParams, entity));
+            entity.ChangeAnim(animFindByID,AnimSlotNum,animFindByID.blendInTime
+            ,null,mask,_isAdditional);
         }
     }
 }
@@ -765,10 +782,21 @@ public class scHitDef : StateController
         _setEssential = true,
         _MenuName = "Damages"
     };    
-
-    //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
     [SerializeField]
     stParams<string> hitMoveFlag = new stParams<string>("IAH",true,true)
+    {
+        _setEssential = true,
+        _MenuName = "Damages"
+    };
+
+    [SerializeField]
+    stParams<string> guardPhysFlag = new stParams<string>("SA",true,true)
+    {
+        _setEssential = true,
+        _MenuName = "Damages"
+    };    
+    [SerializeField]
+    stParams<string> guardMoveFlag = new stParams<string>("IAH",true,true)
     {
         _setEssential = true,
         _MenuName = "Damages"
@@ -943,6 +971,8 @@ public class scHitDef : StateController
             //damages, for hitting
             HitMoveFlag = hitMoveFlag.valueGet(loadParams,entity), //essential!
             HitPhysFlag = hitPhysFlag.valueGet(loadParams,entity), //essential!
+            GuardMoveFlag = guardMoveFlag.valueGet(loadParams,entity), //essential!
+            GuardPhysFlag = guardPhysFlag.valueGet(loadParams,entity), //essential!
 
             //hit vect set
             velset = 
@@ -967,9 +997,9 @@ public class scHitDef : StateController
 
             //Controller for state executions
             ChangeState_Target = 
-            ChangeState_OwnerStateID._isReadable ? ChangeState_OwnerStateID.valueGet(loadParams,entity) : -1,
-            ChangeState_Owner = 
             ChangeState_TargetStateID._isReadable ? ChangeState_TargetStateID.valueGet(loadParams,entity) : -1,
+            ChangeState_Owner = 
+            ChangeState_OwnerStateID._isReadable ? ChangeState_OwnerStateID.valueGet(loadParams,entity) : -1,
             TargetRefsOwnerNum =
             isTargetRefsOwnerID._isReadable ? isTargetRefsOwnerID.valueGet(loadParams, entity) : false,
 
@@ -983,6 +1013,7 @@ public class scHitDef : StateController
         //GameStateに登録させておきたい.
         if(gameState.self.ProvokeHitDef_Entity(entity, HitDef))
         {
+            //Debug.DrawLine(,)
         }
     }
 

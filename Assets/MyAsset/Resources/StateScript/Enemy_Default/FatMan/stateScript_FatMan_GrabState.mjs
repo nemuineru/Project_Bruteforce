@@ -158,7 +158,7 @@ export function StateDef_213_TargetGrabProcess_ID(entity)
     let CurrentAnimID = CS.Elem.CheckAnimID(entity);
 
     //loads the owner entity.
-    let ControlledEntity = in_entity.controlledEntity
+    let ControlledEntity = entity.controlledEntity
     let Enemy_C_EntityStateID = CS.Elem.CheckStateDefID(ControlledEntity)
 
     //ChangeAnim
@@ -167,7 +167,7 @@ export function StateDef_213_TargetGrabProcess_ID(entity)
         verdList.Add(0);
     }
     // change to idle. also damage them and check the rest frametime
-    if(  Enemy_C_EntityStateID == 7 )
+    if(  Enemy_C_EntityStateID == 212 )
     {
         verdList.Add(1);
     }
@@ -197,7 +197,7 @@ export function StateDef_214_TargetGrabEnd_ID(entity)
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
     let CurrentAnimID = CS.Elem.CheckAnimID(entity);
     
-    let ControlledEntity = in_entity.controlledEntity
+    let ControlledEntity = entity.controlledEntity
     let Enemy_C_EntityStateID = CS.Elem.CheckStateDefID(ControlledEntity)
     let Enemy_C_animTime = CS.Elem.CheckAnimTime(ControlledEntity)
     let Enemy_AnimEndTime = CS.Elem.CheckAnimEndTime(ControlledEntity)
@@ -219,6 +219,58 @@ export function StateDef_214_TargetGrabEnd_ID(entity)
     return verdList;
 }
 
+export function ThrowHit_Owner_Choker(entity)
+{
+    //List<Object>
+    let List_Object =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+    let outs = new List_Object();
+
+    const Vector2 = CS.UnityEngine.Vector2;
+    const Vector3 = CS.UnityEngine.Vector3;
+    
+    let trf = Vector3.ProjectOnPlane(entity.transform.forward, Vector3.up).normalized
+    
+    let retVec = new Vector3(0,0,0);
+    retVec =  Vector3.op_Addition(Vector3.op_Multiply(trf,10.0), new Vector3(0,90,0))
+    outs.Add(retVec)
+    return outs
+}
+
+export function ThrowHit_Target_Track(entity)
+{
+    //List<Object>
+    let List_Object =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+    let outs = new List_Object();
+
+    const Vector2 = CS.UnityEngine.Vector2;
+    const Vector3 = CS.UnityEngine.Vector3;
+
+    let ControlledEntity = entity.controlledEntity
+    
+    let tr_Choked = CS.Elem.getEntityBoneTransform(entity,"spine").position
+    let tr_Choker_L = CS.Elem.getEntityBoneTransform(ControlledEntity,"hand.l").position
+    let tr_Choker_R = CS.Elem.getEntityBoneTransform(ControlledEntity,"hand.r").position
+    
+    let retVec = new Vector3(0,0,0);
+    
+    //Get Hand Middle point, and calc it.
+    let tr_Choker_All = Vector3.op_Multiply(Vector3.op_Addition(tr_Choker_L,tr_Choker_R),0.5)
+    //let DPos = new Vector3( tr_Choker_All.x - tr_Choked.x , tr_Choker_All.y -  tr_Choked.y , tr_Choker_All.z - tr_Choked.z )
+    let diffPos =  Vector3.op_Subtraction(tr_Choker_All, tr_Choked) //CS.UnityEngine.Time.fixedDeltaTime
+
+    //CS.UnityEngine.Debug.Log(diffPos);
+    // CS.UnityEngine.Debug.DrawLine(tr_Choked, tr_Choker_All);
+    // CS.UnityEngine.Debug.DrawLine(tr_Choked, Vector3.op_Addition(Vector3.up,tr_Choked));
+    outs.Add(diffPos)
+    let throwingVect_1 = Vector3.ProjectOnPlane(entity.transform.forward, Vector3.up).normalized
+    let throwingVect_2 = Vector3.op_Multiply(Vector3.up, 0.2);
+
+    outs.Add(Vector3.op_Multiply(Vector3.op_Addition(throwingVect_1,throwingVect_2), 10.0));
+    
+    return outs
+}
 
 // export Parameter @ stateDef 0.
 // not only this function, but those params need to be 

@@ -34,7 +34,7 @@ MonoBehaviour:
     StateDefID: 211
     ScriptDirectory: StateScript/Enemy_Default/FatMan
     ScriptName: stateScript_FatMan_GrabState.mjs
-    preStateVerdictName: QueuedStateID_ThrowHit_Player_OnProcess
+    preStateVerdictName: StateDef_211_OwnerGrabProcess_ID
     ParamLoadName: ChokerSped
     stateType: 0
     moveType: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     StateDefID: 212
     ScriptDirectory: StateScript/Enemy_Default/FatMan
     ScriptName: stateScript_FatMan_GrabState.mjs
-    preStateVerdictName: QueuedStateID_ThrowHit_Player_EndProcess
+    preStateVerdictName: StateDef_212_OwnerGrabEnd_ID
     ParamLoadName: 
     stateType: 0
     moveType: 0
@@ -61,10 +61,10 @@ MonoBehaviour:
     Dir: 
     setCtrl: 0
   - StateDefName: Throw_Enemy State Start
-    StateDefID: 215
+    StateDefID: 213
     ScriptDirectory: StateScript/Enemy_Default/FatMan
     ScriptName: stateScript_FatMan_GrabState.mjs
-    preStateVerdictName: QueuedStateID_ThrowHit_Enemy_OnProcess
+    preStateVerdictName: StateDef_213_TargetGrabProcess_ID
     ParamLoadName: ChockAnim_Track
     stateType: 0
     moveType: 72
@@ -78,10 +78,10 @@ MonoBehaviour:
     Dir: 
     setCtrl: 0
   - StateDefName: Throw_Enemy State End
-    StateDefID: 216
+    StateDefID: 214
     ScriptDirectory: StateScript/Enemy_Default/FatMan
     ScriptName: stateScript_FatMan_GrabState.mjs
-    preStateVerdictName: QueuedStateID_ThrowHit_Enemy_EndProcess
+    preStateVerdictName: StateDef_214_TargetGrabEnd_ID
     ParamLoadName: ChockAnim_Track
     stateType: 0
     moveType: 72

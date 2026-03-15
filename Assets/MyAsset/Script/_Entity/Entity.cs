@@ -457,9 +457,10 @@ public class Entity : MonoBehaviour
             prevState = 
             loadedDefs.Find(stDef => stDef.StateDefID == prevStateID);
         }
+        //ChangeStateと同時に発行されると、エラーが発生する？
         else
         {
-            Debug.LogWarning("Parent Entity Loaded");
+            //Debug.LogWarning("Parent Entity Loaded");
             StateDef findDef = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID).Clone();
             currentState = findDef;
         }        

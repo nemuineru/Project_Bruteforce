@@ -50,8 +50,6 @@ public class hitDefParams
     [SerializeField]
     public GameObject GuardHitEff;
 
-    //当てた敵のステート変更情報(負の数以下で変更しない)
-    public int ChangeState_Target = -1;
 
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
@@ -59,10 +57,13 @@ public class hitDefParams
     //ダウン設定.
     public float fallTime = 0;
 
-    //敵がプレイヤーのステート名を参照するか？
+    //当てた敵のステート変更情報(負の数以下で変更しない)
+    public int ChangeState_Target = -1;
+    
+    //当てられた側が当てた側のステート名を参照するか？
     public bool TargetRefsOwnerNum = false;
 
-    //プレイヤーのステート変更情報(負の数以下で変更しない)
+    //当てた側のステート変更情報(負の数以下で変更しない)
     public int ChangeState_Owner = -1;
 
     //どういう姿勢に当たるか？　など. "S"tanding "A"ir, "L"aying の頭文字指定
@@ -71,6 +72,12 @@ public class hitDefParams
 
     //どういう動きに当たるか？　など やられ判定のときに追撃しないようにしたりとか.
     public string HitMoveFlag = "IA";
+
+    //どういう姿勢ならガード可能？
+    public string GuardPhysFlag = "SA";
+    //どういう動きでガード可能？
+    public string GuardMoveFlag = "IA";
+
     
     //Anim設定. この設定に基づき、ステート・アニメの変更先を変える.
     //L -> Light, M -> Middle, H -> Heavy, U -> Up, D -> Down, A -> Air, C -> Crouch, B -> Blow
@@ -125,8 +132,10 @@ public class hitDefParams
     {
         //基本的に当たったものとする.
         MoveContact = true;
-        //ガードが入ってるか？
-        MoveGuarded = targetEntity.attrs.isGuarded == true && targetEntity.status.currentGuardPoint >= 0;
+        //ガードが入ってるか？ あと、ガード可能な攻撃？
+        bool isGuardable = GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardPhysFlag.Contains(targetEntity.physicsType.ToString());
+        MoveGuarded = targetEntity.attrs.isGuarded == true && targetEntity.status.currentGuardPoint >= 0 && isGuardable;
+
         //プレイヤー方向とか色々..        
         PushVector = Vector3.ProjectOnPlane
         (targetEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
@@ -163,7 +172,16 @@ public class hitDefParams
     {
         //基本立ち喰らいアニメ
         int retID = 5000;
-        if(ChangeState_Target > -1)
+        int referenceID = refEntity.CurrentStateID;
+        //Guardingが設定されているなら双方に登録される関数値を考える.
+        //entityとhitIDが同じヤツは二重に登録しない筈.
+        //OnGuardedStateの105に移動させる.
+        if(MoveGuarded)
+        {
+            retID = 105;
+            //Debug.Log("MoveGuarded To " + referenceID);
+        }
+        else if(ChangeState_Target > -1)
         {
             retID = ChangeState_Target;
         }
@@ -174,7 +192,6 @@ public class hitDefParams
             //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
             //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
             //if文祭りじゃ.
-            int referenceID = refEntity.CurrentStateID;
             //基本として、LightHit用のStateDefは入っていないと問題外.
             //Fall hit - FallTimeが0以上、またはFall中に攻撃を加えたとき
             if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
@@ -224,14 +241,6 @@ public class hitDefParams
                 DamageType = 2;
             }
             retID += DamageType + HitType;
-            //いずれにせよ、Guardingが設定されているなら双方に登録される関数値を考える.
-            //entityとhitIDが同じヤツは二重に登録しない筈.
-            //OnGuardedStateの105に移動させる.
-            if(MoveGuarded)
-            {
-                retID = 105;
-                Debug.Log("MoveGuarded To " + referenceID);
-            }
         }
         return retID;
     }
@@ -285,13 +294,12 @@ public class hitDefParams
         
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
         //設定されたEntityはselfStateが読み出されない限り読み出す.
-        if(TargetRefsOwnerNum)
+        if(TargetRefsOwnerNum && !MoveGuarded)
         {
             targetEntity.controlledEntity = ownerEntity;
         }
-
         //当てた側のChangeStateが0以上なら変更. ChangeStateも行う.
-        if(ChangeState_Owner > -1)
+        if(ChangeState_Owner > -1 && !MoveGuarded)
         {
             ownerEntity.isStateChanged = true;
             ownerEntity.CurrentStateID = ChangeState_Owner;
