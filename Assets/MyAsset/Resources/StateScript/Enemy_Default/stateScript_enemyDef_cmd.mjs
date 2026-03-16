@@ -14,7 +14,7 @@ export function stateCmd(entity) {
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity);
     //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-    let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Grab");
+    let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Basic");
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
