@@ -54,9 +54,10 @@ public class hitDefParams
     public int HitPriority;
 
     //同じ値がかち合った時、どういった挙動にするか.
-    // H - Hit, 相手にもhitdefをapplyする.
+    // H - Hit, 相手がDodgeでなければhitdefをapplyする.
     // M - Miss, 攻撃は回避される.
-    // A - Avoid, 
+    // D - Dodge, 互いに命中しない. 
+    public char HitPriorityBehavior = 'H';
 
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
