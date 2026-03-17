@@ -50,6 +50,13 @@ public class hitDefParams
     [SerializeField]
     public GameObject GuardHitEff;
 
+    //同時に当てた際の挙動確認. 多ければ多いほど優先され、優先度が低い程そのhitdefによるchangestateは変化されない.
+    public int HitPriority;
+
+    //同じ値がかち合った時、どういった挙動にするか.
+    // H - Hit, 相手にもhitdefをapplyする.
+    // M - Miss, 攻撃は回避される.
+    // A - Avoid, 
 
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
@@ -155,7 +162,7 @@ public class hitDefParams
     void registerDef(Entity entity)
     {
         //if not find, -1 is outputted.
-        int getDupedID = entity.registeredHitDefs.FindIndex(fParam => fParam.hitID == hitID && fParam.ownerEntity == ownerEntity);
+        int getDupedID = entity.registeredHitDefs.FindIndex(fParam => fParam.hitID == hitID && fParam.ownerEntity == ownerEntity && fParam.targetEntity == targetEntity);
         //remove the duped HitDef, and renew it.
         if(getDupedID >= 0)
         {

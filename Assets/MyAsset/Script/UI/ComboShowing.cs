@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 /// <summary>
 /// Tracks how many consecutive hits the player lands and displays the count via TextMeshPro.
@@ -51,6 +52,13 @@ public class ComboShowing : MonoBehaviour
     gameState _gs;
     float _idleTimer;
 
+    bool isShivering = false;
+
+
+    //null at first, if registered, tries to find not same.
+    //it resets at ResetCombo.
+    hitDefParams atRegisteredParam;
+
     // Per-entity hit count cache to detect new hits each frame
     readonly Dictionary<Entity, int> _prevHitCounts = new();
 
@@ -69,7 +77,13 @@ public class ComboShowing : MonoBehaviour
     // ------------------------------------------------------------------ //
     void Update()
     {
-        if (_player == null || _gs == null) return;
+        if (_player == null || _gs == null) {
+            
+            Debug.Log("not finding player");
+            _player = gameState.self.Player;
+            _gs = gameState.self;
+            return;
+            }
 
         bool hitThisFrame = CheckForNewHits();
 
@@ -81,6 +95,7 @@ public class ComboShowing : MonoBehaviour
         else if (IsComboActive)
         {
             _idleTimer += Time.deltaTime;
+            isShivering = _idleTimer + 1.0f >= comboResetTime ? !isShivering : false;
             if (_idleTimer >= comboResetTime)
                 ResetCombo();
         }
@@ -106,6 +121,7 @@ public class ComboShowing : MonoBehaviour
             if (entity == _player || !entity.attrs.alive) continue;
 
             int currentCount = CountPlayerHitsOn(entity);
+            Debug.Log("calcCombos " + currentCount);
 
             if (!_prevHitCounts.TryGetValue(entity, out int prevCount))
             {
@@ -131,9 +147,24 @@ public class ComboShowing : MonoBehaviour
     /// <summary>Counts registeredHitDefs on an entity where the player is the attacker.</summary>
     int CountPlayerHitsOn(Entity entity)
     {
-        int n = 0;
-        foreach (hitDefParams hit in entity.registeredHitDefs)
-            if (hit.ownerEntity == _player) n++;
+        int n = ComboCount;
+        List<hitDefParams> ownerDefs = entity.registeredHitDefs.FindAll(et => et.ownerEntity == _player);
+        if(ownerDefs.Count != 0)
+        {
+            hitDefParams getLatest = ownerDefs.Last();
+            //最新のRegisteredParamが同じ登録値でなければ.. 1ヒットとする.
+            if(getLatest != atRegisteredParam)
+            {
+                foreach(hitDefParams hit in ownerDefs)
+                {
+                    atRegisteredParam = hit;
+                }
+                n++;
+            }
+        }
+        // int _HitCount = 0;
+        // foreach (hitDefParams hit in entity.registeredHitDefs)
+        //     if (hit.ownerEntity == _player) n++;
         return n;
     }
 
@@ -160,6 +191,7 @@ public class ComboShowing : MonoBehaviour
         _idleTimer = 0f;
         IsComboActive = false;
         _prevHitCounts.Clear();
+        atRegisteredParam = null;
         RefreshUI();
     }
 
@@ -171,10 +203,15 @@ public class ComboShowing : MonoBehaviour
     {
         if (comboText == null) return;
 
-        bool show = IsComboActive && ComboCount >= showThreshold;
+        //コンボ消えかけなら消す..
+        bool show = IsComboActive && ComboCount >= showThreshold && (isShivering == false);
         comboText.gameObject.SetActive(show);
 
-        if (show)
-            comboText.text = ComboCount + " HIT";
+        if (show){
+            string x = 
+            string.Format("<size=5em>{0}</size><line-height=120%>\n<size=2em>CHAIN!<line-height=30%>\n<size=0.7em>",ComboCount);
+            comboText.text = x;
+            comboText.color = Color.Lerp(Color.white,Color.gray, Mathf.Pow(_idleTimer / comboResetTime,0.75f));
+            }
     }
 }

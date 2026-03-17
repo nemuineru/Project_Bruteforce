@@ -163,6 +163,7 @@ public class Entity : MonoBehaviour
     //GetHitDef/GetAttackDefで管理されるHitParams.
     //当てたプレイヤー本人のガード等を鑑みて..
 
+    [SerializeField]
     internal List<hitDefParams> registeredHitDefs = new List<hitDefParams>();
 
     //first init.
@@ -758,7 +759,7 @@ public class Entity : MonoBehaviour
             destroTime_Current += Time.fixedDeltaTime;
             float rep = Mathf.Repeat(destroTime_Current, destroTime_meshRev);
             bool isDisabled = (destroTime_meshRev * (1f / 2f) > rep);
-            Debug.Log("entity renderer : " + isDisabled + " " + rep);
+            // Debug.Log("entity renderer : " + isDisabled + " " + rep);
             foreach (Renderer r in renderers)
             {
                 r.enabled = isDisabled;
