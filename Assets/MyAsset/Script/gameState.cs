@@ -100,12 +100,14 @@ public class gameState : MonoBehaviour
         .ToList();
     }
 
-    
+
+    //hitdefFrame - リストアップしたhitdefparamを優先度に応じて実行する.
     void HitParamFrame()
     {
         var sorted = hitDef_Regs.OrderByDescending(s => s.param.HitPriority).ToList();
         var executed = new List<HitDef_Registered>();
 
+        //最初に実行されるヤツはコンディションに依らず必ず実行. 
         foreach (var reg in sorted)
         {
             bool shouldExecute = true;
