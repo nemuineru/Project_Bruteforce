@@ -40,21 +40,7 @@ public class gameState : MonoBehaviour
 
     public Transform InitSpawnPos;
 
-    public class HitDef_Registered
-    {
-        internal hitDefParams param;
-        Entity owner, target;
-        Vector3 hitPoint;
-        public HitDef_Registered(hitDefParams setParam, Entity own, Entity tgt, Vector3 hitPt)
-        {
-            param = setParam;
-            owner = own;
-            target = tgt;
-            hitPoint = hitPt;
-        }
-    }
-
-    public List<HitDef_Registered> hitDef_Regs;
+    public List<hitDefParams> onOneFrameHitdefs;
 
     internal float elapsedTime = 0f;
     void Awake()
@@ -104,8 +90,8 @@ public class gameState : MonoBehaviour
     //hitdefFrame - リストアップしたhitdefparamを優先度に応じて実行する.
     void HitParamFrame()
     {
-        var sorted = hitDef_Regs.OrderByDescending(s => s.param.HitPriority).ToList();
-        var executed = new List<HitDef_Registered>();
+        var sorted = onOneFrameHitdefs.OrderByDescending(s => s.HitPriority).ToList();
+        var executed = new List<hitDefParams>();
 
         //最初に実行されるヤツはコンディションに依らず必ず実行. 
         foreach (var reg in sorted)
@@ -115,19 +101,19 @@ public class gameState : MonoBehaviour
             foreach (var prime in executed)
             {
                 // Current param's owner was targeted by a prime param
-                if (reg.param.ownerEntity != prime.param.targetEntity)
+                if (reg.ownerEntity != prime.targetEntity)
                     continue;
 
-                if (reg.param.HitPriority < prime.param.HitPriority)
+                if (reg.HitPriority < prime.HitPriority)
                 {
                     // Lower priority against someone who already hit us — skip
                     shouldExecute = false;
                     break;
                 }
-                else if (reg.param.HitPriority == prime.param.HitPriority)
+                else if (reg.HitPriority == prime.HitPriority)
                 {
                     // Same priority — HitPriorityBehavior decides
-                    char behavior = reg.param.HitPriorityBehavior;
+                    char behavior = reg.HitPriorityBehavior;
                     if (behavior == 'M' || behavior == 'D')
                     {
                         shouldExecute = false;
@@ -138,12 +124,12 @@ public class gameState : MonoBehaviour
             }
 
             if (shouldExecute)
-                reg.param.SetStatus();
+                reg.SetStatus();
 
             executed.Add(reg);
         }
 
-        hitDef_Regs.Clear();
+        onOneFrameHitdefs.Clear();
     }
 
     //HitDefを発火する際のイベント - プレイヤー設定の際..
@@ -257,6 +243,7 @@ public class gameState : MonoBehaviour
         generatedParam.ContactPoint = hitContactPoint;
 
         //ステータス設定.
+        onOneFrameHitdefs.Add(generatedParam);
         generatedParam.SetStatus();
     }
 
