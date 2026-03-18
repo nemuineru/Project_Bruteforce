@@ -100,11 +100,48 @@ public class gameState : MonoBehaviour
         .ToList();
     }
 
+    
     void HitParamFrame()
     {
-        
-        hitDef_Regs.OrderByDescending(s => s.param.HitPriority);
-        
+        var sorted = hitDef_Regs.OrderByDescending(s => s.param.HitPriority).ToList();
+        var executed = new List<HitDef_Registered>();
+
+        foreach (var reg in sorted)
+        {
+            bool shouldExecute = true;
+
+            foreach (var prime in executed)
+            {
+                // Current param's owner was targeted by a prime param
+                if (reg.param.ownerEntity != prime.param.targetEntity)
+                    continue;
+
+                if (reg.param.HitPriority < prime.param.HitPriority)
+                {
+                    // Lower priority against someone who already hit us — skip
+                    shouldExecute = false;
+                    break;
+                }
+                else if (reg.param.HitPriority == prime.param.HitPriority)
+                {
+                    // Same priority — HitPriorityBehavior decides
+                    char behavior = reg.param.HitPriorityBehavior;
+                    if (behavior == 'M' || behavior == 'D')
+                    {
+                        shouldExecute = false;
+                        break;
+                    }
+                    // 'H': hit applies, continue executing
+                }
+            }
+
+            if (shouldExecute)
+                reg.param.SetStatus();
+
+            executed.Add(reg);
+        }
+
+        hitDef_Regs.Clear();
     }
 
     //HitDefを発火する際のイベント - プレイヤー設定の際..
