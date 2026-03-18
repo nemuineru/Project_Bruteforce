@@ -40,6 +40,21 @@ public class gameState : MonoBehaviour
 
     public Transform InitSpawnPos;
 
+    public class HitDef_Registered
+    {
+        internal hitDefParams param;
+        Entity owner, target;
+        Vector3 hitPoint;
+        public HitDef_Registered(hitDefParams setParam, Entity own, Entity tgt, Vector3 hitPt)
+        {
+            param = setParam;
+            owner = own;
+            target = tgt;
+            hitPoint = hitPt;
+        }
+    }
+
+    public List<HitDef_Registered> hitDef_Regs;
 
     internal float elapsedTime = 0f;
     void Awake()
@@ -83,6 +98,13 @@ public class gameState : MonoBehaviour
         propList = FindObjectsByType<Props>(FindObjectsSortMode.None)
         .OrderBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
         .ToList();
+    }
+
+    void HitParamFrame()
+    {
+        
+        hitDef_Regs.OrderByDescending(s => s.param.HitPriority);
+        
     }
 
     //HitDefを発火する際のイベント - プレイヤー設定の際..
@@ -180,7 +202,7 @@ public class gameState : MonoBehaviour
     }
 
     //hitdefApply is called for everything.. 
-    //Projectileも同様に管理したい.
+    //Projectileも同様に管理.
     void hitDefApply(Entity target, Entity calledEntity,
     hitDefParams calledEParam, Vector3 hitContactPoint)
     {
@@ -199,47 +221,47 @@ public class gameState : MonoBehaviour
         generatedParam.SetStatus();
     }
 
-    void hitDef_proj_Apply(Entity target, Entity owner, Transform calledPoint,
-    hitDefParams calledEParam, Vector3 hitContactPoint)
-    {
-        hitDefParams generatedParam = new hitDefParams();
+    // void hitDef_proj_Apply(Entity target, Entity owner, Transform calledPoint,
+    // hitDefParams calledEParam, Vector3 hitContactPoint)
+    // {
+    //     hitDefParams generatedParam = new hitDefParams();
 
-        //call Parameter for damages..
-        generatedParam = calledEParam;
+    //     //call Parameter for damages..
+    //     generatedParam = calledEParam;
         
-        generatedParam.HitRegisterTime = elapsedTime;
+    //     generatedParam.HitRegisterTime = elapsedTime;
 
-        generatedParam.ownerEntity = null;
-        generatedParam.targetEntity = target;
-        generatedParam.ContactPoint = hitContactPoint;
+    //     generatedParam.ownerEntity = null;
+    //     generatedParam.targetEntity = target;
+    //     generatedParam.ContactPoint = hitContactPoint;
 
-        //stateChangeを設定..
-        target.isStateChanged = true;
+    //     //stateChangeを設定..
+    //     target.isStateChanged = true;
 
-        //一先ず、プレースホルダーとして入れる
-        //stateTimeをリセット.
-        target.CurrentStateID = calledEParam.ChangeState_Target;
-        target.stateTime = 0;
+    //     //一先ず、プレースホルダーとして入れる
+    //     //stateTimeをリセット.
+    //     target.CurrentStateID = calledEParam.ChangeState_Target;
+    //     target.stateTime = 0;
 
-        if (calledEParam.TargetRefsOwnerNum == true)
-        {
-            target.controlledEntity = owner;
-        }
+    //     if (calledEParam.TargetRefsOwnerNum == true)
+    //     {
+    //         target.controlledEntity = owner;
+    //     }
 
-        //placeholder for velocity
-        //currently its barebone
-        Vector3 HitVect = Vector3.ProjectOnPlane
-        (target.transform.position - calledPoint.position, Vector3.up);
+    //     //placeholder for velocity
+    //     //currently its barebone
+    //     Vector3 HitVect = Vector3.ProjectOnPlane
+    //     (target.transform.position - calledPoint.position, Vector3.up);
 
-        //hitpause
-        (target.HitPauseTime) = (calledEParam.hitStopTime.y);
+    //     //hitpause
+    //     (target.HitPauseTime) = (calledEParam.hitStopTime.y);
 
-        /*
-        DamageApply(beatenEntity, HitVect, calledEParam, 100f);
-        Instantiate
-        ((calledEParam.HitEff != null ? calledEParam.HitEff : defaultEff), hitContactPoint, Quaternion.identity);
-        */
-    }
+    //     /*
+    //     DamageApply(beatenEntity, HitVect, calledEParam, 100f);
+    //     Instantiate
+    //     ((calledEParam.HitEff != null ? calledEParam.HitEff : defaultEff), hitContactPoint, Quaternion.identity);
+    //     */
+    // }
 
 
     internal void ClearChars()
