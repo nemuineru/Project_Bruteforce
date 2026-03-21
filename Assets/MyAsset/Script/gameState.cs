@@ -86,6 +86,11 @@ public class gameState : MonoBehaviour
         .ToList();
     }
 
+    void LateUpdate()
+    {
+        HitParamFrame();
+    }
+
 
     //hitdefFrame - リストアップしたhitdefparamを優先度に応じて実行する.
     void HitParamFrame()
@@ -244,7 +249,7 @@ public class gameState : MonoBehaviour
 
         //ステータス設定.
         onOneFrameHitdefs.Add(generatedParam);
-        generatedParam.SetStatus();
+        //generatedParam.SetStatus();
     }
 
     // void hitDef_proj_Apply(Entity target, Entity owner, Transform calledPoint,

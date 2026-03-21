@@ -894,6 +894,22 @@ public class scHitDef : StateController
     {
         _MenuName = "Animation"
     };
+    
+
+    //当たり判定の優先順位.
+    [SerializeField]
+    stParams<int> Priority = new stParams<int>(0,true,true)
+    {
+        _MenuName = "Controller"
+    };
+
+    //当たり判定の同値時設定.
+    //H it, M iss, D odge で分けられる.
+    [SerializeField]
+    stParams<char> Priority_Behavior = new stParams<char>('H',true,true)
+    {
+        _MenuName = "Controller"
+    };
 
     //投げとか、ステート飛ばしを実行する際に呼び出し.
     [SerializeField]
@@ -996,6 +1012,11 @@ public class scHitDef : StateController
             guardhitEffect._isReadable ? guardhitEffect.valueGet(loadParams,entity) : null,
 
             //Controller for state executions
+            HitPriority = 
+            Priority._isReadable ? Priority.valueGet(loadParams,entity) : 0,
+            HitPriorityBehavior = 
+            Priority_Behavior._isReadable ? Priority_Behavior.valueGet(loadParams,entity) : 'H',
+
             ChangeState_Target = 
             ChangeState_TargetStateID._isReadable ? ChangeState_TargetStateID.valueGet(loadParams,entity) : -1,
             ChangeState_Owner = 
