@@ -98,6 +98,7 @@ MonoBehaviour:
     - rid: 1814087975545077760
     - rid: 1814087975545077761
     - rid: 1814088090491813892
+    - rid: 8440311363031793664
     Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
@@ -449,7 +450,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 250
           useID: -1
           stLuaLoads: 
         damage:
@@ -458,7 +459,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 28
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -2187,7 +2188,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 250
           useID: -1
           stLuaLoads: 
         damage:
@@ -2196,7 +2197,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 25
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -3521,7 +3522,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 20
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -4944,6 +4945,304 @@ MonoBehaviour:
             ChangeState_Owner: -1
             HitPhysFlag: SA
             HitMoveFlag: IAH
+            GuardPhysFlag: SA
+            GuardMoveFlag: IA
+            AnimType: 
+            HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 8440311363031793664
+      type: {class: scHitDef, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 100000
+          stLuaLoads: 
+        stateControllerSubName: RoundKick_Def
+        doLoadAfterChangeState: 0
+        hitID:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 220
+          useID: -1
+          stLuaLoads: 
+        damage:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 45
+          useID: -1
+          stLuaLoads: 
+        hitPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        hitMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IAH
+          useID: -1
+          stLuaLoads: 
+        guardPhysFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        guardMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IAH
+          useID: -1
+          stLuaLoads: 
+        guardDamage:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        guardBreakPoint:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        guardBreakPoint_OnGuard:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Kill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        guardOnKill:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_hitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        player_GuardhitVelSet:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Physics
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        hitAnimType:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitStopTime:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        guardHitStopTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        hitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        guardhitEffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Animation
+          loadTypes: 0
+          stParamValue: {fileID: 0}
+          useID: -1
+          stLuaLoads: 
+        Priority:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Priority_Behavior:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 72
+          useID: -1
+          stLuaLoads: 
+        ChangeState_OwnerStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        ChangeState_TargetStateID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        isTargetRefsOwnerID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fallTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        StateIDExcluder:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        hitParams:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue:
+            hitID: 0
+            Damage: 0
+            GuardDamage: 0
+            GuardBreakPoint: 0
+            GuardBreakPoint_OnGuard: 0
+            Kill: 0
+            GuardOnKill: 0
+            velset: {x: 0, y: 0, z: 0}
+            guard_velset: {x: 0, y: 0, z: 0}
+            pl_velset: {x: 0, y: 0, z: 0}
+            pl_guard_velset: {x: 0, y: 0, z: 0}
+            hitStopTime: {x: 0, y: 0}
+            guard_hitStopTime: {x: 0, y: 0}
+            HitEff: {fileID: 0}
+            GuardHitEff: {fileID: 0}
+            HitPriority: 0
+            HitPriorityBehavior: 72
+            maxEntityHits: 1
+            fallTime: 0
+            ChangeState_Target: -1
+            TargetRefsOwnerNum: 0
+            ChangeState_Owner: -1
+            HitPhysFlag: SA
+            HitMoveFlag: IA
             GuardPhysFlag: SA
             GuardMoveFlag: IA
             AnimType: 
