@@ -59,6 +59,8 @@ public class hitDefParams
     // D - Dodge, 互いに命中しない. 
     public char HitPriorityBehavior = 'H';
 
+    //もしsameHitIntervalが0より大きい数で指定されている場合なら、同じStateDefNo内で再度実行する.
+    public float sameHitInterval = 0;
     //当たる数(1がデフォ)
     public int maxEntityHits = 1;
 
@@ -119,8 +121,6 @@ public class hitDefParams
     /*
     //MoveReversed..は今は考えない(難しくなりそー。)
     */
-    
-    
 
     //ガードされたかどうかに関わらず、当たってからの経過時間を考える.
     //一番近い時間としてソートして..という形で.

@@ -159,6 +159,7 @@ public class gameState : MonoBehaviour
             {
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
+                //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
                 bool f = provokerEntity.hitCheck(e, out Vector3 HitPt);
                 bool isContactable = hitDefParams.HitMoveFlag.Contains(e.moveType.ToString()) &&
                 hitDefParams.HitPhysFlag.Contains(e.physicsType.ToString()) &&
