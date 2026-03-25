@@ -138,6 +138,7 @@ public class gameState : MonoBehaviour
     }
 
     //HitDefを発火する際のイベント - プレイヤー設定の際..
+    //HitDefのIntervalが設定されているなら、同じStateDef内で登録する.
     public bool ProvokeHitDef_Entity(Entity provokerEntity, hitDefParams hitDefParams)
     {
         bool ret = false;
