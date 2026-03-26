@@ -61,7 +61,8 @@ public class hitDefParams
 
     //もしsameHitIntervalが0より大きい数で指定されている場合なら、同じStateDefNo内で再度実行する.
     public float sameHitInterval = 0;
-    //当たる数(1がデフォ)
+
+    //hitDef読み出し時、stateDefNoが同じ呼び出しとして設定されている際最大値として当たる数. (1がデフォ)
     public int maxEntityHits = 1;
 
     //ダウン設定.
@@ -103,6 +104,8 @@ public class hitDefParams
 
     //このHitDefの対象先.
     internal Entity targetEntity;
+
+    //このHitDefを呼び出した時の同StateDefNo中での構造..
 
     //このHitDefを呼び出した時のgameStateの時間を登録.
     internal float HitRegisterTime = 0;
@@ -153,10 +156,12 @@ public class hitDefParams
 
         SetStates();
         DamageCalc();
+        ownerEntity.hitdefSameTime.Add(hitID);
         if(targetEntity != null)
             registerDef(targetEntity);
         if(ownerEntity != null)
             registerDef(ownerEntity);
+        
     }
 
     //registered index - last index is latest.

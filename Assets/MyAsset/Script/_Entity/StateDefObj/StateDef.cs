@@ -936,6 +936,13 @@ public class scHitDef : StateController
     {
         _MenuName = "Controller"
     };
+
+    [SerializeField]
+    stParams<float> hitIntervalTime = new stParams<float>(1,false,false)
+    {
+        _MenuName = "Controller"
+    };
+    
     
     [SerializeField]
     stParams<float> fallTime = new stParams<float>(1,false,false)
@@ -1016,6 +1023,7 @@ public class scHitDef : StateController
             Priority._isReadable ? Priority.valueGet(loadParams,entity) : 0,
             HitPriorityBehavior = 
             Priority_Behavior._isReadable ? Priority_Behavior.valueGet(loadParams,entity) : 'H',
+            
 
             ChangeState_Target = 
             ChangeState_TargetStateID._isReadable ? ChangeState_TargetStateID.valueGet(loadParams,entity) : -1,
@@ -1026,6 +1034,7 @@ public class scHitDef : StateController
 
             maxEntityHits = 
             maxEntityHits._isReadable ? maxEntityHits.valueGet(loadParams,entity) : 1,
+            sameHitInterval = hitIntervalTime._isReadable ? hitIntervalTime.valueGet(loadParams,entity) : 0,
             fallTime = fallTime._isReadable ? fallTime.valueGet(loadParams,entity) : 0,
             HitExcludeList = excluder
         };

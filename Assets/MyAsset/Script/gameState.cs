@@ -151,20 +151,36 @@ public class gameState : MonoBehaviour
 
         useParam.ownerEntity = provokerEntity;
 
-        refNumRemaining = useParam.maxEntityHits;
+        //contact数を考える..
+        int refOwnerTargetContact = provokerEntity.hitdefSameTime.FindAll(h => h == hitDefParams.hitID).Count;
+
+        refNumRemaining = useParam.maxEntityHits - refOwnerTargetContact;
 
         foreach (Entity e in entityList)
         {
             //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
             if (e != provokerEntity && e.tag != provokerEntity.tag && refNumRemaining > 0)
             {
+                bool isIntervalAvailable = true;
+                //もし見つけられなかったら新規登録なので..
+                hitDefParams FindP = e.registeredHitDefs.Find(hDef => hDef.hitID == hitDefParams.hitID);
+                if(FindP != null && refOwnerTargetContact != 0)
+                {
+                    float recentRevTime = elapsedTime - FindP.HitRegisterTime;
+                    //インターバル未設定なら一回のみ. インターバル設定済みなら...
+                    if(hitDefParams.sameHitInterval <= 0 || recentRevTime < hitDefParams.sameHitInterval)
+                    {
+                        isIntervalAvailable = false;
+                    }
+                }
+
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
                 //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
                 bool f = provokerEntity.hitCheck(e, out Vector3 HitPt);
                 bool isContactable = hitDefParams.HitMoveFlag.Contains(e.moveType.ToString()) &&
                 hitDefParams.HitPhysFlag.Contains(e.physicsType.ToString()) &&
-                !hitDefParams.HitExcludeList.Contains(e.CurrentStateID);
+                !hitDefParams.HitExcludeList.Contains(e.CurrentStateID) && isIntervalAvailable;
                 //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
                 if (f == true && isContactable)
                 {

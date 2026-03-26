@@ -146,6 +146,9 @@ public class Entity : MonoBehaviour
     //実行済みのステート番号の書き換えなど
     public List<int> executedStateIDs = new List<int>();
 
+    //同時StateDef内で実行されたhitDefのID名称. MaxHitが指定されているならこれを使う.
+    public List<int> hitdefSameTime = new List<int>();
+
     internal List<StateDef> loadedDefs = new List<StateDef>();
 
     string verd_1;
@@ -290,10 +293,11 @@ public class Entity : MonoBehaviour
         stateTime = isStateChanged ? 0 : HitPauseTime >= 0 ? stateTime : stateTime + 1;
 
         attrs.updateCombatStates(isStateChanged);
-        //ステートが変更されなければそのまま.
+        //ステートが変更されていれば色々Reset.
         if (isStateChanged)
         {
             executedStateIDs = new List<int>();
+            hitdefSameTime = new List<int>();
         }
         //statusAlign();
     }
