@@ -107,9 +107,9 @@ export function StateDef_220_ID(entity){
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let CurrentAnimID = CS.Elem.CheckAnimID(entity);
-    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 15 && CurrentAnimID == 220;
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 9 && CurrentAnimID == 220;
 
-    if (CurrentAnimTime > 35 && CurrentAnimID == 220)
+    if (CurrentAnimTime > 20 && CurrentAnimID == 220)
     {
         verdList.Add(1);
     }
@@ -119,13 +119,17 @@ export function StateDef_220_ID(entity){
     }
     //Aight, does native JS supports math function?
     //current Animtime needs to be set more than 8
-    if (Math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 &&
-        entity.attrs.isStateHit == 0)
+    if ( CurrentAnimID == 220 && CurrentAnimTime > 9 && CurrentAnimTime < 14)
     {
         verdList.Add(10);
     }
     if(SoundTime){
         verdList.Add(100);
+    }
+    
+    if ( CurrentAnimID == 220 && CurrentAnimTime > 4 && CurrentAnimTime < 12)
+    {
+        verdList.Add(11);
     }
     return verdList;
 }

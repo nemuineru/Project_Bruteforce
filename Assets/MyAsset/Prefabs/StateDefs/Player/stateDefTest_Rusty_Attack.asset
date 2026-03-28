@@ -75,7 +75,7 @@ MonoBehaviour:
     preStateVerdictName: StateDef_210_ID
     ParamLoadName: 
     stateType: 0
-    moveType: 49
+    moveType: 73
     physType: 0
     StateList:
     - rid: 1814087954197118983
@@ -92,13 +92,14 @@ MonoBehaviour:
     preStateVerdictName: StateDef_220_ID
     ParamLoadName: 
     stateType: 0
-    moveType: 540
-    physType: 540
+    moveType: 32
+    physType: 32
     StateList:
     - rid: 1814087975545077760
     - rid: 1814087975545077761
     - rid: 1814088090491813892
     - rid: 8440311363031793664
+    - rid: 8440311490821226501
     Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab
@@ -1437,7 +1438,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 10
+          stParamValue: 2
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -1446,7 +1447,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 0.01
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         fallTime:
@@ -5076,7 +5077,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 100000
+          value: 10
           stLuaLoads: 
         stateControllerSubName: RoundKick_Def
         doLoadAfterChangeState: 0
@@ -5095,7 +5096,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 45
+          stParamValue: 60
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -5180,12 +5181,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitVelSet:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Physics
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 8, y: 2, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -5230,7 +5231,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 8, y: 8}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -5306,12 +5307,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 8
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -5377,5 +5378,32 @@ MonoBehaviour:
             GuardMoveFlag: IA
             AnimType: 
             HitExcludeList: 
+          useID: -1
+          stLuaLoads: 
+    - rid: 8440311490821226501
+      type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 11
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 0
+        MoveVelocity:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 30, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        isSpeedstatAffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 

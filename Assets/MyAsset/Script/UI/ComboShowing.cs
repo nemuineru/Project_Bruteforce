@@ -85,7 +85,7 @@ public class ComboShowing : MonoBehaviour
             return;
             }
 
-        bool hitThisFrame = CheckForNewHits();
+        bool hitThisFrame = false;//CheckForNewHits();
 
         if (hitThisFrame)
         {

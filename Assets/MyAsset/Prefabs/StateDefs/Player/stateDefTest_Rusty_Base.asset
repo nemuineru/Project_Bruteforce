@@ -91,15 +91,18 @@ MonoBehaviour:
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Main.mjs
     preStateVerdictName: StateDef_100_ID
-    ParamLoadName: 
+    ParamLoadName: StateDef_0_Param
     stateType: 0
     moveType: 0
     physType: 0
     StateList:
+    - rid: 8440311490821226519
     - rid: 5331018537749184512
+    - rid: 8440311490821226520
     - rid: 5331018854245859337
     - rid: 5331018537749184513
     - rid: 3324168081673289731
+    - rid: 8440311490821226512
     Dir: 
     setCtrl: 0
   - StateDefName: Guard HitDefs contacted
@@ -113,6 +116,7 @@ MonoBehaviour:
     physType: 0
     StateList:
     - rid: 3324168081673289733
+    - rid: 8440311490821226533
     - rid: 3324168081673289732
     - rid: 3324168328257470479
     - rid: 3324168081673289734
@@ -366,7 +370,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         animParameter:
@@ -387,7 +391,7 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        mask: {fileID: 0}
+        mask: {fileID: 31900000, guid: 9206d9f6938fbda4abe235dfa29cf8b3, type: 2}
     - rid: 3324168081673289734
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -537,7 +541,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         animParameter:
@@ -558,7 +562,7 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
-        mask: {fileID: 0}
+        mask: {fileID: 31900000, guid: 9206d9f6938fbda4abe235dfa29cf8b3, type: 2}
     - rid: 5331018537749184513
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -575,12 +579,12 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 0
+          value: 1
           stLuaLoads: 
         stateControllerSubName: AnimEnd
         doLoadAfterChangeState: 1
         AnimSlot:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
@@ -643,3 +647,139 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         mask: {fileID: 0}
+    - rid: 8440311490821226512
+      type: {class: scBasicInputMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: Set Move
+        doLoadAfterChangeState: 0
+        MutipleVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        MutipleMoveVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0.4, y: 0.4, z: 1}
+          useID: -1
+          stLuaLoads: 
+    - rid: 8440311490821226519
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: AnimSlot_0_BaseMove
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 8440311490821226520
+      type: {class: scAnimParamChange, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10
+          stLuaLoads: 
+        stateControllerSubName: AnimSlot_0_ParamChange
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 1
+          stParamValue: {x: 0, y: 0}
+          useID: 0
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: 0
+          stLuaLoads: 
+    - rid: 8440311490821226533
+      type: {class: scAnimEnd, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 3
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 1
+        AnimSlot:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        fadeTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
