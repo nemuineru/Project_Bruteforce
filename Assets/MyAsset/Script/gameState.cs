@@ -42,6 +42,16 @@ public class gameState : MonoBehaviour
 
     public List<hitDefParams> onOneFrameHitdefs;
 
+    public GameStatus gameStatus;
+
+    public enum GameStatus
+    {
+        //ゲーム中。
+        InGame,
+        //ポーズモードとか.
+        OutGame
+    }
+
     internal float elapsedTime = 0f;
     void Awake()
     {

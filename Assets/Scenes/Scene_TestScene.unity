@@ -936,6 +936,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: LoadedBehavior
+      value: 
+      objectReference: {fileID: 11400000, guid: c1470366b3bea504686d9b6beddfeb49, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2007,11 +2011,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
       propertyPath: status.maxHP
-      value: 10000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
+      propertyPath: LoadedBehavior
+      value: 
+      objectReference: {fileID: 11400000, guid: c1470366b3bea504686d9b6beddfeb49, type: 2}
+    - target: {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
       propertyPath: status.currentHP
-      value: 10000
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

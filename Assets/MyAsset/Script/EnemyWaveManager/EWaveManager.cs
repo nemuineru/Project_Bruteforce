@@ -54,7 +54,6 @@ public class EWaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
         //ウェーブ変化時にエンティティオブジェクト生成.
         if (isWaveChanged == false)
         {
@@ -82,7 +81,7 @@ public class EWaveManager : MonoBehaviour
         }
         //現在生成数を確認.
         int countSpawned = spawnedEntity.FindAll(et => et != null).Count;
-        if (currentDesc != null && gameState.self.gDesc == gameState.GameStateDesc.InGame && currentSpawnSec > spawnSec && EnemySpawnPoints.Count > 0)
+        if (currentDesc != null && gameState.self.desc == gameState.GameStatus.InGame && currentSpawnSec > spawnSec && EnemySpawnPoints.Count > 0)
         {
             //Debug.Log("Decriptor found - LV." + currentDesc.minlevel + " - " + currentDesc.maxlevel);
             //一度に生成するエンティティ量が指定の量を超えないまでは..
@@ -111,11 +110,11 @@ public class EWaveManager : MonoBehaviour
                     currentLevel++;
                     if (currentLevel > MaxLevel)
                     {
-                        gameState.self.gDesc = gameState.GameStateDesc.Finished;
+                        gameState.self.gameStatus = gameState.GameStatus.OutGame;
                     }
                     else
                     {
-                        StartCoroutine(gameState.self.ShowWaveNames("Wave " + currentLevel.ToString()));
+                        //StartCoroutine(gameState.self.ShowWaveNames("Wave " + currentLevel.ToString()));
                     }
                 }
                 isWaveChanged = false;
@@ -128,7 +127,6 @@ public class EWaveManager : MonoBehaviour
             currentSpawnSec += Time.fixedDeltaTime;
         }
         LevelUI.text = currentLevel != 0 ? "Wave " + (currentLevel).ToString() + " / " + MaxLevel.ToString() : "Practice";
-        */
     }
 }
 
