@@ -163,6 +163,11 @@ public class Entity : MonoBehaviour
     [SerializeField]
     internal List<entityInputManager.entityInput_Buffers> cmdList;
 
+    [SerializeField]
+    //ヒット回数を数えるための変数. どの様な感じでも減少しない.
+    internal int TotalHitNo = 0;
+
+
     //GetHitDef/GetAttackDefで管理されるHitParams.
     //当てたプレイヤー本人のガード等を鑑みて..
 

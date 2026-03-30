@@ -35,6 +35,9 @@ public class ComboShowing : MonoBehaviour
     public int ComboCount { get; private set; }
     public bool IsComboActive { get; private set; }
 
+    public int prevHitCount = 0;
+    public int registeredHitCount = 0;
+
     // ------------------------------------------------------------------ //
     //  Events  (subscribe to expand with your own systems)
     // ------------------------------------------------------------------ //
@@ -85,7 +88,7 @@ public class ComboShowing : MonoBehaviour
             return;
             }
 
-        bool hitThisFrame = false;//CheckForNewHits();
+        bool hitThisFrame = CheckForNewHits();
 
         if (hitThisFrame)
         {
@@ -115,30 +118,18 @@ public class ComboShowing : MonoBehaviour
     {
         bool newHit = false;
 
-        foreach (Entity entity in _gs.entityList)
+        if(_player != null)
         {
-            // Skip the player itself and dead enemies
-            if (entity == _player || !entity.attrs.alive) continue;
-
-            int currentCount = CountPlayerHitsOn(entity);
-            Debug.Log("calcCombos " + currentCount);
-
-            if (!_prevHitCounts.TryGetValue(entity, out int prevCount))
+            if(_player.TotalHitNo > registeredHitCount)
             {
-                _prevHitCounts[entity] = currentCount;
-                continue;
-            }
-
-            if (currentCount > prevCount)
-            {
-                int delta = currentCount - prevCount;
-                for (int i = 0; i < delta; i++)
-                    RegisterHit();
-
+                registeredHitCount = _player.TotalHitNo;
                 newHit = true;
+                RegisterHit();
             }
-
-            _prevHitCounts[entity] = currentCount;
+        }
+        else
+        {
+            Debug.Log("player entity not found!");
         }
 
         return newHit;
@@ -174,7 +165,7 @@ public class ComboShowing : MonoBehaviour
 
     void RegisterHit()
     {
-        ComboCount++;
+        ComboCount = registeredHitCount - prevHitCount;
         OnComboHit?.Invoke(ComboCount);
     }
 
@@ -192,6 +183,7 @@ public class ComboShowing : MonoBehaviour
         IsComboActive = false;
         _prevHitCounts.Clear();
         atRegisteredParam = null;
+        prevHitCount = registeredHitCount;
         RefreshUI();
     }
 

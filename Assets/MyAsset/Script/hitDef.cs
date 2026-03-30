@@ -147,6 +147,7 @@ public class hitDefParams
         bool isGuardable = GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardPhysFlag.Contains(targetEntity.physicsType.ToString());
         MoveGuarded = targetEntity.attrs.isGuarded == true && targetEntity.status.currentGuardPoint >= 0 && isGuardable;
 
+
         //プレイヤー方向とか色々..        
         PushVector = Vector3.ProjectOnPlane
         (targetEntity.transform.position - ownerEntity.transform.position, Vector3.up).normalized;
@@ -155,7 +156,7 @@ public class hitDefParams
         ownerEntity.attrs.isStateHit = ownerEntity.attrs.isStateHit > 0 ? ownerEntity.attrs.isStateHit : 1;
 
         SetStates();
-        DamageCalc();
+        DamageCalc();        
         ownerEntity.hitdefSameTime.Add(hitID);
         if(targetEntity != null)
             registerDef(targetEntity);
@@ -200,6 +201,7 @@ public class hitDefParams
         }
         else
         {
+            ownerEntity.TotalHitNo++;
             int DamageType = 0;
             int HitType = 0;
             //refEntityが指定した遷移可能なStateを持っていればretIDに登録..
