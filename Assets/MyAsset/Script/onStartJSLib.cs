@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class onStartJSLib : MonoBehaviour
 {
-    /*
     [DllImport("__Internal")]
     public static extern void InjectionJs(string url);
 
@@ -29,5 +28,4 @@ public class onStartJSLib : MonoBehaviour
     {
         SwalFireBase(body);
     }
-    */
 }

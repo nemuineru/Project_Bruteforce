@@ -1,5 +1,5 @@
 
-        window.PUERTS_JS_RESOURCES = {"StateScript/Enemy_Default/stateScript_enemyDef_cmd.mjs": (function(exports, require, module, __filename, __dirname) {
+        window.PUERTS_JS_RESOURCES = {"StateScript/Enemy_Default/FatMan/stateScript_FatMan_cmd.mjs": (function(exports, require, module, __filename, __dirname) {
             "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19,11 +19,535 @@ function stateCmd(entity) {
   let verdList = new List_Int();
   let selfOnGrd = CS.Elem.isEntityOnGround(entity);
   //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
-  let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
-  //charger for basic 
-  let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
-  let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
-  let AttackCmd_y_isPressed = CS.Elem.CheckButtonPressed(entity, "Weapon");
+  let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Basic");
+  let StateDefID = entity.CurrentStateID;
+  let isChainable = StateDefID == 0 || StateDefID >= 200 && StateDefID < 210;
+  let chargeVal = entity.status.ChargeTime;
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Ground Grabbing strikes.
+  if (selfOnGrd == true && AttackCmd_b == true && StateDefID == 0) {
+    verdList.Add(210);
+  }
+  return verdList;
+}
+        }),"StateScript/Enemy_Default/FatMan/stateScript_FatMan_GrabState.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Accel_Start = Accel_Start;
+exports.StateDef_0_Param = StateDef_0_Param;
+exports.StateDef_210_ID = StateDef_210_ID;
+exports.StateDef_211_OwnerGrabProcess_ID = StateDef_211_OwnerGrabProcess_ID;
+exports.StateDef_212_OwnerGrabEnd_ID = StateDef_212_OwnerGrabEnd_ID;
+exports.StateDef_213_TargetGrabProcess_ID = StateDef_213_TargetGrabProcess_ID;
+exports.StateDef_214_TargetGrabEnd_ID = StateDef_214_TargetGrabEnd_ID;
+exports.ThrowHit_Owner_Choker = ThrowHit_Owner_Choker;
+exports.ThrowHit_Target_Track = ThrowHit_Target_Track;
+// any meant as any type.
+// also use 'let' at first declearation,
+// put the variable type name after colon,
+// and put the init value lastly.
+
+// We could use List name, if they call variable first.
+function StateDef_210_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+  //Init.
+  if (selfStTime == 0) {
+    verdList.Add(0);
+  }
+
+  //Accels
+  if (CurrentAnimTime > 7 && CurrentAnimTime < 8) {
+    verdList.Add(2);
+  }
+  //hitDefs Register    
+  if (CurrentAnimTime > 7 && CurrentAnimTime < 18 && CurrentAnimID == 2) {
+    verdList.Add(1);
+  }
+  //ChangeState on AnimEnd
+  if (AnimEndTime - CurrentAnimTime < 4 && CurrentAnimID == 2) {
+    verdList.Add(100);
+  }
+  //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+  return verdList;
+}
+
+//params for accelation
+function Accel_Start(entity) {
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let vel2 = new Vector2(0, 0);
+  let vel3 = new Vector3(0, 0, 0);
+
+  //オブジェクトのRigidBodyを取得する.
+  vel3 = entity.rigid.velocity;
+  //オブジェクトの正面方向・右方向を考え、Dotで計算.
+  let vel_relate_f = entity.transform.forward;
+  let vel_relate_r = entity.transform.right;
+  //Operator_Multiply on this..
+  vel3 = Vector3.op_Multiply(Vector3.ProjectOnPlane(vel_relate_f, Vector3.up), 300.0);
+  outs.Add(vel3);
+  //CS.UnityEngine.Debug.Log(vel2);
+  return outs;
+}
+
+//stateDef 211 (Grab Process State) 
+function StateDef_211_OwnerGrabProcess_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+  //ChangeAnim
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  // change to idle. also damage them and check the rest frametime
+  if (CurrentAnimTime > 4 && CurrentAnimTime < 5 && selfOnGrd == true) {
+    verdList.Add(1);
+  }
+  if (AnimEndTime - CurrentAnimTime < 1 && selfOnGrd == true && CurrentAnimID == 3) {
+    verdList.Add(2);
+  }
+  return verdList;
+}
+
+//stateDef 212 (Grab Ending State) 
+function StateDef_212_OwnerGrabEnd_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+  //ChangeAnim
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  // change to idle. also damage them and check the rest frametime
+  if (AnimEndTime - CurrentAnimTime < 7 && CurrentAnimID == 4) {
+    verdList.Add(1);
+  }
+  return verdList;
+}
+
+//stateDef 213 (Grab Process State) 
+function StateDef_213_TargetGrabProcess_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+
+  //loads the owner entity.
+  let ControlledEntity = entity.controlledEntity;
+  let Enemy_C_EntityStateID = CS.Elem.CheckStateDefID(ControlledEntity);
+
+  //ChangeAnim
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  // change to idle. also damage them and check the rest frametime
+  if (Enemy_C_EntityStateID == 212) {
+    verdList.Add(1);
+  } else {
+    verdList.Add(2);
+  }
+  return verdList;
+}
+
+//stateDef 214 (Grab Ending State) 
+function StateDef_214_TargetGrabEnd_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let ControlledEntity = entity.controlledEntity;
+  let Enemy_C_EntityStateID = CS.Elem.CheckStateDefID(ControlledEntity);
+  let Enemy_C_animTime = CS.Elem.CheckAnimTime(ControlledEntity);
+  let Enemy_AnimEndTime = CS.Elem.CheckAnimEndTime(ControlledEntity);
+
+  //ChangeAnim
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  // change to idle. also damage them and check the rest frametime
+  if (selfStTime > 15) {
+    verdList.Add(1);
+  } else {
+    verdList.Add(2);
+  }
+  return verdList;
+}
+function ThrowHit_Owner_Choker(entity) {
+  //List<Object>
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let trf = Vector3.ProjectOnPlane(entity.transform.forward, Vector3.up).normalized;
+  let retVec = new Vector3(0, 0, 0);
+  retVec = Vector3.op_Addition(Vector3.op_Multiply(trf, 10.0), new Vector3(0, 90, 0));
+  outs.Add(retVec);
+  return outs;
+}
+function ThrowHit_Target_Track(entity) {
+  //List<Object>
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let ControlledEntity = entity.controlledEntity;
+  let tr_Choked = CS.Elem.getEntityBoneTransform(entity, "spine").position;
+  let tr_Choker_L = CS.Elem.getEntityBoneTransform(ControlledEntity, "hand.l").position;
+  let tr_Choker_R = CS.Elem.getEntityBoneTransform(ControlledEntity, "hand.r").position;
+  let retVec = new Vector3(0, 0, 0);
+
+  //Get Hand Middle point, and calc it.
+  let tr_Choker_All = Vector3.op_Multiply(Vector3.op_Addition(tr_Choker_L, tr_Choker_R), 0.5);
+  //let DPos = new Vector3( tr_Choker_All.x - tr_Choked.x , tr_Choker_All.y -  tr_Choked.y , tr_Choker_All.z - tr_Choked.z )
+  let diffPos = Vector3.op_Subtraction(tr_Choker_All, tr_Choked); //CS.UnityEngine.Time.fixedDeltaTime
+
+  //CS.UnityEngine.Debug.Log(diffPos);
+  // CS.UnityEngine.Debug.DrawLine(tr_Choked, tr_Choker_All);
+  // CS.UnityEngine.Debug.DrawLine(tr_Choked, Vector3.op_Addition(Vector3.up,tr_Choked));
+  outs.Add(diffPos);
+  let throwingVect_1 = Vector3.ProjectOnPlane(entity.transform.forward, Vector3.up).normalized;
+  let throwingVect_2 = Vector3.op_Multiply(Vector3.up, 0.2);
+  outs.Add(Vector3.op_Multiply(Vector3.op_Addition(throwingVect_1, throwingVect_2), 10.0));
+  return outs;
+}
+
+// export Parameter @ stateDef 0.
+// not only this function, but those params need to be 
+// returned as GenericList such like List<object>,
+// ..otherwise it fails completely. - N.
+function StateDef_0_Param(entity) {
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let vel2 = new Vector2(0, 0);
+  let vel3 = new Vector3(0, 0, 0);
+
+  //オブジェクトのRigidBodyを取得する.
+  vel3 = entity.rigid.velocity;
+  //オブジェクトの正面方向・右方向を考え、Dotで計算.
+  let vel_relate_f = entity.transform.forward;
+  let vel_relate_r = entity.transform.right;
+  vel2.x = Vector3.Dot(vel3, vel_relate_r);
+  vel2.y = Vector3.Dot(vel3, vel_relate_f);
+  outs.Add(vel2);
+  //CS.UnityEngine.Debug.Log(vel2);
+  return outs;
+}
+        }),"StateScript/Enemy_Default/FatMan/stateScript_FatMan_Hurt.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_5000_ID = StateDef_5000_ID;
+exports.StateDef_5050_ID = StateDef_5050_ID;
+exports.StateDef_5100_ID = StateDef_5100_ID;
+exports.StateDef_5101_ID = StateDef_5101_ID;
+//Hurt_Init for Default Enemy.(5000)
+function StateDef_5000_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0 && CurrentAnimID != 5000) {
+    verdList.Add(0);
+  }
+  if (CurrentTime > 12 && isOnGround) {
+    verdList.Add(1);
+  }
+  if (!isAlive && CurrentTime > 6) {
+    verdList.Add(2);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//Hurt_Blowout(5050)
+function StateDef_5050_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround(entity);
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0 && CurrentAnimID != 5050) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimTime > 6 && CurrentTime > 10 && isOnGround) {
+    verdList.Add(1);
+  }
+  if (SoundTime) {
+    verdList.Add(100);
+  }
+  return verdList;
+}
+
+//FallDown(5100)
+function StateDef_5100_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimID == 5100 && isOnGround && AnimEndTime - CurrentAnimTime < 2 && isAlive) {
+    verdList.Add(1);
+  }
+  if (!isAlive) {
+    verdList.Add(2);
+  }
+  return verdList;
+}
+
+//FallDown_Recovery
+function StateDef_5101_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimID == 5101 && AnimEndTime - CurrentAnimTime < 2) {
+    verdList.Add(1);
+  }
+  return verdList;
+}
+        }),"StateScript/Enemy_Default/FatMan/stateScript_FatMan_main.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_0_ID = StateDef_0_ID;
+exports.StateDef_0_Param = StateDef_0_Param;
+exports.StateDef_50_ID = StateDef_50_ID;
+// any meant as any type.
+// also use 'let' at first declearation,
+// put the variable type name after colon,
+// and put the init value lastly.
+
+// We could use List name, if they call variable first.
+function StateDef_0_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  let isPressed_A = CS.Elem.CheckButtonPressed(entity, "a_");
+  let isPressed_B = CS.Elem.CheckButtonPressed(entity, "b_");
+  let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Init.
+  if (selfStTime > 0) {
+    verdList.Add(0);
+  }
+  if (selfOnGrd) {
+    //Idle/Moving
+    verdList.Add(2);
+    //ChangeState To Jump. (stateNo - 3)
+    if (isPressed_A) {
+      verdList.Add(3);
+    }
+  }
+  if (!isPressed_C) {
+    verdList.Add(800);
+  }
+  if (CS.Elem.CheckStateTime(entity) == 1) {
+    //Debug.Log("Init Anim Loaded")
+    verdList.Add(100);
+  }
+  if (!entity.attrs.alive) {
+    verdList.Add(5100);
+  }
+  //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
+  return verdList;
+}
+
+//Function for jump.
+function StateDef_50_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
+
+  //On Ground.
+  if (selfStTime > 1 && selfOnGrd_f == true) {
+    verdList.Add(1);
+  }
+
+  //idleのanimを指定する
+  if (selfStTime == 0) {
+    //Debug.Log("Jumping Vect");
+    verdList.Add(50);
+  }
+  return verdList;
+}
+
+// export Parameter @ stateDef 0.
+// not only this function, but those params need to be 
+// returned as GenericList such like List<object>,
+// ..otherwise it fails completely. - N.
+function StateDef_0_Param(entity) {
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let vel2 = new Vector2(0, 0);
+  let vel3 = new Vector3(0, 0, 0);
+
+  //オブジェクトのRigidBodyを取得する.
+  vel3 = entity.rigid.velocity;
+  //オブジェクトの正面方向・右方向を考え、Dotで計算.
+  let vel_relate_f = entity.transform.forward;
+  let vel_relate_r = entity.transform.right;
+  vel2.x = Vector3.Dot(vel3, vel_relate_r);
+  vel2.y = Vector3.Dot(vel3, vel_relate_f);
+  outs.Add(vel2);
+  //CS.UnityEngine.Debug.Log(vel2);
+  return outs;
+}
+        }),"StateScript/Enemy_Default/Grunt/stateScript_enemyGrunt_Attack_Base.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_200_ID = StateDef_200_ID;
+//puncher states for stateDef 200, enemy defaults.
+function StateDef_200_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  if (CurrentTime > 16) {
+    verdList.Add(3);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+
+  //HitDef Generate.
+  if (Math.abs(CurrentAnimTime - 9) < 2 && entity.attrs.isStateHit == 0) {
+    //Sounddefs..
+    if (SoundTime) {
+      verdList.Add(100);
+    }
+    verdList.Add(10);
+  }
+
+  //CS.UnityEngine.Debug.Log("Executed");
+  return verdList;
+}
+        }),"StateScript/Enemy_Default/stateScript_enemyDef_cmd.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stateCmd = stateCmd;
+// any meant as any type.
+// also use 'let' at first declearation,
+// put the variable type name after colon,
+// and put the init value lastly.
+
+// We could use List name, if they call variable first.
+function stateCmd(entity) {
+  //CS.UnityEngine.Debug.Log("executing PuerTS CMDs..");
+  //List<Int>
+  const List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
+  let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Basic");
   let StateDefID = entity.CurrentStateID;
   let isChainable = StateDefID == 0 || StateDefID >= 200 && StateDefID < 210;
   let chargeVal = entity.status.ChargeTime;
@@ -33,27 +557,8 @@ function stateCmd(entity) {
   let selfStTime = CS.Elem.CheckStateTime(entity);
 
   //Ground Attacks - N
-  if (selfOnGrd == true && AttackCmd_x == true && StateDefID == 0) {
+  if (selfOnGrd == true && AttackCmd_b == true && StateDefID == 0) {
     verdList.Add(200);
-  }
-  //Air Attacks - N
-  if (selfOnGrd == false && AttackCmd_x == true && (StateDefID == 50 || StateDefID == 300 && selfStTime > 15)) {
-    verdList.Add(300);
-  }
-
-  //ここまで通常攻撃
-  //Special Ground Attack _ Knife c1
-  if (selfOnGrd == true && AttackCmd_y_isPressed && isChainable) {
-    verdList.Add(250);
-  }
-
-  //the combo button could charge to the doubleskill - to full skill
-  if (AttackCmd_x_isPressed && StateDefID < 5000) {
-    verdList.Add(30);
-  }
-  //for at damaged. the charge is gone to none
-  else if (!AttackCmd_x_isPressed || StateDefID >= 5000 && StateDefID <= 5300) {
-    verdList.Add(31);
   }
   return verdList;
 }
@@ -204,9 +709,7 @@ function StateDef_0_ID(entity) {
   if (!isPressed_C) {
     verdList.Add(800);
   }
-
-  //entityに登録されたmixerの数が0のときは緊急。
-  if (CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0) {
+  if (CS.Elem.CheckStateTime(entity) == 1) {
     //Debug.Log("Init Anim Loaded")
     verdList.Add(100);
   }
@@ -259,6 +762,72 @@ function StateDef_0_Param(entity) {
   vel2.y = Vector3.Dot(vel3, vel_relate_f);
   outs.Add(vel2);
   //CS.UnityEngine.Debug.Log(vel2);
+  return outs;
+}
+        }),"StateScript/Enemy_Default/Weaker/stateScript_enemyWeaker_Attack_Base.mjs": (function(exports, require, module, __filename, __dirname) {
+            "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StateDef_200_ID = StateDef_200_ID;
+exports.ThrowPos = ThrowPos;
+//weaker(thrower) states for stateDef 200, enemy defaults.
+//瓶投げ攻撃.
+function StateDef_200_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+
+  //ステート変更.
+  if (AnimEndTime - CurrentAnimTime < 8 && CurrentTime > 10) {
+    verdList.Add(2);
+  }
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+
+  //HitDef Generate.
+  if (CurrentTime == 48) {
+    //Sounddefs..
+    if (SoundTime) {
+      verdList.Add(100);
+    }
+    verdList.Add(1);
+    CS.UnityEngine.Debug.Log("Throwing Bottles.");
+  }
+
+  //CS.UnityEngine.Debug.Log("Executed");
+  return verdList;
+}
+
+//Aight, time to pack it UnityEngine's Vector3 operator : 
+//op_Addition as -,
+//op_Subtraction as -,
+//op_Multiply as *,
+//op_Division as / ..
+
+//functions for throwing positions.
+function ThrowPos(entity) {
+  let List_Object = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+  let outs = new List_Object();
+  const Vector2 = CS.UnityEngine.Vector2;
+  const Vector3 = CS.UnityEngine.Vector3;
+  let addVec = new Vector3(0, 0, 0);
+  let thrower_fw = entity.transform.forward;
+
+  //throwing velocity for sect 0
+  addVec = Vector3.op_Addition(Vector3.op_Multiply(Vector3.up, 4.0), Vector3.op_Multiply(thrower_fw, 4.0));
+  outs.Add(addVec);
+
+  //hand pos for section 1.
+  let thrower_hand = CS.Elem.getEntityBoneTransform(entity, "hand.r");
+  addVec = thrower_hand.position;
+  outs.Add(addVec);
   return outs;
 }
         }),"StateScript/Rusty/_state.mjs": (function(exports, require, module, __filename, __dirname) {
@@ -314,6 +883,11 @@ function stateCmd(entity) {
   //this must be set as 0.
   let selfStTime = CS.Elem.CheckStateTime(entity);
 
+  //ガード状態.
+  if (selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0) {
+    verdList.Add(100);
+  }
+
   //Ground Attacks - N
   if (selfOnGrd == true && AttackCmd_x == true && StateDefID == 0) {
     verdList.Add(200);
@@ -338,6 +912,7 @@ function stateCmd(entity) {
   }
 
   //ここまで通常攻撃
+
   //Special Ground Attack _ Knife c1
   if (selfOnGrd == true && AttackCmd_y_isPressed && isChainable) {
     verdList.Add(250);
@@ -349,9 +924,6 @@ function stateCmd(entity) {
   //Special Air Attack _ Knife c1
   if (selfOnGrd == false && AttackCmd_y_isPressed == true && StateDefID == 50) {
     verdList.Add(350);
-  }
-  if (selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0) {
-    verdList.Add(5);
   }
 
   //the combo button could charge to the doubleskill - to full skill
@@ -532,9 +1104,11 @@ function StateDef_200_ID(entity) {
     verdList.Add(0);
   }
   //Aight, does native JS supports math function?
-  if (Math.abs(CurrentTime - 4) < 2 && entity.attrs.isStateHit == 0) {
-    verdList.Add(10);
-  }
+  if (Math.abs(CurrentTime - 4) < 2)
+    // && entity.attrs.isStateHit == 0
+    {
+      verdList.Add(10);
+    }
   if (SoundTime) {
     verdList.Add(100);
   }
@@ -584,7 +1158,7 @@ function StateDef_210_ID(entity) {
   }
   //Aight, does native JS supports math function?
   //current Animtime needs to be set more than 8
-  if (Math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 && entity.attrs.isStateHit == 0) {
+  if (CurrentTime > 3 && CurrentAnimTime > 9 && CurrentAnimTime < 13 && entity.attrs.isStateHit == 0) {
     verdList.Add(10);
   }
   if (SoundTime) {
@@ -601,8 +1175,8 @@ function StateDef_220_ID(entity) {
   let CurrentTime = CS.Elem.CheckStateTime(entity);
   let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
   let CurrentAnimID = CS.Elem.CheckAnimID(entity);
-  let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 15 && CurrentAnimID == 220;
-  if (CurrentAnimTime > 35 && CurrentAnimID == 220) {
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 9 && CurrentAnimID == 220;
+  if (CurrentAnimTime > 20 && CurrentAnimID == 220) {
     verdList.Add(1);
   }
   if (CurrentTime == 0) {
@@ -610,11 +1184,14 @@ function StateDef_220_ID(entity) {
   }
   //Aight, does native JS supports math function?
   //current Animtime needs to be set more than 8
-  if (Math.abs(CurrentTime - 4) < 3 && CurrentAnimTime > 8 && entity.attrs.isStateHit == 0) {
+  if (CurrentAnimID == 220 && CurrentAnimTime > 9 && CurrentAnimTime < 14) {
     verdList.Add(10);
   }
   if (SoundTime) {
     verdList.Add(100);
+  }
+  if (CurrentAnimID == 220 && CurrentAnimTime > 4 && CurrentAnimTime < 12) {
+    verdList.Add(11);
   }
   return verdList;
 }
@@ -756,7 +1333,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.StateDef_5000_ID = StateDef_5000_ID;
 exports.StateDef_5050_ID = StateDef_5050_ID;
-exports.StateDef_5100 = StateDef_5100;
+exports.StateDef_5100_ID = StateDef_5100_ID;
+exports.StateDef_5101_ID = StateDef_5101_ID;
 //Hurt_Init(5000)
 function StateDef_5000_ID(entity) {
   //List<Int>
@@ -769,9 +1347,13 @@ function StateDef_5000_ID(entity) {
   let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
   let isOnGround = CS.Elem.isEntityOnGround;
   let isAlive = entity.attrs.alive;
+
+  //AnimSet
   if (CurrentTime == 0 && CurrentAnimID != 5000) {
     verdList.Add(0);
   }
+
+  //OnGround and time is after..
   if (CurrentTime > 12 && isOnGround) {
     verdList.Add(1);
   }
@@ -808,8 +1390,50 @@ function StateDef_5050_ID(entity) {
   return verdList;
 }
 
-//BlowOff(5100)
-function StateDef_5100(entity) {}
+//FallDown(5100)
+function StateDef_5100_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimID == 5100 && isOnGround && AnimEndTime - CurrentAnimTime < 2 && isAlive) {
+    verdList.Add(1);
+  }
+  if (!isAlive) {
+    verdList.Add(2);
+  }
+  return verdList;
+}
+
+//FallDown_Recovery
+function StateDef_5101_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+  let CurrentTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+  let isOnGround = CS.Elem.isEntityOnGround;
+  let isAlive = entity.attrs.alive;
+  if (CurrentTime == 0) {
+    verdList.Add(0);
+  }
+  if (CurrentAnimID == 5101 && AnimEndTime - CurrentAnimTime < 2) {
+    verdList.Add(1);
+  }
+  return verdList;
+}
         }),"StateScript/Rusty/stateScript_Rusty_Main.mjs": (function(exports, require, module, __filename, __dirname) {
             "use strict";
 
@@ -818,8 +1442,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.StateDef_0_ID = StateDef_0_ID;
 exports.StateDef_0_Param = StateDef_0_Param;
+exports.StateDef_100_ID = StateDef_100_ID;
+exports.StateDef_105_ID = StateDef_105_ID;
+exports.StateDef_20_ID = StateDef_20_ID;
 exports.StateDef_50_ID = StateDef_50_ID;
-exports.StateDef_5_ID = StateDef_5_ID;
+exports.StateDef_55_ID = StateDef_55_ID;
+exports.StateDef_60_ID = StateDef_60_ID;
 // any meant as any type.
 // also use 'let' at first declearation,
 // put the variable type name after colon,
@@ -834,9 +1462,11 @@ function StateDef_0_ID(entity) {
   let isPressed_A = CS.Elem.CheckButtonPressed(entity, "Jump");
   let isPressed_B = CS.Elem.CheckButtonPressed(entity, "_b");
   let isPressed_C = CS.Elem.CheckButtonPressed(entity, "c");
+  let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
 
   //this must be set as 0.
   let selfStTime = CS.Elem.CheckStateTime(entity);
+  let currentAnimID = CS.Elem.CheckAnimID(entity);
 
   //Init.
   if (selfStTime > 0) {
@@ -855,39 +1485,34 @@ function StateDef_0_ID(entity) {
   }
 
   //entityに登録されたmixerの数が0のときは緊急。
-  if (CS.Elem.CheckStateTime(entity) == 1 || CS.Elem.CheckAnimationsListNum(entity) == 0) {
+  if (CS.Elem.CheckStateTime(entity) == 0 && currentAnimID != 0) {
     //Debug.Log("Init Anim Loaded")
     verdList.Add(100);
   }
   if (!entity.attrs.alive) {
     verdList.Add(5100);
   }
+  //falling state.
+  if (!selfOnGrd_f) {
+    verdList.Add(55);
+  }
   //CS.UnityEngine.Debug.Log("PuerTS MainState Debug Executed Correctly.");
   return verdList;
 }
 
-//function for Guarding
-function StateDef_5_ID(entity) {
+//function for Rolling.
+//currently the Clss is gone for while.
+function StateDef_20_ID(entity) {
   //List<Int>
   let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
-  let verdList = new List_Int();
-  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
-  let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
-
-  //this must be set as 0.
   let selfStTime = CS.Elem.CheckStateTime(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+  let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
 
-  //Init.
-  if (selfStTime == 0) {
+  //if the WishingVect exists, it rolls towards there.
+  if (selfStTime > 0) {
     verdList.Add(0);
   }
-
-  //if you release B or non ground..
-  if (!isPressed_B) {
-    //change to Idle.
-    verdList.Add(1);
-  }
-  return verdList;
 }
 
 //Function for jump.
@@ -899,7 +1524,7 @@ function StateDef_50_ID(entity) {
   let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
 
   //On Ground.
-  if (selfStTime > 1 && selfOnGrd_f == true) {
+  if (selfStTime > 18) {
     verdList.Add(1);
   }
 
@@ -909,6 +1534,48 @@ function StateDef_50_ID(entity) {
     verdList.Add(50);
   }
   return verdList;
+}
+
+//Function for falling.
+function StateDef_55_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
+
+  //idleのanimを指定する
+  if (selfStTime == 0) {
+    //Debug.Log("Jumping Vect");
+    verdList.Add(0);
+  }
+  //On Ground.
+  if (selfStTime > 1 && selfOnGrd_f == true) {
+    CS.UnityEngine.Debug.Log("Jumping Vect");
+    verdList.Add(1);
+  }
+  return verdList;
+}
+
+//Function for landing.
+function StateDef_60_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList_F = new List_Int();
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+  let selfOnGrd_f = CS.Elem.isEntityOnGround(entity);
+
+  //On Ground.
+  if (selfStTime > 1 && selfOnGrd_f == true) {
+    verdList_F.Add(1);
+  }
+
+  //idleのanimを指定する
+  if (selfStTime == 0) {
+    //Debug.Log("Jumping Vect");
+    verdList_F.Add(50);
+  }
+  return verdList_F;
 }
 
 // export Parameter @ stateDef 0.
@@ -934,12 +1601,73 @@ function StateDef_0_Param(entity) {
   //CS.UnityEngine.Debug.Log(vel2);
   return outs;
 }
+
+//function for Guarding
+function StateDef_100_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Init.
+  if (selfStTime == 0) {
+    verdList.Add(0);
+  }
+
+  //if you release B or non ground..
+  if (!isPressed_B) {
+    //change to Idle.
+    verdList.Add(1);
+  }
+
+  //Guarding State is continued.
+  verdList.Add(10);
+  return verdList;
+}
+
+//function for Guarding_GettingHurt - and also set non damage
+function StateDef_105_ID(entity) {
+  //List<Int>
+  let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+  let verdList = new List_Int();
+  let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+  let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+  let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+  //this must be set as 0.
+  let selfStTime = CS.Elem.CheckStateTime(entity);
+
+  //Init.
+  if (selfStTime == 0) {
+    verdList.Add(0);
+  }
+
+  //after taking hits.
+  //if you release B or non ground.. change to init.
+  if (CurrentAnimTime >= 10) {
+    if (!isPressed_B) {
+      //change to Idle.
+      verdList.Add(1);
+    }
+    //if not, continue and changestate to guarding.
+    else {
+      verdList.Add(2);
+    }
+    verdList.Add(3);
+  }
+  verdList.Add(10);
+  return verdList;
+}
         }),"puerts/csharp.mjs": (function(exports, require, module, __filename, __dirname) {
             "use strict";
 
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
  * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
  */
@@ -963,23 +1691,26 @@ function csTypeToClass(csType) {
     }
     let readonlyStaticMembers;
     if (readonlyStaticMembers = cls.__puertsMetadata.get('readonlyStaticMembers')) {
+      cls.__puertsMetadata.set('readonlyStaticMembers', undefined);
       for (var key in cls) {
         let desc = Object.getOwnPropertyDescriptor(cls, key);
         if (readonlyStaticMembers.has(key) && desc && typeof desc.get == 'function' && typeof desc.value == 'undefined') {
           let getter = desc.get;
           let value;
           let valueGetted = false;
-          Object.defineProperty(cls, key, Object.assign(desc, {
-            get() {
-              if (!valueGetted) {
-                value = getter();
-                valueGetted = true;
-              }
-              return value;
-            },
-            configurable: false
-          }));
-          if (cls.__p_isEnum) {
+          if (desc.configurable) {
+            Object.defineProperty(cls, key, Object.assign(desc, {
+              get() {
+                if (!valueGetted) {
+                  value = getter();
+                  valueGetted = true;
+                }
+                return value;
+              },
+              configurable: false
+            }));
+          }
+          if (cls.__p_innerType.IsEnum) {
             const val = cls[key];
             if (typeof val == 'number') {
               cls[val] = key;
@@ -1098,10 +1829,26 @@ function makeGeneric(genericTypeInfo, ...genericArgs) {
   if (!p.has('$type')) {
     let typName = genericTypeInfo.get('$name');
     let typ = puer.loadType(typName, ...genericArgs);
-    if (getType(csharpModule.System.Collections.IEnumerable).IsAssignableFrom(getType(typ))) {
+    let csType = getType(typ);
+    if (getType(csharpModule.System.Collections.IEnumerable).IsAssignableFrom(csType)) {
       typ.prototype[Symbol.iterator] = function () {
         return genIterator(this);
       };
+    }
+    let nestedTypes = puer.getNestedTypes(csType);
+    if (nestedTypes) {
+      for (var i = 0; i < nestedTypes.Length; i++) {
+        let ntype = nestedTypes.get_Item(i);
+        if (ntype.IsGenericTypeDefinition) {
+          genericArgs = genericArgs.map(g => puer.$typeof(g) || g);
+          ntype = ntype.MakeGenericType(...genericArgs);
+        }
+        try {
+          typ[ntype.Name] = csTypeToClass(ntype);
+        } catch (e) {
+          console.warn(`load nestedtype [${ntype.Name || ntype}] of ${csType.Name || csType} fail: ${e}`);
+        }
+      }
     }
     p.set('$type', typ);
   }
@@ -1169,7 +1916,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = resetAllFunctionWhenDisposed;
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
-* Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+* Copyright (C) 2020 Tencent.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
@@ -1225,7 +1972,7 @@ function resetAllFunctionWhenDisposed() {
 
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
-* Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+* Copyright (C) 2020 Tencent.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
@@ -1306,7 +2053,7 @@ puer.emit = emit;
 
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
  * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
  */
@@ -1324,7 +2071,7 @@ puer.loadType = function (nameOrCSType, ...genericArgs) {
     csType = jsEnv.GetTypeByString(nameOrCSType);
   }
   if (csType) {
-    if (genericArgs && csType.IsGenericTypeDefinition) {
+    if (genericArgs && genericArgs.length > 0 && csType.IsGenericTypeDefinition) {
       genericArgs = genericArgs.map(g => puer.$typeof(g));
       csType = csType.MakeGenericType(...genericArgs);
     }
@@ -1336,6 +2083,18 @@ puer.loadType = function (nameOrCSType, ...genericArgs) {
     cls.__p_innerType = csType;
     // todo
     cls.__puertsMetadata = cls.__puertsMetadata || new Map();
+    let fields = csType.GetFields(26);
+    for (var i = 0; i < fields.Length; ++i) {
+      let field = fields.get_Item(i);
+      if (field.IsInitOnly || field.IsLiteral) {
+        let readonlyStaticMembers = cls.__puertsMetadata.get('readonlyStaticMembers');
+        if (!readonlyStaticMembers) {
+          readonlyStaticMembers = new Set();
+          cls.__puertsMetadata.set('readonlyStaticMembers', readonlyStaticMembers);
+        }
+        readonlyStaticMembers.add(field.Name);
+      }
+    }
     return cls;
   }
 };
@@ -1416,7 +2175,7 @@ global.__tgjsRegisterTickHandler = function (fn) {
 
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
  * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
  */
@@ -1484,7 +2243,7 @@ puer.fileExists = loader.FileExists.bind(loader);
 
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
  * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
  */
@@ -1917,7 +2676,7 @@ puer.module = {
 
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
-* Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+* Copyright (C) 2020 Tencent.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms.
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
@@ -1951,7 +2710,7 @@ globalThis.clearImmediate = function (fn) {
 
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
-* Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+* Copyright (C) 2020 Tencent.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms.
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
@@ -1969,7 +2728,7 @@ global.process = {
 
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
  * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
  */
@@ -2036,7 +2795,7 @@ function handlerAddedAfterReject(promise) {
 
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
-* Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+* Copyright (C) 2020 Tencent.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
@@ -2178,7 +2937,7 @@ global.clearTimeout = global.clearInterval;
 
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
-* Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+* Copyright (C) 2020 Tencent.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms.
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
@@ -2259,12 +3018,6 @@ class WebSocket extends EventTarget {
     return this._url;
   }
   get readyState() {
-    if (this._readyState === WebSocket.OPEN) {
-      const [statue, message] = this._raw.statue();
-      if (statue != 0) {
-        this._fail(`${message}[${statue}]`);
-      }
-    }
     return this._readyState;
   }
   send(data) {
