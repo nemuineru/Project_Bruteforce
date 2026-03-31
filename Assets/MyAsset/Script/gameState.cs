@@ -83,7 +83,7 @@ public class gameState : MonoBehaviour
         objs.transform.SetParent(GUI_Top.transform, false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         elapsedTime += Time.fixedDeltaTime;
         entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
@@ -94,13 +94,12 @@ public class gameState : MonoBehaviour
         propList = FindObjectsByType<Props>(FindObjectsSortMode.None)
         .OrderBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
         .ToList();
-    }
-
-    void LateUpdate()
-    {
+        foreach(Entity et in entityList)
+        {
+            et.EntityUpdate();
+        }
         HitParamFrame();
     }
-
 
     //hitdefFrame - リストアップしたhitdefparamを優先度に応じて実行する.
     void HitParamFrame()

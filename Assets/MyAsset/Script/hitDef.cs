@@ -303,7 +303,7 @@ public class hitDefParams
         //targetEntity.CurrentStateID = ReturnStateIDs(targetEntity);
 
         //当てた相手は問答無用でstateTimeを0にする.
-        targetEntity.stateTime = 0;
+        //targetEntity.stateTime = 0;
         //stateChangeを設定.
         //targetEntity.isStateChanged = true;
 
@@ -319,8 +319,9 @@ public class hitDefParams
         //当てた側のChangeStateが0以上なら変更. ChangeStateも行う.
         if(ChangeState_Owner > -1 && !MoveGuarded)
         {
+            ownerEntity.CListQueue.Add(new Entity.ChangeStateQueue(){stateDefID = ChangeState_Owner, priority = 100});
+            //ownerEntity.stateTime = 0;
             ownerEntity.isStateChanged = true;
-            ownerEntity.CurrentStateID = ChangeState_Owner;
         }
     }
 }

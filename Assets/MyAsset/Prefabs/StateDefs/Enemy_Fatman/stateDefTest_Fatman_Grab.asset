@@ -581,6 +581,24 @@ MonoBehaviour:
           stParamValue: {fileID: 0}
           useID: -1
           stLuaLoads: 
+        Priority:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: -1
+          useID: -1
+          stLuaLoads: 
+        Priority_Behavior:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 68
+          useID: -1
+          stLuaLoads: 
         ChangeState_OwnerStateID:
           _setHidden: 0
           _setEssential: 0
@@ -609,6 +627,15 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        hitIntervalTime:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -657,6 +684,9 @@ MonoBehaviour:
             guard_hitStopTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
+            HitPriority: 0
+            HitPriorityBehavior: 72
+            sameHitInterval: 0
             maxEntityHits: 1
             fallTime: 0
             ChangeState_Target: -1

@@ -253,7 +253,7 @@ public class Entity : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void EntityUpdate()
     {
         if (vCam != null && transposer == null)
         {
@@ -402,6 +402,8 @@ public class Entity : MonoBehaviour
             CListQueue.Sort((CQ_L, CQ_M) => CQ_M.priority - CQ_L.priority);
             prevStateID = CurrentStateID;
             CurrentStateID = CListQueue[0].stateDefID;
+            //ChangeStateが実行されているならstateTimeは0.
+            stateTime = 0;
 
             //resets at update
             attrs.updateCombatStates(true);

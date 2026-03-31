@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 086f730ee7db8bc4abfeb89d68ca2d15, type: 3}
       propertyPath: m_TagString
@@ -193,6 +193,7 @@ MonoBehaviour:
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: c1470366b3bea504686d9b6beddfeb49, type: 2}
   executedStateIDs: 
+  hitdefSameTime: 
   raycenter: {x: 0, y: 0, z: 0}
   cmdList:
   - CommandName: Basic
@@ -200,6 +201,8 @@ MonoBehaviour:
     currentBufferTime: 1
     bufferMaxTime: 1
     readLength: 1
+  TotalHitNo: 0
+  registeredHitDefs: []
 --- !u!136 &7960206234810124181
 CapsuleCollider:
   m_ObjectHideFlags: 0
