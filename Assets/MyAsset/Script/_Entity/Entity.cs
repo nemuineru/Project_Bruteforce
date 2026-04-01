@@ -16,6 +16,18 @@ using Animancer;
 
 public class Entity : MonoBehaviour
 {
+    //set Entity Name.
+    [SerializeField]
+    internal string EntityName;
+    
+    //set Entity team Name. Avoiding Friendly Fire.
+    [SerializeField]
+    internal string EntityTeamName;
+
+    //prevent to compare name directly.
+    internal string EntityTeamID;
+
+
     //statetype : 体勢の設定. 
     public enum _StateType
     {
@@ -248,8 +260,7 @@ public class Entity : MonoBehaviour
             min.SetEntity(this);
             min.transform.parent = transform;
             min.transform.localPosition = Vector3.up;
-        }
-        
+        }        
     }
 
     // Update is called once per frame
@@ -293,6 +304,8 @@ public class Entity : MonoBehaviour
         capsuleRaydraw();
 
         HitPauseTime -= 1.0f;
+        //のけぞり計算
+        status.HitTime -= HitPauseTime <= 0 ? 1 : 0;
 
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
         stateTime = isStateChanged ? 0 : HitPauseTime >= 0 ? stateTime : stateTime + 1;
@@ -391,13 +404,17 @@ public class Entity : MonoBehaviour
             stateTime = 0;
         }
     }
+    
+    StateDef prevState = null;
 
     void executeStates()
     {
+        bool isStateChanged = false;
         //ChangeStateを実行した直後フレームの、その時のステートIDを読み出す..
         int prevStateID = -100000;
         if (CListQueue.Count > 0)
         {
+            isStateChanged = true;
             //Most Primal Queue is Most Biggest Number.
             CListQueue.Sort((CQ_L, CQ_M) => CQ_M.priority - CQ_L.priority);
             prevStateID = CurrentStateID;
@@ -412,6 +429,18 @@ public class Entity : MonoBehaviour
         }
 
         //常時実行StateDef(-1, -2, -3)
+
+        //-3はステート奪取対象のものを読み出して実行.
+        if (controlledEntity != null)
+        {
+            StateDef AutoState_3 =
+            controlledEntity.loadedDefs.Find(stDef => stDef.StateDefID == -3);
+            if (AutoState_3 != null)
+            {
+                //Debug.Log("auto checking -1 state");
+                AutoState_3.Execute(this, false);
+            }
+        }
 
         //-2はステート奪取されていても実行.
         StateDef AutoState_2 =
@@ -458,16 +487,15 @@ public class Entity : MonoBehaviour
         
         onGameFinished();
 
-            //state実行.. これは一つだけに実行されるはず.
-            //ステート奪取したときの値を実行..
-            StateDef currentState = null;
-            StateDef prevState = null;
+        //state実行.. これは一つだけに実行されるはず.
+        //ステート奪取したときの値を実行..
+        StateDef currentState = null;
+
+        //前回のprevStateは前回常時実行ステート以外で, 実行したものを参照.
         if (controlledEntity == null)
         {
             currentState =
             loadedDefs.Find(stDef => stDef.StateDefID == CurrentStateID);
-            prevState = 
-            loadedDefs.Find(stDef => stDef.StateDefID == prevStateID);
         }
         //ChangeStateと同時に発行されると、エラーが発生する？
         else
@@ -476,35 +504,38 @@ public class Entity : MonoBehaviour
             StateDef findDef = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID).Clone();
             currentState = findDef;
         }        
-        if (prevState != null)
+        
+        if (prevState != null && isStateChanged == true)
         {
-            //過去のStateを実行
+            //過去のStateを実行(ChangeStateが実行された後の1フレームのみ.)
             foreach (int ID in prevState.Execute(this, true))
             {
 
             }
         }
         if (currentState != null)
-            {
-                //Debug.Log("Executing stateDef - " + CurrentStateID + " at state time of - " + Time.frameCount + stateTime);
-                // + " at time of " + stateTime            
-                //the StateDef needs as deepcopy?
+        {
+            //Debug.Log("Executing stateDef - " + CurrentStateID + " at state time of - " + Time.frameCount + stateTime);
+            // + " at time of " + stateTime            
+            //the StateDef needs as deepcopy?
 
-                //実行したSTATEIDを格納. 実行回数はまだ記録してない.
-                foreach (int ID in currentState.Execute(this, false))
-                {
-                    if (!executedStateIDs.Any(i => i == ID))
-                    {
-                        executedStateIDs.Add(ID);
-                    }
-                }
-                //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
-                //" " + this.gameObject.name);
-            }
-            else
+            //実行したSTATEIDを格納. 実行回数はまだ記録してない.
+            foreach (int ID in currentState.Execute(this, false))
             {
-                //Debug.LogError("Loaded State is null : " + CurrentStateID);
+                if (!executedStateIDs.Any(i => i == ID))
+                {
+                    executedStateIDs.Add(ID);
+                }
             }
+            //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
+            //" " + this.gameObject.name);
+            //前回ステートにcurrentStateの情報を登録
+            prevState = currentState;
+        }
+        else
+        {
+            //Debug.LogError("Loaded State is null : " + CurrentStateID);
+        }
     }
 
     void onGameFinished()

@@ -1,6 +1,5 @@
 
 
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -956,6 +955,20 @@ public class scHitDef : StateController
         _MenuName = "Controller"
     };
 
+    //自分がもらうパワー増減管理.  x => ヒット時, y => ガード時.
+    [SerializeField]
+    stParams<Vector2> GetPower = new stParams<Vector2>(new Vector2(0,0),false,false)
+    {
+        _MenuName = "Status"
+    };
+    //相手がもらうパワー増減管理.  x => ヒット時, y => ガード時.
+    [SerializeField]
+    stParams<Vector2> GivePower = new stParams<Vector2>(new Vector2(0,0),false,false)
+    {
+        _MenuName = "Status"
+    };
+
+
     //旧Param. これはReferenceのため取っておく..
     [SerializeField]
     stParams<hitDefParams> hitParams;
@@ -1538,3 +1551,4 @@ public class scIgnoreEntityCollisions : StateController
         entity.ignoreCollider();
     }
 }
+

@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -184,12 +186,12 @@ public class hitDefParams
     //ここではstateTimeなどの変更は無し.
     public int ReturnStateIDs(Entity refEntity)
     {
-        //基本立ち喰らいアニメ
+        //基本立ち喰らいアニメ. 汎用.
         int retID = 5000;
         int referenceID = refEntity.CurrentStateID;
         //Guardingが設定されているなら双方に登録される関数値を考える.
         //entityとhitIDが同じヤツは二重に登録しない筈.
-        //OnGuardedStateの105に移動させる.
+        //いまのとこ、OnGuardedStateの105に移動させる.
         if(MoveGuarded)
         {
             retID = 105;
@@ -214,27 +216,28 @@ public class hitDefParams
             {
                 HitType = 50;
             }
-            //Up hit - 5000 to 5009
-            else if(AnimType.Contains('U'))
+            //AnimTypeの基、refEntityにその番号があるなら指定..
+            //Up hit - 5000 to 5009(上半身ダメージアニメ)
+            else if (AnimType.Contains('U'))
             {
                 HitType = 0;
             }
-            //Down hit - 5010 to 5019
-            if(AnimType.Contains('D') && refEntity.loadedDefs.Any(a => a.StateDefID == 5010))
+            //Down hit - 5010 to 5019(下半身ダメージアニメ)
+            else if(AnimType.Contains('D') && refEntity.loadedDefs.Any(a => a.StateDefID == 5010))
             {
                 HitType = 10;
             }
-            //Crouch hit - 5020 to 5029
+            //Crouch hit - 5020 to 5029(かがみダメージアニメ)
             else if(AnimType.Contains('C') && refEntity.loadedDefs.Any(a => a.StateDefID == 5020))
             {
                 HitType = 20;
             }
-            //Air hit - 5030 to 5039
+            //Air hit - 5030 to 5039(空中ダメージアニメ)
             else if(AnimType.Contains('A') && refEntity.loadedDefs.Any(a => a.StateDefID == 5030))
             {
                 HitType = 30;
             }
-            //Takedown Hit
+            //Takedown Hit(転倒ダメージ)
             else if(AnimType.Contains('T') && refEntity.loadedDefs.Any(a => a.StateDefID == 5040))
             {
                 HitType = 40;
@@ -269,9 +272,9 @@ public class hitDefParams
         targetEntity.transform.DOShakePosition(targetEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
 
+        //hitpoint damage("on" Guarded), knockbacking time and falling time set.
         if(MoveGuarded)
         {            
-            //hitpoint damage("on" Guarded)
             targetEntity.status.currentHP -= GuardDamage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
         }
         else
