@@ -308,7 +308,7 @@ public class hitDefParams
         //当てた相手は問答無用でstateTimeを0にする.
         //targetEntity.stateTime = 0;
         //stateChangeを設定.
-        //targetEntity.isStateChanged = true;
+        targetEntity.isStateChanged = true;
 
         targetEntity.CListQueue.Add(new Entity.ChangeStateQueue(){stateDefID = ReturnStateIDs(targetEntity), priority = 100});
         targetEntity.ChangeAnim();

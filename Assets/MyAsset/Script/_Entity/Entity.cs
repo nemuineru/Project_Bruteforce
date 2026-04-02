@@ -283,8 +283,6 @@ public class Entity : MonoBehaviour
         //これはBehaviorDesignerに登録させる予定.
         //entityInput.RecordInput_Player(0);
         //play BehaviorDesigner.
-        //isStateChangedはここで変更される. currentStateでstateChangeが発生した際,　リセットをかけるため.
-        isStateChanged = false;
         entityPhisics();
         setanimPlay();
 
@@ -318,6 +316,8 @@ public class Entity : MonoBehaviour
             hitdefSameTime = new List<int>();
         }
         //statusAlign();
+        //isStateChangedはここで変更される. currentStateでstateChangeが発生した際,　リセットをかけるため.
+        isStateChanged = false;
     }
 
     void statusAlign()
@@ -409,7 +409,6 @@ public class Entity : MonoBehaviour
 
     void executeStates()
     {
-        bool isStateChanged = false;
         //ChangeStateを実行した直後フレームの、その時のステートIDを読み出す..
         int prevStateID = -100000;
         if (CListQueue.Count > 0)
@@ -505,8 +504,10 @@ public class Entity : MonoBehaviour
             currentState = findDef;
         }        
         
+        //ステート奪取後も実行される.
         if (prevState != null && isStateChanged == true)
         {
+            Debug.Log("executing prevstate");
             //過去のStateを実行(ChangeStateが実行された後の1フレームのみ.)
             foreach (int ID in prevState.Execute(this, true))
             {
