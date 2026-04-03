@@ -7,8 +7,9 @@ export function StateDef_200_ID(entity)
     
     let verdList = new List_Int();
 
-    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
     let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && (CurrentAnimID == 200 || CurrentAnimID == 201) && CurrentTime > 1;
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
 
     if (CurrentTime > 12)
@@ -17,7 +18,7 @@ export function StateDef_200_ID(entity)
     }
     if (CurrentTime == 0)
     {
-        CS.UnityEngine.Debug.Log("Executed Anim");
+        //CS.UnityEngine.Debug.Log("Executed Anim");
         verdList.Add(0);
     }
     //Aight, does native JS supports math function?
@@ -39,7 +40,8 @@ export function StateDef_202_ID(entity){
     
     let verdList = new List_Int();
 
-    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimID == 202;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
 

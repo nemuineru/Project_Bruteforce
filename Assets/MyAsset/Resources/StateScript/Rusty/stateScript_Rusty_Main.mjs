@@ -123,7 +123,7 @@ export function StateDef_55_ID(entity)
     //On Ground.
     if(selfStTime > 1 && selfOnGrd_f == true)
     {
-        CS.UnityEngine.Debug.Log("Jumping Vect");        
+        //CS.UnityEngine.Debug.Log("Jumping Vect");        
         verdList.Add(1);
     }
     return verdList
@@ -190,7 +190,7 @@ export function StateDef_100_ID(entity) {
     let verdList = new List_Int();
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity)
-    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+    let isPressable = CS.Elem.CheckButtonPressed(entity, "Guarding") && !CS.Elem.isTargetRefsOwnerID(entity);
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
@@ -202,7 +202,7 @@ export function StateDef_100_ID(entity) {
     }
 
     //if you release B or non ground..
-    if (!isPressed_B) 
+    if (!isPressable) 
     { 
         //change to Idle.
         verdList.Add(1);
@@ -221,7 +221,7 @@ export function StateDef_105_ID(entity){
     let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
     
     let verdList = new List_Int();
-    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding");
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding") && !CS.Elem.isTargetRefsOwnerID(entity);
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);

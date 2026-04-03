@@ -507,32 +507,42 @@ public class Entity : MonoBehaviour
         //ステート奪取後も実行される.
         if (prevState != null && isStateChanged == true)
         {
-            Debug.Log("executing prevstate");
+            Debug.Log("finding prevstate at - " + CurrentStateID + " prevStateDefID : " + prevState.StateDefID + " statedef main : " + prevState.StateDefName);
+            List<int> ExID = prevState.Execute(this, true);
             //過去のStateを実行(ChangeStateが実行された後の1フレームのみ.)
-            foreach (int ID in prevState.Execute(this, true))
+            foreach (int ID in ExID)
             {
-
+                Debug.Log(ID);
             }
         }
+
         if (currentState != null)
         {
             //Debug.Log("Executing stateDef - " + CurrentStateID + " at state time of - " + Time.frameCount + stateTime);
             // + " at time of " + stateTime            
             //the StateDef needs as deepcopy?
 
+            int i = 0;
+            List<int> ExID = currentState.Execute(this, false);
             //実行したSTATEIDを格納. 実行回数はまだ記録してない.
-            foreach (int ID in currentState.Execute(this, false))
+            foreach (int ID in ExID)
             {
                 if (!executedStateIDs.Any(i => i == ID))
                 {
                     executedStateIDs.Add(ID);
                 }
+                i++;
+                // Debug.Log("Executed for " + i + "," + ID);
             }
             //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
             //" " + this.gameObject.name);
             //前回ステートにcurrentStateの情報を登録
-            prevState = currentState;
+            if( isStateChanged == true )
+            {
+                prevState = currentState;
+            }
         }
+
         else
         {
             //Debug.LogError("Loaded State is null : " + CurrentStateID);

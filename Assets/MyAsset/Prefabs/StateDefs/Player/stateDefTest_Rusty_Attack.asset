@@ -706,6 +706,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -982,7 +1000,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 40, y: 0, z: 0}
+          stParamValue: {x: 32, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
         isSpeedstatAffect:
@@ -1063,7 +1081,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 40, y: 0, z: 0}
+          stParamValue: {x: 20, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
         isSpeedstatAffect:
@@ -1468,6 +1486,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -1774,6 +1810,24 @@ MonoBehaviour:
           _MenuName: Controller
           loadTypes: 0
           stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitParams:
@@ -2130,6 +2184,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -2484,6 +2556,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -2790,6 +2880,24 @@ MonoBehaviour:
           _MenuName: Controller
           loadTypes: 0
           stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitParams:
@@ -3214,6 +3322,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -3541,6 +3667,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -3847,6 +3991,24 @@ MonoBehaviour:
           _MenuName: Controller
           loadTypes: 0
           stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitParams:
@@ -4220,6 +4382,24 @@ MonoBehaviour:
           _MenuName: Controller
           loadTypes: 0
           stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitParams:
@@ -4658,6 +4838,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -5034,6 +5232,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -5342,6 +5558,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -5395,7 +5629,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 30, y: 0, z: 0}
+          stParamValue: {x: 45, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
         isSpeedstatAffect:

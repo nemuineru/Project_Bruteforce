@@ -321,7 +321,7 @@ public class StateDef
         env = PuerTS_Framework.main.JSEnv;
         //ExecuteModuleで使用するスクリプトデータを読み込ませる. 
         Dir = ScriptDirectory + "/" + ScriptName;
-        Debug.Log("script Directory " + Dir + " : at ID of " + StateDefID);
+        //Debug.Log("script Directory " + Dir + " : at ID of " + StateDefID);
     }
 
     //Execute時のLuaのStateIDをそれぞれのStateDefに保存 - これ、掴みの時のEntity参照時の設定時に重複発生しそー..    
@@ -329,8 +329,8 @@ public class StateDef
 
     void entityTypeSet(Entity entity)
     {
-        Debug.Log("EntityTypeSet Executed - " +
-        stateType.ToString() + " , " + physType.ToString() + " , " + moveType.ToString());
+        // Debug.Log("EntityTypeSet Executed - " +
+        // stateType.ToString() + " , " + physType.ToString() + " , " + moveType.ToString());
         switch (stateType)
         {
             case 's':

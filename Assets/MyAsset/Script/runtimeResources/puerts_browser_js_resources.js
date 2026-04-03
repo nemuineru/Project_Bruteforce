@@ -1100,7 +1100,7 @@ function StateDef_200_ID(entity) {
     verdList.Add(1);
   }
   if (CurrentTime == 0) {
-    CS.UnityEngine.Debug.Log("Executed Anim");
+    //CS.UnityEngine.Debug.Log("Executed Anim");
     verdList.Add(0);
   }
   //Aight, does native JS supports math function?

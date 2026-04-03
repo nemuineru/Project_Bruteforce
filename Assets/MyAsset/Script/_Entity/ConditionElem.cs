@@ -186,4 +186,9 @@ public class Elem
 
         return null;
     }
+
+    public static bool isTargetRefsOwnerID(Entity et)
+    {
+        return et.controlledEntity != null;
+    }
 }
