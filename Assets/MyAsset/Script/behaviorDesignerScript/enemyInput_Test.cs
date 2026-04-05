@@ -55,7 +55,7 @@ public class enemyInput_Test : Action
         commandPallette cmdRegisterOneFrame = new commandPallette();
         //スティックを前に(y = 0)
         virtualSticks stc =
-        new virtualSticks(virtualStickInput.Value *
+        new virtualSticks((virtualStickInput.Value).normalized * virtualStickInput.Value.SqrMagnitude() * 
         Mathf.Clamp01(DistClamp.Value), 0, 1f);
 
         cmdRegisterOneFrame.MovAxisVecs.Add(stc);

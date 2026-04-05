@@ -12,13 +12,14 @@ export function StateDef_5000_ID(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
     let isOnGround = CS.Elem.isEntityOnGround;
+    let isRecovReady = entity.status.HitTime <= 0;
     let isAlive = entity.attrs.alive;
 
     if (CurrentTime == 0 && CurrentAnimID != 5000)
     {
         verdList.Add(0);
     }
-    if (CurrentTime > 12 && isOnGround)
+    if (CurrentTime > 12 && isOnGround && isRecovReady)
     {
         verdList.Add(1);
     }

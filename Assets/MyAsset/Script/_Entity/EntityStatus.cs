@@ -117,12 +117,18 @@ public class EntityStatus
     public Vector3 BaseAccelParam = new Vector3(40f,40f,40f);
 
     
+    //この秒数が0にならない限り動きを止める. stateTimeなども同様.
     //ヒットのポーズ用(ガード含む). entityがhitPause時は減少しない.
-    internal int HitPauseTime = 0;
+    [SerializeField]
+    public int HitPauseTime = 0;
+    
     //ヒットののけぞり用(ガード含む). entityがhitPause時は減少しない.
-    internal int HitTime = 0;
+    [SerializeField]
+    public int HitTime = 0;
+
     //ヒット落下. entityがhitPause時は減少しない. また, recoveryにFall値を0に設定する.
-    internal int HitFall = 0;
+    [SerializeField]
+    public int HitFallTime = 0;
 
     //チャージ. 特殊ボタンの押しっぱなしを判別.
     //ダメージを受けたりすると0に戻る.

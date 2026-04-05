@@ -871,13 +871,13 @@ public class scHitDef : StateController
 
     //HitStopに関しては x -> 当てた対象, y -> 当てた本人 の時間として Vector2で管理する.
     [SerializeField]
-    stParams<Vector2> hitStopTime = new stParams<Vector2>(Vector2.zero, true, true)
+    stParams<Vector2Int> hitStopTime = new stParams<Vector2Int>(Vector2Int.zero, true, true)
     {
         _MenuName = "Animation"
     }; 
     
     [SerializeField]
-    stParams<Vector2> guardHitStopTime = new stParams<Vector2>(Vector2.zero, false, false)
+    stParams<Vector2Int> guardHitStopTime = new stParams<Vector2Int>(Vector2Int.zero, false, false)
     {
         _MenuName = "Animation"
     }; 
@@ -942,9 +942,15 @@ public class scHitDef : StateController
         _MenuName = "Controller"
     };
     
-    
+    //x as Direct Hit, y as Guard.
     [SerializeField]
-    stParams<float> fallTime = new stParams<float>(1,false,false)
+    stParams<Vector2Int> hitTime = new stParams<Vector2Int>(Vector2Int.zero,false,false)
+    {
+        _MenuName = "Controller"
+    };
+
+    [SerializeField]
+    stParams<int> fallTime = new stParams<int>(1,false,false)
     {
         _MenuName = "Controller"
     };
@@ -1024,9 +1030,9 @@ public class scHitDef : StateController
             AnimType = 
             hitAnimType._isReadable ? hitAnimType.valueGet(loadParams,entity) : "L",
             hitStopTime = 
-            hitStopTime._isReadable ? hitStopTime.valueGet(loadParams,entity) : Vector2.zero,
+            hitStopTime._isReadable ? hitStopTime.valueGet(loadParams,entity) : Vector2Int.zero,
             guard_hitStopTime = 
-            guardHitStopTime._isReadable ? guardHitStopTime.valueGet(loadParams,entity) : Vector2.zero,
+            guardHitStopTime._isReadable ? guardHitStopTime.valueGet(loadParams,entity) : Vector2Int.zero,
             HitEff = hitEffect._isReadable ? hitEffect.valueGet(loadParams,entity) : null,
             GuardHitEff = 
             guardhitEffect._isReadable ? guardhitEffect.valueGet(loadParams,entity) : null,
@@ -1048,6 +1054,8 @@ public class scHitDef : StateController
             maxEntityHits = 
             maxEntityHits._isReadable ? maxEntityHits.valueGet(loadParams,entity) : 1,
             sameHitInterval = hitIntervalTime._isReadable ? hitIntervalTime.valueGet(loadParams,entity) : 0,
+
+            HitTime = hitTime._isReadable ? hitTime.valueGet(loadParams,entity) : Vector2Int.zero,
             fallTime = fallTime._isReadable ? fallTime.valueGet(loadParams,entity) : 0,
             HitExcludeList = excluder
         };

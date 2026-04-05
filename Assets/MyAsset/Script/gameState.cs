@@ -214,7 +214,7 @@ public class gameState : MonoBehaviour
                     ((hitDefParams.HitEff != null ? hitDefParams.HitEff : defaultEff), hits, Quaternion.identity);
                     //onHit, entity will stop. but props wont.
                     //I'll set high pause for each.
-                    (provokerEntity.HitPauseTime , prop.disableTime) = (4, 30);
+                    (provokerEntity.status.HitPauseTime , prop.disableTime) = (4, 30);
                 }
                 prop.isHit = true;
             }

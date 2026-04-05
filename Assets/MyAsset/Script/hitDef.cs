@@ -43,9 +43,14 @@ public class hitDefParams
 
     //ガード時と通常時のヒットストップ時刻
     [SerializeField]
-    public Vector2 hitStopTime;
+    public Vector2Int hitStopTime;
     [SerializeField]
-    public Vector2 guard_hitStopTime;
+    public Vector2Int guard_hitStopTime;
+
+    //ヒット硬直時間設定
+    [SerializeField]
+    public Vector2Int HitTime;
+
     [SerializeField]
     public GameObject HitEff;
     
@@ -68,7 +73,7 @@ public class hitDefParams
     public int maxEntityHits = 1;
 
     //ダウン設定.
-    public float fallTime = 0;
+    public int fallTime = 0;
 
     //当てた敵のステート変更情報(負の数以下で変更しない)
     public int ChangeState_Target = -1;
@@ -210,8 +215,14 @@ public class hitDefParams
             //その前にAnimTypeに指定のCharが入ってないと遷移不可能にする..
             //if文祭りじゃ.
             //基本として、LightHit用のStateDefは入っていないと問題外.
+
+            //現在EntityがFall状態で追撃したなら再読み込み.
+            if(referenceID >= 5100 && referenceID <= 5110 && refEntity.loadedDefs.Any(a => a.StateDefID == 5100))
+            {
+                HitType = 100;
+            }
             //Fall hit - FallTimeが0以上、またはFall中に攻撃を加えたとき
-            if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
+            else if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
             && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
@@ -269,18 +280,21 @@ public class hitDefParams
         //スピード設定.
         targetEntity.rigid.velocity = PushVector.normalized * velset.x + Vector3.up * velset.y;
         //shapepositions. 後でこれも設定できるようにしたい.
-        targetEntity.transform.DOShakePosition(targetEntity.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
+        targetEntity.transform.DOShakePosition(targetEntity.status.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
 
         //hitpoint damage("on" Guarded), knockbacking time and falling time set.
         if(MoveGuarded)
         {            
             targetEntity.status.currentHP -= GuardDamage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
+            targetEntity.status.HitTime = HitTime.y;
         }
         else
         {
             //hitpoint damage(if not guarded.)
             targetEntity.status.currentHP -= Damage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
+            targetEntity.status.HitTime = HitTime.x;
+            targetEntity.status.HitFallTime = fallTime;
         }
 
         //placeholder for rotation
@@ -289,7 +303,7 @@ public class hitDefParams
         //Debug.Log("Hit : " + ownerEntity.gameObject.name);
 
         //hitpause
-        (ownerEntity.HitPauseTime, targetEntity.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
+        (ownerEntity.status.HitPauseTime, targetEntity.status.HitPauseTime) = (hitStopTime.x, hitStopTime.y);
         
         //ダメージエフェクトの生成はselfから発動する.
         GameObject instanceEff = HitEff != null ? HitEff : gameState.self.defaultEff;

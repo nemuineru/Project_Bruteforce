@@ -138,9 +138,6 @@ public class Entity : MonoBehaviour
 
     public Vector3 wishingVect;
 
-    //この秒数が0にならない限り動きを止める. stateTimeなども同様.
-    internal float HitPauseTime;
-
     //Input Manager for each entitys
     internal entityInputManager entityInput = new entityInputManager();
 
@@ -301,12 +298,13 @@ public class Entity : MonoBehaviour
 
         capsuleRaydraw();
 
-        HitPauseTime -= 1.0f;
+        status.HitPauseTime -= 1;
         //のけぞり計算
-        status.HitTime -= HitPauseTime <= 0 ? 1 : 0;
+        status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
+        status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
 
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
-        stateTime = isStateChanged ? 0 : HitPauseTime >= 0 ? stateTime : stateTime + 1;
+        stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
 
         attrs.updateCombatStates(isStateChanged);
         //ステートが変更されていれば色々Reset.
@@ -603,7 +601,7 @@ public class Entity : MonoBehaviour
         //Animancer版.
         if(animancerManager != null)
         {
-            animancerManager.Tick((HitPauseTime <= 0));
+            animancerManager.Tick((status.HitPauseTime <= 0));
             animationFrameTime = animancerManager.AM_AnimCurrentTime(0);
             animationEndTime = animancerManager.AM_AnimEndTime(0);
         }
@@ -661,7 +659,7 @@ public class Entity : MonoBehaviour
             //set gravity.
             //rigid.velocity += Physics.gravity * Time.fixedDeltaTime;
         }
-        bool isPaused = (HitPauseTime > 0);
+        bool isPaused = (status.HitPauseTime > 0);
         if (isPaused)
         {
             if(!rigid.isKinematic)
