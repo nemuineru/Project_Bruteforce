@@ -43,7 +43,7 @@ export function stateCmd(entity) {
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
     //ガード状態.
-    if(selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0)
+    if(selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0 && entity.status.currentGuardPoint > 0)
     {        
         verdList.Add(100);
     }

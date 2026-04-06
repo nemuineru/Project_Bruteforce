@@ -24,6 +24,7 @@ public class gameState : MonoBehaviour
 
     public GameObject defaultEff;
     public GameObject defaultGuardEff;
+    public GameObject defaultGuardBreakEff;
     public GameObject defaultDeathEff;
 
 

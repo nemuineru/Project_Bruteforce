@@ -40,9 +40,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Main.mjs
     preStateVerdictName: 
     ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 73
+    physType: 83
     StateList: []
     Dir: 
     setCtrl: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     ParamLoadName: 
     stateType: 83
     moveType: 0
-    physType: 83
+    physType: 65
     StateList:
     - rid: 4404389163807801372
     - rid: 4404389163807801373
@@ -69,7 +69,7 @@ MonoBehaviour:
     ParamLoadName: 
     stateType: 83
     moveType: 0
-    physType: 83
+    physType: 65
     StateList:
     - rid: 3324167878465552384
     - rid: 3324167878465552385
@@ -93,13 +93,14 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Main.mjs
     preStateVerdictName: StateDef_100_ID
     ParamLoadName: StateDef_0_Param
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 73
+    physType: 83
     StateList:
     - rid: 8440311490821226519
     - rid: 5331018537749184512
     - rid: 8440311490821226520
+    - rid: 503850252001869887
     - rid: 5331018854245859337
     - rid: 503850231326572544
     - rid: 5331018537749184513
@@ -113,9 +114,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Main.mjs
     preStateVerdictName: StateDef_105_ID
     ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 73
+    physType: 83
     StateList:
     - rid: 3324168081673289733
     - rid: 8440311490821226533
@@ -126,14 +127,16 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Stun
     StateDefID: 110
-    ScriptDirectory: 
+    ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Main.mjs
-    preStateVerdictName: 
+    preStateVerdictName: StateDef_110_ID
     ParamLoadName: 
     stateType: 83
     moveType: 73
     physType: 83
-    StateList: []
+    StateList:
+    - rid: 503850252001869885
+    - rid: 503850252001869886
     Dir: 
     setCtrl: 0
   - StateDefName: Winning Pose
@@ -191,6 +194,74 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         priority: 0
+    - rid: 503850252001869885
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Set Anim
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 110
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 503850252001869886
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Set Init
+        doLoadAfterChangeState: 0
+        changeTo: 0
+        priority: 0
+    - rid: 503850252001869887
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 110
+          stLuaLoads: 
+        stateControllerSubName: Stun if the guard is gone.
+        doLoadAfterChangeState: 0
+        changeTo: 110
+        priority: 50
     - rid: 1982101199356952583
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

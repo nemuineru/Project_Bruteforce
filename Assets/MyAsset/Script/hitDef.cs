@@ -316,7 +316,14 @@ public class hitDefParams
         GameObject instanceEff = HitEff != null ? HitEff : gameState.self.defaultEff;
         if(MoveGuarded)
         {
-            instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardEff;
+            if(targetEntity.status.currentGuardPoint <= 0)
+            {
+                instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardBreakEff;                
+            }
+            else
+            {
+                instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardEff;
+            }
         }
         gameState.self.GenerateEffect(instanceEff, ContactPoint, targetEntity.transform.rotation);
     }

@@ -212,6 +212,11 @@ export function StateDef_100_ID(entity) {
         verdList.Add(105)
     }
 
+    if(entity.status.currentGuardPoint <= 0)
+    {
+        verdList.Add(110);
+    }
+
     //Guarding State is continued.
     verdList.Add(10);
 
@@ -241,10 +246,9 @@ export function StateDef_105_ID(entity){
     { 
         verdList.Add(0); 
     }
-
     //after taking hits.
     //if you release B or non ground.. change to init.
-    if(CurrentAnimTime >= 10 && selfStTime > 4 && entity.status.HitTime < 0)
+    if((CurrentAnimTime >= 10 && selfStTime > 4 && entity.status.HitTime < 0) || entity.status.currentGuardPoint <= 0)
     {
         if (!isPressed_B) 
         { 
@@ -264,6 +268,31 @@ export function StateDef_105_ID(entity){
 
 
 //function for Guarding_Stun : Guarding is exceeded..
-export function StateDef_106_ID(entity){    
+export function StateDef_110_ID(entity){   
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding") && !CS.Elem.isTargetRefsOwnerID(entity);
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0); 
+    }
+
+    //after taking hits.
+    //if you release B or non ground.. change to init.
+    if(CurrentAnimTime >= 20 && selfStTime > 4 && entity.status.HitTime < 0)
+    {
+        verdList.Add(1);
+    } 
+    return verdList;
 
 }

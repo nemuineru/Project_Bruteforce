@@ -1894,6 +1894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57138f686d9a74f8ad5d22366a6c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityName: 
+  EntityTeamName: 
   stateType: 0
   physicsType: 0
   moveType: 0
@@ -1935,14 +1937,19 @@ MonoBehaviour:
     currentHP: 100
     maxEnergy: 50
     currentEnergy: 0
-    currentGuardPoint: 100
-    maxGuardPoint: 100
+    currentGuardPoint: 10
+    maxGuardPoint: 10
     GuardReductDmgrate: 1
     guardRecoverRate: 0.8
     guardRecoverParsedTime: 0
-    GuardRecoverTime: 0.7
+    GuardRecoverTime: 0
     BaseAttackPerc: 100
     BaseDefencePerc: 100
+    BaseMoveVelocityParam: {x: 5, y: 4, z: 5}
+    BaseAccelParam: {x: 40, y: 40, z: 40}
+    HitPauseTime: 0
+    HitTime: 0
+    HitFallTime: 0
     ChargeTime: 0
   attrs:
     ctrl: 1
@@ -1958,6 +1965,9 @@ MonoBehaviour:
     isStateGuarded: 0
     isStateReversed: 0
     isSoundNotPlayed: 0
+    isBeingStateHit: 0
+    isBeingStateContact: 0
+    isBeingStateGuarded: 0
   parentEntity: {fileID: 0}
   controlledEntity: {fileID: 0}
   animID: 0
@@ -1979,6 +1989,7 @@ MonoBehaviour:
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: 03f10cc9c0671a049adf2ebf5f2e8fc4, type: 2}
   executedStateIDs: 
+  hitdefSameTime: 
   raycenter: {x: 0, y: 0, z: 0}
   cmdList:
   - CommandName: Jump
@@ -2011,6 +2022,8 @@ MonoBehaviour:
     currentBufferTime: 0
     bufferMaxTime: 2
     readLength: 1
+  TotalHitNo: 0
+  registeredHitDefs: []
 --- !u!54 &7256620476241511130
 Rigidbody:
   m_ObjectHideFlags: 0

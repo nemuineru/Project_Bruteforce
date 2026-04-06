@@ -104,7 +104,7 @@ MonoBehaviour:
       cycleOffset: 0
       mixPosition: {x: 0, y: 0}
     blendInTime: 0.01
-    blendOutTime: 0.2
+    blendOutTime: 0.1
     useDefaultClss: 0
     clssSetting:
       clssDefs: []
@@ -115,23 +115,22 @@ MonoBehaviour:
   - mixType: 1
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 120
-    Name: Rolling
+    ID: 110
+    Name: Stun
     animClip:
-    - Clip: {fileID: 7400000, guid: a1e18afdfc55d624e97233022612ea5b, type: 2}
+    - Clip: {fileID: 7400000, guid: 58303df4c0200614d8d8b0ea38f69464, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0
       mixPosition: {x: 0, y: 0}
     blendInTime: 0
-    blendOutTime: 0.4
+    blendOutTime: 0.1
     useDefaultClss: 0
     clssSetting:
       clssDefs: []
-      disableClssList:
-      - head
+      disableClssList: []
       root: {fileID: 0}
-      eraseAllClss: 1
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -176,8 +175,8 @@ MonoBehaviour:
         startPos: {x: 0, y: 0, z: 0}
         endPos: {x: 0, y: 0, z: 0}
         width: 0
-        _lastcalcStartPos: {x: -2.5684123, y: 0.6817984, z: 3.8977401}
-        _lastcalcEndPos: {x: -2.5684123, y: 0.6817984, z: 3.8977401}
+        _lastcalcStartPos: {x: -1.6240463, y: 0.6943344, z: 3.9708028}
+        _lastcalcEndPos: {x: -1.6240463, y: 0.6943344, z: 3.9708028}
       disableClssList: []
       root: {fileID: 0}
       eraseAllClss: 0

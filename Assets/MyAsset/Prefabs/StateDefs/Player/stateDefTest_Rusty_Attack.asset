@@ -2061,7 +2061,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 10
           useID: -1
           stLuaLoads: 
         Priority_Behavior:
