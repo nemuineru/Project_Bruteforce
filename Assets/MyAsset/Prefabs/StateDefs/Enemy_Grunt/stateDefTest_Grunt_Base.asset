@@ -322,7 +322,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -343,13 +343,22 @@ MonoBehaviour:
           stParamValue: IA
           useID: -1
           stLuaLoads: 
-        guardDamage:
+        guardPhysFlag:
           _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
+          _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        guardMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IAH
           useID: -1
           stLuaLoads: 
         guardBreakPoint:
@@ -358,16 +367,7 @@ MonoBehaviour:
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -439,7 +439,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 0, y: 100}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -469,7 +469,25 @@ MonoBehaviour:
           stParamValue: {fileID: 0}
           useID: -1
           stLuaLoads: 
-        ChangeState_EnemyStateID:
+        Priority:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Priority_Behavior:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 72
+          useID: -1
+          stLuaLoads: 
+        ChangeState_OwnerStateID:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -478,7 +496,7 @@ MonoBehaviour:
           stParamValue: -1
           useID: -1
           stLuaLoads: 
-        ChangeState_PlayerStateID:
+        ChangeState_TargetStateID:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -487,7 +505,7 @@ MonoBehaviour:
           stParamValue: -1
           useID: -1
           stLuaLoads: 
-        refsPlayerStateIDonHit:
+        isTargetRefsOwnerID:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -503,6 +521,24 @@ MonoBehaviour:
           _MenuName: Controller
           loadTypes: 0
           stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        hitIntervalTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         fallTime:
@@ -523,6 +559,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -531,10 +585,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 10
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1.5, y: 0, z: 0}
@@ -543,15 +595,21 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 8, y: 2}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
-            ChangeState_Enemy: 5000
+            HitPriority: 0
+            HitPriorityBehavior: 72
+            sameHitInterval: 0
             maxEntityHits: 1
             fallTime: 0
-            enemyRefsPlayerNum: 0
-            ChangeState_Player: -1
+            ChangeState_Target: -1
+            TargetRefsOwnerNum: 0
+            ChangeState_Owner: -1
             HitPhysFlag: SA
             HitMoveFlag: IA
+            GuardPhysFlag: SA
+            GuardMoveFlag: IA
             AnimType: 
             HitExcludeList: 
           useID: -1
@@ -637,7 +695,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -658,13 +716,22 @@ MonoBehaviour:
           stParamValue: IA
           useID: -1
           stLuaLoads: 
-        guardDamage:
+        guardPhysFlag:
           _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
+          _setEssential: 1
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: SA
+          useID: -1
+          stLuaLoads: 
+        guardMoveFlag:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: IAH
           useID: -1
           stLuaLoads: 
         guardBreakPoint:
@@ -673,16 +740,7 @@ MonoBehaviour:
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -784,7 +842,25 @@ MonoBehaviour:
           stParamValue: {fileID: 0}
           useID: -1
           stLuaLoads: 
-        ChangeState_EnemyStateID:
+        Priority:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        Priority_Behavior:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 72
+          useID: -1
+          stLuaLoads: 
+        ChangeState_OwnerStateID:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -793,7 +869,7 @@ MonoBehaviour:
           stParamValue: -1
           useID: -1
           stLuaLoads: 
-        ChangeState_PlayerStateID:
+        ChangeState_TargetStateID:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -802,7 +878,7 @@ MonoBehaviour:
           stParamValue: -1
           useID: -1
           stLuaLoads: 
-        refsPlayerStateIDonHit:
+        isTargetRefsOwnerID:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
@@ -818,6 +894,24 @@ MonoBehaviour:
           _MenuName: Controller
           loadTypes: 0
           stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        hitIntervalTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         fallTime:
@@ -838,6 +932,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -846,10 +958,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 0
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1, y: 2, z: 0}
@@ -858,15 +968,21 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 3, y: 10}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: 763c35982e678ac4bbc44144c42c505f, type: 3}
             GuardHitEff: {fileID: 0}
-            ChangeState_Enemy: 5000
+            HitPriority: 0
+            HitPriorityBehavior: 72
+            sameHitInterval: 0
             maxEntityHits: 1
             fallTime: 0
-            enemyRefsPlayerNum: 0
-            ChangeState_Player: -1
+            ChangeState_Target: -1
+            TargetRefsOwnerNum: 0
+            ChangeState_Owner: -1
             HitPhysFlag: SA
             HitMoveFlag: IA
+            GuardPhysFlag: SA
+            GuardMoveFlag: IA
             AnimType: 
             HitExcludeList: 
           useID: -1

@@ -460,7 +460,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 28
+          stParamValue: {x: 45, y: 25}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -499,31 +499,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -741,10 +723,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 10
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 0, y: 4, z: 2}
@@ -1250,7 +1230,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 16
+          stParamValue: {x: 14, y: 4}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -1289,31 +1269,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -1531,10 +1493,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 20
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1.5, y: 0, z: 0}
@@ -1586,7 +1546,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 16
+          stParamValue: {x: 18, y: 4}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -1625,31 +1585,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -1867,10 +1809,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 20
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1.8, y: 0.7, z: 0}
@@ -1968,7 +1908,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 11
+          stParamValue: {x: 10, y: 4}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -2007,31 +1947,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -2249,10 +2171,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 9
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 3.1, y: 0.3, z: 0}
@@ -2350,7 +2270,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 25
+          stParamValue: {x: 40, y: 20}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -2389,31 +2309,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -2631,10 +2533,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 80
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1, y: 2, z: 0}
@@ -2686,7 +2586,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 45
+          stParamValue: {x: 50, y: 25}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -2725,31 +2625,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -2967,10 +2849,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 65
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 4, y: 0, z: 0}
@@ -3136,7 +3016,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 19
+          stParamValue: {x: 28, y: 10}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -3175,31 +3055,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -3417,10 +3279,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 30
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 3, y: 4, z: 0}
@@ -3491,7 +3351,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -3530,31 +3390,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -3772,10 +3614,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 0
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 0, y: 0, z: 0}
@@ -3827,7 +3667,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 20
+          stParamValue: {x: 32, y: 12}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -3866,31 +3706,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -4108,10 +3930,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 0
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 0, y: 0, z: 0}
@@ -4228,7 +4048,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -4267,31 +4087,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -4509,10 +4311,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 25
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 4, y: 1, z: 0}
@@ -4692,7 +4492,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -4731,31 +4531,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -4973,10 +4755,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 70
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 0.8, y: 7, z: 0}
@@ -5096,7 +4876,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -5135,31 +4915,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -5377,10 +5139,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 100
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 0, y: 0, z: 0}
@@ -5432,7 +5192,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 60
+          stParamValue: {x: 55, y: 16}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -5471,31 +5231,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -5713,10 +5455,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 0
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 0, y: 0, z: 0}

@@ -7,10 +7,12 @@ public class Status_MainUI : MonoBehaviour
     public HealthGaugeComponent Health;
     public EnergyGaugeComponent Energy;
     public ChargerGaugeComponent Charger;
+    public GuardGaugeComponent Guard;
     public void SetComponent(Entity playerEntity)
     {
         Health.valueEntity = playerEntity;
         Energy.valueEntity = playerEntity;
         Charger.valueEntity = playerEntity;
+        Guard.valueEntity = playerEntity;
     }
 }

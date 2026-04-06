@@ -20,11 +20,9 @@ public class hitDefParams
     public int hitID;
 
     //通常ダメージ・ガード時ダメージ
-    public float Damage;
-    public float GuardDamage;
+    public Vector2 Damage;
     //ガードポイント減少/通常とガード時
-    public float GuardBreakPoint;
-    public float GuardBreakPoint_OnGuard;
+    public Vector2 GuardBreakPoint;
 
     public bool Kill;
     public bool GuardOnKill;
@@ -197,8 +195,8 @@ public class hitDefParams
         //Guardingが設定されているなら双方に登録される関数値を考える.
         //entityとhitIDが同じヤツは二重に登録しない筈.
         //いまのとこ、OnGuardedStateの105に移動させる.
-        //ガードフラグなら、
-        if(MoveGuarded)
+        //ガードフラグが立ってた or ヒットタイムが0
+        if(MoveGuarded || (HitTime.x < 0))
         {
             //retID = 105;
             //Debug.Log("MoveGuarded To " + referenceID);
@@ -290,16 +288,17 @@ public class hitDefParams
         //hitpoint damage("on" Guarded), knockbacking time and falling time set.
         if(MoveGuarded)
         {            
-            targetEntity.status.currentHP -= GuardDamage *
+            targetEntity.status.currentHP -= Damage.y *
             (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f, targetEntity.status.BaseDefencePerc * targetEntity.status.GuardReductDmgrate));
             targetEntity.status.HitTime = HitTime.y;
             targetEntity.attrs.isBeingStateGuarded = 1;
-            targetEntity.status.currentGuardPoint -= GuardBreakPoint_OnGuard;
+            targetEntity.status.currentGuardPoint -= GuardBreakPoint.y;
         }
         else
         {
             //hitpoint damage(if not guarded.)
-            targetEntity.status.currentHP -= Damage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
+            targetEntity.status.currentHP -= Damage.x * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
+            targetEntity.status.currentGuardPoint -= GuardBreakPoint.x;
             targetEntity.status.HitTime = HitTime.x;
             targetEntity.status.HitFallTime = fallTime;
             targetEntity.attrs.isBeingStateHit = 1;
@@ -327,16 +326,16 @@ public class hitDefParams
     {
         //targetEntity.CurrentStateID = ReturnStateIDs(targetEntity);
 
-        //当てた相手は問答無用でstateTimeを0にする.
         //targetEntity.stateTime = 0;
         //stateChangeを設定.
-        targetEntity.isStateChanged = true;
 
         int retID = ReturnStateIDs(targetEntity);
-        if(retID != -1)
+        if(retID > -1)
         {
             targetEntity.CListQueue.Add(new Entity.ChangeStateQueue(){stateDefID = retID, priority = 100});
             targetEntity.ChangeAnim();
+            //当てた相手が-1以外を指定しているなら..
+            targetEntity.isStateChanged = true;
         }
 
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定

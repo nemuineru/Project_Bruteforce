@@ -766,8 +766,9 @@ public class scHitDef : StateController
     };
 
     //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
+    //xが直撃, yがガード.
     [SerializeField]
-    stParams<float> damage = new stParams<float>(0f,true,true)
+    stParams<Vector2> damage = new stParams<Vector2>(Vector2.zero,true,true)
     {
         _setEssential = true,
         _MenuName = "Damages"
@@ -801,23 +802,9 @@ public class scHitDef : StateController
         _MenuName = "Damages"
     };
 
+    //xが直撃, yがガード.
     [SerializeField]
-    stParams<float> guardDamage = new stParams<float>(0f,false,false)
-    {
-        _setEssential = false,
-        _MenuName = "Damages",
-
-    };
-
-    [SerializeField]
-    stParams<float> guardBreakPoint = new stParams<float>(0f,false,false)
-    {
-        _setEssential = false,
-        _MenuName = "Damages"
-    };
-
-    [SerializeField]
-    stParams<float> guardBreakPoint_OnGuard = new stParams<float>(0f,false,false)
+    stParams<Vector2> guardBreakPoint = new stParams<Vector2>(Vector2.zero,false,false)
     {
         _setEssential = false,
         _MenuName = "Damages"
@@ -1000,12 +987,8 @@ public class scHitDef : StateController
             hitID = hitID.valueGet(loadParams, entity), //essential!
             //damages
             Damage = damage.valueGet(loadParams, entity), //essential!
-            GuardDamage = 
-            guardDamage._isReadable ? guardDamage.valueGet(loadParams, entity) : 0,
             GuardBreakPoint = 
-            guardBreakPoint._isReadable ? guardBreakPoint.valueGet(loadParams, entity) : 0,
-            GuardBreakPoint_OnGuard = 
-            guardBreakPoint._isReadable ? guardBreakPoint_OnGuard.valueGet(loadParams, entity) : 0,
+            guardBreakPoint._isReadable ? guardBreakPoint.valueGet(loadParams, entity) : Vector2.zero,
             
             Kill = Kill._isReadable ? Kill.valueGet(loadParams,entity) : true,
             GuardOnKill = guardOnKill._isReadable ? guardOnKill.valueGet(loadParams,entity) : false,
@@ -1249,6 +1232,26 @@ public class scAddHealth : StateController
     internal override void OnExecute(Entity entity)
     {
         entity.status.currentHP += value;
+    }
+}
+
+//status変更. (GP)
+[System.Serializable]
+[SerializeField]
+[SCHiearchy("System/add GuardPoint")]
+public class scAddGuardPoint : StateController
+{     
+    [SerializeField]
+    stParams<float> MultipleValue = new stParams<float>(1.0f,true,true);
+
+    [SerializeField]
+    stParams<bool> isImmidiate = new stParams<bool>(false);
+
+    [SerializeField]
+    int priority = 0;
+    internal override void OnExecute(Entity entity)
+    {
+        entity.status.GuardGain(isImmidiate.valueGet(loadParams,entity), MultipleValue.valueGet(loadParams,entity));
     }
 }
 

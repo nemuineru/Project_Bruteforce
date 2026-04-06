@@ -111,12 +111,12 @@ public class EntityStatus
     //ガード中はこの値を先に減少させてから、適応
     public float currentGuardPoint = 100f;
     public float maxGuardPoint = 100f;
-
+    //ダメージ減少レート. 
     public float GuardReductDmgrate = 1.0f;
     
     public float guardRecoverRate= .8f;
-    public float guardRecoverParsedTime = 0f;
-    public float GuardRecoverTime = .7f;
+    public int guardRecoverParsedTime = 0;
+    public int GuardRecoverTime = 20;
 
 
     //100%上限
@@ -161,6 +161,16 @@ public class EntityStatus
     public int GetCurrentHP()
     {
         return Mathf.CeilToInt(Mathf.Max(0, currentHP));
+    }
+
+    public void GuardGain(bool isImmidiate, float multiValue)
+    {
+        guardRecoverParsedTime++;
+        if(isImmidiate || guardRecoverParsedTime > GuardRecoverTime)
+        {
+            currentGuardPoint += guardRecoverRate * multiValue;
+        }
+        currentGuardPoint = Mathf.Min(currentGuardPoint,maxGuardPoint);
     }
 }
 

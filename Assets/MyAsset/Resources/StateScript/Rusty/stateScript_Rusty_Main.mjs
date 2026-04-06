@@ -214,6 +214,9 @@ export function StateDef_100_ID(entity) {
 
     //Guarding State is continued.
     verdList.Add(10);
+
+    //ending Anim is always on.
+    verdList.Add(3);
     
     return verdList;
 }
@@ -241,7 +244,7 @@ export function StateDef_105_ID(entity){
 
     //after taking hits.
     //if you release B or non ground.. change to init.
-    if(CurrentAnimTime >= 10)
+    if(CurrentAnimTime >= 10 && selfStTime > 4 && entity.status.HitTime < 0)
     {
         if (!isPressed_B) 
         { 
@@ -253,8 +256,14 @@ export function StateDef_105_ID(entity){
         {
             verdList.Add(2);
         }
-        verdList.Add(3);
     }
+    verdList.Add(3);
     verdList.Add(10);    
     return verdList;
+}
+
+
+//function for Guarding_Stun : Guarding is exceeded..
+export function StateDef_106_ID(entity){    
+
 }

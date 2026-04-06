@@ -33,7 +33,7 @@ public class Props : MonoBehaviour
         //POWER!!
         rigid.AddForceAtPosition(AddVelocity,hitPos, ForceMode.Impulse);
         disableTime += hitParam.hitStopTime.y;
-        HP -= hitParam.Damage;
+        HP -= hitParam.Damage.x;
     }
     List<Renderer> renderers;
 
