@@ -29,6 +29,12 @@ public class EntityAttr
 
     public int isSoundNotPlayed = 0;
 
+    //こっちはやられた時.
+    public int isBeingStateHit = 0;
+    public int isBeingStateContact = 0;
+    public int isBeingStateGuarded = 0;
+
+
     public void updateCombatStates(bool willReset)
     {
         if(willReset)
@@ -50,6 +56,9 @@ public class EntityAttr
             isStateGuarded += isStateGuarded != 0 ? 1 : 0;
             isStateReversed += isStateReversed != 0 ? 1 : 0;
         }
+        isBeingStateHit += isBeingStateHit != 0 ? 1 : 0;
+        isBeingStateContact += isBeingStateContact != 0 ? 1 : 0;
+        isBeingStateGuarded += isBeingStateGuarded != 0 ? 1 : 0;
         isSoundNotPlayed += isSoundNotPlayed != 0 ? 1 : 0;
     }
 
@@ -60,6 +69,9 @@ public class EntityAttr
         isStateGuarded = 0;
         isStateReversed = 0;       
         isSoundNotPlayed = 0;
+        isBeingStateHit = 0;
+        isBeingStateContact = 0;
+        isBeingStateGuarded = 0;
     }
 
     public List<EntityFlag> flags = new List<EntityFlag>();

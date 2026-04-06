@@ -207,6 +207,10 @@ export function StateDef_100_ID(entity) {
         //change to Idle.
         verdList.Add(1);
     }
+    if(entity.attrs.isBeingStateGuarded > 0)
+    {
+        verdList.Add(105)
+    }
 
     //Guarding State is continued.
     verdList.Add(10);

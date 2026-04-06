@@ -100,6 +100,7 @@ MonoBehaviour:
     - rid: 5331018537749184512
     - rid: 8440311490821226520
     - rid: 5331018854245859337
+    - rid: 503850231326572544
     - rid: 5331018537749184513
     - rid: 3324168081673289731
     - rid: 8440311490821226512
@@ -138,6 +139,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 503850231326572544
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 105
+          stLuaLoads: 
+        stateControllerSubName: ChangeState to 105 on Guarded OK
+        doLoadAfterChangeState: 0
+        changeTo: 105
+        priority: 0
     - rid: 1982101199356952583
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

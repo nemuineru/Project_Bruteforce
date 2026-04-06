@@ -688,6 +688,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -744,6 +753,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 7, y: 6}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -1468,6 +1478,15 @@ MonoBehaviour:
           stParamValue: 0
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -1524,6 +1543,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 1, y: 8}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -1794,6 +1814,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -1850,6 +1879,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 3, y: 9}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -2166,6 +2196,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -2222,6 +2261,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 7, y: 4}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -2538,6 +2578,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -2594,6 +2643,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 3, y: 10}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: 763c35982e678ac4bbc44144c42c505f, type: 3}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -2864,6 +2914,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -2920,6 +2979,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 12, y: 25}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: b79e8cdd7ac32d940900158f95728ccb, type: 3}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -3304,6 +3364,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -3360,6 +3429,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 10, y: 14}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -3649,6 +3719,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -3705,6 +3784,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -3975,6 +4055,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 0
           _setEssential: 0
@@ -4031,6 +4120,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -4366,6 +4456,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -4422,6 +4521,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 7, y: 7}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -4820,6 +4920,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -4876,6 +4985,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: d21f96766665f5b4591b1c012ae59e31, type: 3}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -5214,6 +5324,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -5270,6 +5389,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -5540,6 +5660,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 30, y: 30}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -5596,6 +5725,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 0, y: 0}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0

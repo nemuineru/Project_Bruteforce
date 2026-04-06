@@ -191,4 +191,24 @@ public class Elem
     {
         return et.controlledEntity != null;
     }
+    
+    //get the movement stick. Digital movement should be considered..
+    //(0,0) -> (1,1) or (0,0) -> (-1,-1) should be counted but reversed wont. (1,-1) -> (0,0)
+    //should be considered as "how is the distance from (0,0) differed between the keyNumber".
+    //要は中央から離れるなら... 近づくのはだめ..
+    public static int getStickSnapValue(Entity et, int keyNum, int countNum, float threadshold)
+    {
+        List<Vector2> inputList;
+        inputList = et.entityInput.commandBuffer.Select(item => item.MoveAxis).ToList();
+        int cnt = 0;
+        for (int i = 0; i < inputList.Count - 1; i++)
+        {
+            //距離移動位置が前回よりも多いなら..
+            if (Vector2.Distance(Vector3.zero, inputList[i + 1]) - Vector2.Distance(Vector3.zero, inputList[i]) > threadshold)
+            {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
 }

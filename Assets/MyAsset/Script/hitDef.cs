@@ -197,10 +197,12 @@ public class hitDefParams
         //Guardingが設定されているなら双方に登録される関数値を考える.
         //entityとhitIDが同じヤツは二重に登録しない筈.
         //いまのとこ、OnGuardedStateの105に移動させる.
+        //ガードフラグなら、
         if(MoveGuarded)
         {
-            retID = 105;
+            //retID = 105;
             //Debug.Log("MoveGuarded To " + referenceID);
+            return -1;
         }
         else if(ChangeState_Target > -1)
         {
@@ -216,16 +218,16 @@ public class hitDefParams
             //if文祭りじゃ.
             //基本として、LightHit用のStateDefは入っていないと問題外.
 
-            //現在EntityがFall状態で追撃したなら再読み込み.
-            if(referenceID >= 5100 && referenceID <= 5110 && refEntity.loadedDefs.Any(a => a.StateDefID == 5100))
-            {
-                HitType = 100;
-            }
             //Fall hit - FallTimeが0以上、またはFall中に攻撃を加えたとき
-            else if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
+            if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
             && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
+            }
+            //現在EntityがFall状態で追撃したなら再読み込み.
+            else if(referenceID >= 5100 && referenceID <= 5110 && refEntity.loadedDefs.Any(a => a.StateDefID == 5100))
+            {
+                HitType = 100;
             }
             //AnimTypeの基、refEntityにその番号があるなら指定..
             //Up hit - 5000 to 5009(上半身ダメージアニメ)
@@ -282,12 +284,17 @@ public class hitDefParams
         //shapepositions. 後でこれも設定できるようにしたい.
         targetEntity.transform.DOShakePosition(targetEntity.status.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
+        
+        targetEntity.attrs.isBeingStateContact = 1;
 
         //hitpoint damage("on" Guarded), knockbacking time and falling time set.
         if(MoveGuarded)
         {            
-            targetEntity.status.currentHP -= GuardDamage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
+            targetEntity.status.currentHP -= GuardDamage *
+            (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f, targetEntity.status.BaseDefencePerc * targetEntity.status.GuardReductDmgrate));
             targetEntity.status.HitTime = HitTime.y;
+            targetEntity.attrs.isBeingStateGuarded = 1;
+            targetEntity.status.currentGuardPoint -= GuardBreakPoint_OnGuard;
         }
         else
         {
@@ -295,6 +302,7 @@ public class hitDefParams
             targetEntity.status.currentHP -= Damage * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
             targetEntity.status.HitTime = HitTime.x;
             targetEntity.status.HitFallTime = fallTime;
+            targetEntity.attrs.isBeingStateHit = 1;
         }
 
         //placeholder for rotation
@@ -324,9 +332,13 @@ public class hitDefParams
         //stateChangeを設定.
         targetEntity.isStateChanged = true;
 
-        targetEntity.CListQueue.Add(new Entity.ChangeStateQueue(){stateDefID = ReturnStateIDs(targetEntity), priority = 100});
-        targetEntity.ChangeAnim();
-        
+        int retID = ReturnStateIDs(targetEntity);
+        if(retID != -1)
+        {
+            targetEntity.CListQueue.Add(new Entity.ChangeStateQueue(){stateDefID = retID, priority = 100});
+            targetEntity.ChangeAnim();
+        }
+
         //攻撃を当てた対象にコントロールされる場合は相手のステートマップの読み出しを設定
         //設定されたEntityはselfStateが読み出されない限り読み出す.
         if(TargetRefsOwnerNum && !MoveGuarded)
