@@ -10,8 +10,11 @@ export function StateDef_200_ID(entity)
     let SoundTime = entity.attrs.isSoundNotPlayed == 0;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let EndTime = CS.Elem.CheckAnimEndTime(entity);
+    let isMoveExecuted = CS.Elem.CheckExecutedID(entity, 1);
 
-    if (CurrentTime > 16)
+    //end if
+    if (CurrentTime > 1 && EndTime - CurrentAnimTime < 4)
     {
         verdList.Add(3);
     }
@@ -19,10 +22,14 @@ export function StateDef_200_ID(entity)
     {
         verdList.Add(0);
     }
+    if(!isMoveExecuted && CurrentAnimTime - 17 > 0 && CurrentTime > 1)
+    {
+        verdList.Add(1);
+    }
     
     //HitDef Generate.
-    if (Math.abs(CurrentAnimTime - 9) < 2 &&
-        entity.attrs.isStateHit == 0)
+    if (Math.abs(CurrentAnimTime - 19) < 2 &&
+        entity.attrs.isStateHit == 0 && CurrentTime > 1)
     {
         //Sounddefs..
         if(SoundTime)

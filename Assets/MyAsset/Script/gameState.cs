@@ -149,6 +149,8 @@ public class gameState : MonoBehaviour
 
     //HitDefを発火する際のイベント - プレイヤー設定の際..
     //HitDefのIntervalが設定されているなら、同じStateDef内で登録する.
+    //2026-04-07
+    //やっぱこれおかしいな、空振りが多発してる.
     public bool ProvokeHitDef_Entity(Entity provokerEntity, hitDefParams hitDefParams)
     {
         bool ret = false;
@@ -181,6 +183,7 @@ public class gameState : MonoBehaviour
                     if(hitDefParams.sameHitInterval <= 0 || recentRevTime < hitDefParams.sameHitInterval)
                     {
                         isIntervalAvailable = false;
+                        Debug.Log("Max Hit Reached");
                     }
                 }
 

@@ -225,7 +225,7 @@ public class Entity : MonoBehaviour
             BTree = gameObject.AddComponent<BehaviorTree>();
             BTree.ExternalBehavior = LoadedBehavior;
         }
-        rigid.useGravity = true;
+        rigid.useGravity = physicsType != _PhysicsType.N;
         selfSource = GetComponent<AudioSource>();
     }
 
@@ -263,6 +263,10 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     public void EntityUpdate()
     {
+        //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
+        stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
+        
+        //executedStateIDs.Any();
         if (vCam != null && transposer == null)
         {
             Debug.Log("Finding Transposer");
@@ -303,8 +307,6 @@ public class Entity : MonoBehaviour
         status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
         status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
 
-        //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
-        stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
 
         attrs.updateCombatStates(isStateChanged);
         //ステートが変更されていれば色々Reset.

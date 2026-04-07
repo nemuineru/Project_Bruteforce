@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bef611c4806534aab65ba4d51677e3, type: 3}
   m_Name: stateDefTest_Grunt_Hard
   m_EditorClassIdentifier: 
-  ScriptDirectory: 
+  ScriptDirectory: StateScript/Enemy_Default
   stateDefs:
   - StateDefName: OnInitLoad
     StateDefID: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -334,31 +334,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -523,6 +505,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -541,6 +532,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -549,10 +558,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 10
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1.5, y: 0, z: 0}
@@ -561,6 +568,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 8, y: 2}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 0}
             GuardHitEff: {fileID: 0}
             HitPriority: 0
@@ -660,7 +668,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         hitPhysFlag:
@@ -699,31 +707,13 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardDamage:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
         guardBreakPoint:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 0
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
-        guardBreakPoint_OnGuard:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 0
-          _MenuName: Damages
-          loadTypes: 0
-          stParamValue: 0
+          stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
         Kill:
@@ -888,6 +878,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        hitTime:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Controller
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         fallTime:
           _setHidden: 1
           _setEssential: 0
@@ -906,6 +905,24 @@ MonoBehaviour:
           stParamValue: 
           useID: -1
           stLuaLoads: 
+        GetPower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        GivePower:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Status
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
         hitParams:
           _setHidden: 1
           _setEssential: 0
@@ -914,10 +931,8 @@ MonoBehaviour:
           loadTypes: 0
           stParamValue:
             hitID: 0
-            Damage: 0
-            GuardDamage: 0
-            GuardBreakPoint: 0
-            GuardBreakPoint_OnGuard: 0
+            Damage: {x: 0, y: 0}
+            GuardBreakPoint: {x: 0, y: 0}
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1, y: 2, z: 0}
@@ -926,6 +941,7 @@ MonoBehaviour:
             pl_guard_velset: {x: 0, y: 0, z: 0}
             hitStopTime: {x: 3, y: 10}
             guard_hitStopTime: {x: 0, y: 0}
+            HitTime: {x: 0, y: 0}
             HitEff: {fileID: 130626, guid: 763c35982e678ac4bbc44144c42c505f, type: 3}
             GuardHitEff: {fileID: 0}
             HitPriority: 0

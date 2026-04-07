@@ -74,7 +74,7 @@ export function stateCmd(entity) {
         verdList.Add(220);
     }
     //Air Attacks - N
-    if(selfOnGrd == false && AttackCmd_x == true && (StateDefID == 50 || (StateDefID == 300 && selfStTime > 15)))
+    if(selfOnGrd == false && AttackCmd_x == true && ((StateDefID >= 50 && StateDefID <= 59) || (StateDefID == 300 && selfStTime > 15)))
     {
         verdList.Add(300);
     }

@@ -1936,9 +1936,9 @@ MonoBehaviour:
     maxHP: 100
     currentHP: 100
     maxEnergy: 50
-    currentEnergy: 0
-    currentGuardPoint: 10
-    maxGuardPoint: 10
+    currentEnergy: 50
+    currentGuardPoint: 40
+    maxGuardPoint: 40
     GuardReductDmgrate: 1
     guardRecoverRate: 0.8
     guardRecoverParsedTime: 0

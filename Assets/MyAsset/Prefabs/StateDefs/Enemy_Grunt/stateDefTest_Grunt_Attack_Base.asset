@@ -58,7 +58,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 0
+          value: 1
           stLuaLoads: 
         stateControllerSubName: OneShot Vect
         doLoadAfterChangeState: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 50, y: 0, z: 0}
+          stParamValue: {x: 25, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
         isSpeedstatAffect:

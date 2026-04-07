@@ -83,7 +83,8 @@ export function StateDef_20_ID(entity)
 export function StateDef_50_ID(entity) 
 {
     //List<Int>
-    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);
+    let isPressed_A = CS.Elem.CheckButtonPressed(entity, "Jump");    
     
     let verdList = new List_Int();
     let selfStTime =  CS.Elem.CheckStateTime(entity)
@@ -94,12 +95,43 @@ export function StateDef_50_ID(entity)
     {
         verdList.Add(1);
     }
+    //Air Dash.
+    else if(isPressed_A && selfStTime > 5)
+    {
+        verdList.Add(51);
+    }
 
     //idleのanimを指定する
     if(selfStTime == 0)
     {
         //Debug.Log("Jumping Vect");
         verdList.Add(50);
+    }
+    return verdList
+}
+
+//Function for jump.
+export function StateDef_51_ID(entity) 
+{
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let selfStTime =  CS.Elem.CheckStateTime(entity)
+    let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+
+    //On Ground.
+    if(selfStTime > 7)
+    {
+        verdList.Add(55);
+    }
+
+    //idleのanimを指定する
+    if(selfStTime == 0)
+    {
+        verdList.Add(0);
+        CS.UnityEngine.Debug.Log(selfStTime);
+        entity.status.currentEnergy -= 15;
     }
     return verdList
 }
@@ -113,6 +145,7 @@ export function StateDef_55_ID(entity)
     let verdList = new List_Int();
     let selfStTime =  CS.Elem.CheckStateTime(entity)
     let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+    let isPressed_A = CS.Elem.CheckButtonPressed(entity, "Jump");    
 
     //idleのanimを指定する
     if(selfStTime == 0)
@@ -125,6 +158,11 @@ export function StateDef_55_ID(entity)
     {
         //CS.UnityEngine.Debug.Log("Jumping Vect");        
         verdList.Add(1);
+    }
+    //Air Dash.
+    else if(isPressed_A && selfStTime > 5)
+    {
+        verdList.Add(51);
     }
     return verdList
 }
