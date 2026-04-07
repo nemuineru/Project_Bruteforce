@@ -150,7 +150,8 @@ public class gameState : MonoBehaviour
     //HitDefを発火する際のイベント - プレイヤー設定の際..
     //HitDefのIntervalが設定されているなら、同じStateDef内で登録する.
     //2026-04-07
-    //やっぱこれおかしいな、空振りが多発してる.
+    //やっぱこれおかしいな、空振りが多発してる. 
+    //2つのキャラクターが攻撃判定に重なった時のみ攻撃判定になってる？
     public bool ProvokeHitDef_Entity(Entity provokerEntity, hitDefParams hitDefParams)
     {
         bool ret = false;
@@ -183,7 +184,6 @@ public class gameState : MonoBehaviour
                     if(hitDefParams.sameHitInterval <= 0 || recentRevTime < hitDefParams.sameHitInterval)
                     {
                         isIntervalAvailable = false;
-                        Debug.Log("Max Hit Reached");
                     }
                 }
 
@@ -191,9 +191,10 @@ public class gameState : MonoBehaviour
                 //また、entityの無敵判定に関しても考える.
                 //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
                 bool f = provokerEntity.hitCheck(e, out Vector3 HitPt);
-                bool isContactable = hitDefParams.HitMoveFlag.Contains(e.moveType.ToString()) &&
-                hitDefParams.HitPhysFlag.Contains(e.physicsType.ToString()) &&
-                !hitDefParams.HitExcludeList.Contains(e.CurrentStateID) && isIntervalAvailable;
+                bool isContactable = true;
+                // hitDefParams.HitMoveFlag.Contains(e.moveType.ToString()) &&
+                // hitDefParams.HitPhysFlag.Contains(e.physicsType.ToString()) &&
+                // !hitDefParams.HitExcludeList.Contains(e.CurrentStateID) && isIntervalAvailable;
                 //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
                 if (f == true && isContactable)
                 {

@@ -20,9 +20,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_200_ID
     ParamLoadName: LuaOutput
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 3579423065411158016
     - rid: 3579423095655497736
@@ -39,9 +39,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_200_ID
     ParamLoadName: LuaOutput
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 3579423095655497729
     - rid: 3002629213760520203
@@ -57,9 +57,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_202_ID
     ParamLoadName: LuaOutput
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 4404388799971590146
     - rid: 4404388799971590147
@@ -74,9 +74,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_210_ID
     ParamLoadName: 
-    stateType: 0
-    moveType: 73
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 1814087954197118983
     - rid: 1814087954197118982
@@ -91,9 +91,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_220_ID
     ParamLoadName: 
-    stateType: 0
-    moveType: 32
-    physType: 32
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 1814087975545077760
     - rid: 1814087975545077761
@@ -108,9 +108,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Gear.mjs
     preStateVerdictName: StateDef_250_ID_Knife
     ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 4404388709018370071
     - rid: 4404388709018370073
@@ -124,9 +124,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Gear.mjs
     preStateVerdictName: StateDef_251_ID_KnifeV2
     ParamLoadName: StateDef_251_ID_Knife_physics
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 1814088220477227008
     - rid: 1814088220477227010
@@ -141,9 +141,9 @@ MonoBehaviour:
     ScriptName: 
     preStateVerdictName: QueuedStateID_Axe
     ParamLoadName: Accel_Start
-    stateType: 52
-    moveType: 51
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 7982028148908752899
     - rid: 7982028148908752901
@@ -159,9 +159,9 @@ MonoBehaviour:
     ScriptName: 
     preStateVerdictName: QueuedStateID_Hammer
     ParamLoadName: null
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 83
     StateList:
     - rid: 7982028148908752904
     - rid: 7982028148908752905
@@ -176,9 +176,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Base.mjs
     preStateVerdictName: StateDef_300_ID_JumpKick
     ParamLoadName: LuaOutput
-    stateType: 48
-    moveType: 68
-    physType: 0
+    stateType: 83
+    moveType: 65
+    physType: 65
     StateList:
     - rid: 3579423095655497732
     - rid: 4404388637674569820
@@ -194,9 +194,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Attack_Gear.mjs
     preStateVerdictName: StateDef_350_AirKnife
     ParamLoadName: null
-    stateType: 0
-    moveType: 80
-    physType: 70
+    stateType: 83
+    moveType: 65
+    physType: 65
     StateList:
     - rid: 4404388709018370089
     - rid: 4404388709018370090
@@ -244,7 +244,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 10
+          value: 100000
           stLuaLoads: 
         stateControllerSubName: Air_KickHit_Ground
         doLoadAfterChangeState: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 300
+          stParamValue: 301
           useID: -1
           stLuaLoads: 
         damage:
@@ -456,12 +456,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 6
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -1556,7 +1556,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAN
           useID: -1
           stLuaLoads: 
         hitMoveFlag:
@@ -1574,7 +1574,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAN
           useID: -1
           stLuaLoads: 
         guardMoveFlag:
@@ -1745,7 +1745,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 2
+          stParamValue: 3
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -1872,7 +1872,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAN
           useID: -1
           stLuaLoads: 
         hitMoveFlag:
@@ -2058,10 +2058,10 @@ MonoBehaviour:
         maxEntityHits:
           _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 3
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -2297,7 +2297,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 4, y: -2, z: 0}
+          stParamValue: {x: 8, y: -1, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -2418,12 +2418,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 8
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -3342,7 +3342,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAN
           useID: -1
           stLuaLoads: 
         hitMoveFlag:
@@ -3526,12 +3526,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 3
           useID: -1
           stLuaLoads: 
         hitIntervalTime:

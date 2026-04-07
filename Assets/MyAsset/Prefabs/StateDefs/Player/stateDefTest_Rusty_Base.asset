@@ -53,12 +53,28 @@ MonoBehaviour:
     preStateVerdictName: StateDef_50_ID
     ParamLoadName: 
     stateType: 83
-    moveType: 0
+    moveType: 73
     physType: 65
     StateList:
     - rid: 4404389163807801372
     - rid: 4404389163807801373
     - rid: 4404389163807801374
+    - rid: 503850271682330670
+    Dir: 
+    setCtrl: 0
+  - StateDefName: Air Dash
+    StateDefID: 51
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: StateDef_51_ID
+    ParamLoadName: 
+    stateType: 83
+    moveType: 73
+    physType: 78
+    StateList:
+    - rid: 503850271682330664
+    - rid: 503850271682330667
+    - rid: 503850271682330672
     Dir: 
     setCtrl: 0
   - StateDefName: On_Falling
@@ -68,10 +84,11 @@ MonoBehaviour:
     preStateVerdictName: StateDef_55_ID
     ParamLoadName: 
     stateType: 83
-    moveType: 0
+    moveType: 73
     physType: 65
     StateList:
     - rid: 3324167878465552384
+    - rid: 503850271682330671
     - rid: 3324167878465552385
     Dir: 
     setCtrl: 0
@@ -262,6 +279,112 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 110
         priority: 50
+    - rid: 503850271682330664
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: JumpAnimVel
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 51
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 503850271682330667
+      type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: setVel
+        doLoadAfterChangeState: 0
+        MoveVelocity:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 25, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        isSpeedstatAffect:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+    - rid: 503850271682330670
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 51
+          stLuaLoads: 
+        stateControllerSubName: AirDash
+        doLoadAfterChangeState: 0
+        changeTo: 51
+        priority: 1
+    - rid: 503850271682330671
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 51
+          stLuaLoads: 
+        stateControllerSubName: AirDash
+        doLoadAfterChangeState: 0
+        changeTo: 51
+        priority: 1
+    - rid: 503850271682330672
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 55
+          stLuaLoads: 
+        stateControllerSubName: FallState
+        doLoadAfterChangeState: 0
+        changeTo: 55
+        priority: 0
     - rid: 1982101199356952583
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

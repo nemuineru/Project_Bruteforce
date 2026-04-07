@@ -69,9 +69,9 @@ MonoBehaviour:
     ScriptName: stateScript_enemyDef_main.mjs
     preStateVerdictName: StateDef_0_ID
     ParamLoadName: LuaOutput
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 73
+    physType: 83
     StateList:
     - rid: 4404389163807801372
     - rid: 4404389163807801374

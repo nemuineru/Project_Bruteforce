@@ -55,26 +55,6 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 50
-    Name: Jump
-    animClip:
-    - Clip: {fileID: 7400000, guid: 7dd67cce11e9cc64d9d817b21324c527, type: 2}
-      speed: 0
-      startFrame: 0
-      cycleOffset: 0
-      mixPosition: {x: 0, y: 0}
-    blendInTime: 0.1
-    blendOutTime: 0
-    useDefaultClss: 0
-    clssSetting:
-      clssDefs: []
-      disableClssList:
-      - head
-      root: {fileID: 0}
-      eraseAllClss: 0
-  - mixType: 0
-    MixParamName: 
-    CurrentParamPos: {x: 0, y: 0}
     ID: 100
     Name: GuardAnim
     animClip:
@@ -134,6 +114,46 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
+    ID: 50
+    Name: Jump
+    animClip:
+    - Clip: {fileID: 7400000, guid: 7dd67cce11e9cc64d9d817b21324c527, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.1
+    blendOutTime: 0
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 51
+    Name: Air Dashing
+    animClip:
+    - Clip: {fileID: 7400000, guid: 5baeec2e844286d4abc8342771be3ffa, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.4
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 1
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
     ID: 55
     Name: Falling
     animClip:
@@ -175,8 +195,8 @@ MonoBehaviour:
         startPos: {x: 0, y: 0, z: 0}
         endPos: {x: 0, y: 0, z: 0}
         width: 0
-        _lastcalcStartPos: {x: -1.6240463, y: 0.6943344, z: 3.9708028}
-        _lastcalcEndPos: {x: -1.6240463, y: 0.6943344, z: 3.9708028}
+        _lastcalcStartPos: {x: -1.6051431, y: 0.6962887, z: 4.423293}
+        _lastcalcEndPos: {x: -1.6051431, y: 0.6962887, z: 4.423293}
       disableClssList: []
       root: {fileID: 0}
       eraseAllClss: 0
