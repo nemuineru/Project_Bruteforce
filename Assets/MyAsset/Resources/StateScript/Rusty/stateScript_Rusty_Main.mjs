@@ -119,6 +119,7 @@ export function StateDef_51_ID(entity)
     let verdList = new List_Int();
     let selfStTime =  CS.Elem.CheckStateTime(entity)
     let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
     let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimID == 51;
 
     //On Ground.
