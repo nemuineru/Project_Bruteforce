@@ -162,8 +162,7 @@ export function StateDef_300_ID_JumpKick(entity){
     // !CS.Elem.CheckExecutedID(entity,10)
     //Aight, does native JS supports math function?
     //current Animtime needs to be set more than 8
-    if (CurrentAnimTime > 4 && CurrentAnimID == 300 && 
-        entity.attrs.isStateHit == 0)
+    if (CurrentAnimTime > 4 && CurrentAnimID == 300)
     {
         verdList.Add(10);
     }

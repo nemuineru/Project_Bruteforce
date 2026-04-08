@@ -96,7 +96,7 @@ export function StateDef_50_ID(entity)
         verdList.Add(1);
     }
     //Air Dash.
-    else if(isPressed_A && selfStTime > 5)
+    else if(isPressed_A && selfStTime > 7)
     {
         verdList.Add(51);
     }
@@ -119,6 +119,7 @@ export function StateDef_51_ID(entity)
     let verdList = new List_Int();
     let selfStTime =  CS.Elem.CheckStateTime(entity)
     let selfOnGrd_f = CS.Elem.isEntityOnGround(entity)
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimID == 51;
 
     //On Ground.
     if(selfStTime > 7)
@@ -132,6 +133,11 @@ export function StateDef_51_ID(entity)
         verdList.Add(0);
         CS.UnityEngine.Debug.Log(selfStTime);
         entity.status.currentEnergy -= 15;
+    }
+    //Dash Sound and Effect
+    if(SoundTime != true)
+    {
+        verdList.Add(1);
     }
     return verdList
 }
@@ -160,7 +166,7 @@ export function StateDef_55_ID(entity)
         verdList.Add(1);
     }
     //Air Dash.
-    else if(isPressed_A && selfStTime > 5)
+    else if(isPressed_A && selfStTime > 7)
     {
         verdList.Add(51);
     }

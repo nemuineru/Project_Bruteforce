@@ -777,7 +777,8 @@ public class scHitDef : StateController
 
     //ダメージ集. プレイヤーダメージとかは別のstateControllerに登録する.
     [SerializeField]
-    stParams<string> hitPhysFlag = new stParams<string>("SA",true,true)
+    [RenamedFrom("hitPhysFlag")] 
+    stParams<string> hitStateFlag = new stParams<string>("SA",true,true)
     {
         _setEssential = true,
         _MenuName = "Damages"
@@ -790,7 +791,8 @@ public class scHitDef : StateController
     };
 
     [SerializeField]
-    stParams<string> guardPhysFlag = new stParams<string>("SA",true,true)
+    [RenamedFrom("guardPhysFlag")] 
+    stParams<string> guardStateFlag = new stParams<string>("SA",true,true)
     {
         _setEssential = true,
         _MenuName = "Damages"
@@ -995,9 +997,9 @@ public class scHitDef : StateController
 
             //damages, for hitting
             HitMoveFlag = hitMoveFlag.valueGet(loadParams,entity), //essential!
-            HitPhysFlag = hitPhysFlag.valueGet(loadParams,entity), //essential!
+            hitStateFlag = hitStateFlag.valueGet(loadParams,entity), //essential!
             GuardMoveFlag = guardMoveFlag.valueGet(loadParams,entity), //essential!
-            GuardPhysFlag = guardPhysFlag.valueGet(loadParams,entity), //essential!
+            GuardStateFlag = guardStateFlag.valueGet(loadParams,entity), //essential!
 
             //hit vect set
             velset = 
@@ -1040,15 +1042,14 @@ public class scHitDef : StateController
 
             HitTime = hitTime._isReadable ? hitTime.valueGet(loadParams,entity) : Vector2Int.zero,
             fallTime = fallTime._isReadable ? fallTime.valueGet(loadParams,entity) : 0,
-            HitExcludeList = excluder
+            HitExcludeList = excluder,
+
+            ownerEntity = entity
         };
 
         //HitDefをこの時点で呼び出すのはちょっとな―..
-        //GameStateに登録させておきたい.
-        if(gameState.self.ProvokeHitDef_Entity(entity, HitDef))
-        {
-            //Debug.DrawLine(,)
-        }
+        //GameStateに登録.
+        gameState.self.queuedHitDefs.Add(HitDef);
     }
 
 }

@@ -50,9 +50,9 @@ MonoBehaviour:
     ScriptName: stateScript_FatMan_Hurt
     preStateVerdictName: StateDef_5050_ID
     ParamLoadName: LuaOutput
-    stateType: 83
+    stateType: 65
     moveType: 72
-    physType: 83
+    physType: 65
     StateList:
     - rid: 4404388637674569735
     - rid: 4404388575372902408

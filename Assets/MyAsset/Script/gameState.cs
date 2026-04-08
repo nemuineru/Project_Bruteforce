@@ -35,12 +35,15 @@ public class gameState : MonoBehaviour
 
     public CinemachineVirtualCamera Player_Vcam;
 
+    [SerializeField]
     public List<Entity> entityList;
 
+    [SerializeField]
     public List<Props> propList;
 
     public Transform InitSpawnPos;
 
+    internal List<hitDefParams> queuedHitDefs = new List<hitDefParams>();
     public List<hitDefParams> onOneFrameHitdefs;
 
     public GameStatus gameStatus;
@@ -89,17 +92,25 @@ public class gameState : MonoBehaviour
         elapsedTime += Time.fixedDeltaTime;
         entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
         .OrderBy(t => !t.attrs.alive)
-        .ThenBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
         .ToList();
 
-        propList = FindObjectsByType<Props>(FindObjectsSortMode.None)
-        .OrderBy(t => Vector3.Magnitude(t.transform.position - Player.transform.position))
-        .ToList();
+        propList = FindObjectsByType<Props>(FindObjectsSortMode.None).ToList();
         foreach(Entity et in entityList)
         {
             et.EntityUpdate();
         }
+
+        foreach(hitDefParams HParam in queuedHitDefs)
+        {
+            ProvokeHitDef_Entity(HParam);
+        }
         HitParamFrame();
+        queuedHitDefs = new List<hitDefParams>();
+
+        foreach(Entity et in entityList)
+        {
+            et.resetStates();
+        }
     }
 
     //hitdefFrame - リストアップしたhitdefparamを優先度に応じて実行する.
@@ -152,36 +163,46 @@ public class gameState : MonoBehaviour
     //2026-04-07
     //やっぱこれおかしいな、空振りが多発してる. 
     //2つのキャラクターが攻撃判定に重なった時のみ攻撃判定になってる？
-    public bool ProvokeHitDef_Entity(Entity provokerEntity, hitDefParams hitDefParams)
+    //2026-04-08 HitCheckにバグが有るのを確認. うーん..
+    //そも　selectedEntityがなんかおかしいことになってるならnullになる筈..
+    //追記 AnimDefの登録がヤバかったみたいです. 今は治った.
+    public bool ProvokeHitDef_Entity(hitDefParams refHitParam)
     {
         bool ret = false;
         int refNumRemaining;
         hitDefParams useParam = new hitDefParams();        
-        if (hitDefParams != null)
+        if (refHitParam != null)
         {
-            useParam = hitDefParams;
+            useParam = refHitParam;
         }
 
-        useParam.ownerEntity = provokerEntity;
-
         //contact数を考える..
-        int refOwnerTargetContact = provokerEntity.hitdefSameTime.FindAll(h => h == hitDefParams.hitID).Count;
+        int refOwnerTargetContact = useParam.ownerEntity.hitdefSameTime.FindAll(h => h == useParam.hitID).Count;
 
         refNumRemaining = useParam.maxEntityHits - refOwnerTargetContact;
 
-        foreach (Entity e in entityList)
+        //Debug.Log(entityList.Count());
+
+        foreach (Entity selectedEntity in entityList)
         {
             //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
-            if (e != provokerEntity && e.tag != provokerEntity.tag && refNumRemaining > 0)
+            if (selectedEntity != useParam.ownerEntity && 
+            selectedEntity.tag != useParam.ownerEntity.tag &&
+            refNumRemaining > 0)
             {
+                Debug.Log(selectedEntity.gameObject.name);
+                bool hitCheck = 
+                useParam.ownerEntity.hitCheck(selectedEntity, out Vector3 HitPt);
+                Debug.Log(hitCheck);
+
                 bool isIntervalAvailable = true;
                 //もし見つけられなかったら新規登録なので..
-                hitDefParams FindP = e.registeredHitDefs.Find(hDef => hDef.hitID == hitDefParams.hitID);
+                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == useParam.hitID);
                 if(FindP != null && refOwnerTargetContact != 0)
                 {
                     float recentRevTime = elapsedTime - FindP.HitRegisterTime;
                     //インターバル未設定なら一回のみ. インターバル設定済みなら...
-                    if(hitDefParams.sameHitInterval <= 0 || recentRevTime < hitDefParams.sameHitInterval)
+                    if(useParam.sameHitInterval <= 0 || recentRevTime < useParam.sameHitInterval)
                     {
                         isIntervalAvailable = false;
                     }
@@ -190,41 +211,46 @@ public class gameState : MonoBehaviour
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
                 //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
-                bool f = provokerEntity.hitCheck(e, out Vector3 HitPt);
-                bool isContactable = true;
-                // hitDefParams.HitMoveFlag.Contains(e.moveType.ToString()) &&
-                // hitDefParams.HitPhysFlag.Contains(e.physicsType.ToString()) &&
-                // !hitDefParams.HitExcludeList.Contains(e.CurrentStateID) && isIntervalAvailable;
+                bool isContactable = hitCheck && 
+                refHitParam.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
+                refHitParam.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
+                !refHitParam.HitExcludeList.Contains(selectedEntity.CurrentStateID) && isIntervalAvailable;
                 //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
-                if (f == true && isContactable)
+                if (isContactable)
                 {
-                    Debug.Log("HitID" + useParam.hitID);
                     ret = true;
-                    hitDefApply(e, provokerEntity, useParam, HitPt);
+                    hitDefApply(selectedEntity, useParam.ownerEntity, useParam, HitPt);
                     //当てた分キャラ指定の値が減少..
                     refNumRemaining--;
-                    provokerEntity.status.currentEnergy += 3;
+                    useParam.ownerEntity.status.currentEnergy += 3;
                 }
+                if(hitCheck)
+                {
+                    Debug.Log("HitID" + useParam.hitID);                    
+                }
+            }
+            else if(selectedEntity == useParam.ownerEntity)
+            {
+                Debug.Log("selectetEntity is same value.");
             }
         }
         foreach(Props prop in propList)
         {
-            if(provokerEntity.hitCheck(prop.hitBox, out Vector3 hits))
+            if(useParam.ownerEntity.hitCheck(prop.hitBox, out Vector3 hits))
             {
                 if(prop.isHit == false && prop.isPausable())
                 {
                     //雑ぅ. でもひとまずこれでなんとかなるか..
-                    prop.OnHit(hitDefParams, hits);
+                    prop.OnHit(refHitParam, hits);
                     Instantiate
-                    ((hitDefParams.HitEff != null ? hitDefParams.HitEff : defaultEff), hits, Quaternion.identity);
+                    ((refHitParam.HitEff != null ? refHitParam.HitEff : defaultEff), hits, Quaternion.identity);
                     //onHit, entity will stop. but props wont.
                     //I'll set high pause for each.
-                    (provokerEntity.status.HitPauseTime , prop.disableTime) = (4, 30);
+                    (useParam.ownerEntity.status.HitPauseTime , prop.disableTime) = (4, 30);
                 }
                 prop.isHit = true;
             }
         }
-
         return ret;
     }
 

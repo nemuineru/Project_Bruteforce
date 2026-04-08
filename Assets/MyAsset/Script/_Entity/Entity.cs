@@ -231,10 +231,12 @@ public class Entity : MonoBehaviour
 
     void initAnimSetting()
     {
-        
-        foreach (AnimlistObject f in animListObject)
+        foreach (AnimlistObject list in animListObject)
         {
-            animDefs.AddRange(f.animDef.ToList());
+            foreach(AnimDef Anims in list.animDef)
+            {
+                animDefs.Add(Anims.Clone());
+            }
         }
         if (mainAnimancer != null && animator != null)
         {
@@ -306,8 +308,16 @@ public class Entity : MonoBehaviour
         //のけぞり計算
         status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
         status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
+    }
 
+    void statusAlign()
+    {
+        status.currentHP = Mathf.Clamp(status.currentHP , 0 , status.maxHP);
+        status.currentEnergy = Mathf.Clamp(status.currentEnergy , 0 , status.maxEnergy);
+    }
 
+    internal void resetStates()
+    {
         attrs.updateCombatStates(isStateChanged);
         //ステートが変更されていれば色々Reset.
         if (isStateChanged)
@@ -318,12 +328,6 @@ public class Entity : MonoBehaviour
         //statusAlign();
         //isStateChangedはここで変更される. currentStateでstateChangeが発生した際,　リセットをかけるため.
         isStateChanged = false;
-    }
-
-    void statusAlign()
-    {
-        status.currentHP = Mathf.Clamp(status.currentHP , 0 , status.maxHP);
-        status.currentEnergy = Mathf.Clamp(status.currentEnergy , 0 , status.maxEnergy);
     }
 
     //地面判定.
@@ -688,6 +692,7 @@ public class Entity : MonoBehaviour
     public bool hitCheck(Entity checkEntity, out Vector3 HitPoint)
     {
         bool resl = false;
+        Debug.Log("Check Clss between " + gameObject.name + " and " + checkEntity.gameObject.name);
         clssSetting cEnemy = checkEntity.animancerManager.primaryAnimDef.clssSetting;
         clssSetting cSelf = animancerManager.primaryAnimDef.clssSetting;
         HitPoint = Vector3.zero;
@@ -696,7 +701,7 @@ public class Entity : MonoBehaviour
             //比較対象のentityの時間が取れてなーい！！
             resl = cSelf.clssCollided
             (out Vector3 v1, out Vector3 v2, out float d,
-            clssDef.ClssType.Attack, cEnemy, 0.1f);
+            clssDef.ClssType.Attack, cEnemy, 0f);
             HitPoint = (v1 + v2) / 2f;
         }
         else

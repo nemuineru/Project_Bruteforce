@@ -419,13 +419,13 @@ MonoBehaviour:
           stParamValue: {x: 0, y: 0}
           useID: -1
           stLuaLoads: 
-        hitPhysFlag:
+        hitStateFlag:
           _setHidden: 1
           _setEssential: 1
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: S
+          stParamValue: SA
           useID: -1
           stLuaLoads: 
         hitMoveFlag:
@@ -437,13 +437,13 @@ MonoBehaviour:
           stParamValue: IA
           useID: -1
           stLuaLoads: 
-        guardPhysFlag:
+        guardStateFlag:
           _setHidden: 1
           _setEssential: 1
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 
+          stParamValue: SA
           useID: -1
           stLuaLoads: 
         guardMoveFlag:
@@ -700,9 +700,9 @@ MonoBehaviour:
             ChangeState_Target: -1
             TargetRefsOwnerNum: 0
             ChangeState_Owner: -1
-            HitPhysFlag: SA
+            hitStateFlag: SA
             HitMoveFlag: IA
-            GuardPhysFlag: SA
+            GuardStateFlag: SA
             GuardMoveFlag: IA
             AnimType: 
             HitExcludeList: 

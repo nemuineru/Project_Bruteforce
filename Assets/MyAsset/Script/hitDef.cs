@@ -84,13 +84,13 @@ public class hitDefParams
 
     //どういう姿勢に当たるか？　など. "S"tanding "A"ir, "L"aying の頭文字指定
     //また、"F"は Fall状態のフラッグがあるキャラにHit, "E"veryはフラッグ問わず全部当たる.
-    public string HitPhysFlag = "SA";
+    public string hitStateFlag = "SA";
 
     //どういう動きに当たるか？　など やられ判定のときに追撃しないようにしたりとか.
     public string HitMoveFlag = "IA";
 
     //どういう姿勢ならガード可能？
-    public string GuardPhysFlag = "SA";
+    public string GuardStateFlag = "SA";
     //どういう動きでガード可能？
     public string GuardMoveFlag = "IA";
 
@@ -149,7 +149,7 @@ public class hitDefParams
         //基本的に当たったものとする.
         MoveContact = true;
         //ガードが入ってるか？ あと、ガード可能な攻撃？
-        bool isGuardable = GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardPhysFlag.Contains(targetEntity.physicsType.ToString());
+        bool isGuardable = GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardStateFlag.Contains(targetEntity.physicsType.ToString());
         MoveGuarded = targetEntity.attrs.isGuarded == true && targetEntity.status.currentGuardPoint >= 0 && isGuardable;
 
 
