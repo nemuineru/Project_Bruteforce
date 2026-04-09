@@ -879,11 +879,11 @@ public class Entity : MonoBehaviour
     {
         capCol.enabled = false;
     }
-}
 
-//
-public class hitTarget
-{
-
+    //足元サウンド. あると臨場感出るんじゃね。
+    public void SetStepSound(string param, float value, bool useGrdSnd)
+    {
+        
+    }
 }
 
