@@ -79,7 +79,7 @@ MonoBehaviour:
     preStateVerdictName: StateDef_5101_ID
     ParamLoadName: 
     stateType: 83
-    moveType: 73
+    moveType: 72
     physType: 83
     StateList:
     - rid: 7982027949219512334

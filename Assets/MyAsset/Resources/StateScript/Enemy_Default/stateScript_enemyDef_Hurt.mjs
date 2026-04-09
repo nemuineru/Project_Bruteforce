@@ -119,7 +119,7 @@ export function StateDef_5101_ID(entity)
         verdList.Add(0);
     }    
     if (CurrentAnimID == 5101 &&
-    AnimEndTime - CurrentAnimTime < 2)
+    CurrentAnimTime > 10)
     {
         verdList.Add(1);
     }

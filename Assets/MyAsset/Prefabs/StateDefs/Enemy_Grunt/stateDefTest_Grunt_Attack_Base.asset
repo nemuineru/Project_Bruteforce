@@ -164,7 +164,7 @@ MonoBehaviour:
           stParamValue: {x: 10, y: 0}
           useID: -1
           stLuaLoads: 
-        hitPhysFlag:
+        hitStateFlag:
           _setHidden: 1
           _setEssential: 1
           _isReadable: 1
@@ -182,7 +182,7 @@ MonoBehaviour:
           stParamValue: IA
           useID: -1
           stLuaLoads: 
-        guardPhysFlag:
+        guardStateFlag:
           _setHidden: 1
           _setEssential: 1
           _isReadable: 1
@@ -200,13 +200,31 @@ MonoBehaviour:
           stParamValue: IAH
           useID: -1
           stLuaLoads: 
-        guardBreakPoint:
+        stanceDamagePoint:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        balanceDamagePoint:
           _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 4, y: 15}
+          stParamValue: 1.5
+          useID: -1
+          stLuaLoads: 
+        jugglePoint:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Damages
+          loadTypes: 0
+          stParamValue: 8
           useID: -1
           stLuaLoads: 
         Kill:
@@ -278,7 +296,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 10, y: 10}
+          stParamValue: {x: 4, y: 8}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -377,7 +395,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: {x: 5, y: 3}
+          stParamValue: {x: 15, y: 15}
           useID: -1
           stLuaLoads: 
         fallTime:
@@ -425,7 +443,9 @@ MonoBehaviour:
           stParamValue:
             hitID: 0
             Damage: {x: 0, y: 0}
-            GuardBreakPoint: {x: 0, y: 0}
+            StanceDamage: {x: 0, y: 0}
+            BalanceDamage: 0
+            JugglePoint: 0
             Kill: 0
             GuardOnKill: 0
             velset: {x: 1.5, y: 0, z: 0}
@@ -445,9 +465,9 @@ MonoBehaviour:
             ChangeState_Target: -1
             TargetRefsOwnerNum: 0
             ChangeState_Owner: -1
-            HitPhysFlag: SA
+            hitStateFlag: SA
             HitMoveFlag: IA
-            GuardPhysFlag: SA
+            GuardStateFlag: SA
             GuardMoveFlag: IA
             AnimType: 
             HitExcludeList: 

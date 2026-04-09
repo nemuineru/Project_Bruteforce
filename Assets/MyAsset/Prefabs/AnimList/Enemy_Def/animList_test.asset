@@ -61,6 +61,7 @@ MonoBehaviour:
         _lastcalcEndPos: {x: 0, y: 0, z: 0}
       disableClssList: []
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -90,6 +91,7 @@ MonoBehaviour:
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -109,6 +111,7 @@ MonoBehaviour:
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -138,6 +141,7 @@ MonoBehaviour:
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -157,6 +161,7 @@ MonoBehaviour:
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -176,6 +181,7 @@ MonoBehaviour:
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
@@ -195,22 +201,24 @@ MonoBehaviour:
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
     ID: 5101
     Name: BlowOut_Recover
     animClip:
-    - Clip: {fileID: 7400000, guid: aa501d40a36f394449a9b389ffa9bccd, type: 2}
+    - Clip: {fileID: 7400000, guid: 5258f380d3189684e8e31ec19689044b, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0
       mixPosition: {x: 0, y: 0}
-    blendInTime: 0.06
-    blendOutTime: 0.02
+    blendInTime: 0.2
+    blendOutTime: 0.7
     useDefaultClss: 0
     clssSetting:
       clssDefs: []
       disableClssList:
       - Face
       root: {fileID: 0}
+      eraseAllClss: 0

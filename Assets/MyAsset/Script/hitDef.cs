@@ -154,7 +154,8 @@ public class hitDefParams
         //基本的に当たったものとする.
         MoveContact = true;
         //ガードが入ってるか？ あと、ガード可能な攻撃？
-        bool isGuardable = GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardStateFlag.Contains(targetEntity.physicsType.ToString());
+        bool isGuardable = 
+        GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardStateFlag.Contains(targetEntity.physicsType.ToString()) && targetEntity.status.currentStancePoint >= 0;
         MoveGuarded = targetEntity.attrs.isGuarded == true && isGuardable;
 
 

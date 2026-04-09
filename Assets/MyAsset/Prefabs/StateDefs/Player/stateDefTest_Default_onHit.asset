@@ -21,8 +21,8 @@ MonoBehaviour:
     preStateVerdictName: StateDef_5000_ID
     ParamLoadName: LuaOutput
     stateType: 83
-    moveType: 0
-    physType: 0
+    moveType: 72
+    physType: 83
     StateList:
     - rid: 4404388549547524096
     - rid: 4404388569968803840
@@ -35,9 +35,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Hurt.mjs
     preStateVerdictName: StateDef_5050_ID
     ParamLoadName: LuaOutput
-    stateType: 0
-    moveType: 0
-    physType: 32
+    stateType: 83
+    moveType: 72
+    physType: 65
     StateList:
     - rid: 4404388637674569735
     - rid: 4404388575372902408
@@ -50,9 +50,9 @@ MonoBehaviour:
     ScriptName: stateScript_Rusty_Hurt.mjs
     preStateVerdictName: 
     ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 83
+    moveType: 72
+    physType: 65
     StateList: []
     Dir: 
     setCtrl: 0
@@ -63,8 +63,8 @@ MonoBehaviour:
     preStateVerdictName: StateDef_5100_ID
     ParamLoadName: 
     stateType: 76
-    moveType: 0
-    physType: 76
+    moveType: 72
+    physType: 83
     StateList:
     - rid: 7982027949219512321
     - rid: 7982027949219512328
@@ -78,8 +78,8 @@ MonoBehaviour:
     preStateVerdictName: StateDef_5101_ID
     ParamLoadName: 
     stateType: 76
-    moveType: 0
-    physType: 76
+    moveType: 72
+    physType: 83
     StateList:
     - rid: 7982027949219512322
     - rid: 7982027949219512326
@@ -91,9 +91,9 @@ MonoBehaviour:
     ScriptName: 
     preStateVerdictName: Dead
     ParamLoadName: 
-    stateType: 0
-    moveType: 0
-    physType: 0
+    stateType: 76
+    moveType: 72
+    physType: 83
     StateList:
     - rid: 7982027949219512329
     - rid: 7982027949219512330
