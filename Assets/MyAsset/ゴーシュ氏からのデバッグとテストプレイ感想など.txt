@@ -1,3 +1,35 @@
+<2026-04-09 リソースとかを思考する>
+現状実装している主要リソース変数値
+ - HP : 0にすると5300に飛ぶ
+ - Energy : 基礎リソース. 技とか実行すると減少. 0になっても特殊ステートにならない.
+ - Stance(GuardPoint) : 緊急回避とか、ガードすると減少. 0になると特殊ステートが解禁される.
+ 
+ 未だ未実装、構想段階 :
+ - Balance(BalancePoint) : 攻撃を受けた時の減少する強靭性(アーマー剥がし.) 基本0. 
+ - Juggle : 錐揉みダウン(無敵化ダウン)に移行.. 回復フレームでは0に戻す.
+
+>> 追加されるべきHitDef値
+ - Balance : BalanceDamage
+ - Juggle : JuggleAdd
+ 
+その他、考慮すべき変数値
+ - status/CustomVariableComponent
+ 右下側 情報バーとして追加可能な数値. 
+ 内部に(int_ID/string_ID/int_var_1/int_var_2/float_var_1/float_var_2/bool_var/string_var)がそれぞれ設定される. 
+  >> 
+  class CustomVariableComponent
+  {
+	int varID
+	string varName
+	int iVar, iSubVar //現在値, 最大値..
+	float fVar, fSubVar //現在値, 最大値..
+	bool bVar
+	string sVar
+  }
+  
+  entityのステップ・ダッシュ使用時のStancePointの仕様に関してはソウル系やExvs系を参考に.
+  ガチャフォースでやれ？ それはそーなのよ
+
 <2026-02-17 GetHitDefs関数関連. ガード状態とかを考えるにあたり..>
 ・
 
