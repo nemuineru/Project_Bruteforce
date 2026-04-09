@@ -22,7 +22,12 @@ public class hitDefParams
     //通常ダメージ・ガード時ダメージ
     public Vector2 Damage;
     //ガードポイント減少/通常とガード時
-    public Vector2 GuardBreakPoint;
+    public Vector2 StanceDamage;
+
+    //よろけダメージ計算
+    public float BalanceDamage;
+    //ジャグル計算
+    public float JugglePoint;
 
     public bool Kill;
     public bool GuardOnKill;
@@ -150,7 +155,7 @@ public class hitDefParams
         MoveContact = true;
         //ガードが入ってるか？ あと、ガード可能な攻撃？
         bool isGuardable = GuardMoveFlag.Contains(targetEntity.moveType.ToString()) && GuardStateFlag.Contains(targetEntity.physicsType.ToString());
-        MoveGuarded = targetEntity.attrs.isGuarded == true && targetEntity.status.currentGuardPoint >= 0 && isGuardable;
+        MoveGuarded = targetEntity.attrs.isGuarded == true && isGuardable;
 
 
         //プレイヤー方向とか色々..        
@@ -159,6 +164,9 @@ public class hitDefParams
         
         //攻撃を"当てた側"のisStateHitを変更.
         ownerEntity.attrs.isStateHit = ownerEntity.attrs.isStateHit > 0 ? ownerEntity.attrs.isStateHit : 1;
+        
+        //強靭性ダメージ. 
+        targetEntity.status.currentBalancePoint -= BalanceDamage;
 
         SetStates();
         DamageCalc();        
@@ -195,17 +203,23 @@ public class hitDefParams
         //Guardingが設定されているなら双方に登録される関数値を考える.
         //entityとhitIDが同じヤツは二重に登録しない筈.
         //いまのとこ、OnGuardedStateの105に移動させる.
-        //ガードフラグが立ってた or ヒットタイムが0
-        if(MoveGuarded || (HitTime.x < 0))
+        // ガードフラグが立ってた or 
+        // ヒットタイムが0以下 or balancePointが0以上 かつ ChangeState_targetが指定されない
+        if(MoveGuarded || 
+        ((HitTime.x < 0 || refEntity.status.currentBalancePoint > 0) && ChangeState_Target <= -1))
         {
             //retID = 105;
             //Debug.Log("MoveGuarded To " + referenceID);
             return -1;
         }
-        else if(ChangeState_Target > -1)
+
+        //ひるみ・やられ状態確定！
+        refEntity.status.currentJugglePoint -= JugglePoint; 
+        if(ChangeState_Target > -1)
         {
             retID = ChangeState_Target;
         }
+        //Juggle値を計算. もし
         else
         {
             ownerEntity.TotalHitNo++;
@@ -216,8 +230,23 @@ public class hitDefParams
             //if文祭りじゃ.
             //基本として、LightHit用のStateDefは入っていないと問題外.
 
+            if(refEntity.status.currentJugglePoint <= 0)
+            {
+                if(refEntity.loadedDefs.Any(a => a.StateDefID == 5105))
+                {
+                    //(錐揉み回転)
+                    retID = 5105;
+                }
+                else
+                {
+                    //(通常ダウン)
+                    retID = 5100;
+                }
+                return retID;
+            }
+
             //Fall hit - FallTimeが0以上、またはFall中に攻撃を加えたとき
-            if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
+            else if(((fallTime > 0 ) || (5050 <= referenceID && referenceID <= 5059)) 
             && refEntity.loadedDefs.Any(a => a.StateDefID == 5050))
             {
                 HitType = 50;
@@ -292,13 +321,13 @@ public class hitDefParams
             (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f, targetEntity.status.BaseDefencePerc * targetEntity.status.GuardReductDmgrate));
             targetEntity.status.HitTime = HitTime.y;
             targetEntity.attrs.isBeingStateGuarded = 1;
-            targetEntity.status.currentGuardPoint -= GuardBreakPoint.y;
+            targetEntity.status.currentStancePoint -= StanceDamage.y;
         }
         else
         {
             //hitpoint damage(if not guarded.)
             targetEntity.status.currentHP -= Damage.x * (ownerEntity.status.BaseAttackPerc / Mathf.Max(1.0f,targetEntity.status.BaseDefencePerc));
-            targetEntity.status.currentGuardPoint -= GuardBreakPoint.x;
+            targetEntity.status.currentStancePoint -= StanceDamage.x;
             targetEntity.status.HitTime = HitTime.x;
             targetEntity.status.HitFallTime = fallTime;
             targetEntity.attrs.isBeingStateHit = 1;
@@ -316,7 +345,7 @@ public class hitDefParams
         GameObject instanceEff = HitEff != null ? HitEff : gameState.self.defaultEff;
         if(MoveGuarded)
         {
-            if(targetEntity.status.currentGuardPoint <= 0)
+            if(targetEntity.status.currentStancePoint <= 0)
             {
                 instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardBreakEff;                
             }

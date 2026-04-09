@@ -96,7 +96,7 @@ export function StateDef_50_ID(entity)
         verdList.Add(1);
     }
     //Air Dash.
-    else if(isPressed_A && selfStTime > 7)
+    else if(isPressed_A && selfStTime > 7 && entity.status.currentStancePoint > 0)
     {
         verdList.Add(51);
     }
@@ -133,7 +133,7 @@ export function StateDef_51_ID(entity)
     {
         verdList.Add(0);
         CS.UnityEngine.Debug.Log(selfStTime);
-        entity.status.currentEnergy -= 15;
+        entity.status.currentStancePoint -= 15;
     }
     //Dash Sound and Effect
     if(SoundTime != true)
@@ -167,7 +167,7 @@ export function StateDef_55_ID(entity)
         verdList.Add(1);
     }
     //Air Dash.
-    else if(isPressed_A && selfStTime > 7)
+    else if(isPressed_A && selfStTime > 7 && entity.status.currentStancePoint > 0)
     {
         verdList.Add(51);
     }
@@ -257,7 +257,7 @@ export function StateDef_100_ID(entity) {
         verdList.Add(105)
     }
 
-    if(entity.status.currentGuardPoint <= 0)
+    if(entity.status.currentStancePoint <= 0)
     {
         verdList.Add(110);
     }
@@ -293,7 +293,7 @@ export function StateDef_105_ID(entity){
     }
     //after taking hits.
     //if you release B or non ground.. change to init.
-    if((CurrentAnimTime >= 10 && selfStTime > 4 && entity.status.HitTime < 0) || entity.status.currentGuardPoint <= 0)
+    if((CurrentAnimTime >= 10 && selfStTime > 4 && entity.status.HitTime < 0) || entity.status.currentStancePoint <= 0)
     {
         if (!isPressed_B) 
         { 

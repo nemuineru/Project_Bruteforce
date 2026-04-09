@@ -18,7 +18,7 @@ public class GuardGaugeComponent : GaugeComponent
     internal override void setValues()
     {
         //guiText = Mathf.CeilToInt(valueEntity.status.currentGuardPoint).ToString();
-        float Percentage = valueEntity.status.currentGuardPoint / valueEntity.status.maxGuardPoint;
+        float Percentage = valueEntity.status.currentStancePoint / valueEntity.status.maxStancePoint;
         perc_prev = Mathf.Lerp(perc_prev,Percentage,0.15f);
         OverrideShapes.Width = perc_prev * BaseShapes.Width;
         

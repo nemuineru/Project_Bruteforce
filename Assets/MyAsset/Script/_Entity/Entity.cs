@@ -13,6 +13,8 @@ using DG.Tweening;
 using System;
 using BehaviorDesigner.Runtime;
 using Animancer;
+using UnityEngine.InputSystem.XR;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class Entity : MonoBehaviour
 {
@@ -308,6 +310,17 @@ public class Entity : MonoBehaviour
         //のけぞり計算
         status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
         status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
+        
+        //ジャグルはstateChangeの値が反映.
+        status.currentJugglePoint = moveType != _MoveType.H ? status.maxJugglePoint : 
+        status.currentJugglePoint;
+
+        // 強靭値回復はhitPauseを考慮
+        // ただし負数のmaxBalancePoint以下にはならない.
+        status.currentBalancePoint = moveType != _MoveType.H && status.HitPauseTime < -10 ? 
+        Mathf.Min(status.currentBalancePoint + status.balanceRecoveryRate, status.maxBalancePoint) : 
+        status.currentBalancePoint;
+        status.currentBalancePoint = Mathf.Max(-status.maxBalancePoint,status.currentBalancePoint);
     }
 
     void statusAlign()
@@ -787,9 +800,12 @@ public class Entity : MonoBehaviour
         public int priority;
     }
 
-    internal GameObject makeInstantiate(GameObject gObj)
+    internal GameObject makeInstantiate(GameObject gObj, Vector3? position, string boneName = "", bool isAligned = false)
     {
-        return Instantiate(gObj, transform.position, Quaternion.identity);
+        Transform findBone = Elem.getEntityBoneTransform(this,boneName);
+        Vector3 pos = position.HasValue ? position.Value : Vector3.zero; 
+        Quaternion rot = isAligned ? transform.rotation : Quaternion.identity;
+        return Instantiate(gObj, findBone.position + pos, rot);
     }
 
     internal char checkHitStates()

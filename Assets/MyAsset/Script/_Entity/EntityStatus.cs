@@ -107,21 +107,32 @@ public class EntityStatus
     public float currentHP = 100f;
     public float maxEnergy = 50f;
     public float currentEnergy = 50f;
-    //ガード値
+
+    //スタンス値
     //ガード中はこの値を先に減少させてから、適応
-    public float currentGuardPoint = 100f;
-    public float maxGuardPoint = 100f;
-    //ダメージ減少レート. 
-    public float GuardReductDmgrate = 1.0f;
+    public float currentStancePoint = 25f;
+    public float maxStancePoint = 25f;
     
-    public float guardRecoverRate= .8f;
-    public int guardRecoverParsedTime = 0;
-    public int GuardRecoverTime = 20;
+    public float stanceRecoverRate= .8f;
+    public int stanceRecoverParsedTime = 0;
+    public int stanceRecoverMinTime = 20;
 
+    //強靭性. これが有るときはノーリアクション. 0でリアクション.
+    public float currentBalancePoint = 3f;
+    public float maxBalancePoint = 3f;
+    public float balanceRecoveryRate = 0.025f;
 
+    //強制ダウン値. maxJugglePointになると5100系列に変換, また、回復するまで攻撃は当たらない.
+    //0に戻るのは復帰時.
+    public float currentJugglePoint = 0f;
+    public float maxJugglePoint = 100f;
+
+    //攻撃値とか.
     //100%上限
     public float BaseAttackPerc = 100f;
     public float BaseDefencePerc = 100f;
+    //ダメージ減少レート. 
+    public float GuardReductDmgrate = 1.0f;
 
     //スピードとかの設定.
     public Vector3 BaseMoveVelocityParam = new Vector3(5f,4f,5f);
@@ -165,12 +176,12 @@ public class EntityStatus
 
     public void GuardGain(bool isImmidiate, float multiValue)
     {
-        guardRecoverParsedTime++;
-        if(isImmidiate || guardRecoverParsedTime > GuardRecoverTime)
+        stanceRecoverParsedTime++;
+        if(isImmidiate || stanceRecoverParsedTime > stanceRecoverMinTime)
         {
-            currentGuardPoint += guardRecoverRate * multiValue;
+            currentStancePoint += stanceRecoverRate * multiValue;
         }
-        currentGuardPoint = Mathf.Min(currentGuardPoint,maxGuardPoint);
+        currentStancePoint = Mathf.Min(currentStancePoint,maxStancePoint);
     }
 }
 

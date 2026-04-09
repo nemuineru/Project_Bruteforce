@@ -211,7 +211,8 @@ public class gameState : MonoBehaviour
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
                 //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
-                bool isContactable = hitCheck && 
+                //Juggle追加.. これ管理しきれねえ.
+                bool isContactable = hitCheck && selectedEntity.status.currentJugglePoint >= 0 && 
                 refHitParam.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
                 refHitParam.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
                 !refHitParam.HitExcludeList.Contains(selectedEntity.CurrentStateID) && isIntervalAvailable;

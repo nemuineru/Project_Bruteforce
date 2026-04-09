@@ -1937,14 +1937,19 @@ MonoBehaviour:
     currentHP: 100
     maxEnergy: 50
     currentEnergy: 50
-    currentGuardPoint: 40
-    maxGuardPoint: 40
-    GuardReductDmgrate: 1
-    guardRecoverRate: 0.8
-    guardRecoverParsedTime: 0
-    GuardRecoverTime: 0
-    BaseAttackPerc: 100
+    currentStancePoint: 25
+    maxStancePoint: 25
+    stanceRecoverRate: 0.8
+    stanceRecoverParsedTime: 0
+    stanceRecoverMinTime: 20
+    currentBalancePoint: 2
+    maxBalancePoint: 2
+    balanceRecoveryRate: 0.04
+    currentJugglePoint: 0
+    maxJugglePoint: 25
+    BaseAttackPerc: 25
     BaseDefencePerc: 100
+    GuardReductDmgrate: 1
     BaseMoveVelocityParam: {x: 5, y: 4, z: 5}
     BaseAccelParam: {x: 40, y: 40, z: 40}
     HitPauseTime: 0

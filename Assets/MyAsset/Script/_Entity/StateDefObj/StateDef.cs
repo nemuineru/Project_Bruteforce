@@ -806,7 +806,23 @@ public class scHitDef : StateController
 
     //xが直撃, yがガード.
     [SerializeField]
-    stParams<Vector2> guardBreakPoint = new stParams<Vector2>(Vector2.zero,false,false)
+    stParams<Vector2> stanceDamagePoint = new stParams<Vector2>(Vector2.zero,false,false)
+    {
+        _setEssential = false,
+        _MenuName = "Damages"
+    };
+    
+    //強靭性ダメージ.
+    [SerializeField]
+    stParams<float> balanceDamagePoint = new stParams<float>(0,false,false)
+    {
+        _setEssential = false,
+        _MenuName = "Damages"
+    };
+
+    //ジャグルポイント.
+    [SerializeField]
+    stParams<float> jugglePoint = new stParams<float>(0,false,false)
     {
         _setEssential = false,
         _MenuName = "Damages"
@@ -989,9 +1005,13 @@ public class scHitDef : StateController
             hitID = hitID.valueGet(loadParams, entity), //essential!
             //damages
             Damage = damage.valueGet(loadParams, entity), //essential!
-            GuardBreakPoint = 
-            guardBreakPoint._isReadable ? guardBreakPoint.valueGet(loadParams, entity) : Vector2.zero,
-            
+            StanceDamage = 
+            stanceDamagePoint._isReadable ? stanceDamagePoint.valueGet(loadParams, entity) : Vector2.zero,
+            BalanceDamage = 
+            balanceDamagePoint._isReadable ? balanceDamagePoint.valueGet(loadParams, entity) : 0,
+            JugglePoint = 
+            jugglePoint._isReadable ? jugglePoint.valueGet(loadParams, entity) : 0,
+
             Kill = Kill._isReadable ? Kill.valueGet(loadParams,entity) : true,
             GuardOnKill = guardOnKill._isReadable ? guardOnKill.valueGet(loadParams,entity) : false,
 
@@ -1077,7 +1097,7 @@ public class scProjectile : StateController
         //set projs. if its null do nothing
         if (projs != null)
         {
-            GameObject inst = entity.makeInstantiate(projs.gameObject);
+            GameObject inst = entity.makeInstantiate(projs.gameObject,null);
             inst.transform.position = InstPosition.valueGet(loadParams, entity);
             inst.GetComponent<Rigidbody>().velocity = InstDirection.valueGet(loadParams, entity);
             inst.GetComponent<Projectile>().proj_Controller = entity;
@@ -1191,9 +1211,29 @@ public class scEmitEffect : StateController
 {
     [SerializeField]
     stParams<GameObject> EmitObject;
+    [SerializeField]
+    stParams<bool> setAlignTo;
+
+    [SerializeField]
+    stParams<bool> setParent;
+
+    [SerializeField]
+    stParams<Vector3> instantiatePos;
+
+    [SerializeField]
+    stParams<string> bonePosName;
     internal override void OnExecute(Entity entity)
     {
-        entity.makeInstantiate(EmitObject.valueGet(loadParams, entity));
+        GameObject obj = entity.makeInstantiate(
+            EmitObject.valueGet(loadParams, entity),
+            instantiatePos.valueGet(loadParams,entity),
+            bonePosName.valueGet(loadParams,entity),
+            setAlignTo.valueGet(loadParams,entity)
+            );
+        if(setParent.valueGet(loadParams,entity))
+        {
+            obj.transform.parent = entity.transform;    
+        }
     }
 }
 

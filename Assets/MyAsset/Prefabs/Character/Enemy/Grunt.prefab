@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57138f686d9a74f8ad5d22366a6c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityName: 
+  EntityTeamName: 
   stateType: 0
   physicsType: 0
   moveType: 0
@@ -149,16 +151,24 @@ MonoBehaviour:
     currentHP: 115
     maxEnergy: 50
     currentEnergy: 50
-    currentGuardPoint: 100
-    maxGuardPoint: 100
-    GuardReductDmgrate: 1
-    guardRecoverRate: 0.8
-    guardRecoverParsedTime: 0
-    GuardRecoverTime: 0.7
+    currentStancePoint: 25
+    maxStancePoint: 25
+    stanceRecoverRate: 0.8
+    stanceRecoverParsedTime: 0
+    stanceRecoverMinTime: 20
+    currentBalancePoint: 0
+    maxBalancePoint: 0
+    balanceRecoveryRate: 0.025
+    currentJugglePoint: 0
+    maxJugglePoint: 100
     BaseAttackPerc: 60
     BaseDefencePerc: 100
+    GuardReductDmgrate: 1
     BaseMoveVelocityParam: {x: 3, y: 3, z: 1}
     BaseAccelParam: {x: 40, y: 40, z: 40}
+    HitPauseTime: 0
+    HitTime: 0
+    HitFallTime: 0
     ChargeTime: 0
   attrs:
     ctrl: 1
@@ -174,6 +184,9 @@ MonoBehaviour:
     isStateGuarded: 0
     isStateReversed: 0
     isSoundNotPlayed: 0
+    isBeingStateHit: 0
+    isBeingStateContact: 0
+    isBeingStateGuarded: 0
   parentEntity: {fileID: 0}
   controlledEntity: {fileID: 0}
   animID: 0
