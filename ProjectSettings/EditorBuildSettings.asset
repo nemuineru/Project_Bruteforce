@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_Dojo.unity
     guid: d9f11f696140a38428faa7e0b81d5f92
+  - enabled: 1
+    path: Assets/Scenes/Scene_Arena.unity
+    guid: 3cc3abaea6346fc43a89d32aa662a9ae
   m_configObjects: {}
