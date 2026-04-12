@@ -56,6 +56,21 @@ MonoBehaviour:
     StateList: []
     Dir: 
     setCtrl: 0
+  - StateDefName: Blow_Spinner
+    StateDefID: 5060
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_Rusty_Hurt.mjs
+    preStateVerdictName: StateDef_5060_ID
+    ParamLoadName: 
+    stateType: 83
+    moveType: 72
+    physType: 65
+    StateList:
+    - rid: 503850355378094085
+    - rid: 503850355378094086
+    - rid: 503850355378094091
+    Dir: 
+    setCtrl: 0
   - StateDefName: Blow_Down
     StateDefID: 5100
     ScriptDirectory: StateScript/Rusty
@@ -72,7 +87,7 @@ MonoBehaviour:
     Dir: 
     setCtrl: 0
   - StateDefName: Blow_Recovery
-    StateDefID: 5101
+    StateDefID: 5110
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Hurt.mjs
     preStateVerdictName: StateDef_5101_ID
@@ -116,6 +131,82 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 503850355378094085
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Set Anim
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 5060
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 0
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 503850355378094086
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Change to 5100
+        doLoadAfterChangeState: 0
+        changeTo: 0
+        priority: 0
+    - rid: 503850355378094091
+      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 0
+        vels:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 3, z: 0}
+          useID: -1
+          stLuaLoads: 
+        priority: 0
     - rid: 1982100752660430849
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -430,7 +521,7 @@ MonoBehaviour:
           stLuaLoads: 
         stateControllerSubName: Transit to Recover
         doLoadAfterChangeState: 0
-        changeTo: 5101
+        changeTo: 5110
         priority: 0
     - rid: 7982027949219512329
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}

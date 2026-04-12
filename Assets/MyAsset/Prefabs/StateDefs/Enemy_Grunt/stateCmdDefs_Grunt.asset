@@ -15,6 +15,19 @@ MonoBehaviour:
   ScriptDirectory: StateScript/Enemy_Default
   stateDefs:
   - StateDefName: Default
+    StateDefID: -2
+    ScriptDirectory: StateScript/Enemy_Default
+    ScriptName: stateScript_enemyDef_cmd.mjs
+    preStateVerdictName: setStatus
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 503850355378094082
+    Dir: 
+    setCtrl: 0
+  - StateDefName: Default
     StateDefID: -1
     ScriptDirectory: StateScript/Enemy_Default
     ScriptName: stateScript_enemyDef_cmd.mjs
@@ -33,6 +46,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 503850355378094082
+      type: {class: scAddHealth, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10000
+          stLuaLoads: 
+        stateControllerSubName: dummy
+        doLoadAfterChangeState: 0
+        value: 0
+        priority: 0
     - rid: 1982101297765023744
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

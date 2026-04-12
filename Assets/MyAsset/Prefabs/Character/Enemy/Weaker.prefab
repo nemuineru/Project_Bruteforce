@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57138f686d9a74f8ad5d22366a6c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityName: 
+  EntityTeamName: 
   stateType: 0
   physicsType: 0
   moveType: 0
@@ -143,19 +145,38 @@ MonoBehaviour:
       _lastcalcEndPos: {x: 0, y: 0, z: 0}
     disableClssList: []
     root: {fileID: 0}
+    eraseAllClss: 0
   status:
     maxHP: 60
     currentHP: 60
     maxEnergy: 50
     currentEnergy: 50
+    currentStancePoint: 25
+    maxStancePoint: 25
+    stanceRecoverRate: 0.8
+    stanceRecoverParsedTime: 0
+    stanceRecoverMinTime: 20
+    currentBalancePoint: 0
+    maxBalancePoint: 0
+    balanceRecoveryRate: 0.025
+    currentJugglePoint: 0
+    maxJugglePoint: 100
     BaseAttackPerc: 60
     BaseDefencePerc: 100
+    GuardReductDmgrate: 1
+    BaseMoveVelocityParam: {x: 5, y: 4, z: 5}
+    BaseAccelParam: {x: 40, y: 40, z: 40}
+    HitPauseTime: 0
+    HitTime: 0
+    HitFallTime: 0
     ChargeTime: 0
   attrs:
     ctrl: 1
     alive: 1
     isPaused: 0
     isStateChanged: 0
+    isGuarded: 0
+    isDamaged: 0
     isFall: 0
     isEraseReady: 0
     isStateHit: 0
@@ -163,12 +184,16 @@ MonoBehaviour:
     isStateGuarded: 0
     isStateReversed: 0
     isSoundNotPlayed: 0
+    isBeingStateHit: 0
+    isBeingStateContact: 0
+    isBeingStateGuarded: 0
   parentEntity: {fileID: 0}
   controlledEntity: {fileID: 0}
   animID: 0
   animListObject:
   - {fileID: 11400000, guid: b51c9017a01584c4182996c71f2b52c6, type: 2}
   - {fileID: 11400000, guid: cfbf7cbfe7eb3644f87e8aa5275d0821, type: 2}
+  mainAnimancer: {fileID: 0}
   CurColor: {r: 0, g: 0, b: 0, a: 0}
   isOnGround: 0
   isStateChanged: 0
@@ -179,7 +204,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9627480b18d7514ba5178d0f74e8931, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: 1a02fafd4beb98342a4e556bd578e5a8, type: 2}
+  executedStateIDs: 
+  hitdefSameTime: 
   raycenter: {x: 0, y: -0.5, z: 0}
+  cmdList: []
+  TotalHitNo: 0
+  registeredHitDefs: []
 --- !u!54 &7195815572568816930
 Rigidbody:
   m_ObjectHideFlags: 0

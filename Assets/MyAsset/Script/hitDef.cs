@@ -231,17 +231,17 @@ public class hitDefParams
             //if文祭りじゃ.
             //基本として、LightHit用のStateDefは入っていないと問題外.
 
-            if(refEntity.status.currentJugglePoint <= 0)
+            if(refEntity.status.currentJugglePoint < 0)
             {
-                if(refEntity.loadedDefs.Any(a => a.StateDefID == 5105))
+                if(refEntity.loadedDefs.Any(a => a.StateDefID == 5060))
                 {
-                    //(錐揉み回転)
-                    retID = 5105;
+                    //(錐揉み回転State)
+                    retID = 5060;
                 }
                 else
                 {
                     //(通常ダウン)
-                    retID = 5100;
+                    retID = 5050;
                 }
                 return retID;
             }
@@ -253,7 +253,7 @@ public class hitDefParams
                 HitType = 50;
             }
             //現在EntityがFall状態で追撃したなら再読み込み.
-            else if(referenceID >= 5100 && referenceID <= 5110 && refEntity.loadedDefs.Any(a => a.StateDefID == 5100))
+            else if(referenceID >= 5100 && referenceID <= 5100 && refEntity.loadedDefs.Any(a => a.StateDefID == 5100))
             {
                 HitType = 100;
             }

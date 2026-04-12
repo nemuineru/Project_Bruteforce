@@ -303,30 +303,30 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         stanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 4, y: 4}
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 8
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 3
           useID: -1
           stLuaLoads: 
         Kill:
@@ -1168,6 +1168,15 @@ MonoBehaviour:
           stParamValue: {x: 0, y: 0, z: 0}
           useID: 0
           stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
         priority: 0
     - rid: 1982101230649868288
       type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
@@ -1359,6 +1368,15 @@ MonoBehaviour:
           stParamValue: 1
           useID: -1
           stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 3324168377381683254
       type: {class: scBasicInputMove, ns: , asm: Assembly-CSharp}
       data:
@@ -1384,6 +1402,15 @@ MonoBehaviour:
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 1, y: 1, z: 1}
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
     - rid: 3324168377381683261
@@ -1413,6 +1440,15 @@ MonoBehaviour:
           stParamValue: {x: 1, y: 1, z: 1}
           useID: -1
           stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 3324168377381683263
       type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
       data:
@@ -1428,7 +1464,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 20, y: 0, z: 0}
+          stParamValue: {x: 4, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
         isSpeedstatAffect:
@@ -1438,6 +1474,15 @@ MonoBehaviour:
           _MenuName: Base
           loadTypes: 0
           stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
     - rid: 3324168377381683264
@@ -1650,7 +1695,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 4
+          stParamValue: 1
           useID: -1
           stLuaLoads: 
         Kill:
@@ -2305,7 +2350,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 30, y: 4}
+          stParamValue: {x: 20, y: 4}
           useID: -1
           stLuaLoads: 
         hitStateFlag:
@@ -2363,12 +2408,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 2
           useID: -1
           stLuaLoads: 
         Kill:
@@ -2395,7 +2440,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 20, y: 8, z: 0}
+          stParamValue: {x: 4, y: 3, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -2435,12 +2480,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitStopTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 7, y: 7}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -2521,7 +2566,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 8
+          stParamValue: 4
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -2530,16 +2575,16 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
         hitTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 6, y: 6}
           useID: -1
           stLuaLoads: 
         fallTime:
@@ -3032,7 +3077,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAL
           useID: -1
           stLuaLoads: 
         hitMoveFlag:
@@ -3081,12 +3126,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 100
           useID: -1
           stLuaLoads: 
         Kill:
@@ -3194,7 +3239,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 20
           useID: -1
           stLuaLoads: 
         Priority_Behavior:
@@ -3252,12 +3297,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 20, y: 5}
           useID: -1
           stLuaLoads: 
         fallTime:
@@ -3531,12 +3576,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 1000
           useID: -1
           stLuaLoads: 
         Kill:
@@ -3802,6 +3847,15 @@ MonoBehaviour:
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
           useID: 0
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
           stLuaLoads: 
         priority: 0
     - rid: 5331019055452913782
@@ -4916,6 +4970,15 @@ MonoBehaviour:
           loadTypes: 1
           stParamValue: {x: 0, y: 0, z: 0}
           useID: 0
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
           stLuaLoads: 
         priority: 0
     - rid: 7557642784103727104
@@ -6100,6 +6163,15 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         isSpeedstatAffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
           _setHidden: 1
           _setEssential: 0
           _isReadable: 1

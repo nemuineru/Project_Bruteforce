@@ -782,6 +782,15 @@ MonoBehaviour:
           stLuaLoads: 
         stateControllerSubName: JumpAnimVel
         doLoadAfterChangeState: 0
+        Vel:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 210, z: 0}
+          useID: -1
+          stLuaLoads: 
     - rid: 4404389163807801373
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:

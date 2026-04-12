@@ -156,8 +156,8 @@ MonoBehaviour:
     stanceRecoverRate: 0.8
     stanceRecoverParsedTime: 0
     stanceRecoverMinTime: 20
-    currentBalancePoint: 0
-    maxBalancePoint: 0
+    currentBalancePoint: 1
+    maxBalancePoint: 1
     balanceRecoveryRate: 0.025
     currentJugglePoint: 0
     maxJugglePoint: 100
@@ -208,6 +208,7 @@ MonoBehaviour:
   executedStateIDs: 
   hitdefSameTime: 
   raycenter: {x: 0, y: 0, z: 0}
+  pausedVel: {x: 0, y: 0, z: 0}
   cmdList:
   - CommandName: Basic
     Command: _b

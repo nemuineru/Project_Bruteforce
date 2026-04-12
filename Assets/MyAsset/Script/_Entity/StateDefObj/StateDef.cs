@@ -665,6 +665,9 @@ public class scBasicInputMove : StateController
     [SerializeField]
     stParams<Vector3> MutipleMoveVelocity = new stParams<Vector3>(new Vector3(1f,1f,1f), true, true);
 
+    [SerializeField]
+    stParams<bool> isIgnorePause;
+
     //velocityで設定してたので、これを別のやつにする..
     //ハマったとき、抜けなくなるので..
     internal override void OnExecute(Entity entity)
@@ -691,10 +694,13 @@ public class scBasicInputMove : StateController
 public class scBasicForwardMove : StateController
 {    
     [SerializeField]
-    stParams<Vector3> MoveVelocity = new stParams<Vector3>(new Vector3(10f,0f,0f), true);
+    internal stParams<Vector3> MoveVelocity = new stParams<Vector3>(new Vector3(10f,0f,0f), true);
 
     [SerializeField]
     stParams<bool> isSpeedstatAffect = new stParams<bool>(false,true);
+
+    [SerializeField]
+    stParams<bool> isIgnorePause;
 
 
     //velocityで設定してたので、これを別のやつにする..
@@ -703,7 +709,14 @@ public class scBasicForwardMove : StateController
     {
         Vector3 MVels = MoveVelocity.valueGet(loadParams,entity);
         MVels *= isSpeedstatAffect.valueGet(loadParams,entity) ? entity.status.BaseMoveVelocityParam.x : 1f;
+                
         entity.rigid.AddForce(entity.hardVelocity(MVels), ForceMode.Force);
+        //HitPause時はpauseVelに設定..
+        // if(entity.status.HitPauseTime > 0)
+        // {
+        //     entity.rigid.AddForce(entity.hardVelocity(MVels), ForceMode.Force);
+        //     entity.pausedVel = entity.hardVelocity(MVels);
+        // }
         //entity.rigid.AddTorque(Vector3.up * rightMean / forceMean ,ForceMode.Force);
     }
 }
@@ -717,10 +730,24 @@ public class scAddVelocity : StateController
     stParams<Vector3> vels;
 
     [SerializeField]
+    stParams<bool> isIgnorePause;
+
+    [SerializeField]
     int priority = 0;
     internal override void OnExecute(Entity entity)
     {
-        entity.rigid.velocity += vels.valueGet(loadParams,entity) * Time.fixedDeltaTime;
+        Vector3 vel = vels.valueGet(loadParams,entity) * Time.fixedDeltaTime;
+
+        //HitPause時はpauseVelに設定..
+        if(entity.status.HitPauseTime > 0 && isIgnorePause.valueGet(loadParams,entity))
+        {
+            entity.rigid.velocity += vel;
+            entity.pausedVel = vel;
+        }
+        else
+        {
+            entity.rigid.velocity += vel;
+        }
     }
 
     public override string typeGet()
@@ -738,10 +765,24 @@ public class scSetVelocity : StateController
     stParams<Vector3> vels;
 
     [SerializeField]
+    stParams<bool> isIgnorePause;
+
+    [SerializeField]
     int priority = 0;
     internal override void OnExecute(Entity entity)
     {
-        entity.rigid.velocity = vels.valueGet(loadParams,entity) * Time.fixedDeltaTime; 
+        var vel = vels.valueGet(loadParams,entity); 
+        
+        //HitPause時はpauseVelに設定..
+        if(entity.status.HitPauseTime > 0 && isIgnorePause.valueGet(loadParams,entity))
+        {
+            entity.rigid.velocity = vel;
+            entity.pausedVel = vel;
+        }
+        else
+        {
+            entity.rigid.velocity = vel;
+        }
     }
 
     public override string typeGet()
@@ -1113,10 +1154,18 @@ public class scProjectile : StateController
 [SCHiearchy("Physics/Jump")]
 public class scJump : StateController
 {
+    [SerializeField]
+    stParams<Vector3> Vel;
     internal override void OnExecute(Entity entity)
     {
-        entity.rigid.velocity = Vector3.ProjectOnPlane(entity.rigid.velocity,Vector3.up) + Vector3.up * 3.2f;
+        scBasicForwardMove scEx = new scBasicForwardMove();
+        scEx.ID = this.ID;
+        scEx.loadParams = this.loadParams;
+        scEx.stateControllerSubName = this.stateControllerSubName;
+        scEx.MoveVelocity = Vel;
+        scEx.OnExecute(entity);
         entity.isOnGround = false;
+        //entity.rigid.velocity = Vector3.ProjectOnPlane(entity.rigid.velocity,Vector3.up) + Vector3.up * 5.5f;
         //Debug.Log("Executed " + "JumpState " + " in " + entity.name + " - " + entity.stateTime);
     }
 }
@@ -1444,10 +1493,11 @@ public class scSetStatetype : StateController
     internal override void OnExecute(Entity entity)
     {
         char val = value.valueGet(loadParams, entity);
-        if (Enum.IsDefined(typeof(Entity._StateType), val))
-        {
-            entity.stateType = (Entity._StateType)val;
-        }
+        entity.stateType = (Entity._StateType)Enum.Parse(typeof(Entity._StateType), val.ToString());
+        // if (Enum.IsDefined(typeof(Entity._StateType), val.ToString()))
+        // {
+        //     entity.stateType = (Entity._StateType)val;
+        // }
     }
 }
 
@@ -1466,10 +1516,7 @@ public class scSetStatePhystype : StateController
     internal override void OnExecute(Entity entity)
     {
         char val = value.valueGet(loadParams, entity);
-        if (Enum.IsDefined(typeof(Entity._PhysicsType), val))
-        {
-            entity.physicsType = (Entity._PhysicsType)val;
-        }
+        entity.physicsType = (Entity._PhysicsType)Enum.Parse(typeof(Entity._PhysicsType), val.ToString());
     }
 }
 
@@ -1488,10 +1535,7 @@ public class scSetStateMovetype : StateController
     internal override void OnExecute(Entity entity)
     {
         char val = value.valueGet(loadParams, entity);
-        if (Enum.IsDefined(typeof(Entity._MoveType), val))
-        {
-            entity.moveType = (Entity._MoveType)val;
-        }
+        entity.moveType = (Entity._MoveType)Enum.Parse(typeof(Entity._MoveType), val.ToString());
     }
 }
 

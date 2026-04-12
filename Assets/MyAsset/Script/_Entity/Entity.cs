@@ -152,7 +152,7 @@ public class Entity : MonoBehaviour
     CapsuleCollider capCol;
 
     //カメラ登録時、格納.
-    CinemachineOrbitalTransposer transposer;
+    CinemachineOrbitalTransposer transposer_Orbit;
 
     //実行済みのステート番号の書き換えなど
     public List<int> executedStateIDs = new List<int>();
@@ -166,7 +166,7 @@ public class Entity : MonoBehaviour
     [SerializeField]
     Vector3 raycenter = Vector3.down * 0.5f;
 
-    Vector3 pausedVel = Vector3.zero;
+    public Vector3 pausedVel = Vector3.zero;
 
     internal Vector3 GroundNormal = Vector3.zero;
 
@@ -270,12 +270,6 @@ public class Entity : MonoBehaviour
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
         stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
         
-        //executedStateIDs.Any();
-        if (vCam != null && transposer == null)
-        {
-            Debug.Log("Finding Transposer");
-            transposer = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-        }
         //check each cmds. and buffers it.
         foreach (var cmds in cmdList)
         {
@@ -311,17 +305,25 @@ public class Entity : MonoBehaviour
         status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
         status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
         
-        //ジャグルはstateChangeの値が反映.
-        status.currentJugglePoint = moveType != _MoveType.H ? status.maxJugglePoint : 
-        status.currentJugglePoint;
+    }
 
+    public void addBalancePoint(float AddBalancePt)
+    {
         // 強靭値回復はhitPauseを考慮
-        // ただし負数のmaxBalancePoint以下にはならない.
-        status.currentBalancePoint = moveType != _MoveType.H && status.HitPauseTime < -10 ? 
-        Mathf.Min(status.currentBalancePoint + status.balanceRecoveryRate, status.maxBalancePoint) : 
-        status.currentBalancePoint;
+        // ただし負数のmaxBalancePoint以下にはならない
+        // status.currentBalancePoint = moveType != _MoveType.H && status.HitPauseTime < -10 ? 
+        status.currentBalancePoint = Mathf.Min(status.currentBalancePoint + AddBalancePt, status.maxBalancePoint);
         status.currentBalancePoint = Mathf.Max(-status.maxBalancePoint,status.currentBalancePoint);
     }
+    
+    public void setJugglePoint(float JugglePt)
+    {
+        //ジャグルはstateChangeの値が反映.
+        // status.currentJugglePoint = moveType != _MoveType.H ? status.maxJugglePoint : 
+        //ジャグルはstateChangeの値が反映.
+        status.currentJugglePoint = JugglePt;
+    }
+
 
     void statusAlign()
     {
@@ -496,7 +498,7 @@ public class Entity : MonoBehaviour
         }
 
         //On death, Change to 5000 first, end at 5300(death state).
-        if (attrs.alive == false && CurrentStateID < 5000 && CurrentStateID > 5300)
+        if (attrs.alive == false && (CurrentStateID < 5000 || CurrentStateID > 5300) && controlledEntity == null)
         {
             CurrentStateID = 5000;
         }
@@ -589,17 +591,24 @@ public class Entity : MonoBehaviour
                                                              //Debug.Log(entityInput.commandBuffer[0].MoveAxis);
 
         //Vcamが設定されているなら、Camera設定に従いfwを設定する.
-        if (vCam != null && transposer != null)
+        if (vCam != null)
         {
             //Debug.Log("Transpose Camera setting..");
             targetTo_fw = Vector3.ProjectOnPlane(vCam.transform.forward, Vector3.up).normalized;
-            transposer.m_XAxis.Value += look.x * 3.0f;
+            if(transposer_Orbit != null)
+            {
+                transposer_Orbit.m_XAxis.Value += look.x * 3.0f;
+            }
+            else
+            {
+                transposer_Orbit = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+            }
         }
         else
         {
-            //Debug.Log(look.x);
             targetTo_fw = Quaternion.Euler(0f, look.x, 0f) * targetTo_fw;
         }
+        
         if (targetTo_fw != null)
         {
             wishingVect = targetTo_fw * wish.y
@@ -881,9 +890,13 @@ public class Entity : MonoBehaviour
     }
 
     //足元サウンド. あると臨場感出るんじゃね。
-    public void SetStepSound(string param, float value, bool useGrdSnd)
+    public void SetStepSound(int iVal = 0)
     {
-        
+        AudioClip[] clip = gameState.self.defaultFootSound;
+        if(clip != null)
+        {
+            selfSource.PlayOneShot(clip[UnityEngine.Random.Range(0,clip.Count())],0.25f);            
+        }
     }
 }
 

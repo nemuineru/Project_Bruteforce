@@ -63,7 +63,7 @@ export function Accel_Start(entity)
     let vel_relate_f = entity.transform.forward;
     let vel_relate_r = entity.transform.right;
     //Operator_Multiply on this..
-    vel3 = Vector3.op_Multiply(Vector3.ProjectOnPlane(vel_relate_f,Vector3.up) , 300.0);
+    vel3 = Vector3.op_Multiply(Vector3.ProjectOnPlane(vel_relate_f,Vector3.up) , 5.0);
 
     outs.Add(vel3);
     //CS.UnityEngine.Debug.Log(vel2);

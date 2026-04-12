@@ -12,6 +12,38 @@
 // 200 - 400 キャラクター指定の通常技、必殺技とか
 // 5000 - 基本やられ
 
+export function setStatus(entity)
+{
+    const List_Int =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity);
+    //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
+    let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
+    //charger for basic 
+    let AttackCmd_x_isPressed = CS.Elem.CheckButtonPressed(entity, "Combo_Keep");
+    let AttackCmd_x_isReleased = CS.Elem.CheckButtonPressed(entity, "Combo_Release");
+
+    let AttackCmd_y_isPressed = CS.Elem.CheckButtonPressed(entity, "Weapon");
+
+    //長押しで入力中とする.
+    let GuardCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Guarding");
+
+    let StateDefID = entity.CurrentStateID;
+    let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
+    let chargeVal = entity.status.ChargeTime;
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+    if(entity.status.HitTime < -60)
+        entity.addBalancePoint(entity.status.balanceRecoveryRate);
+    if(entity.status.HitTime < -10)
+        entity.setJugglePoint(entity.status.maxJugglePoint);
+
+    return verdList;
+}
+
 
 // We could use List name, if they call variable first.
 export function stateCmd(entity) {
@@ -92,7 +124,7 @@ export function stateCmd(entity) {
         verdList.Add(251);
     }
     //Special Air Attack _ Knife c1
-    if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID == 50 ))
+    if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID >= 50 && StateDefID <= 55))
     {
         verdList.Add(350);
     }

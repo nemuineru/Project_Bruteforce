@@ -14,6 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScriptDirectory: StateScript/Rusty
   stateDefs:
+  - StateDefName: Always
+    StateDefID: -2
+    ScriptDirectory: StateScript/Rusty
+    ScriptName: stateScript_cmd.mjs
+    preStateVerdictName: setStatus
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 503850344495972352
+    Dir: 
+    setCtrl: 0
   - StateDefName: Default
     StateDefID: -1
     ScriptDirectory: StateScript/Rusty
@@ -45,6 +58,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 503850344495972352
+      type: {class: scAddHealth, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 5000000
+          stLuaLoads: 
+        stateControllerSubName: 0
+        doLoadAfterChangeState: 0
+        value: 0
+        priority: 0
     - rid: 1814087929669091328
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

@@ -31,7 +31,7 @@ MonoBehaviour:
   - StateDefName: OnHit
     StateDefID: 5000
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: stateScript_FatMan_Hurt
+    ScriptName: stateScript_FatMan_Hurt.mjs
     preStateVerdictName: StateDef_5000_ID
     ParamLoadName: LuaOutput
     stateType: 83
@@ -47,7 +47,7 @@ MonoBehaviour:
   - StateDefName: OnHit_Blow
     StateDefID: 5050
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: stateScript_FatMan_Hurt
+    ScriptName: stateScript_FatMan_Hurt.mjs
     preStateVerdictName: StateDef_5050_ID
     ParamLoadName: LuaOutput
     stateType: 65
@@ -59,10 +59,25 @@ MonoBehaviour:
     - rid: 7982027949219512346
     Dir: 
     setCtrl: 0
+  - StateDefName: Default
+    StateDefID: 5060
+    ScriptDirectory: StateScript/Enemy_Default/FatMan
+    ScriptName: stateScript_FatMan_Hurt.mjs
+    preStateVerdictName: StateDef_5060_ID
+    ParamLoadName: 
+    stateType: 65
+    moveType: 72
+    physType: 65
+    StateList:
+    - rid: 503850366890410015
+    - rid: 503850366890410016
+    - rid: 503850366890410017
+    Dir: 
+    setCtrl: 0
   - StateDefName: OnHit_Fall
     StateDefID: 5100
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: stateScript_FatMan_Hurt
+    ScriptName: stateScript_FatMan_Hurt.mjs
     preStateVerdictName: StateDef_5100_ID
     ParamLoadName: 
     stateType: 76
@@ -77,7 +92,7 @@ MonoBehaviour:
   - StateDefName: OnHit_Recover
     StateDefID: 5101
     ScriptDirectory: StateScript/Enemy_Default/FatMan
-    ScriptName: stateScript_FatMan_Hurt
+    ScriptName: stateScript_FatMan_Hurt.mjs
     preStateVerdictName: StateDef_5101_ID
     ParamLoadName: 
     stateType: 76
@@ -86,11 +101,132 @@ MonoBehaviour:
     StateList:
     - rid: 7982027949219512334
     - rid: 7982027949219512333
+    - rid: 503850366890410037
     Dir: 
     setCtrl: 0
   references:
     version: 2
     RefIds:
+    - rid: 503850366890410015
+      type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Anims
+        doLoadAfterChangeState: 0
+        changeAnimID:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 5060
+          useID: -1
+          stLuaLoads: 
+        AnimSlot:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        animParameter:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0}
+          useID: -1
+          stLuaLoads: 
+        isAdditional:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        mask: {fileID: 0}
+    - rid: 503850366890410016
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1
+          stLuaLoads: 
+        stateControllerSubName: Down
+        doLoadAfterChangeState: 0
+        changeTo: 5100
+        priority: 0
+    - rid: 503850366890410017
+      type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Fw Vel
+        doLoadAfterChangeState: 0
+        MoveVelocity:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 4, y: 7, z: 0}
+          useID: -1
+          stLuaLoads: 
+        isSpeedstatAffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 503850366890410037
+      type: {class: scSetStatetype, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 0
+        value:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 83
+          useID: -1
+          stLuaLoads: 
+        priority:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 3579423253479817227
       type: {class: scAnimSet, ns: , asm: Assembly-CSharp}
       data:

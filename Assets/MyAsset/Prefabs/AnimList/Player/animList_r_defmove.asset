@@ -223,6 +223,26 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
+    ID: 5060
+    Name: Blowoff_nonRecov
+    animClip:
+    - Clip: {fileID: 7400000, guid: acee90f9bf33fa84ea705f56e86115df, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.4
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs: []
+      disableClssList:
+      - head
+      root: {fileID: 0}
+      eraseAllClss: 1
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
     ID: 5100
     Name: Down
     animClip:

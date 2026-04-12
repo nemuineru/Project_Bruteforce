@@ -29,9 +29,33 @@ MonoBehaviour:
     - rid: 1982101297765023745
     Dir: 
     setCtrl: 0
+  - StateDefName: Default
+    StateDefID: -2
+    ScriptDirectory: 
+    ScriptName: stateScript_FatMan_cmd.mjs
+    preStateVerdictName: setStatus
+    ParamLoadName: 
+    stateType: 0
+    moveType: 0
+    physType: 0
+    StateList:
+    - rid: 503850355378094081
+    Dir: 
+    setCtrl: 0
   references:
     version: 2
     RefIds:
+    - rid: 503850355378094081
+      type: {class: scAddHealth, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10000
+          stLuaLoads: 
+        stateControllerSubName: 
+        doLoadAfterChangeState: 0
+        value: 0
+        priority: 0
     - rid: 1982101297765023745
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

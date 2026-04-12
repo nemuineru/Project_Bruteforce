@@ -129,7 +129,7 @@ export function StateDef_220_ID(entity){
         verdList.Add(100);
     }
     
-    if ( CurrentAnimID == 220 && CurrentAnimTime > 4 && CurrentAnimTime < 12)
+    if ( CurrentAnimID == 220 && CurrentTime > 4 && CurrentTime < 12)
     {
         verdList.Add(11);
     }

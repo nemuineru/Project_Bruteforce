@@ -65,6 +65,37 @@ export function StateDef_5050_ID(entity)
     return verdList;
 }
 
+//Hurt_Blowout_NonRecov(5060)
+export function StateDef_5060_ID(entity)
+{ 
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+    let isOnGround =  CS.Elem.isEntityOnGround(entity);
+    let isAlive = entity.attrs.alive;
+
+    if (CurrentTime == 0 && CurrentAnimID != 5060)
+    {
+        verdList.Add(0);
+    }
+    if (CurrentAnimTime > 12 && CurrentTime > 10 && isOnGround)
+    {
+        verdList.Add(1);
+    }    
+    if(SoundTime){
+        verdList.Add(100);
+    }
+    return verdList;
+}
+
+
 //FallDown(5100)
 export function StateDef_5100_ID(entity)
 {    
@@ -118,9 +149,14 @@ export function StateDef_5101_ID(entity)
         verdList.Add(0);
     }    
     if (CurrentAnimID == 5101 &&
-    AnimEndTime - CurrentAnimTime < 2)
+    AnimEndTime - CurrentAnimTime < 32)
     {
         verdList.Add(1);
     }
+    if (CurrentAnimID == 5101 && isOnGround &&
+    CurrentAnimTime > 34 && isAlive)
+    {
+        verdList.Add(2);
+    }    
     return verdList;
 }

@@ -115,7 +115,7 @@ export function StateDef_350_AirKnife(entity)
     {
         verdList.Add(10);
     }
-    if(SoundTime){
+    if(CurrentTime == 0 && SoundTime){
         verdList.Add(100);
     }
     return verdList;
