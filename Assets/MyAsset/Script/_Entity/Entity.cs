@@ -530,12 +530,14 @@ public class Entity : MonoBehaviour
         if (prevState != null && isStateChanged == true)
         {
             Debug.Log("finding prevstate at - " + CurrentStateID + " prevStateDefID : " + prevState.StateDefID + " statedef main : " + prevState.StateDefName);
+            //なんか, StateExecute時にWebGLだとIndexOutofBoundsとなるみたいなので対策せねば.
             List<int> ExID = prevState.Execute(this, true);
             //過去のStateを実行(ChangeStateが実行された後の1フレームのみ.)
-            foreach (int ID in ExID)
-            {
-                Debug.Log(ID);
-            }
+            if(ExID.Count() > 0)
+                foreach (int ID in ExID)
+                {
+                    Debug.Log(ID);
+                }
         }
 
         if (currentState != null)
@@ -545,17 +547,19 @@ public class Entity : MonoBehaviour
             //the StateDef needs as deepcopy?
 
             int i = 0;
+            //こちらも対策せねば.
             List<int> ExID = currentState.Execute(this, false);
             //実行したSTATEIDを格納. 実行回数はまだ記録してない.
-            foreach (int ID in ExID)
-            {
-                if (!executedStateIDs.Any(i => i == ID))
+            if(ExID.Count() > 0)
+                foreach (int ID in ExID)
                 {
-                    executedStateIDs.Add(ID);
+                    if (!executedStateIDs.Any(i => i == ID))
+                    {
+                        executedStateIDs.Add(ID);
+                    }
+                    i++;
+                    // Debug.Log("Executed for " + i + "," + ID);
                 }
-                i++;
-                // Debug.Log("Executed for " + i + "," + ID);
-            }
             //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
             //" " + this.gameObject.name);
             //前回ステートにcurrentStateの情報を登録

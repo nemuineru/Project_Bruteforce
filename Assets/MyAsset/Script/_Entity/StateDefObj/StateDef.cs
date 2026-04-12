@@ -159,7 +159,7 @@ public class stParams<Type>
             //としたい. 
             case loadType.Condition:
                 {
-                    if(loadParams.Count > useID && useID >= 0)
+                    if(loadParams.Count > useID && useID >= 0 && loadParams.Count > 0)
                     // Debug.Log(entity.gameObject.name + " tries envs " 
                     // + loadParams[useID].GetType() + "to match " + retValue.GetType());
                     retValue = (Type)loadParams[useID];
@@ -448,17 +448,18 @@ public class StateDef
             string executingStr = "";
             if (ExecuteStates != null)
             {
-                for (int i = 0; i < ExecuteStates.Count(); i++)
-                {
-                    executingStr += ExecuteStates[i] + " , ";
-                }
-                //Debug.Log(executingStr); 
+                // for (int i = 0; i < ExecuteStates.Count(); i++)
+                // {
+                //     executingStr += ExecuteStates[i] + " , ";
+                // }
+                // //Debug.Log(executingStr); 
             }
             foreach (StateController state in selectLoad)
             {
+                int[] Lister = ExecuteStates.ToArray();
                 //idがステート読み出しリスト内・もしくはステート自体が読み出し処理を行う場合
                 //Debug.LogWarning(entity.gameObject.name + " loads " + state.ID.value.ToString());
-                if (ExecuteStates != null && state.isIDValid(ExecuteStates.ToArray(), entity))
+                if (ExecuteStates != null && Lister.Count() > 0 && state.isIDValid(Lister, entity))
                 {
                     //stateにluaOutputParamsを予め登録.
                     state.loadParams = luaOutputParams;

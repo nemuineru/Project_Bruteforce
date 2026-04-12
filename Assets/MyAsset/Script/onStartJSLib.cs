@@ -14,6 +14,11 @@ public class onStartJSLib : MonoBehaviour
 
     void Awake()
     {
+        
+    }
+
+    void setInGL()
+    {
         #if !UNITY_EDITOR && UNITY_WEBGL
         {
             var url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts-runtime.js";
