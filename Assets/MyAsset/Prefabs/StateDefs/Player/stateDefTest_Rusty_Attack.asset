@@ -116,6 +116,7 @@ MonoBehaviour:
     - rid: 4404388709018370073
     - rid: 1982101230649868302
     - rid: 1814088220477227011
+    - rid: 503850379300044884
     Dir: 
     setCtrl: 0
   - StateDefName: KnifeStab_V2
@@ -133,6 +134,7 @@ MonoBehaviour:
     - rid: 1814088220477227012
     - rid: 5331018484740521993
     - rid: 1814088220477227009
+    - rid: 503850379300044885
     Dir: 
     setCtrl: 0
   - StateDefName: AxeSlash
@@ -202,25 +204,27 @@ MonoBehaviour:
     - rid: 4404388709018370090
     - rid: 4404388709018370088
     - rid: 1982101252599447576
+    - rid: 503850379300044898
     Dir: 
     setCtrl: 0
   - StateDefName: Grd Special Attack
     StateDefID: 400
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: QueuedStateID_100
-    ParamLoadName: Accel
-    stateType: 0
-    moveType: 0
-    physType: 0
+    ScriptName: stateScript_Rusty_Attack_Base.mjs
+    preStateVerdictName: StateDef_400_ID
+    ParamLoadName: 
+    stateType: 83
+    moveType: 65
+    physType: 65
     StateList:
     - rid: 7557642759318274048
     - rid: 7557642759318274052
-    - rid: 7557642759318274051
     - rid: 7557642759318274049
-    - rid: 7557642759318274113
     - rid: 7557642759318274050
     - rid: 7557642784103727104
+    - rid: 503850379300044899
+    - rid: 7557642759318274051
+    - rid: 503850379300044923
     Dir: 
     setCtrl: 0
   - StateDefName: Air Special Attack
@@ -575,6 +579,102 @@ MonoBehaviour:
             HitExcludeList: 
           useID: -1
           stLuaLoads: 
+    - rid: 503850379300044884
+      type: {class: scAddEnergy, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: decrease Energy
+        doLoadAfterChangeState: 0
+        value: -5
+        priority: 0
+    - rid: 503850379300044885
+      type: {class: scAddEnergy, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: decrease Energy
+        doLoadAfterChangeState: 0
+        value: -10
+        priority: 0
+    - rid: 503850379300044898
+      type: {class: scAddEnergy, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: set energy
+        doLoadAfterChangeState: 0
+        value: -10
+        priority: 0
+    - rid: 503850379300044899
+      type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: VelSet
+        doLoadAfterChangeState: 0
+        MoveVelocity:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 2, y: 30, z: 0}
+          useID: -1
+          stLuaLoads: 
+        isSpeedstatAffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 503850379300044923
+      type: {class: scNotHitBy, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1000
+          stLuaLoads: 
+        stateControllerSubName: NotHitBy
+        doLoadAfterChangeState: 0
+        States:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 
+          useID: -1
+          stLuaLoads: 
+        time:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 1814087954197118982
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
@@ -846,12 +946,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 7
           useID: -1
           stLuaLoads: 
         jugglePoint:
@@ -2781,12 +2881,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 3
           useID: -1
           stLuaLoads: 
         jugglePoint:
@@ -3581,7 +3681,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 1000
+          stParamValue: 4
           useID: -1
           stLuaLoads: 
         Kill:
@@ -3608,7 +3708,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 1.8, y: 3, z: 0}
+          stParamValue: {x: 2.4, y: 3.1, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -4218,7 +4318,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 32, y: 12}
+          stParamValue: {x: 40, y: 4}
           useID: -1
           stLuaLoads: 
         hitStateFlag:
@@ -4267,21 +4367,21 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 25
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 6
           useID: -1
           stLuaLoads: 
         Kill:
@@ -4431,10 +4531,10 @@ MonoBehaviour:
         maxEntityHits:
           _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 3
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -4461,7 +4561,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 8
+          stParamValue: 12
           useID: -1
           stLuaLoads: 
         StateIDExcluder:
@@ -4540,16 +4640,16 @@ MonoBehaviour:
         stateControllerSubName: init anim
         doLoadAfterChangeState: 0
         changeAnimID:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 100
+          stParamValue: 400
           useID: -1
           stLuaLoads: 
         AnimSlot:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
@@ -4619,7 +4719,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 4, y: 4}
           useID: -1
           stLuaLoads: 
         hitStateFlag:
@@ -4628,7 +4728,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAL
           useID: -1
           stLuaLoads: 
         hitMoveFlag:
@@ -4637,7 +4737,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: IA
+          stParamValue: IAH
           useID: -1
           stLuaLoads: 
         guardStateFlag:
@@ -4646,7 +4746,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: SA
+          stParamValue: SAH
           useID: -1
           stLuaLoads: 
         guardMoveFlag:
@@ -4659,30 +4759,30 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         stanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 40, y: 40}
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 100
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 100
           useID: -1
           stLuaLoads: 
         Kill:
@@ -4704,12 +4804,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitVelSet:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: KnockBack
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 7, y: 4, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -4830,12 +4930,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         maxEntityHits:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 20
           useID: -1
           stLuaLoads: 
         hitIntervalTime:
@@ -4857,12 +4957,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         fallTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 10
           useID: -1
           stLuaLoads: 
         StateIDExcluder:
@@ -4951,35 +5051,7 @@ MonoBehaviour:
           stLuaLoads: 
         stateControllerSubName: Set Energy Drain for 25
         doLoadAfterChangeState: 0
-        value: -25
-        priority: 0
-    - rid: 7557642759318274113
-      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          useLua: 0
-          value: 0
-          stLuaLoads: 
-        stateControllerSubName: setVel
-        doLoadAfterChangeState: 0
-        vels:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Base
-          loadTypes: 1
-          stParamValue: {x: 0, y: 0, z: 0}
-          useID: 0
-          stLuaLoads: 
-        isIgnorePause:
-          _setHidden: 1
-          _setEssential: 0
-          _isReadable: 1
-          _MenuName: Base
-          loadTypes: 0
-          stParamValue: 0
-          useID: -1
-          stLuaLoads: 
+        value: -50
         priority: 0
     - rid: 7557642784103727104
       type: {class: scPlayOneshotSound, ns: , asm: Assembly-CSharp}
@@ -5881,21 +5953,21 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 5
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 7
           useID: -1
           stLuaLoads: 
         Kill:
@@ -6070,12 +6142,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         fallTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 4
           useID: -1
           stLuaLoads: 
         StateIDExcluder:

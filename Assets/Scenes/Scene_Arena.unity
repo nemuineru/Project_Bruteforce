@@ -3748,95 +3748,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &156357577
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4017308151286546850, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_Name
-      value: FatMan
-      objectReference: {fileID: 0}
-    - target: {fileID: 4017308151286546850, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: status.BaseAttackPerc
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: status.maxJugglePoint
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: status.maxBalancePoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: status.balanceRecoveryRate
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: status.currentBalancePoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: defaultClss.clssDefs.Array.data[0].width
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: defaultClss.clssDefs.Array.data[1].width
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.5814397
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0030001402
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.6602817
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.13052632
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.9914449
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -195
-      objectReference: {fileID: 0}
-    - target: {fileID: 4362731116810410776, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
 --- !u!1 &161441911
 GameObject:
   m_ObjectHideFlags: 0
@@ -8336,6 +8247,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6abd2f1467ff0204380cea64af3257bf, type: 3}
   m_PrefabInstance: {fileID: 387018092}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &392314174
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
+  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - JOIN_MITER
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 14
+    - _StencilComp: 3
+    - _StencilID: 2
+    - _StencilOp: 0
+    - _StencilOpPass: 2
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZOffsetFactor: 0
+    - _ZOffsetUnits: 0
+    - _ZTest: 4
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &404267129
 GameObject:
   m_ObjectHideFlags: 0
@@ -14182,6 +14131,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!21 &509740880
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
+  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - JOIN_MITER
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 0
+    - _StencilComp: 8
+    - _StencilID: 1
+    - _StencilOp: 0
+    - _StencilOpPass: 2
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZOffsetFactor: 0
+    - _ZOffsetUnits: 0
+    - _ZTest: 4
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &533454202
 GameObject:
   m_ObjectHideFlags: 0
@@ -23383,44 +23370,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &686973150
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
-  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - JOIN_MITER
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 0
-    - _StencilComp: 8
-    - _StencilID: 2
-    - _StencilOp: 0
-    - _StencilOpPass: 2
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _ZOffsetFactor: 0
-    - _ZOffsetUnits: 0
-    - _ZTest: 4
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &692703263
 GameObject:
   m_ObjectHideFlags: 0
@@ -24113,6 +24062,44 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!21 &712773217
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
+  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - JOIN_MITER
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 0
+    - _StencilComp: 8
+    - _StencilID: 2
+    - _StencilOp: 0
+    - _StencilOpPass: 2
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZOffsetFactor: 0
+    - _ZOffsetUnits: 0
+    - _ZTest: 4
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &728982548
 GameObject:
   m_ObjectHideFlags: 0
@@ -25088,44 +25075,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748117320}
   m_CullTransparentMesh: 1
---- !u!21 &767014959
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
-  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - JOIN_MITER
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 0
-    - _StencilComp: 8
-    - _StencilID: 1
-    - _StencilOp: 0
-    - _StencilOpPass: 2
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _ZOffsetFactor: 0
-    - _ZOffsetUnits: 0
-    - _ZTest: 4
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &774106672
 GameObject:
   m_ObjectHideFlags: 0
@@ -25976,6 +25925,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803284521}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!21 &809437792
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
+  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - JOIN_MITER
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 14
+    - _StencilComp: 3
+    - _StencilID: 1
+    - _StencilOp: 0
+    - _StencilOpPass: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZOffsetFactor: 0
+    - _ZOffsetUnits: 0
+    - _ZTest: 4
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!4 &817994047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 461138, guid: b4211be9733b4bb47adaef270c35ea59, type: 3}
@@ -26347,44 +26334,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846750986}
   m_CullTransparentMesh: 1
---- !u!21 &865999959
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
-  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - JOIN_MITER
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 14
-    - _StencilComp: 3
-    - _StencilID: 1
-    - _StencilOp: 0
-    - _StencilOpPass: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _ZOffsetFactor: 0
-    - _ZOffsetUnits: 0
-    - _ZTest: 4
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &869899931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46207,7 +46156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 767014959}
+  - {fileID: 509740880}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -58773,44 +58722,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581070787}
   m_CullTransparentMesh: 1
---- !u!21 &1595243587
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Polyline 2D Transparent (JOIN_MITER) (instance)
-  m_Shader: {fileID: 4800000, guid: 99a1df08fb8c6bc4b985a2eb44648277, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - JOIN_MITER
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 14
-    - _StencilComp: 3
-    - _StencilID: 2
-    - _StencilOp: 0
-    - _StencilOpPass: 2
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _ZOffsetFactor: 0
-    - _ZOffsetUnits: 0
-    - _ZTest: 4
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &1595699700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59306,6 +59217,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609255533}
   m_CullTransparentMesh: 1
+--- !u!1001 &1610929574
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.018681
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0029999018
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.390415
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869517794951248107, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503030713478505041, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
+      propertyPath: m_Name
+      value: Grunt_alt
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
 --- !u!4 &1624368816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4d4c336f51d68b34097375038b4286ea, type: 3}
@@ -67930,7 +67898,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1595243587}
+  - {fileID: 392314174}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -68964,7 +68932,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -81536,7 +81504,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 865999959}
+  - {fileID: 809437792}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84436,6 +84404,7 @@ MonoBehaviour:
   InitSpawnPos: {fileID: 620327187}
   onOneFrameHitdefs: []
   gameStatus: 0
+  KillNo: 0
 --- !u!4 &2028734054
 Transform:
   m_ObjectHideFlags: 0
@@ -84473,7 +84442,7 @@ MonoBehaviour:
   - {fileID: 803284522}
   - {fileID: 14390451}
   - {fileID: 1002617022}
-  gameType: 0
+  gameType: 1
   waveLists:
   - spawnEntity:
     - {fileID: 5081649798993669841, guid: 59b0edc2aa18e5245abd754067f3e6d9, type: 3}
@@ -84486,7 +84455,7 @@ MonoBehaviour:
     - {fileID: 2493359583392770523, guid: a72b2c4d32358784db80431ba0753c1f, type: 3}
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     minlevel: 2
-    maxlevel: 2
+    maxlevel: 4
     remainTime: 60
     maxEntityNum: 2
   - spawnEntity:
@@ -84494,16 +84463,14 @@ MonoBehaviour:
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
-    - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
-    - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     minlevel: 3
-    maxlevel: 6
+    maxlevel: 4
     remainTime: 60
     maxEntityNum: 3
   - spawnEntity:
     - {fileID: 4248921899865468105, guid: 3911bd9d06d08304d8d2c8203bff4a7d, type: 3}
-    minlevel: 7
-    maxlevel: 8
+    minlevel: 5
+    maxlevel: 5
     remainTime: 60
     maxEntityNum: 1
   - spawnEntity:
@@ -84512,8 +84479,8 @@ MonoBehaviour:
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
-    minlevel: 8
-    maxlevel: 9
+    minlevel: 6
+    maxlevel: 8
     remainTime: 60
     maxEntityNum: 5
   - spawnEntity:
@@ -84522,8 +84489,8 @@ MonoBehaviour:
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     - {fileID: 8497660351752712310, guid: b87453c57b91cc747aafd95043fa01f5, type: 3}
     - {fileID: 8497660351752712310, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
-    minlevel: 9
-    maxlevel: 11
+    minlevel: 6
+    maxlevel: 8
     remainTime: 60
     maxEntityNum: 4
   - spawnEntity:
@@ -84535,7 +84502,7 @@ MonoBehaviour:
     - {fileID: 8497660351752712310, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
     - {fileID: 4248921899865468105, guid: 994ef33f6d9512e4a9aa1dbb08a8fa97, type: 3}
     minlevel: 9
-    maxlevel: 14
+    maxlevel: 9
     remainTime: 60
     maxEntityNum: 3
   - spawnEntity:
@@ -84547,12 +84514,12 @@ MonoBehaviour:
     - {fileID: 8497660351752712310, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
     - {fileID: 8497660351752712310, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
     - {fileID: 8497660351752712310, guid: 1645214a10daf4143be27464c53eaab7, type: 3}
-    minlevel: 13
-    maxlevel: 15
+    minlevel: 10
+    maxlevel: 10
     remainTime: 60
     maxEntityNum: 4
   isWaveChanged: 0
-  MaxLevel: 15
+  MaxLevel: 10
   currentLevel: 1
 --- !u!1 &2029574445
 GameObject:
@@ -85837,7 +85804,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 686973150}
+  - {fileID: 712773217}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88294,4 +88261,4 @@ SceneRoots:
   - {fileID: 1807202478}
   - {fileID: 1541350872}
   - {fileID: 404267130}
-  - {fileID: 156357577}
+  - {fileID: 1610929574}

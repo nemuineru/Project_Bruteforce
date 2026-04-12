@@ -222,7 +222,7 @@ MonoBehaviour:
         stateControllerSubName: 400 Grd_Special
         doLoadAfterChangeState: 0
         changeTo: 400
-        priority: 0
+        priority: 4
     - rid: 7982028180311244821
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

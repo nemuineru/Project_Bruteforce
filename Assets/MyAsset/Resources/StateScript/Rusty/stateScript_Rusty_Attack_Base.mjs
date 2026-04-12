@@ -171,3 +171,41 @@ export function StateDef_300_ID_JumpKick(entity){
     }
     return verdList;
 }
+
+
+//puncher states for stateDef 200 and 201
+export function StateDef_400_ID(entity)
+{ 
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && (CurrentAnimID == 400) && CurrentTime > 1;
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+
+    if (CurrentTime > 2)
+    {
+        verdList.Add(2);
+    }
+    //init.
+    if (CurrentTime == 0)
+    {
+        //CS.UnityEngine.Debug.Log("Executed Anim");
+        verdList.Add(0);
+    }
+    //Aight, does native JS supports math function?
+    //StateEnds
+    if ((AnimEndTime - CurrentAnimTime) <= 8  && CurrentAnimID == 400 ) // && entity.attrs.isStateHit == 0
+    {
+        verdList.Add(10);
+    }
+    if(SoundTime){
+        verdList.Add(1);
+    }
+    //CS.UnityEngine.Debug.Log("Executed");
+    return verdList;
+}

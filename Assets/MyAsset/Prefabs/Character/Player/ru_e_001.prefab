@@ -1996,6 +1996,7 @@ MonoBehaviour:
   executedStateIDs: 
   hitdefSameTime: 
   raycenter: {x: 0, y: 0, z: 0}
+  pausedVel: {x: 0, y: 0, z: 0}
   cmdList:
   - CommandName: Jump
     Command: '"_a"'
@@ -2027,6 +2028,11 @@ MonoBehaviour:
     currentBufferTime: 0
     bufferMaxTime: 2
     readLength: 1
+  - CommandName: Burst
+    Command: '"xy"'
+    currentBufferTime: 0
+    bufferMaxTime: 1
+    readLength: 3
   TotalHitNo: 0
   registeredHitDefs: []
 --- !u!54 &7256620476241511130

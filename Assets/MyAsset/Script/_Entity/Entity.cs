@@ -490,8 +490,11 @@ public class Entity : MonoBehaviour
                 //BOLD tagging gamechanger system that I hate to implement.
                 if (gameObject.tag == "Player")
                 {
-                    //
-                    //gameState.self.gDesc = gameState.GameStateDesc.GameOver;
+                    gameState.self.gameStatus = gameState.GameStatus.OutGame;
+                }
+                else
+                {
+                    gameState.self.KillNo++;
                 }
             }
             attrs.alive = false;

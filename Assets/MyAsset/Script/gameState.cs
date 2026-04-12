@@ -49,6 +49,8 @@ public class gameState : MonoBehaviour
 
     public GameStatus gameStatus;
 
+    public int KillNo = 0;
+
     public enum GameStatus
     {
         //ゲーム中。

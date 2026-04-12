@@ -38,7 +38,7 @@ export function setStatus(entity)
 
     if(entity.status.HitTime < -60)
         entity.addBalancePoint(entity.status.balanceRecoveryRate);
-    if(entity.status.HitTime < -10)
+    if(entity.status.HitTime < -120)
         entity.setJugglePoint(entity.status.maxJugglePoint);
 
     return verdList;
@@ -65,11 +65,13 @@ export function stateCmd(entity) {
 
     //長押しで入力中とする.
     let GuardCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Guarding");
+    let BurstCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Burst");
 
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let isReversable = isChainable || (StateDefID == 5000 || StateDefID == 5050 || StateDefID == 5100 || StateDefID == 5110)
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
@@ -114,22 +116,26 @@ export function stateCmd(entity) {
     //ここまで通常攻撃
 
     //Special Ground Attack _ Knife c1
-    if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable)
+    if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable && entity.status.currentEnergy > 5)
     {
         verdList.Add(250);
     }
     //Special Ground Attack _ Knife c2
-    if(selfOnGrd == true && AttackCmd_y_isPressed && (StateDefID == 250 && selfStTime > 12))
+    if(selfOnGrd == true && AttackCmd_y_isPressed && (StateDefID == 250 && selfStTime > 12) && entity.status.currentEnergy > 10)
     {
         verdList.Add(251);
     }
     //Special Air Attack _ Knife c1
-    if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID >= 50 && StateDefID <= 55))
+    if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID >= 50 && StateDefID <= 55) && entity.status.currentEnergy > 10)
     {
         verdList.Add(350);
+    }    
+    
+    //Reversal Attack
+    if(BurstCmd_isPressed == true && isReversable && entity.status.currentEnergy >= 50)
+    {
+        verdList.Add(400);
     }
-
-
 
     //the combo button could charge to the doubleskill - to full skill
     if(AttackCmd_x_isPressed && StateDefID < 5000)

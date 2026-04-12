@@ -206,13 +206,13 @@ MonoBehaviour:
     ID: 5050
     Name: BlowOut
     animClip:
-    - Clip: {fileID: 7400000, guid: 6abb78ce4a9f70e42957498b0dd09dd6, type: 2}
+    - Clip: {fileID: 7400000, guid: c07705ed9c24d6245bc06603741e7da8, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0
       mixPosition: {x: 0, y: 0}
     blendInTime: 0
-    blendOutTime: 0.1
+    blendOutTime: 0.3
     useDefaultClss: 0
     clssSetting:
       clssDefs: []
@@ -246,7 +246,7 @@ MonoBehaviour:
     ID: 5100
     Name: Down
     animClip:
-    - Clip: {fileID: 7400000, guid: 7f6a3d3729dbabb4dba10c2f966afbe9, type: 2}
+    - Clip: {fileID: 7400000, guid: e22dca3e294f3bc49bc294498529d17d, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0

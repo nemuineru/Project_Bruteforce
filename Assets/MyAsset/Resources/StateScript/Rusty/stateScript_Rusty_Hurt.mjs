@@ -50,14 +50,14 @@ export function StateDef_5050_ID(entity)
     let CurrentAnimID = CS.Elem.CheckAnimID(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
-    let isOnGround = CS.Elem.isEntityOnGround;
+    let isOnGround = CS.Elem.isEntityOnGround(entity);
     let isAlive = entity.attrs.alive;
 
     if (CurrentTime == 0 && CurrentAnimID != 5050)
     {
         verdList.Add(0);
     }
-    if (CurrentTime > 6 && isOnGround)
+    if (CurrentAnimTime > 6 && CurrentTime > 10 && isOnGround)
     {
         verdList.Add(1);
     }    
@@ -125,6 +125,7 @@ export function StateDef_5100_ID(entity)
     if(!isAlive){
         verdList.Add(2);
     }
+    entity.setJugglePoint(-1);
     return verdList;
 }
 

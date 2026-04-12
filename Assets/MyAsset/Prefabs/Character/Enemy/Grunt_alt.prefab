@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57138f686d9a74f8ad5d22366a6c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityName: 
+  EntityTeamName: 
   stateType: 0
   physicsType: 0
   moveType: 0
@@ -173,14 +175,32 @@ MonoBehaviour:
     currentHP: 85
     maxEnergy: 50
     currentEnergy: 50
+    currentStancePoint: 25
+    maxStancePoint: 25
+    stanceRecoverRate: 0.8
+    stanceRecoverParsedTime: 0
+    stanceRecoverMinTime: 20
+    currentBalancePoint: 1
+    maxBalancePoint: 1
+    balanceRecoveryRate: 0.025
+    currentJugglePoint: 0
+    maxJugglePoint: 10
     BaseAttackPerc: 100
     BaseDefencePerc: 100
+    GuardReductDmgrate: 1
+    BaseMoveVelocityParam: {x: 5, y: 4, z: 5}
+    BaseAccelParam: {x: 40, y: 40, z: 40}
+    HitPauseTime: 0
+    HitTime: 0
+    HitFallTime: 0
     ChargeTime: 0
   attrs:
     ctrl: 1
     alive: 1
     isPaused: 0
     isStateChanged: 0
+    isGuarded: 0
+    isDamaged: 0
     isFall: 0
     isEraseReady: 0
     isStateHit: 0
@@ -188,23 +208,39 @@ MonoBehaviour:
     isStateGuarded: 0
     isStateReversed: 0
     isSoundNotPlayed: 0
+    isBeingStateHit: 0
+    isBeingStateContact: 0
+    isBeingStateGuarded: 0
   parentEntity: {fileID: 0}
   controlledEntity: {fileID: 0}
   animID: 0
   animListObject:
   - {fileID: 11400000, guid: fa3e95b17fea8fc4e9b0432af0719e70, type: 2}
   - {fileID: 11400000, guid: 0a8efc8603d74ec4d9e00bfd3527211a, type: 2}
+  mainAnimancer: {fileID: 0}
   CurColor: {r: 0.51744395, g: 0.58047223, b: 0.7169812, a: 0}
   isOnGround: 1
   isStateChanged: 0
   renderers: []
   DefLists:
+  - {fileID: 11400000, guid: 8bcf0ad01b4f0e0458eeb5ae6b601662, type: 2}
   - {fileID: 11400000, guid: 99131bba18a79ac46a55404ce4e4db7f, type: 2}
   - {fileID: 11400000, guid: f099bc9f38964c1409c7e7d95bde40ae, type: 2}
   - {fileID: 11400000, guid: 2dd91936676db4b429fc722fbd829625, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: 2c21ffcbc2ec87c4093d858fa36c86d4, type: 2}
+  executedStateIDs: 
+  hitdefSameTime: 
   raycenter: {x: 0, y: 0, z: 0}
+  pausedVel: {x: 0, y: 0, z: 0}
+  cmdList:
+  - CommandName: Basic
+    Command: _b
+    currentBufferTime: 1
+    bufferMaxTime: 1
+    readLength: 1
+  TotalHitNo: 0
+  registeredHitDefs: []
 --- !u!136 &7960206234810124181
 CapsuleCollider:
   m_ObjectHideFlags: 0

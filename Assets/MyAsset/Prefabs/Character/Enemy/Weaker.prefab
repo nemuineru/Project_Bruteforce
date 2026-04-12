@@ -160,7 +160,7 @@ MonoBehaviour:
     maxBalancePoint: 0
     balanceRecoveryRate: 0.025
     currentJugglePoint: 0
-    maxJugglePoint: 100
+    maxJugglePoint: 10
     BaseAttackPerc: 60
     BaseDefencePerc: 100
     GuardReductDmgrate: 1
@@ -207,6 +207,7 @@ MonoBehaviour:
   executedStateIDs: 
   hitdefSameTime: 
   raycenter: {x: 0, y: -0.5, z: 0}
+  pausedVel: {x: 0, y: 0, z: 0}
   cmdList: []
   TotalHitNo: 0
   registeredHitDefs: []

@@ -16,7 +16,7 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
-    ID: 1
+    ID: 200
     Name: ForwardSmash
     animClip:
     - Clip: {fileID: 7400000, guid: 5dfe35f3376e9cc4ebd2bfa7c450da79, type: 2}
