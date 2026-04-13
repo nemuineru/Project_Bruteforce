@@ -151,26 +151,29 @@ public class stParams<Type>
 
     public Type valueGet(List<object> loadParams, Entity entity)
     {
-        Puerts.JsEnv env = PuerTS_Framework.main.JSEnv;
         Type retValue = stParamValue;
         switch (loadTypes)
         {
             //Conditionなら読み出されたLuaConditionに登録されたvalue配列から..
-            //としたい. 
+            //としたい.
             case loadType.Condition:
                 {
-                    if(loadParams.Count > useID && useID >= 0 && loadParams.Count > 0)
-                    // Debug.Log(entity.gameObject.name + " tries envs " 
+                    if(loadParams != null && loadParams.Count > useID && useID >= 0)
+                    // Debug.Log(entity.gameObject.name + " tries envs "
                     // + loadParams[useID].GetType() + "to match " + retValue.GetType());
-                    retValue = (Type)loadParams[useID];
+                        retValue = (Type)loadParams[useID];
                     break;
                 }
             //Calclationなら読み出すLuaCondition中に書かれたfunctionを実行しその値を読み出す.
             case loadType.Calclation:
                 {
+                    if (PuerTS_Framework.main == null) break;
+                    Puerts.JsEnv env = PuerTS_Framework.main.JSEnv;
+                    if (env == null) break;
                     luaCalcParam calcParam =
                     env.ExecuteModule<luaCalcParam>(modulePath, stLuaLoads);
-                    retValue = (Type)calcParam.Invoke(entity);
+                    if (calcParam != null)
+                        retValue = (Type)calcParam.Invoke(entity);
                     break;
                 }
             //コンスタント値または未定義ならstParamvalueをそのまま使用.
@@ -303,7 +306,12 @@ public class StateDef
         retDef.ScriptName = ScriptName;
         retDef.preStateVerdictName = preStateVerdictName;
         retDef.ParamLoadName = ParamLoadName;
-        retDef.StateList = StateList;
+        List<StateController> conts = new List<StateController>();
+        foreach(StateController st in StateList)
+        {
+            conts.Add(st.Clone());
+        }
+        retDef.StateList = conts;
         retDef.luaOutputParams = luaOutputParams;
         retDef.stateType = stateType;
         retDef.moveType = moveType;
@@ -416,8 +424,12 @@ public class StateDef
 
         if (ScriptDirectory != null && selectLoad.Count > 0)
         {     
-            
             executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
+            if (executer == null)
+            {
+                Debug.LogWarning("ExecuteModule returned null for: " + Dir);
+                return executedStateID;
+            }
 
             //executeStatesとStateParamsの初期化
             ExecuteStates = new List<int>();
@@ -432,7 +444,7 @@ public class StateDef
 
             if (executer_stateIDGet != null)
             {
-                ExecuteStates = executer_stateIDGet(entity);
+                ExecuteStates = executer_stateIDGet(entity) ?? new List<int>();
             }
             else
             {
@@ -441,7 +453,7 @@ public class StateDef
             }
             if (executer_stateParamGet != null)
             { 
-                luaOutputParams = executer_stateParamGet(entity);
+                luaOutputParams = executer_stateParamGet(entity) ?? new List<object>();
             }
 
             //for debug string
@@ -514,6 +526,14 @@ public class StateController
 
     }
 
+    public virtual StateController Clone()
+    {
+        var type = GetType();
+        var clone = (StateController)Activator.CreateInstance(type);
+        JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(this), clone);
+        return clone;
+    }
+    
     public virtual string typeGet()
     {
         return this.ToString();
@@ -643,6 +663,10 @@ public class scAnimParentSet : StateController
         int AnimSlotNum = AnimSlot.valueGet(loadParams,entity);
         bool _isAdditional = isAdditional.valueGet(loadParams,entity);
         //entity.parentEntity.animID = changeAnimID.valueGet(loadParams, entity);
+
+        //non controlled entity should not be considered
+        if (entity.controlledEntity == null) return;
+
         AnimDef animFindByID = entity.controlledEntity.animDefs.Find
         (x => x.ID == changeAnimID.valueGet(loadParams, entity));
         //設定されたIDが見つかれば、そのParameterと同様に設定..

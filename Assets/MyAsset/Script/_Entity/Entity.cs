@@ -190,7 +190,9 @@ public class Entity : MonoBehaviour
     {
         allChildTransforms = GetComponentsInChildren<Transform>(true);
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
-        mat = renderers[0].material;
+
+        if (renderers.Count > 0) mat = renderers[0].material;
+        
         animator = GetComponent<Animator>();
         
         mainAnimancer = gameObject.AddComponent<AnimancerComponent>();
@@ -521,8 +523,8 @@ public class Entity : MonoBehaviour
         //ChangeStateと同時に発行されると、エラーが発生する？
         else
         {
-            //Debug.LogWarning("Parent Entity Loaded");
-            StateDef findDef = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID).Clone();
+            StateDef found = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID);
+            StateDef findDef = found?.Clone();
             currentState = findDef;
         }        
         
@@ -595,7 +597,7 @@ public class Entity : MonoBehaviour
         //これ消したい.
         Vector2 wish = Vector2.zero;
         Vector2 look = Vector2.zero;
-        if(entityInput.commandBuffer.Count > 0)
+        if(entityInput.commandBuffer.Count() > 0)
         {
             wish = entityInput.commandBuffer[0].MoveAxis;        
             look = entityInput.commandBuffer[0].LookAxis;
@@ -907,7 +909,8 @@ public class Entity : MonoBehaviour
     public void SetStepSound(int iVal = 0)
     {
         AudioClip[] clip = gameState.self.defaultFootSound;
-        AudioClip select_cl = clip[UnityEngine.Random.Range(0,clip.Count())];
+            if (clip == null || clip.Length == 0) return;
+        AudioClip select_cl = clip[UnityEngine.Random.Range(0, clip.Length)];
         if(select_cl != null)
         {
             selfSource.PlayOneShot(select_cl,0.25f);            

@@ -107,7 +107,7 @@ public class hitDefParams
 
     public string AnimType = "";
 
-    public List<int> HitExcludeList;
+    public List<int> HitExcludeList = new List<int>();
 
     //このHitDefを呼び出した本体..
     internal Entity ownerEntity;
@@ -151,6 +151,7 @@ public class hitDefParams
     //また、registeredHitDefsに登録作業を行う.
     public void SetStatus()
     {
+        if(targetEntity == null || ownerEntity == null) return;
         //基本的に当たったものとする.
         MoveContact = true;
         //ガードが入ってるか？ あと、ガード可能な攻撃？
@@ -172,10 +173,8 @@ public class hitDefParams
         SetStates();
         DamageCalc();        
         ownerEntity.hitdefSameTime.Add(hitID);
-        if(targetEntity != null)
-            registerDef(targetEntity);
-        if(ownerEntity != null)
-            registerDef(ownerEntity);
+        registerDef(targetEntity);
+        registerDef(ownerEntity);
         
     }
 
@@ -310,7 +309,7 @@ public class hitDefParams
         //スピード設定.
         targetEntity.rigid.velocity = PushVector.normalized * velset.x + Vector3.up * velset.y;
         //shapepositions. 後でこれも設定できるようにしたい.
-        targetEntity.transform.DOShakePosition(targetEntity.status.HitPauseTime * Time.fixedDeltaTime, 0.25f, 40, 45);
+        targetEntity.transform.DOShakePosition((targetEntity.status.HitPauseTime + 1f) * Time.fixedDeltaTime, 0.25f, 40, 45);
         //beatenEntity.transform.DOShakeScale(1f, 3f, 30, 90f, true);
         
         targetEntity.attrs.isBeingStateContact = 1;
