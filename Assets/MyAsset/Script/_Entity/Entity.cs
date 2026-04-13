@@ -1,4 +1,4 @@
-
+//現状, debugやexeでは出ない(IndexWasOutOfRange)
 
 using System.Collections;
 using System.Collections.Generic;
@@ -593,9 +593,16 @@ public class Entity : MonoBehaviour
     {
         //At Control, wishinvect is Input by command Buffer
         //これ消したい.
-        Vector2 wish = entityInput.commandBuffer[0].MoveAxis;//(InputInstance.self.inputValues.MovingAxisRead);
-        Vector2 look = entityInput.commandBuffer[0].LookAxis;//(InputInstance.self.inputValues.MovingAxisRead);
-                                                             //Debug.Log(entityInput.commandBuffer[0].MoveAxis);
+        Vector2 wish = Vector2.zero;
+        Vector2 look = Vector2.zero;
+        if(entityInput.commandBuffer.Count > 0)
+        {
+            wish = entityInput.commandBuffer[0].MoveAxis;        
+            look = entityInput.commandBuffer[0].LookAxis;
+        }
+        //(InputInstance.self.inputValues.MovingAxisRead);
+        //(InputInstance.self.inputValues.MovingAxisRead);
+        //Debug.Log(entityInput.commandBuffer[0].MoveAxis);
 
         //Vcamが設定されているなら、Camera設定に従いfwを設定する.
         if (vCam != null)
@@ -900,9 +907,10 @@ public class Entity : MonoBehaviour
     public void SetStepSound(int iVal = 0)
     {
         AudioClip[] clip = gameState.self.defaultFootSound;
-        if(clip != null)
+        AudioClip select_cl = clip[UnityEngine.Random.Range(0,clip.Count())];
+        if(select_cl != null)
         {
-            selfSource.PlayOneShot(clip[UnityEngine.Random.Range(0,clip.Count())],0.25f);            
+            selfSource.PlayOneShot(select_cl,0.25f);            
         }
     }
 }
