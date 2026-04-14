@@ -17997,7 +17997,7 @@ MonoBehaviour:
     maxEntityNum: 1
   isWaveChanged: 0
   MaxLevel: 15
-  currentLevel: 1
+  currentLevel: 12
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

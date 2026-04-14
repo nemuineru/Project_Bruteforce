@@ -185,12 +185,12 @@ public class AnimancerManager
     {
         float val = 0;
         AnimancerLayer refLayer = main.Layers[LayerID];
-        AnimancerState findState = refLayer.CurrentState;
         if (refLayer != null)
         {
+            //AnimancerState findState = refLayer.CurrentState;
             List<AnimationClip> cls = new List<AnimationClip>();
             refLayer.CurrentState.GatherAnimationClips(cls);
-            float frametime = cls.Average(t => t.frameRate);
+            float frametime = cls.Count > 0 ? cls.Average(t => t.frameRate) : 1f;
             val = refLayer.CurrentState.Time * frametime;
         }
         return val;
@@ -201,12 +201,12 @@ public class AnimancerManager
     {
         float val = 0;
         AnimancerLayer refLayer = main.Layers[LayerID];
-        AnimancerState findState = refLayer.CurrentState;
         if (refLayer != null)
         {
+            //AnimancerState findState = refLayer.CurrentState;
             List<AnimationClip> cls = new List<AnimationClip>();
             refLayer.CurrentState.GatherAnimationClips(cls);
-            float frametime = cls.Average(t => t.frameRate);
+            float frametime = cls.Count > 0 ? cls.Average(t => t.frameRate) : 1f;
             val = refLayer.CurrentState.Length * frametime;;
             //Debug.Log(val);
         }
@@ -306,7 +306,7 @@ public class AnimDef
     public void ChangeWeight(float BaseWeight)
     {
         //
-        if(animClip.Length <= 1)
+        if(animClip != null && animClip.Length == 1)
         {
             animClip[0].MixWeightSet = BaseWeight;
             return;

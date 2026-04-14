@@ -406,7 +406,7 @@ public class StateDef
 
     //PUERTSの実装を開始する.
     //あと、実行時に読み出したステート番号をList形式で出力する.
-    //なーんだかここが怪しいな.. Build時にRuntimeError: index out of bounds
+    //なーんだかここが怪しいな.. WebGL Build時にRuntimeError: index out of bounds
     // が発生するのはちょっと.. PuerTSがなんかおかしいことに？
     public List<int> Execute(Entity entity, bool willPrevLoad)
     {
@@ -424,7 +424,7 @@ public class StateDef
             OnInitDef();
         } 
 
-        if (ScriptDirectory != null && selectLoad.Count > 0)
+        if (ScriptDirectory != null && selectLoad.Count > 0 && Dir != null)
         {     
             executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
             if (executer == null)
