@@ -14,19 +14,19 @@ public class onStartJSLib : MonoBehaviour
 
     void Awake()
     {
-        
+        setInGL();
     }
 
     void setInGL()
     {
-        // #if !UNITY_EDITOR && UNITY_WEBGL
-        // {
-        //     var url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts-runtime.js";
-        //     InjectionJs(url);
-        //     url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts_browser_js_resources.js";
-        //     InjectionJs(url);
-        // }
-        // #endif
+        #if !UNITY_EDITOR && UNITY_WEBGL
+        {
+            var url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts-runtime.js";
+            InjectionJs(url);
+            url = "https://cdn.jsdelivr.net/gh/nemuineru/Project_Bruteforce@main/Assets/MyAsset/Script/runtimeResources/puerts_browser_js_resources.js";
+            InjectionJs(url);
+        }
+        #endif
     }
 
     public void ShowMessage(string body)
