@@ -14,7 +14,7 @@ public class onStartJSLib : MonoBehaviour
 
     void Awake()
     {
-        setInGL();
+        //setInGL();
     }
 
     void setInGL()
