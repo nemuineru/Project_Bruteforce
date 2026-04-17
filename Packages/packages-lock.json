@@ -9,7 +9,7 @@
       }
     },
     "com.tencent.puerts.core": {
-      "version": "file:C:/Users/sutea/source/repos/puerts/unity/Assets/core/upm",
+      "version": "file:C:/Users/sutea/source/repos/PuerTS_Mult_2.2.3/upm",
       "depth": 0,
       "source": "local",
       "dependencies": {}

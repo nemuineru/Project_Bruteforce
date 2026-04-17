@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.tencent.puerts.core": "file:C:/Users/sutea/source/repos/puerts/unity/Assets/core/upm",
+    "com.tencent.puerts.core": "file:C:/Users/sutea/source/repos/PuerTS_Mult_2.2.3/upm",
     "com.tencent.puerts.webgl": "file:C:/Users/sutea/source/repos/puerts/unity/Assets/webgl/upm",
     "com.unity.ai.navigation": "1.1.7",
     "com.unity.cinemachine": "2.9.7",

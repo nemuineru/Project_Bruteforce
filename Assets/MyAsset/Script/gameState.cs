@@ -398,4 +398,91 @@ public class gameState : MonoBehaviour
             Instantiate(obj, pos, rot);
         }
     }
+
+    public void TogglePauseMode()
+    {
+        if (gameStatus == GameStatus.InGame)
+        {
+            gameStatus = GameStatus.OutGame;
+        }
+        else
+        { 
+            gameStatus = GameStatus.InGame;
+        }
+    }
+
+    // void GameDescApply()
+    // {
+    //     switch (gDesc)
+    //     {
+    //         case GameStateDesc.PreGame:
+    //             {
+    //                 PreGameUI.SetActive(true);
+    //                 GameStartBy -= Time.deltaTime;
+    //                 if (GameStartBy < 0)
+    //                 {
+    //                     gDesc = GameStateDesc.InGame;
+    //                 }
+    //                 break;
+    //             }
+    //         case GameStateDesc.InGame:
+    //             {
+    //                 Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
+    //                 GameOverCams.enabled = false;
+    //                 pauseGameUI.SetActive(false);
+    //                 PreGameUI.SetActive(false);
+    //                 InGameUI.SetActive(true);
+    //                 if(inGameAuds != null)
+    //                 inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);
+    //                 elapsedTime += Time.deltaTime;
+    //                 break;
+    //             }
+    //         case GameStateDesc.GameOver:
+    //             {
+    //                 InGameUI.SetActive(false);
+    //                 pauseGameUI.SetActive(false);
+    //                 GameOverCams.enabled = true;
+    //                 Time.timeScale = Mathf.Lerp(Time.timeScale, 0.001f, 0.025f);
+    //                 if (!isGameOverUIShown)
+    //                 {
+    //                     GameOverUI.SetActive(true);
+    //                     isGameOverUIShown = true;
+    //                 }
+    //                 if(inGameAuds != null)
+    //                 inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.001f, 0.025f);
+    //                 break;
+    //             }
+    //         case GameStateDesc.Finished:
+    //             {
+    //                 InGameUI.SetActive(false);
+    //                 pauseGameUI.SetActive(false);
+    //                 FinishedCams.enabled = true;
+    //                 if (!isGameOverUIShown)
+    //                 {
+    //                     FinishedUI.SetActive(true);
+    //                     isGameOverUIShown = true;
+    //                 }
+    //                 break;
+    //             }
+    //         case GameStateDesc.PauseMenu:
+    //             {
+    //                 InGameUI.SetActive(false);
+    //                 pauseGameUI.SetActive(true);
+    //                 GameOverCams.enabled = true;
+    //                 Time.timeScale = Mathf.Lerp(Time.timeScale, 0.00f, 0.025f);
+    //                 if(inGameAuds != null)
+    //                 inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.00f, 0.025f);
+    //                 break;
+    //             }
+    //     }
+
+    // }
+    
+    // public void ReturnToMainMenu()
+    // {
+    //     if (gDesc != GameStateDesc.InGame && gDesc != GameStateDesc.PreGame)
+    //     {
+    //         SceneManager.LoadScene("Title");
+    //     }
+    // }
 }
