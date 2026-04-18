@@ -217,10 +217,10 @@ public class InputInstance : MonoBehaviour
         {
             gameState.self.TogglePauseMode();
         }
-        // if (gameState.self != null && SelectPressed == 1)
-        // {
-        //     gameState.self.ReturnToMainMenu();
-        // }
+        if (gameState.self != null && SelectPressed == 1)
+        {
+            gameState.self.ReturnToMainMenu();
+        }
 
         if (ClearPressed == 1)
         {

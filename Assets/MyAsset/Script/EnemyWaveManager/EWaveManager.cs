@@ -81,7 +81,7 @@ public class EWaveManager : MonoBehaviour
         }
         //現在生成数を確認.
         int countSpawned = spawnedEntity.FindAll(et => et != null).Count;
-        if (currentDesc != null && gameState.self.gameStatus == gameState.GameStatus.InGame && 
+        if (currentDesc != null && gameState.self.gameStatus == gameState._GameStatus.InGame && 
         currentSpawnSec > spawnSec && EnemySpawnPoints.Count > 0)
         {
             //Debug.Log("Decriptor found - LV." + currentDesc.minlevel + " - " + currentDesc.maxlevel);
@@ -111,7 +111,7 @@ public class EWaveManager : MonoBehaviour
                     currentLevel++;
                     if (currentLevel > MaxLevel)
                     {
-                        gameState.self.gameStatus = gameState.GameStatus.OutGame;
+                        gameState.self.gameStatus = gameState._GameStatus.OutGame;
                     }
                     else
                     {
