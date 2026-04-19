@@ -8,6 +8,14 @@ public class Status_MainUI : MonoBehaviour
     public EnergyGaugeComponent Energy;
     public ChargerGaugeComponent Charger;
     public GuardGaugeComponent Guard;
+
+    public GameObject PreGameScreen;
+    public GameObject OnGameScreen;
+    public GameObject GameOverScreen;
+    public GameObject GameClearScreen;
+    public GameObject PauseScreen;
+
+    //those GameUI comps are so crude.. but I need it to make them move
     public void SetComponent(Entity playerEntity)
     {
         Health.valueEntity = playerEntity;
@@ -18,33 +26,32 @@ public class Status_MainUI : MonoBehaviour
     
     public void SetPreGameUIActive()
     {
-        // PreGameUI.SetActive(true);
+        PreGameScreen.SetActive(true);
+        OnGameScreen.SetActive(false);
     }
 
     public void SetOnGameActive()
     {
-        // Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
-        // GameOverCams.enabled = false;
-        // pauseGameUI.SetActive(false);
-        // PreGameUI.SetActive(false);
-        // InGameUI.SetActive(true);
-        // if(inGameAuds != null)
-        // inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);
-        // elapsedTime += Time.deltaTime;
+        PauseScreen.SetActive(false);
+        PreGameScreen.SetActive(false);
+        OnGameScreen.SetActive(true);
     }
 
-    public void SetGameoverActive()
+    public void SetGamePauseActive()
     {
-        // InGameUI.SetActive(false);
-        // pauseGameUI.SetActive(false);
-        // GameOverCams.enabled = true;
-        // Time.timeScale = Mathf.Lerp(Time.timeScale, 0.001f, 0.025f);
-        // if (!isGameOverUIShown)
-        // {
-        //     GameOverUI.SetActive(true);
-        //     isGameOverUIShown = true;
-        // }
-        // if(inGameAuds != null)
-        // inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.001f, 0.025f);
+        OnGameScreen.SetActive(false);
+        PauseScreen.SetActive(true);
+    }
+
+    public void SetGameClearActive()
+    {
+        OnGameScreen.SetActive(false);
+        GameClearScreen.SetActive(true);
+    }
+
+    public void SetGameOverActive()
+    {
+        OnGameScreen.SetActive(false);
+        GameOverScreen.SetActive(true);
     }
 }

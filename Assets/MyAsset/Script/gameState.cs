@@ -32,9 +32,13 @@ public class gameState : MonoBehaviour
     public AudioSource inGameAuds;
 
     public Status_MainUI MainGUI;
+    Status_MainUI mainInstGUI;
+
     public GameObject Player_Instantiate;
 
     public CinemachineVirtualCamera Player_Vcam;
+    public CinemachineVirtualCamera BirdView_vcam;
+    public CinemachineVirtualCamera CloseLook_vcam;
 
     [SerializeField]
     public List<Entity> entityList;
@@ -52,7 +56,7 @@ public class gameState : MonoBehaviour
 
     public int KillNo = 0;
 
-    float timeStartBy = 5.0f;
+    float timeStartBy = 2.2f;
 
     public enum _GameStatus
     {
@@ -99,7 +103,23 @@ public class gameState : MonoBehaviour
             cams.ForceCameraPosition(tr.position - tr.transform.forward + Vector3.up,qt);
             Player.vCam = GameObject.FindGameObjectWithTag("Virtual_MainCamera").GetComponent<CinemachineVirtualCamera>();
         }
+
+        if(CloseLook_vcam != null)
+        {
+            CloseLook_vcam.LookAt = Player.transform;
+            CloseLook_vcam.Follow = Player.transform;
+            CloseLook_vcam.gameObject.SetActive(false);
+        }
+        
+        if(BirdView_vcam != null)
+        {
+            BirdView_vcam.LookAt = Player.transform;
+            BirdView_vcam.Follow = Player.transform;
+            BirdView_vcam.gameObject.SetActive(false);
+        }
+
         objs.transform.SetParent(GUI_Top.transform, false);
+        mainInstGUI = objs.GetComponent<Status_MainUI>();
     }
 
     void FixedUpdate()
@@ -126,6 +146,11 @@ public class gameState : MonoBehaviour
         {
             et.resetStates();
         }
+    }
+
+    void Update()
+    {
+        GameDescApply();
     }
 
     //hitdefFrame - リストアップしたhitdefparamを優先度に応じて実行する.
@@ -429,8 +454,9 @@ public class gameState : MonoBehaviour
         {
             case _MenuStatus.PreStart:
                 {
-                    // PreGameUI.SetActive(true);
+                    mainInstGUI.SetPreGameUIActive();
                     timeStartBy -= Time.deltaTime;
+                    gameStatus = _GameStatus.InGame;
                     if (timeStartBy < 0)
                     {
                         menuStatus = _MenuStatus.OnGame;
@@ -439,54 +465,59 @@ public class gameState : MonoBehaviour
                 }
             case _MenuStatus.OnGame:
                 {
-                    // Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
-                    // GameOverCams.enabled = false;
+                    mainInstGUI.SetOnGameActive();
+                    gameStatus = _GameStatus.InGame;
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
+                    if(BirdView_vcam != null)
+                    BirdView_vcam.gameObject.SetActive(false);
+                    if(CloseLook_vcam != null)
+                    CloseLook_vcam.gameObject.SetActive(false);
                     // pauseGameUI.SetActive(false);
                     // PreGameUI.SetActive(false);
                     // InGameUI.SetActive(true);
-                    // if(inGameAuds != null)
-                    // inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);
+                    
+                    if(inGameAuds != null)
+                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);
                     // elapsedTime += Time.deltaTime;
                     break;
                 }
             case _MenuStatus.GameOver:
                 {
+                    mainInstGUI.SetGameOverActive();
                     gameStatus = _GameStatus.OutGame;
-                    // InGameUI.SetActive(false);
-                    // pauseGameUI.SetActive(false);
-                    // GameOverCams.enabled = true;
-                    // Time.timeScale = Mathf.Lerp(Time.timeScale, 0.001f, 0.025f);
-                    // if (!isGameOverUIShown)
-                    // {
-                    //     GameOverUI.SetActive(true);
-                    //     isGameOverUIShown = true;
-                    // }
-                    // if(inGameAuds != null)
-                    // inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.001f, 0.025f);
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.0001f, 0.125f);
+
+                    if(inGameAuds != null)
+                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.0001f, 0.025f);
+
+                    if(BirdView_vcam != null)
+                    BirdView_vcam.gameObject.SetActive(true);
+                    if(CloseLook_vcam != null)
+                    CloseLook_vcam.gameObject.SetActive(false);
                     break;
                 }
             case _MenuStatus.GameClear:
                 {
+                    mainInstGUI.SetGameClearActive();
                     gameStatus = _GameStatus.OutGame;
-                    // InGameUI.SetActive(false);
-                    // pauseGameUI.SetActive(false);
-                    // FinishedCams.enabled = true;
-                    // if (!isGameOverUIShown)
-                    // {
-                    //     FinishedUI.SetActive(true);
-                    //     isGameOverUIShown = true;
-                    // }
+                    if(BirdView_vcam != null)
+                    BirdView_vcam.gameObject.SetActive(false);
+                    if(CloseLook_vcam != null)
+                    CloseLook_vcam.gameObject.SetActive(true);
                     break;
                 }
             case _MenuStatus.Pause:
                 {
+                    mainInstGUI.SetGamePauseActive();
                     gameStatus = _GameStatus.OutGame;
-                    // InGameUI.SetActive(false);
-                    // pauseGameUI.SetActive(true);
-                    // GameOverCams.enabled = true;
-                    // Time.timeScale = Mathf.Lerp(Time.timeScale, 0.00f, 0.025f);
-                    // if(inGameAuds != null)
-                    // inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.00f, 0.025f);
+                    if(BirdView_vcam != null)
+                    BirdView_vcam.gameObject.SetActive(false);
+                    if(CloseLook_vcam != null)
+                    CloseLook_vcam.gameObject.SetActive(false);
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.00f, 0.025f);
+
+                    if(inGameAuds != null)
+                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.00f, 0.025f);
                     break;
                 }
         }
