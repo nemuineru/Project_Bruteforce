@@ -436,15 +436,16 @@ public class gameState : MonoBehaviour
         }
     }
 
+    //PauseMode.
     public void TogglePauseMode()
     {
-        if (gameStatus == _GameStatus.InGame)
+        if (menuStatus == _MenuStatus.OnGame)
         {
-            gameStatus = _GameStatus.OutGame;
+            menuStatus = _MenuStatus.Pause;
         }
-        else
+        else if(menuStatus == _MenuStatus.Pause)
         { 
-            gameStatus = _GameStatus.InGame;
+            menuStatus = _MenuStatus.OnGame;
         }
     }
 
@@ -526,7 +527,7 @@ public class gameState : MonoBehaviour
     
     public void ReturnToMainMenu()
     {
-        if (gameStatus != _GameStatus.OutGame)
+        if (gameStatus == _GameStatus.OutGame)
         {
             SceneManager.LoadScene("Title");
         }
