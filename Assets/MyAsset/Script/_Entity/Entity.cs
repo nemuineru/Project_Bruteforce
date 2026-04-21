@@ -493,6 +493,7 @@ public class Entity : MonoBehaviour
                 if (gameObject.tag == "Player")
                 {
                     gameState.self.gameStatus = gameState._GameStatus.OutGame;
+                    gameState.self.menuStatus = gameState._MenuStatus.GameOver;
                 }
                 else
                 {

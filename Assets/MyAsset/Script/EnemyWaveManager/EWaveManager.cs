@@ -6,6 +6,9 @@ using System.Runtime.CompilerServices;
 
 public class EWaveManager : MonoBehaviour
 {
+    //self for easy search
+    static public EWaveManager self;
+
     [SerializeField]
     TMP_Text LevelUI;
     
@@ -42,12 +45,23 @@ public class EWaveManager : MonoBehaviour
     List<Entity> spawnedEntity = new List<Entity>();
     int currentSpawnIndex = 0;
 
+    void Awake()
+    {
+        if (self == null)
+        {
+            self = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-                //シード値の完全Random(日時指定.)
-                Random.InitState(System.DateTime.Now.Millisecond);
+        //シード値の完全Random(日時指定.)
+        Random.InitState(System.DateTime.Now.Millisecond);
     }
     float spawnSec = 0.14f;
     float currentSpawnSec = 0;
@@ -112,6 +126,7 @@ public class EWaveManager : MonoBehaviour
                     if (currentLevel > MaxLevel)
                     {
                         gameState.self.gameStatus = gameState._GameStatus.OutGame;
+                        gameState.self.menuStatus = gameState._MenuStatus.GameClear;
                     }
                     else
                     {
