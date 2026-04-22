@@ -161,7 +161,7 @@ MonoBehaviour:
     balanceRecoveryRate: 0.025
     currentJugglePoint: 0
     maxJugglePoint: 10
-    BaseAttackPerc: 60
+    BaseAttackPerc: 80
     BaseDefencePerc: 100
     GuardReductDmgrate: 1
     BaseMoveVelocityParam: {x: 3, y: 3, z: 1}

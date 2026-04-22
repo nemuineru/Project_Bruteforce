@@ -386,13 +386,13 @@ MonoBehaviour:
     currentHP: 250
     maxEnergy: 50
     currentEnergy: 50
-    currentStancePoint: 25
-    maxStancePoint: 25
+    currentStancePoint: 1
+    maxStancePoint: 1
     stanceRecoverRate: 0.8
     stanceRecoverParsedTime: 0
     stanceRecoverMinTime: 20
-    currentBalancePoint: 3
-    maxBalancePoint: 3
+    currentBalancePoint: 0
+    maxBalancePoint: 0
     balanceRecoveryRate: 0.025
     currentJugglePoint: 0
     maxJugglePoint: 10

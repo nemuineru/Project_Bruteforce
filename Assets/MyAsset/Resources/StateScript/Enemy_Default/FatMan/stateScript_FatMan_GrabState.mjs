@@ -210,6 +210,10 @@ export function StateDef_214_TargetGrabEnd_ID(entity)
     // change to idle. also damage them and check the rest frametime
     if( selfStTime > 15) 
     {
+        entity.status.HitPauseTime = 5;
+        entity.status.HitTime = 10;
+        entity.status.HitFallTime = 10;
+
         verdList.Add(1);        
     }
     else 

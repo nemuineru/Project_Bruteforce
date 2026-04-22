@@ -202,13 +202,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 088495829a6b34a49b6f04a45ae61ed6, type: 2}
   - {fileID: 11400000, guid: d623e5452ad9bc04785b32c13bdf9400, type: 2}
   - {fileID: 11400000, guid: d9627480b18d7514ba5178d0f74e8931, type: 2}
+  - {fileID: 11400000, guid: 077150c2f5d6d674dac15ec1d9dd56c9, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: 1a02fafd4beb98342a4e556bd578e5a8, type: 2}
   executedStateIDs: 
   hitdefSameTime: 
   raycenter: {x: 0, y: -0.5, z: 0}
   pausedVel: {x: 0, y: 0, z: 0}
-  cmdList: []
+  cmdList:
+  - CommandName: Basic
+    Command: _b
+    currentBufferTime: 0
+    bufferMaxTime: 1
+    readLength: 1
   TotalHitNo: 0
   registeredHitDefs: []
 --- !u!54 &7195815572568816930

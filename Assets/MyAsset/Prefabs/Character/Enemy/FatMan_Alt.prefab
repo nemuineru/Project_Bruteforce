@@ -228,6 +228,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b281225541424554099274e4233436d8, type: 2}
   - {fileID: 11400000, guid: df8ff393dbc596f499d60b5dcb163bdb, type: 2}
   - {fileID: 11400000, guid: 2ffa158c97f6d314e8a757128ad9aa8e, type: 2}
+  - {fileID: 11400000, guid: 91873aa3fbfa37443a197fbcb57df762, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
   LoadedBehavior: {fileID: 11400000, guid: ae60f7737381cac449744b8f4b8f0b0b, type: 2}
   executedStateIDs: 

@@ -299,29 +299,60 @@ public class gameState : MonoBehaviour
     {
         bool ret = false; int refNumRemaining;
         hitDefParams useParam = new hitDefParams();
+
+        
+        // int refOwnerTargetContact = useParam.ownerEntity.hitdefSameTime.FindAll(h => h == useParam.hitID).Count;
+
+        // refNumRemaining = useParam.maxEntityHits - refOwnerTargetContact;
+
+
         if (H_params != null)
         {
             useParam = H_params;
         }
         refNumRemaining = useParam.maxEntityHits;
-        foreach (Entity e in entityList)
+        foreach (Entity selectedEntity in entityList)
         {
             //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
-            if ((ownerEntity == null || (e != ownerEntity && e.tag != ownerEntity.tag)) && refNumRemaining > 0)
+            if ((ownerEntity == null || 
+            (selectedEntity != ownerEntity && selectedEntity.tag != ownerEntity.tag)) 
+            && refNumRemaining > 0)
             {
-                bool f = false;
+                bool hitCheck = false;
                 Vector3 HitPt = Vector3.zero;
                 //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
                 //また、entityの無敵判定に関しても考える.
-                clssSetting cEnemy = e.animancerManager.primaryAnimDef.clssSetting;
-                f = sets.clssCollided(out var v1, out var v2, out var dist, clssDef.ClssType.Attack, cEnemy, .1f);
+                clssSetting cEnemy = selectedEntity.animancerManager.primaryAnimDef.clssSetting;
+                hitCheck = sets.clssCollided(out var v1, out var v2, out var dist, clssDef.ClssType.Attack, cEnemy, .1f);
+
+                bool isIntervalAvailable = true;
+                //もし見つけられなかったら新規登録なので..
+                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == useParam.hitID);
+                if(FindP != null)
+                {
+                    float recentRevTime = elapsedTime - FindP.HitRegisterTime;
+                    //インターバル未設定なら一回のみ. インターバル設定済みなら...
+                    if(useParam.sameHitInterval <= 0 || recentRevTime < useParam.sameHitInterval)
+                    {
+                        isIntervalAvailable = false;
+                    }
+                }
+
+                //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
+                //また、entityの無敵判定に関しても考える.
+                //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
+                //Juggle追加.. これ管理しきれねえ.
+                bool isContactable = hitCheck && selectedEntity.status.currentJugglePoint >= 0 && 
+                H_params.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
+                H_params.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
+                !H_params.HitExcludeList.Contains(selectedEntity.CurrentStateID) && isIntervalAvailable;
                 //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
-                if (f == true)
+                if (hitCheck == true)
                 {
                     Debug.LogWarning("Proj Collided");
                     HitPt = (v1 + v2) / 2f;
                     ret = true;
-                    hitDefApply(e, ownerEntity, useParam, HitPt);
+                    hitDefApply(selectedEntity, ownerEntity, useParam, HitPt);
                     //当てた分キャラ指定の値が減少..
                     refNumRemaining--;
                 }
@@ -457,7 +488,7 @@ public class gameState : MonoBehaviour
                 {
                     mainInstGUI.SetPreGameUIActive();
                     timeStartBy -= Time.deltaTime;
-                    gameStatus = _GameStatus.InGame;
+                    gameStatus = _GameStatus.OutGame;
                     if (timeStartBy < 0)
                     {
                         menuStatus = _MenuStatus.OnGame;
