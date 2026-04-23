@@ -9,18 +9,20 @@
       }
     },
     "com.tencent.puerts.core": {
-      "version": "file:C:/Users/sutea/source/repos/PuerTS_V8_2.2.3/upm",
+      "version": "2.2.2",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
     },
     "com.tencent.puerts.webgl": {
-      "version": "file:C:/Users/sutea/source/repos/puerts/unity/Assets/webgl/upm",
+      "version": "2.2.2",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "com.tencent.puerts.core": "2.2.2"
-      }
+      },
+      "url": "https://package.openupm.com"
     },
     "com.unity.ai.navigation": {
       "version": "1.1.7",

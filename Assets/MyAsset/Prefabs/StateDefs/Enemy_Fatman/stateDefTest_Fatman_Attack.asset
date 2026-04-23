@@ -16,10 +16,10 @@ MonoBehaviour:
   stateDefs:
   - StateDefName: Combo1 Kicker
     StateDefID: 200
-    ScriptDirectory: 
-    ScriptName: 
-    preStateVerdictName: QueuedStateID
-    ParamLoadName: LuaOutput
+    ScriptDirectory: StateScript/Enemy_Default/FatMan
+    ScriptName: stateScript_FatMan_Attack.mjs
+    preStateVerdictName: StateDef_200_ID
+    ParamLoadName: Accel_Start
     stateType: 0
     moveType: 0
     physType: 83
@@ -28,22 +28,59 @@ MonoBehaviour:
     - rid: 3579423065411158016
     - rid: 3579423095655497736
     - rid: 4404388529659445248
+    - rid: 503850638317191175
     Dir: 
     setCtrl: 0
   references:
     version: 2
     RefIds:
-    - rid: 1982100910739292172
-      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
+    - rid: 503850638317191175
+      type: {class: scBasicForwardMove, ns: , asm: Assembly-CSharp}
       data:
         ID:
           useLua: 0
           value: 1
           stLuaLoads: 
+        stateControllerSubName: setVel
+        doLoadAfterChangeState: 0
+        MoveVelocity:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 180, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        isSpeedstatAffect:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 1982100910739292172
+      type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1000
+          stLuaLoads: 
         stateControllerSubName: SetVel
         doLoadAfterChangeState: 0
         vels:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
@@ -71,7 +108,7 @@ MonoBehaviour:
         stateControllerSubName: AnimSet_Jab
         doLoadAfterChangeState: 0
         changeAnimID:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
@@ -112,7 +149,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 10
+          value: 3
           stLuaLoads: 
         stateControllerSubName: Change To Init
         doLoadAfterChangeState: 0
@@ -123,7 +160,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 2
+          value: 10
           stLuaLoads: 
         stateControllerSubName: Chain_1
         doLoadAfterChangeState: 0
@@ -182,30 +219,30 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         stanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 20, y: 20}
           useID: -1
           stLuaLoads: 
         balanceDamagePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 40
           useID: -1
           stLuaLoads: 
         jugglePoint:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: 0
+          stParamValue: 30
           useID: -1
           stLuaLoads: 
         Kill:
@@ -227,12 +264,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         hitVelSet:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Physics
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 6, y: 3, z: 0}
           useID: -1
           stLuaLoads: 
         guardhitVelSet:
@@ -250,7 +287,7 @@ MonoBehaviour:
           _isReadable: 0
           _MenuName: Physics
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 4, y: 10, z: 0}
           useID: -1
           stLuaLoads: 
         player_GuardhitVelSet:
@@ -277,7 +314,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Animation
           loadTypes: 0
-          stParamValue: {x: 0, y: 0}
+          stParamValue: {x: 10, y: 10}
           useID: -1
           stLuaLoads: 
         guardHitStopTime:
@@ -380,12 +417,12 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         fallTime:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
-          _isReadable: 0
+          _isReadable: 1
           _MenuName: Controller
           loadTypes: 0
-          stParamValue: 1
+          stParamValue: 8
           useID: -1
           stLuaLoads: 
         StateIDExcluder:

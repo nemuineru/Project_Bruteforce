@@ -186,7 +186,7 @@ MonoBehaviour:
           stLuaLoads: 
         stateControllerSubName: Change to 5100
         doLoadAfterChangeState: 0
-        changeTo: 0
+        changeTo: 5100
         priority: 0
     - rid: 503850355378094091
       type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}

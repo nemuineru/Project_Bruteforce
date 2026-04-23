@@ -31,7 +31,7 @@ MonoBehaviour:
     setCtrl: 0
   - StateDefName: Default
     StateDefID: -2
-    ScriptDirectory: 
+    ScriptDirectory: StateScript/Enemy_Default/FatMan
     ScriptName: stateScript_FatMan_cmd.mjs
     preStateVerdictName: setStatus
     ParamLoadName: 
@@ -72,11 +72,11 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 1
+          value: 200
           stLuaLoads: 
         stateControllerSubName: Attack_heavy
         doLoadAfterChangeState: 0
-        changeTo: 1
+        changeTo: 200
         priority: 0
     - rid: 4404388709018370078
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}

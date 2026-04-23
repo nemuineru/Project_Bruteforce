@@ -48,7 +48,7 @@ export function stateCmd(entity) {
     let verdList = new List_Int();
 
     let selfOnGrd = CS.Elem.isEntityOnGround(entity);
-    //let isPressed_A = CS.LuaCondition.CheckButtonPressed(entity, "_a");
+    let isPressed_x = CS.Elem.CheckButtonPressed(entity, "Attack");
     let AttackCmd_b = CS.Elem.CheckButtonPressed(entity, "Basic");
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
@@ -57,6 +57,12 @@ export function stateCmd(entity) {
 
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Ground Grabbing strikes.
+    if(selfOnGrd == true && isPressed_x == true && StateDefID == 0)
+    {
+        verdList.Add(200);
+    }
 
     //Ground Grabbing strikes.
     if(selfOnGrd == true && AttackCmd_b == true && StateDefID == 0)
