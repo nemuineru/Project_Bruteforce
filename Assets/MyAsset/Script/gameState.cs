@@ -124,7 +124,10 @@ public class gameState : MonoBehaviour
 
     void FixedUpdate()
     {
-        elapsedTime += Time.fixedDeltaTime;
+        if(gameStatus != _GameStatus.OutGame)
+        {
+            elapsedTime += Time.fixedDeltaTime;
+        }
         entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
         .OrderBy(t => !t.attrs.alive)
         .ToList();
