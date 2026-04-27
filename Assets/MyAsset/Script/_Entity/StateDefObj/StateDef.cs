@@ -31,15 +31,15 @@ public static class ObjectExtension
 //2025-06-28
 //I NEED TO MARK THIS WORK ON HITDEF
 [System.Serializable]
-public class stParams<Type>
+public class stParams<TypeGet>
 {
     //デフォルト値の設定.
     //stParamsを設定する際は必ず初期化を行うとする.
-    internal Type defaultValue;
+    internal TypeGet defaultValue;
 
 
     //必須等設定されている場合
-    public stParams(Type defValue, bool setEssential, bool setReadable)
+    public stParams(TypeGet defValue, bool setEssential, bool setReadable)
     {
         stParamValue = defValue;
         _setEssential = setEssential;
@@ -49,7 +49,7 @@ public class stParams<Type>
     }
 
     //必須等設定されている場合
-    public stParams(Type defValue, bool setEssential)
+    public stParams(TypeGet defValue, bool setEssential)
     {
         stParamValue = defValue;
         _setEssential = setEssential;
@@ -59,7 +59,7 @@ public class stParams<Type>
     }
 
     //デフォルト値が設定されている場合なら初期は隠す.
-    public stParams(Type defValue)
+    public stParams(TypeGet defValue)
     {
         stParamValue = defValue;
         _setHidden = true;
@@ -113,7 +113,7 @@ public class stParams<Type>
 
     [SerializeField]
     //valueに入力された値を考慮して、ConditionElem等に代入
-    Type stParamValue;
+    TypeGet stParamValue;
 
     //LuaConditionで読み出すパラメーターID
     [SerializeField]
@@ -130,7 +130,7 @@ public class stParams<Type>
     //mjs等のスクリプト指定. 基本的に呼び出されたStateDefの値を用いる.
     internal string modulePath = ""; 
 
-    delegate object luaCalcParam(Entity entity);
+    public delegate object luaCalcParam(Entity entity);
 
     //どの形式で値を読み出すかをenumで管理する.
     public enum loadType
@@ -141,7 +141,7 @@ public class stParams<Type>
     }
 
     //登録値を読み出す.
-    public Type valueSet(Type val)
+    public TypeGet valueSet(TypeGet val)
     {
         return val;
     }
@@ -149,9 +149,9 @@ public class stParams<Type>
     //実際に想定された値を読み出す.
     //Condition/Calclationではluaの内容を読み出したいが..
 
-    public Type valueGet(List<object> loadParams, Entity entity)
+    public TypeGet valueGet(List<object> loadParams, Entity entity)
     {
-        Type retValue = stParamValue;
+        TypeGet retValue = stParamValue;
         switch (loadTypes)
         {
             //Conditionなら読み出されたLuaConditionに登録されたvalue配列から..
@@ -161,7 +161,7 @@ public class stParams<Type>
                     if(loadParams != null && loadParams.Count > useID && useID >= 0)
                     // Debug.Log(entity.gameObject.name + " tries envs "
                     // + loadParams[useID].GetType() + "to match " + retValue.GetType());
-                        retValue = (Type)loadParams[useID];
+                        retValue = (TypeGet)loadParams[useID];
                     break;
                 }
             //Calclationなら読み出すLuaCondition中に書かれたfunctionを実行しその値を読み出す.
@@ -171,9 +171,9 @@ public class stParams<Type>
                     Puerts.JsEnv env = PuerTS_Framework.main.JSEnv;
                     if (env == null) break;
                     luaCalcParam calcParam =
-                    env.ExecuteModule<luaCalcParam>(modulePath, stLuaLoads);
+                    PuerTS_Framework.main.paramRet<TypeGet>(modulePath, stLuaLoads);
                     if (calcParam != null)
-                        retValue = (Type)calcParam.Invoke(entity);
+                        retValue = (TypeGet)calcParam.Invoke(entity);
                     break;
                 }
             //コンスタント値または未定義ならstParamvalueをそのまま使用.
@@ -189,7 +189,7 @@ public class stParams<Type>
         else
         //this will returns null I guess..
         {
-            return default(Type);
+            return default(TypeGet);
         }
     }
 
@@ -426,7 +426,9 @@ public class StateDef
 
         if (ScriptDirectory != null && selectLoad.Count > 0 && Dir != null)
         {     
-            executer = PuerTS_Framework.main.JSEnv.ExecuteModule(Dir);
+            //2026-04-27
+            //I guess THIS is what causes the module leakage @ WebGL build
+            executer = PuerTS_Framework.main.ExecuteModule(Dir);
             if (executer == null)
             {
                 Debug.LogWarning("ExecuteModule returned null for: " + Dir);

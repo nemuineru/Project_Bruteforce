@@ -582,13 +582,12 @@ public class Entity : MonoBehaviour
     {
         //プレイヤーなら、ゲームクリア時にこのステートに戻す.
         //180はMUGENでいうと勝利ポーズ..
-        /*
-        if (gameObject.tag == "Player" && gameState.self.gDesc == gameState.GameStateDesc.Finished)
+        if (gameObject.tag == "Player" && gameState.self.menuStatus == gameState._MenuStatus.GameClear && CurrentStateID != 180)
         {
-            CurrentStateID = 180;
+            ChangeStateQueue queue = new ChangeStateQueue();
+            queue.stateDefID = 180;
+            CListQueue.Add(queue);
         }
-        */
-
     }
 
     //カメラ設定.
