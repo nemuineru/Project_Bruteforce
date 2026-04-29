@@ -341,3 +341,26 @@ export function StateDef_110_ID(entity){
     return verdList;
 
 }
+
+//function for Winning
+export function StateDef_180_ID(entity){   
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+    let isPressed_B = CS.Elem.CheckButtonPressed(entity, "Guarding") && !CS.Elem.isTargetRefsOwnerID(entity);
+
+    let selfOnGrd = CS.Elem.isEntityOnGround(entity)
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+
+    //this must be set as 0.
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+
+    //Init.
+    if (selfStTime == 0)
+    { 
+        verdList.Add(0); 
+    }
+    return verdList;
+
+}

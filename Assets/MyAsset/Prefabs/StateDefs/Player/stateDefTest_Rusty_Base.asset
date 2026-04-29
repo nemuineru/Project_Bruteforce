@@ -161,8 +161,8 @@ MonoBehaviour:
   - StateDefName: Winning Pose
     StateDefID: 180
     ScriptDirectory: StateScript/Rusty
-    ScriptName: 
-    preStateVerdictName: WinningPose
+    ScriptName: stateScript_Rusty_Main.mjs
+    preStateVerdictName: StateDef_180_ID
     ParamLoadName: 
     stateType: 83
     moveType: 0
@@ -352,6 +352,15 @@ MonoBehaviour:
           _MenuName: Base
           loadTypes: 0
           stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
     - rid: 503850271682330670
@@ -763,6 +772,15 @@ MonoBehaviour:
           stParamValue: {x: 1, y: 1, z: 1}
           useID: -1
           stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 3579422750824726546
       type: {class: scRotateTowards, ns: , asm: Assembly-CSharp}
       data:
@@ -942,7 +960,7 @@ MonoBehaviour:
         stateControllerSubName: Animset_winningPose
         doLoadAfterChangeState: 0
         changeAnimID:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
@@ -951,7 +969,7 @@ MonoBehaviour:
           useID: -1
           stLuaLoads: 
         AnimSlot:
-          _setHidden: 1
+          _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
@@ -1003,6 +1021,15 @@ MonoBehaviour:
           _MenuName: Base
           loadTypes: 0
           stParamValue: {x: 0.4, y: 0.4, z: 1}
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
           useID: -1
           stLuaLoads: 
     - rid: 8440311490821226519
