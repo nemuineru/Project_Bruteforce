@@ -737,9 +737,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  webGLInitialMemorySize: 1024
+  webGLInitialMemorySize: 2000
   webGLMaximumMemorySize: 4096
-  webGLMemoryGrowthMode: 2
+  webGLMemoryGrowthMode: 1
   webGLMemoryLinearGrowthStep: 16
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 256
@@ -757,7 +757,7 @@ PlayerSettings:
     Stadia: DOTWEEN
     Standalone: DOTWEEN;BAKERY_INCLUDED;BAKERY_NOREIMPORT
     VisionOS: DOTWEEN
-    WebGL: DOTWEEN;BAKERY_INCLUDED;BAKERY_NOREIMPORT
+    WebGL: DOTWEEN;BAKERY_INCLUDED;BAKERY_NOREIMPORT;PUERTS_DISABLE_IL2CPP_OPTIMIZATION
     Windows Store Apps: DOTWEEN
     XboxOne: DOTWEEN
     iPhone: DOTWEEN

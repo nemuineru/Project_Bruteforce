@@ -437,28 +437,16 @@ public class StateDef
 
             //executeStatesとStateParamsの初期化
             ExecuteStates = new List<int>();
-            StateParams = new List<System.Object>();
+            //StateParams = new List<object>();
 
             //Debug.Log("Executed PuerTS : At StateDefID " + StateDefID);
             //Func型じゃないと取れなかったんじゃないっけ？
-            Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
+            // Func<Entity, List<int>> executer_stateIDGet = executer.Get<Func<Entity, List<int>>>(preStateVerdictName);
             Func<Entity, List<object>> executer_stateParamGet = executer.Get<Func<Entity, List<object>>>(ParamLoadName);
 
             //Func型として返される値を格納
-
-            if (executer_stateIDGet != null)
-            {
-                ExecuteStates = executer_stateIDGet(entity) ?? new List<int>();
-            }
-            else
-            {
-                Debug.LogWarning(entity.gameObject.name + " loads the script function :" + preStateVerdictName +
-                "but returns not found.");
-            }
-            if (executer_stateParamGet != null)
-            { 
-                luaOutputParams = executer_stateParamGet(entity) ?? new List<object>();
-            }
+            ExecuteStates = PuerTS_Framework.main.GetValue<int>(executer,preStateVerdictName,entity);
+            luaOutputParams = PuerTS_Framework.main.GetValue<object>(executer ,ParamLoadName, entity);
 
             //for debug string
             string executingStr = "";

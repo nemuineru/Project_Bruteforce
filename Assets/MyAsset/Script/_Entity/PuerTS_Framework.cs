@@ -18,7 +18,7 @@ public class PuerTS_Framework : MonoBehaviour
         if (main == null)
         {
             main = this;
-            JSEnv = new JsEnv();
+            Reset();
         }
         else
         {
@@ -46,9 +46,28 @@ public class PuerTS_Framework : MonoBehaviour
         return ret;
     }
 
+    public List<TypeGet> GetValue<TypeGet>(Puerts.JSObject frameWork, string NameFunction, Entity entity)
+    {
+        List<TypeGet> ret = new List<TypeGet>();
+        Func<Entity, List<TypeGet>> resFunc = frameWork.Get<Func<Entity, List<TypeGet>>>(NameFunction);
+        if(resFunc != null)
+        {
+            ret = resFunc(entity) ?? new List<TypeGet>();
+        }
+        else
+        {
+            Debug.LogWarning(entity.gameObject.name + " loads the script function :" + NameFunction +
+            "but returns 'not found'.");
+        }
+        return ret;
+    }
+
     public void Reset()
     {
-        JSEnv.Dispose();
+        if(JSEnv != null)
+        {
+            JSEnv.Dispose();
+        }
         JSEnv = new JsEnv();
     }
 
