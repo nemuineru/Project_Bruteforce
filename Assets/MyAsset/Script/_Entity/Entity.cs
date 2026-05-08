@@ -103,6 +103,21 @@ public class Entity : MonoBehaviour
     public Entity controlledEntity;
 
 
+    //ターゲット対象のEntity. これ自体のEntityは変更しないが、内容を配慮する.
+    //メインロックオン時に優先的に設定.
+    [SerializeField]
+    public Entity mainTargetEntity;
+    
+    //攻撃を当てた際の短時間で設定される
+    //近接ギア・遠距離ギア対応他
+    [SerializeField]
+    public Entity shortTargetEntity;
+
+    //最も近い位置に居る敵認識のEntityを対象に設定
+    //近接ギア・遠距離ギア対応他
+    [SerializeField]
+    public Entity nearestTargetEntity;
+
     //アニメーション管理用.
     public int animID = 0;
     [SerializeField]
