@@ -97,7 +97,7 @@ public class gameState : MonoBehaviour
         if(Player_Vcam != null)
         {
             CinemachineVirtualCamera cams = Instantiate(Player_Vcam);
-            cams.LookAt = Player.transform;
+            //cams.LookAt = Player.transform;
             cams.Follow = Player.transform;
             //生成位置の後ろ側を指定.
             cams.ForceCameraPosition(tr.position - tr.transform.forward + Vector3.up,qt);

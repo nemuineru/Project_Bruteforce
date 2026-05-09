@@ -604,6 +604,7 @@ public class Entity : MonoBehaviour
             CListQueue.Add(queue);
         }
     }
+    Vector3 rotCam = new Vector3();
 
     //カメラ設定.
     void setViewCams()
@@ -632,7 +633,12 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                transposer_Orbit = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+                Vector3 currentRotCam = vCam.transform.rotation.eulerAngles;
+                rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
+                rotCam.x = Mathf.Clamp(rotCam.x + look.y * 3.0f,-25f,80f);
+                rotCam.y = rotCam.y + look.x * 3.0f;
+                Debug.Log(rotCam.x);
+                vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.4f);
             }
         }
         else
