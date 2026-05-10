@@ -2,14 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityQuaternion;
 using UnityEngine;
+using Shapes;
+using System;
 
 public class TargetLine : MonoBehaviour
 {
     [SerializeField]
-    GameObject NearestSet;
+    Color Nearby;
+
+    [SerializeField]
+    Color Ranged;
+
+    [SerializeField]
+    Color Disabled;
+
+    [SerializeField]
+    TargetComp Base;
+
+    [SerializeField]
+    TargetComp NearestSet;
     
     [SerializeField]
-    GameObject NonHit;
+    TargetComp NonHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +34,27 @@ public class TargetLine : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward,Camera.main.transform.up);
-        if(Vector3.Magnitude(gameState.self.Player.transform.position - transform.position) < 4.0f)
+        float dist = Vector3.Magnitude(gameState.self.Player.transform.position - transform.position);
+        if(dist < 2.0f)
         {
-            NearestSet.SetActive(true);
-            NonHit.SetActive(false);
+            NearestSet.gameObject.SetActive(true);
+            NonHit.gameObject.SetActive(false);
             NearestSet.transform.localRotation *= Quaternion.Euler(0,0,300.0f * Time.deltaTime);
+            NearestSet.SetColors(Nearby);
+            Base.SetColors(Nearby);
+        }
+        else if(dist < 5.0f)
+        {
+            NearestSet.gameObject.SetActive(false);
+            NonHit.gameObject.SetActive(false);
+            Base.SetColors(Ranged);
         }
         else
         {
-            NearestSet.SetActive(false);
-            NonHit.SetActive(true);
+            NearestSet.gameObject.SetActive(false);
+            NonHit.gameObject.SetActive(true);
+            Base.SetColors(Disabled);
+            NonHit.SetColors(Disabled);
         }
     }
 }

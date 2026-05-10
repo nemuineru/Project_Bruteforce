@@ -118,6 +118,7 @@ public class Entity : MonoBehaviour
     [SerializeField]
     public Entity nearestTargetEntity;
 
+
     //アニメーション管理用.
     public int animID = 0;
     [SerializeField]
@@ -286,7 +287,14 @@ public class Entity : MonoBehaviour
     {
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
         stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
-        
+
+        //
+        List<Entity> EList = gameState.self.entityList.Where(x => x != this && x.tag != gameObject.tag).OrderBy(x => (x.transform.position - transform.position).magnitude).ToList();
+        if(EList.Count != 0)
+        {
+            nearestTargetEntity = EList.First();
+        }
+
         //check each cmds. and buffers it.
         foreach (var cmds in cmdList)
         {
@@ -635,7 +643,7 @@ public class Entity : MonoBehaviour
             {
                 Vector3 currentRotCam = vCam.transform.rotation.eulerAngles;
                 rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
-                rotCam.x = Mathf.Clamp(rotCam.x + look.y * 3.0f,-25f,80f);
+                rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
                 rotCam.y = rotCam.y + look.x * 3.0f;
                 Debug.Log(rotCam.x);
                 vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.4f);
