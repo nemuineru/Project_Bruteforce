@@ -27,6 +27,7 @@ public class gameState : MonoBehaviour
     public GameObject defaultGuardBreakEff;
     public GameObject defaultDeathEff;
     public AudioClip[] defaultFootSound;
+    public Target target;
 
 
     public AudioSource inGameAuds;

@@ -5,7 +5,7 @@ using UnityEngine;
 using Shapes;
 using System;
 
-public class TargetLine : MonoBehaviour
+public class Target : MonoBehaviour
 {
     [SerializeField]
     Color Nearby;
@@ -24,6 +24,8 @@ public class TargetLine : MonoBehaviour
     
     [SerializeField]
     TargetComp NonHit;
+
+    public GameObject target_to;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,10 @@ public class TargetLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(target_to != null)
+        {
+            transform.position = target_to.transform.position + Vector3.up;
+        }
         transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward,Camera.main.transform.up);
         float dist = Vector3.Magnitude(gameState.self.Player.transform.position - transform.position);
         if(dist < 2.0f)

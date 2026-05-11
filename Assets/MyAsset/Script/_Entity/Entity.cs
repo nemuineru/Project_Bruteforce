@@ -290,9 +290,11 @@ public class Entity : MonoBehaviour
 
         //
         List<Entity> EList = gameState.self.entityList.Where(x => x != this && x.tag != gameObject.tag).OrderBy(x => (x.transform.position - transform.position).magnitude).ToList();
-        if(EList.Count != 0)
+        if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
         {
             nearestTargetEntity = EList.First();
+            gameState.self.target.target_to = nearestTargetEntity.gameObject;
+            vCam.LookAt = nearestTargetEntity.transform;
         }
 
         //check each cmds. and buffers it.
@@ -642,11 +644,18 @@ public class Entity : MonoBehaviour
             else
             {
                 Vector3 currentRotCam = vCam.transform.rotation.eulerAngles;
-                rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
-                rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
-                rotCam.y = rotCam.y + look.x * 3.0f;
-                Debug.Log(rotCam.x);
-                vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.4f);
+                if(vCam.LookAt != null)
+                {
+                    rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
+                    rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
+                    rotCam.y = rotCam.y + look.x * 3.0f;
+                    Debug.Log(rotCam.x);
+                    vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.4f);
+                }
+                else
+                {
+                    rotCam = currentRotCam;
+                }
             }
         }
         else
