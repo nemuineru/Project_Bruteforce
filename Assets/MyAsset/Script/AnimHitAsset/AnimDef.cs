@@ -25,6 +25,8 @@ public class AnimancerManager
     //clssが読み出す当たり判定要素は基本、これを使う.
     public AnimDef primaryAnimDef;
 
+
+
     //mainAnimancerのステート遷移システム
     public void TransitLayer(AnimDef animDef, int LayerID = 0, float TimeOffset = 0f, AvatarMask animMask = null, bool isAdditive = false)
     {
@@ -152,6 +154,15 @@ public class AnimancerManager
             }
         }
     }
+    
+    //Deactivate時の挙動をなんとかしたい.
+    //CurrentStateを呼び出してもなんともならない, ので新規に作成するべきか？
+    //内部コンポーネントでは格納はされている
+    public void AM_Recall()
+    {
+        
+    }
+
 
     //時空を操る. ..ということではなくステート遷移を一本で纏めたやつ.
     //playSpeedを0にすれば、一時的なpauseとなる.
@@ -187,11 +198,14 @@ public class AnimancerManager
         AnimancerLayer refLayer = main.Layers[LayerID];
         if (refLayer != null)
         {
-            //AnimancerState findState = refLayer.CurrentState;
+            AnimancerState findState = refLayer.CurrentState;
             List<AnimationClip> cls = new List<AnimationClip>();
-            refLayer.CurrentState.GatherAnimationClips(cls);
-            float frametime = cls.Count > 0 ? cls.Average(t => t.frameRate) : 1f;
-            val = refLayer.CurrentState.Time * frametime;
+            if(findState != null)
+            {
+                findState.GatherAnimationClips(cls);
+                float frametime = cls.Count > 0 ? cls.Average(t => t.frameRate) : 1f;
+                val = findState.Time * frametime;
+            }
         }
         return val;
     }
@@ -203,11 +217,14 @@ public class AnimancerManager
         AnimancerLayer refLayer = main.Layers[LayerID];
         if (refLayer != null)
         {
-            //AnimancerState findState = refLayer.CurrentState;
+            AnimancerState findState = refLayer.CurrentState;
             List<AnimationClip> cls = new List<AnimationClip>();
-            refLayer.CurrentState.GatherAnimationClips(cls);
-            float frametime = cls.Count > 0 ? cls.Average(t => t.frameRate) : 1f;
-            val = refLayer.CurrentState.Length * frametime;;
+            if(findState != null)
+            {
+                findState.GatherAnimationClips(cls);
+                float frametime = cls.Count > 0 ? cls.Average(t => t.frameRate) : 1f;
+                val = findState.Length * frametime;
+            }
             //Debug.Log(val);
         }
         return val;

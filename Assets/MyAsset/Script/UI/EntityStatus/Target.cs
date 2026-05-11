@@ -37,7 +37,7 @@ public class Target : MonoBehaviour
     {
         if(target_to != null)
         {
-            transform.position = target_to.transform.position + Vector3.up;
+            transform.position = target_to.transform.position + Vector3.up * 0.5f;
         }
         transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward,Camera.main.transform.up);
         float dist = Vector3.Magnitude(gameState.self.Player.transform.position - transform.position);

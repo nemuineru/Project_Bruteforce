@@ -201,6 +201,23 @@ public class Entity : MonoBehaviour
     [SerializeField]
     internal List<hitDefParams> registeredHitDefs = new List<hitDefParams>();
 
+    //for Animancer Rebind..
+    void OnEnable()
+    {
+        //Animancerが存在していれば、リセット.
+        if(animancerManager != null)
+        {
+            Debug.Log("Recalled!");
+            animancerManager.AM_Recall();
+        }
+        //そうでないなら初期状態なのでinit.
+        else
+        {
+            initAnimSetting();
+            defaultClss.initClss(this);
+        }
+    }
+
     //first init.
     void Awake()
     {
@@ -225,8 +242,6 @@ public class Entity : MonoBehaviour
         //DefList.stateDefs.ForEach(def => def.PriorCondition = def.PriorCondition);
 
         //アニメ設定.
-        initAnimSetting();
-        defaultClss.initClss(this);
 
         foreach (StateDefListObject dObj in DefLists)
         {
@@ -644,7 +659,7 @@ public class Entity : MonoBehaviour
             else
             {
                 Vector3 currentRotCam = vCam.transform.rotation.eulerAngles;
-                if(vCam.LookAt != null)
+                if(vCam.LookAt == null)
                 {
                     rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
                     rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
