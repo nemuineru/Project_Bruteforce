@@ -160,7 +160,14 @@ public class AnimancerManager
     //内部コンポーネントでは格納はされている
     public void AM_Recall()
     {
-        
+        AnimancerLayer refLayer = main.Layers[0];
+        if(refLayer != null)
+        {
+            // Debug.Log("RefLayer Found");
+            // refLayer.Weight = 1.0f;
+            // refLayer.State
+            // refLayer.CurrentState.IsPlaying = true;
+        }
     }
 
 

@@ -279,6 +279,9 @@ public class Entity : MonoBehaviour
             animancerManager = new AnimancerManager();
             animancerManager.main = mainAnimancer;
             animancerManager.root = this;
+            //this is where should I start.. pause anim on disabled?
+            //..man why I wasted the times..
+            animancerManager.main.ActionOnDisable = AnimancerComponent.DisableAction.Pause;
             ChangeAnim();           
         }
     }
@@ -664,7 +667,7 @@ public class Entity : MonoBehaviour
                     rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
                     rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
                     rotCam.y = rotCam.y + look.x * 3.0f;
-                    Debug.Log(rotCam.x);
+                    //Debug.Log(rotCam.x);
                     vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.4f);
                 }
                 else
