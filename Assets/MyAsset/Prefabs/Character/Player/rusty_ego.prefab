@@ -1104,6 +1104,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 90ec64e4b8468fc49b925081c9be31c4, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6107913692295745523, guid: 90ec64e4b8468fc49b925081c9be31c4, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1393,7 +1397,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &390314013091947414
 CapsuleCollider:

@@ -311,7 +311,7 @@ public class Entity : MonoBehaviour
         if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
         {
             nearestTargetEntity = EList.First();
-            if(nearestTargetEntity != null)
+            if(nearestTargetEntity != null && vCam != null)
             {
                 gameState.self.target.target_to = nearestTargetEntity.gameObject;
                 vCam.LookAt = nearestTargetEntity.transform;
