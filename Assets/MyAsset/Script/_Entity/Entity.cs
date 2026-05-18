@@ -311,8 +311,11 @@ public class Entity : MonoBehaviour
         if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
         {
             nearestTargetEntity = EList.First();
-            gameState.self.target.target_to = nearestTargetEntity.gameObject;
-            vCam.LookAt = nearestTargetEntity.transform;
+            if(nearestTargetEntity != null)
+            {
+                gameState.self.target.target_to = nearestTargetEntity.gameObject;
+                vCam.LookAt = nearestTargetEntity.transform;
+            }
         }
 
         //check each cmds. and buffers it.
