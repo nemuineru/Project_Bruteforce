@@ -15,6 +15,7 @@ using BehaviorDesigner.Runtime;
 using Animancer;
 using UnityEngine.InputSystem.XR;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityPhysics;
 
 public class Entity : MonoBehaviour
 {
@@ -363,16 +364,32 @@ public class Entity : MonoBehaviour
             shortTargetEntity = EList.First();
         }
         
-        if(nearestTargetEntity != null && vCam != null)
+        if(mainTargetEntity != null && vCam != null && tag == "Player")
         {
-            gameState.self.target.target_to = nearestTargetEntity.gameObject;
-            vCam.LookAt = nearestTargetEntity.transform;
+            gameState.self.target.target_to = mainTargetEntity.gameObject;
+            vCam.LookAt = mainTargetEntity.transform;
         }
     }
 
-    public void FindTarget()
+    //メインターゲットをカメラ中心から決定する.
+    public void LockCamFuncions()
     {
-        
+        Vector3 origins = transform.position + Vector3.up;
+        float FindLength = 4f;
+        float FindRadius = 10f;
+        //get Entity-Mask only.
+        LayerMask EntityMask = LayerMask.NameToLayer("Entity");
+        //先ず、カメラ方向へ極太のRayCastをプレイヤーから発射する.
+        RaycastHit[] rays = Physics.SphereCastAll( origins, FindRadius, targetTo_fw, FindLength, EntityMask);
+        //射線が通るもののみを選択
+        foreach(RaycastHit r in rays)
+        {
+            Vector3 dir = (r.collider.transform.position - origins).normalized;
+            if(Physics.Raycast(origins,dir,out RaycastHit hit) && gameState.self.entityList.Any(x => x.gameObject == r.collider.gameObject))
+            {
+                
+            }
+        }
     }
 
     public void addBalancePoint(float AddBalancePt)
