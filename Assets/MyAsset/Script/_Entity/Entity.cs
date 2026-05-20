@@ -306,17 +306,8 @@ public class Entity : MonoBehaviour
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
         stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
 
-        //
-        List<Entity> EList = gameState.self.entityList.Where(x => x != this && x.tag != gameObject.tag).OrderBy(x => (x.transform.position - transform.position).magnitude).ToList();
-        if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
-        {
-            nearestTargetEntity = EList.First();
-            if(nearestTargetEntity != null && vCam != null)
-            {
-                gameState.self.target.target_to = nearestTargetEntity.gameObject;
-                vCam.LookAt = nearestTargetEntity.transform;
-            }
-        }
+        //sets target nearby if the button pressed.
+        SetTarget();
 
         //check each cmds. and buffers it.
         foreach (var cmds in cmdList)
@@ -352,6 +343,35 @@ public class Entity : MonoBehaviour
         //のけぞり計算
         status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
         status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
+        
+    }
+
+    public void SetTarget()
+    {
+        //get Nearest Entity.
+        List<Entity> EList = gameState.self.entityList.Where(x => x != this && x.tag != gameObject.tag).OrderBy(x => (x.transform.position - transform.position).magnitude).ToList();
+        if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
+        {
+            nearestTargetEntity = EList.First();
+        }
+
+        //get latest hitdef entity for registering Entity.
+        EList = registeredHitDefs.Where(x => x.targetEntity != this && x.ownerEntity == this)
+        .OrderBy(x => gameState.self.elapsedTime - x.HitRegisterTime).Select(x => x.targetEntity).ToList();
+        if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
+        {
+            shortTargetEntity = EList.First();
+        }
+        
+        if(nearestTargetEntity != null && vCam != null)
+        {
+            gameState.self.target.target_to = nearestTargetEntity.gameObject;
+            vCam.LookAt = nearestTargetEntity.transform;
+        }
+    }
+
+    public void FindTarget()
+    {
         
     }
 
