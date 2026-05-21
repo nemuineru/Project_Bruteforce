@@ -381,14 +381,58 @@ public class Entity : MonoBehaviour
         LayerMask EntityMask = LayerMask.NameToLayer("Entity");
         //先ず、カメラ方向へ極太のRayCastをプレイヤーから発射する.
         RaycastHit[] rays = Physics.SphereCastAll( origins, FindRadius, targetTo_fw, FindLength, EntityMask);
+        List<GameObject> FindObj = new List<GameObject>();
         //射線が通るもののみを選択
         foreach(RaycastHit r in rays)
         {
             Vector3 dir = (r.collider.transform.position - origins).normalized;
             if(Physics.Raycast(origins,dir,out RaycastHit hit) && gameState.self.entityList.Any(x => x.gameObject == r.collider.gameObject))
             {
-                
+                FindObj.Add(r.collider.gameObject);
             }
+        }
+        //Entityが見つからなければそのまま
+        if(FindObj?.Count == 0)
+        {
+            return;
+        }
+
+    }
+
+    //カメラベクトルを比較, 最も中央に近いものを探す.
+    //via https://zenn.dev/aruk_vs/articles/ae723b82fd69ec
+    private void getOptimalObjs(List<GameObject> hitObjects)
+    {
+        float degreep = Mathf.Atan2(targetTo_fw.x, targetTo_fw.z);
+        float lockonFactor = 0.3f;
+        float degreemum = Mathf.PI * 2;
+        GameObject target = null;
+
+        foreach (var enemy in hitObjects)
+        {
+            // pos: 敵からカメラへ向けたベクトル
+            // pos2: カメラから敵に向けたベクトル(水平方向に制限して正規化)
+            // Vector3 pos = cameraTrn.position - enemy.transform.position;
+            // Vector3 pos2 = enemy.transform.position - cameraTrn.position;
+            // pos2.y = 0.0f;
+            // pos2.Normalize();
+
+            // degree: pos2のX,Z成分からなる角度. カメラの前方からどれだけ回転しているか
+            // float degree = Mathf.Atan2(pos2.x, pos2.z);
+            // degreeを-180°～180°に正規化
+            // degree = degreeNormalize(degree, degreep);
+
+            // pos.magnitude: 敵とカメラの距離
+            // pos.magnitudeに応じて角度に重みをかけ、距離が近いほど角度の重みが大きく選好される
+            // degree = degree + degree * (pos.magnitude / 500) * lockonFactor;
+            // Mathf.Abs(degreemum): 以前に記録された最小角度差の絶対値
+            // Mathf.Abs(degree): 現在の角度差の絶対値
+            // if (Mathf.Abs(degreemum) >= Mathf.Abs(degree))
+            // {
+            //     degreemum = degree;
+            //     target = enemy;
+            // }
+            // return (degreemum, target);
         }
     }
 

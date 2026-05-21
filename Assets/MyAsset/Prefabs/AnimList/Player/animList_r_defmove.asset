@@ -19,7 +19,7 @@ MonoBehaviour:
     ID: 0
     Name: Movement
     animClip:
-    - Clip: {fileID: 7400000, guid: b1746320c4335404a98fc1316048773b, type: 2}
+    - Clip: {fileID: 7400000, guid: acce5dd29962d854e9f784ec96294c4f, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0

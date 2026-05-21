@@ -67,6 +67,9 @@ export function stateCmd(entity) {
     let GuardCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Guarding");
     let BurstCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Burst");
 
+    //カメラ設定コマンド
+    let SetCameraCmd_isPressed = CS.Elem.CheckButtonPressed(entity, "Camera");
+
     let StateDefID = entity.CurrentStateID;
     let isChainable = (StateDefID == 0 || (StateDefID >= 200 && StateDefID < 210));
     let chargeVal = entity.status.ChargeTime;
@@ -146,6 +149,11 @@ export function stateCmd(entity) {
     else if(!AttackCmd_x_isPressed || StateDefID >= 5000 && StateDefID <= 5300)
     {
         verdList.Add(31)
+    }
+
+    if(SetCameraCmd_isPressed)
+    {
+        verdList.Add(40)
     }
     return verdList;
 }

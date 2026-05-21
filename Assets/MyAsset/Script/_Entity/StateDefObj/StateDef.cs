@@ -1575,6 +1575,25 @@ public class scSetMoveGuarding : StateController
 }
 
 
+//ガード状態に設定するか?
+//この設定はinit更新時、自動的にfalseとなる.
+[System.Serializable]
+[SerializeField]
+[SCHiearchy("System/Send MainTargetCamera")]
+public class scSetMainTarget : StateController
+{
+    
+    [SerializeField]
+    stParams<bool> willGuardFlagSet = new stParams<bool>(true,true,true);
+
+    internal override void OnExecute(Entity entity)
+    {
+        entity.SetTarget();
+    }
+}
+
+
+
 //set position for absolute value.
 [System.Serializable]
 [SerializeField]

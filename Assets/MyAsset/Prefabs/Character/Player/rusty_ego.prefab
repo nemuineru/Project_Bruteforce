@@ -1370,6 +1370,11 @@ MonoBehaviour:
     currentBufferTime: 0
     bufferMaxTime: 1
     readLength: 3
+  - CommandName: Camera
+    Command: '"c"'
+    currentBufferTime: 0
+    bufferMaxTime: 1
+    readLength: 1
   TotalHitNo: 0
   registeredHitDefs: []
 --- !u!54 &3814792367533234285
