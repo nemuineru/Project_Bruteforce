@@ -1371,7 +1371,7 @@ MonoBehaviour:
     bufferMaxTime: 1
     readLength: 3
   - CommandName: Camera
-    Command: '"c"'
+    Command: '"c_"'
     currentBufferTime: 0
     bufferMaxTime: 1
     readLength: 1

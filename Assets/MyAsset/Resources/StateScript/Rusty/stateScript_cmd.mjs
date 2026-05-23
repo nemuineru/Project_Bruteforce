@@ -151,9 +151,11 @@ export function stateCmd(entity) {
         verdList.Add(31)
     }
 
+    //for camera set
     if(SetCameraCmd_isPressed)
     {
         verdList.Add(40)
     }
+
     return verdList;
 }

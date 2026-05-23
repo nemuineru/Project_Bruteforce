@@ -50,6 +50,7 @@ MonoBehaviour:
     - rid: 4404388709018370091
     - rid: 7982028180311244820
     - rid: 7982028180311244821
+    - rid: 5214395901293363200
     - rid: 7982027888260546560
     - rid: 7982027949219512324
     - rid: 7982028315445428230
@@ -179,6 +180,15 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 201
         priority: 1
+    - rid: 5214395901293363200
+      type: {class: scSetMainTarget, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 40
+          stLuaLoads: 
+        stateControllerSubName: 40 SetTarget
+        doLoadAfterChangeState: 0
     - rid: 5331018537749184514
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

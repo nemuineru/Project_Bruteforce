@@ -1583,12 +1583,10 @@ public class scSetMoveGuarding : StateController
 public class scSetMainTarget : StateController
 {
     
-    [SerializeField]
-    stParams<bool> willGuardFlagSet = new stParams<bool>(true,true,true);
-
     internal override void OnExecute(Entity entity)
     {
-        entity.SetTarget();
+        Debug.Log("Executed!");
+        entity.LockCamFuncions();
     }
 }
 
