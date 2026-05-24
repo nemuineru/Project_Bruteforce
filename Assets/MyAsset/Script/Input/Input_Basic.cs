@@ -550,17 +550,6 @@ public partial class @Input_Basic: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""759337af-c1a3-40c2-86f1-cd65c40a64a6"",
-                    ""path"": ""<Mouse>/scroll"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Controller_LookAxis"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Keyboard"",
                     ""id"": ""f9246bf8-9d1a-42da-ab88-31380f7cfa34"",
                     ""path"": ""2DVector"",

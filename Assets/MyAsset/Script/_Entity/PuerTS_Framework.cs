@@ -56,8 +56,8 @@ public class PuerTS_Framework : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning(entity.gameObject.name + " loads the script function :" + NameFunction +
-            "but returns 'not found'.");
+            // Debug.LogWarning(entity.gameObject.name + " loads the script function :" + NameFunction +
+            // "but returns 'not found'.");
         }
         return ret;
     }

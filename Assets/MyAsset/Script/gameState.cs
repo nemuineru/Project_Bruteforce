@@ -61,9 +61,9 @@ public class gameState : MonoBehaviour
 
     public enum _GameStatus
     {
-        //ゲーム中。
+        //ゲーム中, 時間の流れも動いてる状態.
         InGame,
-        //ポーズ中.
+        //ゲームの外, プレイヤーや敵の動きは止まる
         OutGame
     }
 
@@ -91,8 +91,6 @@ public class gameState : MonoBehaviour
         Quaternion qt = Quaternion.LookRotation(tr.forward);
         Player = Instantiate(Player_Instantiate,tr.position,qt).GetComponent<Entity>();
         
-        MainGUI.SetComponent(Player);
-
         GameObject objs = Instantiate(MainGUI.gameObject);
         GameObject GUI_Top = GameObject.FindGameObjectWithTag("UI");
         if(Player_Vcam != null)
@@ -102,7 +100,7 @@ public class gameState : MonoBehaviour
             cams.Follow = Player.transform;
             //生成位置の後ろ側を指定.
             cams.ForceCameraPosition(tr.position - tr.transform.forward + Vector3.up,qt);
-            Player.vCam = GameObject.FindGameObjectWithTag("Virtual_MainCamera").GetComponent<CinemachineVirtualCamera>();
+            Player.vCam = cams;//GameObject.FindGameObjectWithTag("Virtual_MainCamera").GetComponent<CinemachineVirtualCamera>();
         }
 
         if(CloseLook_vcam != null)
@@ -490,74 +488,80 @@ public class gameState : MonoBehaviour
         {
             case _MenuStatus.PreStart:
                 {
-                    mainInstGUI.SetPreGameUIActive();
                     timeStartBy -= Time.deltaTime;
                     gameStatus = _GameStatus.OutGame;
+                    setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);                    
+                    //prestartから時間がたてばOnGameに移行.
                     if (timeStartBy < 0)
                     {
                         menuStatus = _MenuStatus.OnGame;
                     }
                     break;
                 }
+                //メインゲーム中
             case _MenuStatus.OnGame:
                 {
-                    mainInstGUI.SetOnGameActive();
                     gameStatus = _GameStatus.InGame;
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
-                    if(BirdView_vcam != null)
-                    BirdView_vcam.gameObject.SetActive(false);
-                    if(CloseLook_vcam != null)
-                    CloseLook_vcam.gameObject.SetActive(false);
-                    // pauseGameUI.SetActive(false);
-                    // PreGameUI.SetActive(false);
-                    // InGameUI.SetActive(true);
+                    setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);
                     
-                    if(inGameAuds != null)
-                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);
-                    // elapsedTime += Time.deltaTime;
+                    SetPauseToggle(false);
                     break;
                 }
             case _MenuStatus.GameOver:
                 {
-                    mainInstGUI.SetGameOverActive();
                     gameStatus = _GameStatus.OutGame;
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.0001f, 0.125f);
-
-                    if(inGameAuds != null)
-                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.0001f, 0.025f);
-
-                    if(BirdView_vcam != null)
-                    BirdView_vcam.gameObject.SetActive(true);
-                    if(CloseLook_vcam != null)
-                    CloseLook_vcam.gameObject.SetActive(false);
+                    SetPauseToggle(true);
+                    setCams(isPlayerCam: false, isBirdCam: true, isCloseCam: false);
                     break;
                 }
             case _MenuStatus.GameClear:
                 {
-                    mainInstGUI.SetGameClearActive();
                     gameStatus = _GameStatus.OutGame;
-                    if(BirdView_vcam != null)
-                    BirdView_vcam.gameObject.SetActive(false);
-                    if(CloseLook_vcam != null)
-                    CloseLook_vcam.gameObject.SetActive(true);
+
+                    setCams(isPlayerCam: false, isBirdCam: false, isCloseCam: true);
                     break;
                 }
             case _MenuStatus.Pause:
                 {
-                    mainInstGUI.SetGamePauseActive();
                     gameStatus = _GameStatus.OutGame;
-                    if(BirdView_vcam != null)
-                    BirdView_vcam.gameObject.SetActive(false);
-                    if(CloseLook_vcam != null)
-                    CloseLook_vcam.gameObject.SetActive(false);
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.00f, 0.025f);
-
-                    if(inGameAuds != null)
-                    inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.00f, 0.025f);
+                    setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);
+                    SetPauseToggle(true);
                     break;
                 }
         }
+    }
 
+    //ポーズ状態のとき、時間の流れを止める関数を作った.
+    public void SetPauseToggle(bool isPause)
+    {
+        if(isPause)
+        {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 0.00f, 0.025f);
+            if(inGameAuds != null)
+            {
+                inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 0.00f, 0.025f);  
+            }
+        }        
+        else
+        {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.3f);
+            if(inGameAuds != null)
+            {
+                inGameAuds.pitch = Mathf.Lerp(inGameAuds.pitch, 1f, 0.08f);   
+            }
+        }
+    }
+
+    //カメラ切り替え
+    public void setCams
+    ( bool isPlayerCam = true, bool isBirdCam = false, bool isCloseCam = false)
+    {
+        if(Player_Vcam != null)
+        Player_Vcam.gameObject.SetActive(isPlayerCam);
+        if(BirdView_vcam != null)
+        BirdView_vcam.gameObject.SetActive(isBirdCam);
+        if(CloseLook_vcam != null)
+        CloseLook_vcam.gameObject.SetActive(isCloseCam);
     }
     
     public void ReturnToMainMenu()
