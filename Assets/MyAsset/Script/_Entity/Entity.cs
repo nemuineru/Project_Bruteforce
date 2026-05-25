@@ -409,7 +409,8 @@ public class Entity : MonoBehaviour
                     continue;
                 else
                 {
-                    bool isHit = et.hitCheck(LaysTo,out Vector3 hit);
+                    bool isHit = LaysTo.clssCollided(out Vector3 v1,out Vector3 v2,out float f,
+                    clssDef.ClssType.Attack,et.animancerManager.primaryAnimDef.clssSetting,0);
                     if(isHit)
                     {
                         FindObj.Add(et);
@@ -422,6 +423,7 @@ public class Entity : MonoBehaviour
             {
                 return;
             }
+                Debug.Log("HitCheck");
             float optimalObjDist = Mathf.Infinity;
             Entity optimalObject;
             (optimalObjDist, optimalObject) = getOptimalObjs(FindObj);
@@ -429,6 +431,7 @@ public class Entity : MonoBehaviour
             {
                 mainTargetEntity = optimalObject.GetComponent<Entity>();
             }
+            mainTargetEntity = FindObj.First();
         }
     }
 
