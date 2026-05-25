@@ -388,26 +388,42 @@ public class Entity : MonoBehaviour
             float FindRadius = 10f;
             //get Entity-Mask only.
             LayerMask EntityMask = LayerMask.NameToLayer("Entity");
-            //先ず、カメラ方向へ極太のRayCastをプレイヤーから発射する.
-            RaycastHit[] rays = Physics.SphereCastAll( origins, FindRadius, targetTo_fw, 0, EntityMask);
-            List<GameObject> FindObj = new List<GameObject>();
-            //射線が通るもののみを選択
-            foreach(RaycastHit r in rays)
+
+            //先ず、カメラ方向へ極太のClssDefをプレイヤーから発射する.
+            clssSetting LaysTo = new clssSetting();
+            clssDef def = new clssDef();
+            def.startPos = origins;
+            def.endPos = origins + targetTo_fw; 
+            def.width = FindRadius;
+            def.attachTransform = transform;
+            def.clssType = clssDef.ClssType.Attack;
+
+            LaysTo.clssDefs.Add(def);
+
+            List<Entity> FindObj = new List<Entity>();
+
+            //射線が通るもののみを選択 自分は選択しない
+            foreach(Entity et in gameState.self.entityList)
             {
-                Debug.Log("find Obj");
-                // Vector3 dir = (r.collider.transform.position - origins).normalized;
-                // if(Physics.Raycast(origins,dir,out RaycastHit hit) && gameState.self.entityList.Any(x => x.gameObject == r.collider.gameObject))
-                // {
-                    FindObj.Add(r.collider.gameObject);
-                // }
+                if(et == this)
+                    continue;
+                else
+                {
+                    bool isHit = et.hitCheck(LaysTo,out Vector3 hit);
+                    if(isHit)
+                    {
+                        FindObj.Add(et);
+                    }
+                }
             }
+
             //Entityが見つからなければそのまま
             if(FindObj?.Count == 0)
             {
                 return;
             }
             float optimalObjDist = Mathf.Infinity;
-            GameObject optimalObject;
+            Entity optimalObject;
             (optimalObjDist, optimalObject) = getOptimalObjs(FindObj);
             if(optimalObject != null)
             {
@@ -418,13 +434,13 @@ public class Entity : MonoBehaviour
 
     //カメラベクトルを比較, 最も中央に近いものを探す.
     //via https://zenn.dev/aruk_vs/articles/ae723b82fd69ec
-    private (float, GameObject) getOptimalObjs(List<GameObject> hitObjects)
+    private (float, Entity) getOptimalObjs(List<Entity> hitObjects)
     {
         float degreep = Mathf.Atan2(targetTo_fw.x, targetTo_fw.z);
         float lockonFactor = 0.3f;
         float degreemum = Mathf.PI * 2;
         Transform cameraTrn = Camera.main.transform;
-        GameObject target = null;
+        Entity target = null;
 
         foreach (var enemy in hitObjects)
         {
