@@ -380,13 +380,13 @@ public class AnimDef
         clssSetting.clssPosUpdate();
         List<clssDef> ca = clssSetting.findclss(clssDef.ClssType.Hit, 0f);
         ca.AddRange(clssSetting.findclss(clssDef.ClssType.Attack, 0f));
+        clssSetting.clssDraw();
         
         foreach (clssDef c in ca)
         {
             //Debug.Log("clssCapsule name : " + c.attachTo);
             //Debug.Log(c.attachTo);
             c.getGlobalPos();
-            c.DrawCapsule();
             if (c.showGizmo == true)
             {
                 if (c.clssType == clssDef.ClssType.Attack)
@@ -430,6 +430,14 @@ public class clssSetting
 
     //投げとかステート奪取時の挙動用. 一時的に当たり判定を除去する.
     public bool eraseAllClss;
+
+    public void clssDraw()
+    {
+        foreach(clssDef c in clssDefs)
+        {
+            c.DrawCapsule();
+        }
+    }
 
     //entityで読み出すclssにentityを用意する.
     public void initClss(Entity entity)
@@ -612,6 +620,8 @@ public class clssDef
         EndTime = this.EndTime        
     };
 
+    public Color drawColor = Color.black;
+
     //やられ判定と当たり判定をenumで管理する
     public enum ClssType
     {
@@ -707,8 +717,19 @@ public class clssDef
         (pos_1, pos_2) = getGlobalPos();
         //Debug.Log(attachTo + " Drawin Capsules at" + pos_1.ToString() + pos_2.ToString());
         DrawCapsuleGizmo_Tool(pos_1, pos_2, width,
-        clssType == ClssType.Hit ? Color.blue : Color.red);
+        drawColor != Color.black ? drawColor : (clssType == ClssType.Hit ? Color.blue : Color.red));
         Debug.DrawLine(pos_1,pos_2);
+    }
+
+    internal IEnumerator DrawCapsuleEnums(float secs)
+    {
+        float remain = secs;
+        while(remain > 0)
+        {
+            DrawCapsule();
+            remain -= Time.deltaTime;
+            yield return null;
+        }
     }
 
 //Gizmoの描写

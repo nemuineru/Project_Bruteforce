@@ -364,10 +364,17 @@ public class Entity : MonoBehaviour
             shortTargetEntity = EList.First();
         }
         
-        if(mainTargetEntity != null && vCam != null && tag == "Player")
+        if(vCam != null && tag == "Player")
         {
-            gameState.self.target.target_to = mainTargetEntity.gameObject;
-            vCam.LookAt = mainTargetEntity.transform;
+            if(mainTargetEntity != null)
+            {
+                gameState.self.target.target_to = mainTargetEntity.gameObject;
+                vCam.LookAt = mainTargetEntity.transform;
+            }
+            else
+            {
+                vCam.LookAt = null;
+            }
         }
     }
 
@@ -383,22 +390,26 @@ public class Entity : MonoBehaviour
         else
         {
             Debug.Log("Set!");
-            Vector3 origins = transform.position + Vector3.up;
             float FindLength = 4f;
-            float FindRadius = 10f;
+            float FindRadius = 3f;
             //get Entity-Mask only.
             LayerMask EntityMask = LayerMask.NameToLayer("Entity");
 
             //先ず、カメラ方向へ極太のClssDefをプレイヤーから発射する.
             clssSetting LaysTo = new clssSetting();
             clssDef def = new clssDef();
-            def.startPos = origins;
-            def.endPos = origins + targetTo_fw; 
+            def.startPos = transform.position + Vector3.up + (vCam != null ? vCam.transform.forward * FindRadius : targetTo_fw * FindRadius);
+            def.endPos = def.startPos +(vCam != null ? vCam.transform.forward * FindLength : targetTo_fw * FindLength); 
             def.width = FindRadius;
-            def.attachTransform = transform;
+            def.attachTransform = null;
             def.clssType = clssDef.ClssType.Attack;
+            def.drawColor = Color.cyan;            
 
             LaysTo.clssDefs.Add(def);
+            foreach(var cr in LaysTo.clssDefs)
+            {
+                StartCoroutine(cr.DrawCapsuleEnums(.5f));
+            }
 
             List<Entity> FindObj = new List<Entity>();
 
@@ -753,6 +764,9 @@ public class Entity : MonoBehaviour
             CListQueue.Add(queue);
         }
     }
+
+    [SerializeField]
+    [ReadOnly(true)]
     Vector3 rotCam = new Vector3();
 
     //カメラ設定.
@@ -782,14 +796,17 @@ public class Entity : MonoBehaviour
             }
             else
             {
+                //set -180 to 180, for which rotation should not flipped..
                 Vector3 currentRotCam = vCam.transform.rotation.eulerAngles;
+                currentRotCam.x -= currentRotCam.x > 180 ? 360 : 0; 
+
                 if(vCam.LookAt == null)
                 {
                     rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
                     rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
                     rotCam.y = rotCam.y + look.x * 3.0f;
                     //Debug.Log(rotCam.x);
-                    vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.4f);
+                    vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.24f);
                 }
                 else
                 {
