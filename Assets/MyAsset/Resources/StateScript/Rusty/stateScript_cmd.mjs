@@ -79,6 +79,9 @@ export function stateCmd(entity) {
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
+    //距離を考慮.
+    let targetDist = CS.Elem.getTargetLength(entity)
+
     //ガード状態.
     if(selfOnGrd == true && GuardCmd_isPressed && StateDefID == 0 && entity.status.currentStancePoint > 0)
     {        
@@ -119,7 +122,7 @@ export function stateCmd(entity) {
     //ここまで通常攻撃
 
     //Special Ground Attack _ Knife c1
-    if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable && entity.status.currentEnergy > 5)
+    if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable && entity.status.currentEnergy > 5 && targetDist < 2.0)
     {
         verdList.Add(250);
     }
@@ -128,6 +131,14 @@ export function stateCmd(entity) {
     {
         verdList.Add(251);
     }
+
+    //Special Ground Far Attack - Gun
+    if(selfOnGrd == true && AttackCmd_y_isPressed && isChainable && entity.status.currentEnergy > 5 && targetDist >= 2.0)
+    {
+        verdList.Add(500);
+    }
+
+
     //Special Air Attack _ Knife c1
     if(selfOnGrd == false && AttackCmd_y_isPressed == true && (StateDefID >= 50 && StateDefID <= 55) && entity.status.currentEnergy > 10)
     {
@@ -156,6 +167,8 @@ export function stateCmd(entity) {
     {
         verdList.Add(40)
     }
+
+    
 
     return verdList;
 }

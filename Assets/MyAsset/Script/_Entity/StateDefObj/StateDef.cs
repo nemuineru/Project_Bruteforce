@@ -1632,7 +1632,7 @@ public class scAddPos : StateController
 }
 
 
-[SCHiearchy("Physics/set Rotation")]
+[SCHiearchy("Physics/set Absolute Rotation")]
 //set position for absolute value.
 public class scSetRotate : StateController
 {
@@ -1648,6 +1648,24 @@ public class scSetRotate : StateController
         entity.rigid.rotation = rotation.valueGet(loadParams, entity);
     }
 }
+
+[SCHiearchy("Physics/Add Absolute Rotation")]
+//set position for absolute value.
+public class scAddRotate : StateController
+{
+
+    [SerializeField]
+    stParams<Quaternion> rotation;
+
+    [SerializeField]
+    stParams<int> priority;
+
+    internal override void OnExecute(Entity entity)
+    {
+        entity.rigid.MoveRotation(entity.rigid.rotation * rotation.valueGet(loadParams, entity));
+    }
+}
+
 
 //add position via value.
 [System.Serializable]

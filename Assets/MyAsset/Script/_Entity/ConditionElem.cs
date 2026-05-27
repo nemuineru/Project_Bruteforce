@@ -211,4 +211,51 @@ public class Elem
         }
         return cnt;
     }
+
+    public static Entity getTargetEntity(Entity et)
+    {
+        Entity tgt = null;
+        if(et.mainTargetEntity != null)
+        {
+            tgt = et.mainTargetEntity;
+        }
+        else if(et.shortTargetEntity != null)
+        {
+            tgt = et.shortTargetEntity;
+        }
+        else if(et.nearestTargetEntity != null)
+        {
+            tgt = et.nearestTargetEntity;
+        }
+        return tgt;
+    }
+
+    public static float getTargetLength(Entity et)
+    {
+        float ret = Mathf.Infinity;
+        Entity target = getTargetEntity(et);
+        Vector3 diffs = target.transform.position - et.transform.position;
+        ret = diffs.magnitude;
+        return ret;
+    }
+    
+    //水平方向のアングルを取得
+    public static float getTargetHorizonAngle(Entity et)
+    {
+        float ret = 0f;
+        Entity target = getTargetEntity(et);
+        Vector3 diffs = target.transform.position - et.transform.position;
+        ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.up);
+        return ret;
+    }
+
+    //垂直方向のアングルを取得.
+    public static float getTargetVerticalAngle(Entity et)
+    {
+        float ret = 0f;
+        Entity target = getTargetEntity(et);
+        Vector3 diffs = target.transform.position - et.transform.position;
+        ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.right);
+        return ret;
+    }
 }

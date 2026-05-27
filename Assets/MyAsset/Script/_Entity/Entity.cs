@@ -886,7 +886,6 @@ public class Entity : MonoBehaviour
         {
             animancerManager.AM_FadeLayer(LayerID,fadeTime);
         }
-
     }
 
     public void entityPhisics()

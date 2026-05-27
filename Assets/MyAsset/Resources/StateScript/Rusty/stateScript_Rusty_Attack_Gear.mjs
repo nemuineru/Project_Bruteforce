@@ -120,3 +120,60 @@ export function StateDef_350_AirKnife(entity)
     }
     return verdList;
 }
+
+//Knifer states for Gunning 500
+export function StateDef_500_ID_Gun(entity)
+{ 
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
+
+    if (CurrentTime > 20)
+    {
+        verdList.Add(10);
+    }
+    if (CurrentTime == 0)
+    {
+        verdList.Add(0);
+    }
+    else
+    {
+        verdList.Add(1);
+    }
+    //Aight, does native JS supports math function?
+    if (Math.abs(CurrentTime - 5) < 2 &&
+        entity.attrs.isStateHit == 0)
+    {
+        verdList.Add(5);
+    }
+    if(SoundTime){
+        verdList.Add(100);
+    }
+    return verdList;
+}
+
+export function StateDef_500_Value(entity)
+{
+    let List_Object =
+        puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Object);
+    let outs = new List_Object();
+
+    const Vector2 = CS.UnityEngine.Vector2;
+    const Vector3 = CS.UnityEngine.Vector3;
+    const Quaternion = CS.UnityEngine.Quaternion;
+    let vel2 = new Vector2(0, 0)
+    let vel3 = new Vector3(0,0,0);
+    let Qt = new Quaternion(0,0,0,0);
+
+    Qt = Quaternion.AngleAxis(CS.Elem.getTargetHorizonAngle(entity),Vector3.up);
+
+    outs.Add(Qt);
+    //CS.UnityEngine.Debug.Log(vel2);
+    return outs
+}

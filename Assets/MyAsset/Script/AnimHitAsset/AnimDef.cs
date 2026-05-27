@@ -436,7 +436,7 @@ public class clssSetting
         foreach(clssDef c in clssDefs)
         {
             c.DrawCapsule();
-        }
+        }        
     }
 
     //entityで読み出すclssにentityを用意する.

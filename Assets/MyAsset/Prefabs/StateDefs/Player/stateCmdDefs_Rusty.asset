@@ -50,6 +50,7 @@ MonoBehaviour:
     - rid: 4404388709018370091
     - rid: 7982028180311244820
     - rid: 7982028180311244821
+    - rid: 5214396036557045760
     - rid: 5214395901293363200
     - rid: 7982027888260546560
     - rid: 7982027949219512324
@@ -189,6 +190,17 @@ MonoBehaviour:
           stLuaLoads: 
         stateControllerSubName: 40 SetTarget
         doLoadAfterChangeState: 0
+    - rid: 5214396036557045760
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 500
+          stLuaLoads: 
+        stateControllerSubName: 500 Gun Target
+        doLoadAfterChangeState: 0
+        changeTo: 500
+        priority: 0
     - rid: 5331018537749184514
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
