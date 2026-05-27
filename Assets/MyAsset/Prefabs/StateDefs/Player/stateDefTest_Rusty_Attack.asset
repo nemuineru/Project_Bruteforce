@@ -245,7 +245,7 @@ MonoBehaviour:
     ScriptDirectory: StateScript/Rusty
     ScriptName: stateScript_Rusty_Attack_Gear.mjs
     preStateVerdictName: StateDef_500_ID_Gun
-    ParamLoadName: 
+    ParamLoadName: StateDef_500_Value
     stateType: 83
     moveType: 65
     physType: 83
