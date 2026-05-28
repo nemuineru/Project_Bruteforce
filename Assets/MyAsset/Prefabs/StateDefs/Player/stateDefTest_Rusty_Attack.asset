@@ -3952,7 +3952,7 @@ MonoBehaviour:
           useLua: 0
           value: 0
           stLuaLoads: 
-        stateControllerSubName: Anim 200
+        stateControllerSubName: Anim 500
         doLoadAfterChangeState: 0
         changeAnimID:
           _setHidden: 0
@@ -3960,7 +3960,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 200
+          stParamValue: 500
           useID: -1
           stLuaLoads: 
         AnimSlot:

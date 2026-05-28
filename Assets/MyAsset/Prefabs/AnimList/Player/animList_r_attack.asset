@@ -29,7 +29,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: hand.l
         showGizmo: 1
         _entity: {fileID: 0}
@@ -59,7 +60,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: hand.r
         showGizmo: 1
         _entity: {fileID: 0}
@@ -89,7 +91,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: lowerleg.r
         showGizmo: 1
         _entity: {fileID: 0}
@@ -119,7 +122,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: hand.r
         showGizmo: 1
         _entity: {fileID: 0}
@@ -148,7 +152,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: lowerleg.r
         showGizmo: 1
         _entity: {fileID: 0}
@@ -177,7 +182,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: kf01
         showGizmo: 1
         _entity: {fileID: 0}
@@ -207,7 +213,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: kf01
         showGizmo: 1
         _entity: {fileID: 0}
@@ -236,7 +243,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: ax01
         showGizmo: 1
         _entity: {fileID: 0}
@@ -265,7 +273,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: ha01
         showGizmo: 1
         _entity: {fileID: 0}
@@ -294,7 +303,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: lowerleg.l
         showGizmo: 1
         _entity: {fileID: 0}
@@ -324,7 +334,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: kf01
         showGizmo: 1
         _entity: {fileID: 0}
@@ -353,7 +364,40 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
+        attachTo: lowerleg.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.62, z: 0}
+        endPos: {x: 0, y: -0.57, z: 0}
+        width: 0.51
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList:
+      - head
+      - hip
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 500
+    Name: GunAttack_Normal
+    animClip:
+    - Clip: {fileID: 7400000, guid: de7438ba8ce9df943a0f519c9ae0c81f, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0
+    blendOutTime: 0.12
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
         attachTo: lowerleg.r
         showGizmo: 1
         _entity: {fileID: 0}

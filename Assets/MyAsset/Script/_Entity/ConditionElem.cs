@@ -234,8 +234,11 @@ public class Elem
     {
         float ret = Mathf.Infinity;
         Entity target = getTargetEntity(et);
-        Vector3 diffs = target.transform.position - et.transform.position;
-        ret = diffs.magnitude;
+        if(target != null)
+        {
+            Vector3 diffs = target.transform.position - et.transform.position;
+            ret = diffs.magnitude;
+        }
         return ret;
     }
     
@@ -244,8 +247,11 @@ public class Elem
     {
         float ret = 0f;
         Entity target = getTargetEntity(et);
-        Vector3 diffs = target.transform.position - et.transform.position;
-        ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.up);
+        if(target != null)
+        {
+            Vector3 diffs = target.transform.position - et.transform.position;
+            ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.up);
+        }
         return ret;
     }
 
@@ -254,8 +260,11 @@ public class Elem
     {
         float ret = 0f;
         Entity target = getTargetEntity(et);
-        Vector3 diffs = target.transform.position - et.transform.position;
-        ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.right);
+        if(target != null)
+        {
+            Vector3 diffs = target.transform.position - et.transform.position;
+            ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.right);
+        }
         return ret;
     }
 }
