@@ -253,6 +253,7 @@ MonoBehaviour:
     - rid: 5214396036557045762
     - rid: 5214396036557045763
     - rid: 5214396036557045770
+    - rid: 5214396058945716227
     Dir: 
     setCtrl: 0
   references:
@@ -4027,6 +4028,34 @@ MonoBehaviour:
           _MenuName: Base
           loadTypes: 0
           stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 5214396058945716227
+      type: {class: scProjectile, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1000
+          stLuaLoads: 
+        stateControllerSubName: Bullets
+        doLoadAfterChangeState: 0
+        projs: {fileID: 0}
+        InstDirection:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
+          useID: -1
+          stLuaLoads: 
+        InstPosition:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
     - rid: 5331018484740521993

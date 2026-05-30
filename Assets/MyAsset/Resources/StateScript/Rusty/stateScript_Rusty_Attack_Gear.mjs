@@ -134,7 +134,7 @@ export function StateDef_500_ID_Gun(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
 
-    if (CurrentTime > 20)
+    if (CurrentTime > 17)
     {
         verdList.Add(10);
     }
