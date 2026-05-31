@@ -4035,7 +4035,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 1000
+          value: 500
           stLuaLoads: 
         stateControllerSubName: Bullets
         doLoadAfterChangeState: 0
@@ -4046,7 +4046,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 5, y: 0, z: 0}
           useID: -1
           stLuaLoads: 
         InstPosition:
@@ -4055,7 +4055,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: {x: 0, y: 0, z: 0}
+          stParamValue: {x: 1, y: 1, z: 0}
           useID: -1
           stLuaLoads: 
     - rid: 5331018484740521993

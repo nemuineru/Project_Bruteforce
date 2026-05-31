@@ -134,6 +134,10 @@ export function StateDef_500_ID_Gun(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
 
+    if (CurrentTime == 7)
+    {
+        verdList.Add(500);
+    }
     if (CurrentTime > 17)
     {
         verdList.Add(10);
@@ -142,6 +146,7 @@ export function StateDef_500_ID_Gun(entity)
     {
         verdList.Add(0);
     }
+
     else
     {
         verdList.Add(1);
@@ -167,13 +172,24 @@ export function StateDef_500_Value(entity)
     const Vector2 = CS.UnityEngine.Vector2;
     const Vector3 = CS.UnityEngine.Vector3;
     const Quaternion = CS.UnityEngine.Quaternion;
-    let vel2 = new Vector2(0, 0)
-    let vel3 = new Vector3(0,0,0);
+
+
     let Qt = new Quaternion(0,0,0,0);
+
+    let FwPos = new Vector3(0,0,0);
+    let FwVect = new Vector3(0,0,0);
 
     Qt = Quaternion.AngleAxis(CS.Elem.getTargetHorizonAngle(entity),Vector3.up);
 
+    FwPos = entity.transform.position
+    FwPos.y = FwPos.y + 0.3;
+
+    FwVect = entity.transform.forward;
+    FwVect = Vector3.op_Multiply(FwVect,10.0);
+
     outs.Add(Qt);
+    outs.Add(FwVect);
+    outs.Add(FwPos);
     //CS.UnityEngine.Debug.Log(vel2);
     return outs
 }

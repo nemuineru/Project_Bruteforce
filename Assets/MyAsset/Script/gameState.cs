@@ -89,8 +89,16 @@ public class gameState : MonoBehaviour
         }
         Transform tr = InitSpawnPos != null ? InitSpawnPos : gameObject.transform;
         Quaternion qt = Quaternion.LookRotation(tr.forward);
-        Player = Instantiate(Player_Instantiate,tr.position,qt).GetComponent<Entity>();
-        
+        GameObject findPlayer = GameObject.FindGameObjectWithTag("Player");
+        if(findPlayer != null)
+        {
+            Player = findPlayer.GetComponent<Entity>();
+        }
+        else
+        {
+            Player = Instantiate(Player_Instantiate,tr.position,qt).GetComponent<Entity>();
+        }
+
         GameObject objs = Instantiate(MainGUI.gameObject);
         GameObject GUI_Top = GameObject.FindGameObjectWithTag("UI");
         if(Player_Vcam != null)

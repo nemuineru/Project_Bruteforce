@@ -1143,6 +1143,7 @@ public class scProjectile : StateController
     [SerializeField]
     Projectile projs;
 
+    //sets the velocity.
     [SerializeField]
     stParams<Vector3> InstDirection;
 

@@ -33,16 +33,17 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         cSet.clssPosUpdate();
+        RemainTime -= Time.fixedDeltaTime;
         foreach (clssDef c in cSet.clssDefs)
         {
             Debug.Log("drawing clssDefs");
             c.getGlobalPos();
             c.DrawCapsule();
         }
-        if (gameState.self.ProvokeHitDef_Projs(proj_Controller, cSet, hitDefParams))
+        if (gameState.self.ProvokeHitDef_Projs(proj_Controller, cSet, hitDefParams) || RemainTime < 0)
         {
             Debug.Log("HIT!");
             destroyEmit();

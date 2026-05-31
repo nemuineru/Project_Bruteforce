@@ -386,12 +386,12 @@ MonoBehaviour:
     ID: 500
     Name: GunAttack_Normal
     animClip:
-    - Clip: {fileID: 7400000, guid: de7438ba8ce9df943a0f519c9ae0c81f, type: 2}
+    - Clip: {fileID: 7400000, guid: 29eb862ed38c9df4db1a82baf30ee894, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0
       mixPosition: {x: 0, y: 0}
-    blendInTime: 0
+    blendInTime: 0.24
     blendOutTime: 0.12
     useDefaultClss: 0
     clssSetting:
