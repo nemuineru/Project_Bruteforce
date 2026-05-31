@@ -4008,7 +4008,7 @@ MonoBehaviour:
       data:
         ID:
           useLua: 0
-          value: 90000
+          value: 1
           stLuaLoads: 
         stateControllerSubName: Add Rotate
         doLoadAfterChangeState: 0
