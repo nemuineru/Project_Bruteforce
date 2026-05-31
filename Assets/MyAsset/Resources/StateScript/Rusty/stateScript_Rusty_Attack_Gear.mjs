@@ -134,7 +134,7 @@ export function StateDef_500_ID_Gun(entity)
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
 
-    if (CurrentTime == 7)
+    if (CurrentTime == 6)
     {
         verdList.Add(500);
     }
@@ -145,10 +145,6 @@ export function StateDef_500_ID_Gun(entity)
     if (CurrentTime == 0)
     {
         verdList.Add(0);
-    }
-
-    else
-    {
         verdList.Add(1);
     }
     //Aight, does native JS supports math function?
@@ -184,8 +180,8 @@ export function StateDef_500_Value(entity)
     FwPos = entity.transform.position
     FwPos.y = FwPos.y + 0.3;
 
-    FwVect = entity.transform.forward;
-    FwVect = Vector3.op_Multiply(FwVect,10.0);
+    FwVect = CS.Elem.getTargetForward(entity);
+    FwVect = Vector3.op_Multiply(FwVect, 30.0);
 
     outs.Add(Qt);
     outs.Add(FwVect);

@@ -16,6 +16,7 @@ using Animancer;
 using UnityEngine.InputSystem.XR;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityPhysics;
+using RootMotion.FinalIK;
 
 public class Entity : MonoBehaviour
 {
@@ -195,6 +196,10 @@ public class Entity : MonoBehaviour
     //ヒット回数を数えるための変数. どの様な感じでも減少しない.
     internal int TotalHitNo = 0;
 
+    //Final IK for Aiming. Generates Lookpos Gameobj so it handles good way..
+    public IK ik;
+    public GameObject LookPos;
+
 
     //GetHitDef/GetAttackDefで管理されるHitParams.
     //当てたプレイヤー本人のガード等を鑑みて..
@@ -222,6 +227,8 @@ public class Entity : MonoBehaviour
     //first init.
     void Awake()
     {
+        //ik = GetComponent<IK>();
+
         allChildTransforms = GetComponentsInChildren<Transform>(true);
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
 

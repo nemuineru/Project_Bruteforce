@@ -4039,24 +4039,24 @@ MonoBehaviour:
           stLuaLoads: 
         stateControllerSubName: Bullets
         doLoadAfterChangeState: 0
-        projs: {fileID: 0}
+        projs: {fileID: 6828851396481894345, guid: 6fec6d8ff6891d84b86b0306a0ca5761, type: 3}
         InstDirection:
           _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
-          loadTypes: 0
+          loadTypes: 1
           stParamValue: {x: 5, y: 0, z: 0}
-          useID: -1
+          useID: 1
           stLuaLoads: 
         InstPosition:
           _setHidden: 0
           _setEssential: 0
           _isReadable: 1
           _MenuName: Base
-          loadTypes: 0
+          loadTypes: 1
           stParamValue: {x: 1, y: 1, z: 0}
-          useID: -1
+          useID: 2
           stLuaLoads: 
     - rid: 5331018484740521993
       type: {class: scAddVelocity, ns: , asm: Assembly-CSharp}

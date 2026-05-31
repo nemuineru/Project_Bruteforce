@@ -230,6 +230,17 @@ public class Elem
         return tgt;
     }
 
+    public static Vector3 getTargetForward(Entity et)
+    {
+        Vector3 ret = et.transform.forward;
+        Entity target = getTargetEntity(et);
+        if(target != null)
+        {
+            ret = (target.transform.position - et.transform.position).normalized;
+        }
+        return ret;
+    }
+
     public static float getTargetLength(Entity et)
     {
         float ret = Mathf.Infinity;
