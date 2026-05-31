@@ -145,6 +145,9 @@ export function StateDef_500_ID_Gun(entity)
     if (CurrentTime == 0)
     {
         verdList.Add(0);
+    }
+    else if(Math.abs(CS.Elem.getTargetHorizonAngle(entity)) > 5)
+    {
         verdList.Add(1);
     }
     //Aight, does native JS supports math function?
@@ -175,7 +178,7 @@ export function StateDef_500_Value(entity)
     let FwPos = new Vector3(0,0,0);
     let FwVect = new Vector3(0,0,0);
 
-    Qt = Quaternion.AngleAxis(CS.Elem.getTargetHorizonAngle(entity),Vector3.up);
+    Qt = Quaternion.AngleAxis(CS.Elem.getTargetHorizonAngle(entity) * CS.UnityEngine.Time.fixedDeltaTime * 5.0 ,Vector3.up);
 
     FwPos = entity.transform.position
     FwPos.y = FwPos.y + 0.3;

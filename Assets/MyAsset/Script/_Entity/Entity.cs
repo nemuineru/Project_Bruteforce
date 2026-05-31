@@ -197,7 +197,7 @@ public class Entity : MonoBehaviour
     internal int TotalHitNo = 0;
 
     //Final IK for Aiming. Generates Lookpos Gameobj so it handles good way..
-    public IK ik;
+    public AimIK ik;
     public GameObject LookPos;
 
 
@@ -227,7 +227,10 @@ public class Entity : MonoBehaviour
     //first init.
     void Awake()
     {
-        //ik = GetComponent<IK>();
+        ik = GetComponent<AimIK>() ?? gameObject.AddComponent<AimIK>();
+
+        LookPos = new GameObject(gameObject.name + ".LookerObject");
+        ik.solver.target = LookPos.transform;
 
         allChildTransforms = GetComponentsInChildren<Transform>(true);
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
@@ -370,19 +373,30 @@ public class Entity : MonoBehaviour
         {
             shortTargetEntity = EList.First();
         }
+        if(mainTargetEntity != null)
+        {
+            gameState.self.target.target_to = mainTargetEntity.gameObject;
+        }
         
         if(vCam != null && tag == "Player")
         {
             if(mainTargetEntity != null)
             {
                 gameState.self.target.target_to = mainTargetEntity.gameObject;
-                vCam.LookAt = mainTargetEntity.transform;
+                vCam.LookAt = LookPos.transform;
             }
             else
             {
                 vCam.LookAt = null;
             }
         }
+        
+        Entity tgts = Elem.getTargetEntity(this);
+        if(tgts != null)
+        {
+            LookPos.transform.position = tgts.transform.position + Vector3.up * 0.5f;
+        }
+        LookPos.transform.rotation = transform.rotation;
     }
 
     //メインターゲットをカメラ中心から決定する.
