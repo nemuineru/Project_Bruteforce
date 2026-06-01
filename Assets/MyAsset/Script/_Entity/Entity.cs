@@ -197,8 +197,10 @@ public class Entity : MonoBehaviour
     internal int TotalHitNo = 0;
 
     //Final IK for Aiming. Generates Lookpos Gameobj so it handles good way..
+    //Make a polePosition for handling pole IK pos
     public AimIK ik;
     public GameObject LookPos;
+    public GameObject LookPolePos;
 
 
     //GetHitDef/GetAttackDefで管理されるHitParams.
@@ -230,7 +232,10 @@ public class Entity : MonoBehaviour
         ik = GetComponent<AimIK>() ?? gameObject.AddComponent<AimIK>();
 
         LookPos = new GameObject(gameObject.name + ".LookerObject");
+        LookPolePos =  new GameObject(gameObject.name + ".LookerPoleObject");
+        
         ik.solver.target = LookPos.transform;
+        ik.solver.poleTarget = LookPolePos.transform
 
         allChildTransforms = GetComponentsInChildren<Transform>(true);
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
@@ -397,6 +402,7 @@ public class Entity : MonoBehaviour
             LookPos.transform.position = tgts.transform.position + Vector3.up * 0.5f;
         }
         LookPos.transform.rotation = transform.rotation;
+        LookPolePos = transform.position + Vector3.up * Quaternion.AxisAngle(Elem.getTargetVerticalAngle(this) / 5.0f,Vector3.right);
     }
 
     //メインターゲットをカメラ中心から決定する.
