@@ -670,6 +670,21 @@ public class scAnimParentSet : StateController
     }
 }
 
+[SCHiearchy("Animation/IK Weight Change")]
+//IKの設定を1Fだけする.
+public class scSetIKWeight : StateController
+{
+    [SerializeField]
+    stParams<float> Weight;
+
+    //Parent Version.
+    internal override void OnExecute(Entity entity)
+    {
+        float Weight = Weight.valueGet(loadParams,entity);
+        //entity.ik.
+    }
+}
+
 //Groundに設定された法線方向に移動させる.
 [System.Serializable]
 [SerializeField]
