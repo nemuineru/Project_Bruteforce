@@ -4,32 +4,39 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Vector3 pos_1, pos_2;
-    public float radius;
+    //those 2s are essential
+
+    [SerializeField]
+    public clssDef clssDef;
+    public Vector3 Velocity;
+    public Vector3 Accel;
+
+
+    public Vector3 CustomVectorParam;
 
     public float RemainTime = 1.0f;
 
     public GameObject EffectObject;
+
     //
     public Entity proj_Controller;
+    public Entity proj_Target;
 
     [SerializeField]
     public hitDefParams hitDefParams;
 
+    internal Rigidbody rb;
+
     
     //当たり判定 - 
-    clssSetting cSet = new clssSetting();
+    internal clssSetting cSet = new clssSetting();
     // Start is called before the first frame update
     void Start()
     {
-        clssDef def = new clssDef();
-        def.initTransform(this.transform);
-        def.startPos = pos_1;
-        def.endPos = pos_2;
-        def.clssType = clssDef.ClssType.Attack;
-        def.width = radius;
-
-        cSet.clssDefs.Add(def);
+        clssDef.initTransform(this.transform);
+        cSet.clssDefs.Add(clssDef);
+        rb = GetComponent<Rigidbody>();
+        OnEmit();
     }
 
     // Update is called once per frame
@@ -37,34 +44,29 @@ public class Projectile : MonoBehaviour
     {
         cSet.clssPosUpdate();
         RemainTime -= Time.fixedDeltaTime;
-        foreach (clssDef c in cSet.clssDefs)
-        {
-            Debug.Log("drawing clssDefs");
-            c.getGlobalPos();
-            c.DrawCapsule();
-        }
-        if (gameState.self.ProvokeHitDef_Projs(proj_Controller, cSet, hitDefParams) || RemainTime < 0)
-        {
-            Debug.Log("HIT!");
-            destroyEmit();
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log("Collided! + " + collision.gameObject.layer);
-        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        OnProjUpdation();
+        if (RemainTime < 0)
         {
             destroyEmit();
         }
+        HitUpdate();
     }
 
-    void destroyEmit()
+
+    virtual internal void OnEmit()
     {
-        if (EffectObject != null)
-        { 
-            Instantiate(EffectObject,transform.position,Quaternion.identity);
-        }
+    }
+
+    virtual internal void OnProjUpdation()
+    {
+    }
+
+    virtual internal void HitUpdate()
+    {
+    }
+    virtual internal void destroyEmit()
+    {
         Destroy(gameObject);
     }
+
 }

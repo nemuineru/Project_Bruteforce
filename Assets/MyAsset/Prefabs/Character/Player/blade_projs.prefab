@@ -357,9 +357,6 @@ PrefabInstance:
       addedObject: {fileID: 8325179771528499233}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18fbf3dc91b2a0a44bea3baebc322aa0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6828851396481894345}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18fbf3dc91b2a0a44bea3baebc322aa0, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4310018582816732179}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18fbf3dc91b2a0a44bea3baebc322aa0, type: 3}
       insertIndex: -1
@@ -367,6 +364,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18fbf3dc91b2a0a44bea3baebc322aa0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5198496172343264358}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18fbf3dc91b2a0a44bea3baebc322aa0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3854319322457588370}
   m_SourcePrefab: {fileID: 100100000, guid: 18fbf3dc91b2a0a44bea3baebc322aa0, type: 3}
 --- !u!4 &3473548992023193208 stripped
 Transform:
@@ -399,55 +399,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6828851396481894345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4287240800322272450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e0eefda369607a428c72446ca722e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pos_1: {x: 1, y: 0, z: 0}
-  pos_2: {x: -1, y: 0, z: 0}
-  radius: 0.25
-  RemainTime: 0.5
-  EffectObject: {fileID: 0}
-  proj_Controller: {fileID: 0}
-  hitDefParams:
-    hitID: 500
-    Damage: {x: 30, y: 30}
-    StanceDamage: {x: 4, y: 4}
-    BalanceDamage: 2
-    JugglePoint: 1
-    Kill: 1
-    GuardOnKill: 0
-    velset: {x: 2, y: 4, z: 0}
-    guard_velset: {x: 0, y: 0, z: 0}
-    pl_velset: {x: 0, y: 0, z: 0}
-    pl_guard_velset: {x: 0, y: 0, z: 0}
-    hitStopTime: {x: 6, y: 0}
-    guard_hitStopTime: {x: 4, y: 0}
-    HitTime: {x: 4, y: 0}
-    HitEff: {fileID: 0}
-    GuardHitEff: {fileID: 0}
-    HitPriority: 0
-    HitPriorityBehavior: 72
-    sameHitInterval: 0
-    maxEntityHits: 24
-    fallTime: 0
-    ChangeState_Target: -1
-    TargetRefsOwnerNum: 0
-    ChangeState_Owner: -1
-    hitStateFlag: SA
-    HitMoveFlag: IA
-    GuardStateFlag: SA
-    GuardMoveFlag: IA
-    AnimType: 
-    HitExcludeList: 
 --- !u!54 &4310018582816732179
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -457,7 +408,7 @@ Rigidbody:
   m_GameObject: {fileID: 4287240800322272450}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -506,7 +457,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 81b9112d5f4677b498aa758c981618be, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8164d98477fe5c54987644bfac777d8d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -592,3 +543,65 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3854319322457588370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287240800322272450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce64d5db01eac114d93367b0daf51ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clssDef:
+    drawColor: {r: 0, g: 0, b: 0, a: 1}
+    clssType: 0
+    attachTo: 
+    showGizmo: 0
+    _entity: {fileID: 0}
+    attachTransform: {fileID: 0}
+    startPos: {x: 1, y: 0, z: 0}
+    endPos: {x: -1, y: 0, z: 0}
+    width: 0.25
+    _lastcalcStartPos: {x: 0, y: 0, z: 0}
+    _lastcalcEndPos: {x: 0, y: 0, z: 0}
+  Velocity: {x: 0, y: 0, z: 0}
+  Accel: {x: 0, y: 0, z: 0}
+  CustomVectorParam: {x: 0, y: 0, z: 0}
+  RemainTime: 0.5
+  EffectObject: {fileID: 0}
+  proj_Controller: {fileID: 0}
+  proj_Target: {fileID: 0}
+  hitDefParams:
+    hitID: 500
+    Damage: {x: 30, y: 30}
+    StanceDamage: {x: 4, y: 4}
+    BalanceDamage: 2
+    JugglePoint: 1
+    Kill: 1
+    GuardOnKill: 0
+    velset: {x: 2, y: 4, z: 0}
+    guard_velset: {x: 0, y: 0, z: 0}
+    pl_velset: {x: 0, y: 0, z: 0}
+    pl_guard_velset: {x: 0, y: 0, z: 0}
+    hitStopTime: {x: 6, y: 0}
+    guard_hitStopTime: {x: 4, y: 0}
+    HitTime: {x: 4, y: 0}
+    HitEff: {fileID: 0}
+    GuardHitEff: {fileID: 0}
+    HitPriority: 0
+    HitPriorityBehavior: 72
+    sameHitInterval: 0
+    maxEntityHits: 24
+    fallTime: 0
+    ChangeState_Target: -1
+    TargetRefsOwnerNum: 0
+    ChangeState_Owner: -1
+    hitStateFlag: SA
+    HitMoveFlag: IA
+    GuardStateFlag: SA
+    GuardMoveFlag: IA
+    AnimType: 
+    HitExcludeList: 

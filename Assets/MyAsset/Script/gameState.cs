@@ -305,9 +305,11 @@ public class gameState : MonoBehaviour
         return ret;
     }
 
+    //こっちの方も色々変える
     public bool ProvokeHitDef_Projs(Entity ownerEntity, clssSetting sets, hitDefParams H_params)
     {
-        bool ret = false; int refNumRemaining;
+        bool ret = false; 
+        int refNumRemaining;
         hitDefParams useParam = new hitDefParams();
 
         

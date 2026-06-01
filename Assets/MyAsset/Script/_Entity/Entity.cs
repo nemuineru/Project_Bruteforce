@@ -158,6 +158,8 @@ public class Entity : MonoBehaviour
 
     public Vector3 wishingVect;
 
+    public float baseIKWeight = 0.0f;
+
     //Input Manager for each entitys
     internal entityInputManager entityInput = new entityInputManager();
 
@@ -200,7 +202,6 @@ public class Entity : MonoBehaviour
     //Make a polePosition for handling pole IK pos
     public AimIK ik;
     public GameObject LookPos;
-    public GameObject LookPolePos;
 
 
     //GetHitDef/GetAttackDefで管理されるHitParams.
@@ -232,10 +233,8 @@ public class Entity : MonoBehaviour
         ik = GetComponent<AimIK>() ?? gameObject.AddComponent<AimIK>();
 
         LookPos = new GameObject(gameObject.name + ".LookerObject");
-        LookPolePos =  new GameObject(gameObject.name + ".LookerPoleObject");
         
         ik.solver.target = LookPos.transform;
-        ik.solver.poleTarget = LookPolePos.transform
 
         allChildTransforms = GetComponentsInChildren<Transform>(true);
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
@@ -322,6 +321,9 @@ public class Entity : MonoBehaviour
         //これかぁ.. HitPauseTimeが設定されていてもそのまま続行 - HitPause分も引き継ぐ.
         stateTime = isStateChanged ? 0 : status.HitPauseTime >= 0 ? stateTime : stateTime + 1;
 
+        //IKは基本的に0.
+        ik.solver.IKPositionWeight = baseIKWeight;
+
         //sets target nearby if the button pressed.
         SetTarget();
 
@@ -380,29 +382,36 @@ public class Entity : MonoBehaviour
         }
         if(mainTargetEntity != null)
         {
-            gameState.self.target.target_to = mainTargetEntity.gameObject;
+            gameState.self.target.MainTarget_to = mainTargetEntity.gameObject;
         }
         
         if(vCam != null && tag == "Player")
         {
             if(mainTargetEntity != null)
             {
-                gameState.self.target.target_to = mainTargetEntity.gameObject;
+                gameState.self.target.MainTarget_to = mainTargetEntity.gameObject;
                 vCam.LookAt = LookPos.transform;
             }
             else
             {
+                gameState.self.target.MainTarget_to = null;
                 vCam.LookAt = null;
             }
         }
         
+        //IK solvers
         Entity tgts = Elem.getTargetEntity(this);
         if(tgts != null)
         {
             LookPos.transform.position = tgts.transform.position + Vector3.up * 0.5f;
+            gameState.self.target.transform.position = Vector3.Lerp(gameState.self.target.transform.position,tgts.transform.position + Vector3.up * 0.5f,0.1f);
+            gameState.self.target.gameObject.SetActive(true);
+        }
+        else
+        {
+            gameState.self.target.gameObject.SetActive(false);
         }
         LookPos.transform.rotation = transform.rotation;
-        LookPolePos = transform.position + Vector3.up * Quaternion.AxisAngle(Elem.getTargetVerticalAngle(this) / 5.0f,Vector3.right);
     }
 
     //メインターゲットをカメラ中心から決定する.

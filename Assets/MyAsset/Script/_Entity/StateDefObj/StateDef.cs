@@ -675,13 +675,13 @@ public class scAnimParentSet : StateController
 public class scSetIKWeight : StateController
 {
     [SerializeField]
-    stParams<float> Weight;
+    stParams<float> Weight = new stParams<float>(1f, true, true);
 
     //Parent Version.
     internal override void OnExecute(Entity entity)
     {
-        float Weight = Weight.valueGet(loadParams,entity);
-        //entity.ik.
+        float ikWeight = Weight.valueGet(loadParams,entity);
+        entity.ik.solver.IKPositionWeight = ikWeight;
     }
 }
 
@@ -1160,7 +1160,10 @@ public class scProjectile : StateController
 
     //sets the velocity.
     [SerializeField]
-    stParams<Vector3> InstDirection;
+    stParams<Vector3> InstVelocity;
+
+    [SerializeField]
+    stParams<Vector3> InstAccel;
 
     [SerializeField]
     stParams<Vector3> InstPosition;
@@ -1171,10 +1174,11 @@ public class scProjectile : StateController
         //set projs. if its null do nothing
         if (projs != null)
         {
-            GameObject inst = entity.makeInstantiate(projs.gameObject,null);
+            Projectile inst = entity.makeInstantiate(projs.gameObject,null).GetComponent<Projectile>();
             inst.transform.position = InstPosition.valueGet(loadParams, entity);
-            inst.GetComponent<Rigidbody>().velocity = InstDirection.valueGet(loadParams, entity);
-            inst.GetComponent<Projectile>().proj_Controller = entity;
+            inst.Velocity = InstVelocity.valueGet(loadParams, entity);
+            inst.proj_Controller = entity;
+            inst.proj_Target = Elem.getTargetEntity(entity);
         }
     }
 
