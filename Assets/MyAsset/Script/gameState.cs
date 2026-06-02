@@ -147,7 +147,7 @@ public class gameState : MonoBehaviour
 
         foreach(hitDefParams HParam in queuedHitDefs)
         {
-            ProvokeHitDef_Entity(HParam);
+            ProvokeHitDef(HParam);
         }
         HitParamFrame();
         queuedHitDefs = new List<hitDefParams>();
@@ -216,162 +216,97 @@ public class gameState : MonoBehaviour
     //2026-04-08 HitCheckにバグが有るのを確認. うーん..
     //そも　selectedEntityがなんかおかしいことになってるならnullになる筈..
     //追記 AnimDefの登録がヤバかったみたいです. 今は治った.
-    public bool ProvokeHitDef_Entity(hitDefParams refHitParam)
+    //2026-06-02 ProjとEntityの共通化をAI君に任せた.
+    public bool ProvokeHitDef(hitDefParams refHitParam, clssSetting projSets = null)
     {
         bool ret = false;
-        int refNumRemaining;
-        hitDefParams useParam = new hitDefParams();        
-        if (refHitParam != null)
-        {
-            useParam = refHitParam;
-        }
+        if (refHitParam == null) return false;
 
-        //contact数を考える..
-        int refOwnerTargetContact = useParam.ownerEntity.hitdefSameTime.FindAll(h => h == useParam.hitID).Count;
-
-        refNumRemaining = useParam.maxEntityHits - refOwnerTargetContact;
-
-        //Debug.Log(entityList.Count());
+        Entity ownerEntity = refHitParam.ownerEntity;
+        int refOwnerTargetContact = ownerEntity != null
+            ? ownerEntity.hitdefSameTime.FindAll(h => h == refHitParam.hitID).Count
+            : 0;
+        int refNumRemaining = refHitParam.maxEntityHits - refOwnerTargetContact;
 
         foreach (Entity selectedEntity in entityList)
         {
-            //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
-            if (selectedEntity != useParam.ownerEntity && 
-            selectedEntity.tag != useParam.ownerEntity.tag &&
-            refNumRemaining > 0)
+            bool selfCheck = ownerEntity == null ||
+                (selectedEntity != ownerEntity && selectedEntity.tag != ownerEntity.tag);
+
+            if (selfCheck && refNumRemaining > 0)
             {
-                Debug.Log(selectedEntity.gameObject.name);
-                bool hitCheck = 
-                useParam.ownerEntity.hitCheck(selectedEntity, out Vector3 HitPt);
-                Debug.Log(hitCheck);
+                bool hitCheck;
+                Vector3 HitPt;
+
+                if (projSets != null)
+                {
+                    clssSetting cEnemy = selectedEntity.animancerManager.primaryAnimDef.clssSetting;
+                    hitCheck = projSets.clssCollided(out var v1, out var v2, out var dist, clssDef.ClssType.Attack, cEnemy, .1f);
+                    HitPt = hitCheck ? (v1 + v2) / 2f : Vector3.zero;
+                }
+                else
+                {
+                    Debug.Log(selectedEntity.gameObject.name);
+                    hitCheck = ownerEntity.hitCheck(selectedEntity, out HitPt);
+                    Debug.Log(hitCheck);
+                }
 
                 bool isIntervalAvailable = true;
-                //もし見つけられなかったら新規登録なので..
-                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == useParam.hitID);
-                if(FindP != null && refOwnerTargetContact != 0)
+                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == refHitParam.hitID);
+                if (FindP != null && refOwnerTargetContact != 0)
                 {
                     float recentRevTime = elapsedTime - FindP.HitRegisterTime;
-                    //インターバル未設定なら一回のみ. インターバル設定済みなら...
-                    if(useParam.sameHitInterval <= 0 || recentRevTime < useParam.sameHitInterval)
-                    {
+                    if (refHitParam.sameHitInterval <= 0 || recentRevTime < refHitParam.sameHitInterval)
                         isIntervalAvailable = false;
-                    }
                 }
 
-                //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
-                //また、entityの無敵判定に関しても考える.
-                //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
-                //Juggle追加.. これ管理しきれねえ.
-                bool isContactable = hitCheck && selectedEntity.status.currentJugglePoint >= 0 && 
-                refHitParam.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
-                refHitParam.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
-                !refHitParam.HitExcludeList.Contains(selectedEntity.CurrentStateID) && isIntervalAvailable;
-                //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
+                bool isContactable = hitCheck &&
+                    selectedEntity.status.currentJugglePoint >= 0 &&
+                    refHitParam.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
+                    refHitParam.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
+                    !refHitParam.HitExcludeList.Contains(selectedEntity.CurrentStateID) &&
+                    isIntervalAvailable;
+
                 if (isContactable)
                 {
+                    if (projSets != null)
+                        Debug.LogWarning("Proj Collided");
+                    else
+                        Debug.Log("HitID" + refHitParam.hitID);
                     ret = true;
-                    hitDefApply(selectedEntity, useParam.ownerEntity, useParam, HitPt);
-                    //当てた分キャラ指定の値が減少..
+                    hitDefApply(selectedEntity, ownerEntity, refHitParam, HitPt);
                     refNumRemaining--;
-                    useParam.ownerEntity.status.currentEnergy += 3;
-                }
-                if(hitCheck)
-                {
-                    Debug.Log("HitID" + useParam.hitID);                    
+                    if (ownerEntity != null)
+                        ownerEntity.status.currentEnergy += 3;
                 }
             }
-            else if(selectedEntity == useParam.ownerEntity)
+            else if (ownerEntity != null && selectedEntity == ownerEntity)
             {
                 Debug.Log("selectetEntity is same value.");
             }
         }
-        foreach(Props prop in propList)
+
+        if (projSets == null && ownerEntity != null)
         {
-            if(useParam.ownerEntity.hitCheck(prop.hitBox, out Vector3 hits))
+            foreach (Props prop in propList)
             {
-                if(prop.isHit == false && prop.isPausable())
+                if (ownerEntity.hitCheck(prop.hitBox, out Vector3 hits))
                 {
-                    //雑ぅ. でもひとまずこれでなんとかなるか..
-                    prop.OnHit(refHitParam, hits);
-                    Instantiate
-                    ((refHitParam.HitEff != null ? refHitParam.HitEff : defaultEff), hits, Quaternion.identity);
-                    //onHit, entity will stop. but props wont.
-                    //I'll set high pause for each.
-                    (useParam.ownerEntity.status.HitPauseTime , prop.disableTime) = (4, 30);
-                }
-                prop.isHit = true;
-            }
-        }
-        return ret;
-    }
-
-    //こっちの方も色々変える
-    public bool ProvokeHitDef_Projs(Entity ownerEntity, clssSetting sets, hitDefParams H_params)
-    {
-        bool ret = false; 
-        int refNumRemaining;
-        hitDefParams useParam = new hitDefParams();
-
-        
-        // int refOwnerTargetContact = useParam.ownerEntity.hitdefSameTime.FindAll(h => h == useParam.hitID).Count;
-
-        // refNumRemaining = useParam.maxEntityHits - refOwnerTargetContact;
-
-
-        if (H_params != null)
-        {
-            useParam = H_params;
-        }
-        refNumRemaining = useParam.maxEntityHits;
-        foreach (Entity selectedEntity in entityList)
-        {
-            //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
-            if ((ownerEntity == null || 
-            (selectedEntity != ownerEntity && selectedEntity.tag != ownerEntity.tag)) 
-            && refNumRemaining > 0)
-            {
-                bool hitCheck = false;
-                Vector3 HitPt = Vector3.zero;
-                //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
-                //また、entityの無敵判定に関しても考える.
-                clssSetting cEnemy = selectedEntity.animancerManager.primaryAnimDef.clssSetting;
-                hitCheck = sets.clssCollided(out var v1, out var v2, out var dist, clssDef.ClssType.Attack, cEnemy, .1f);
-
-                bool isIntervalAvailable = true;
-                //もし見つけられなかったら新規登録なので..
-                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == useParam.hitID);
-                if(FindP != null)
-                {
-                    float recentRevTime = elapsedTime - FindP.HitRegisterTime;
-                    //インターバル未設定なら一回のみ. インターバル設定済みなら...
-                    if(useParam.sameHitInterval <= 0 || recentRevTime < useParam.sameHitInterval)
+                    if (prop.isHit == false && prop.isPausable())
                     {
-                        isIntervalAvailable = false;
+                        prop.OnHit(refHitParam, hits);
+                        Instantiate(
+                            refHitParam.HitEff ?? defaultEff, hits, Quaternion.identity);
+                        (ownerEntity.status.HitPauseTime, prop.disableTime) = (4, 30);
                     }
-                }
-
-                //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
-                //また、entityの無敵判定に関しても考える.
-                //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
-                //Juggle追加.. これ管理しきれねえ.
-                bool isContactable = hitCheck && selectedEntity.status.currentJugglePoint >= 0 && 
-                H_params.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
-                H_params.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
-                !H_params.HitExcludeList.Contains(selectedEntity.CurrentStateID) && isIntervalAvailable;
-                //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
-                if (hitCheck == true)
-                {
-                    Debug.LogWarning("Proj Collided");
-                    HitPt = (v1 + v2) / 2f;
-                    ret = true;
-                    hitDefApply(selectedEntity, ownerEntity, useParam, HitPt);
-                    //当てた分キャラ指定の値が減少..
-                    refNumRemaining--;
+                    prop.isHit = true;
                 }
             }
         }
+
         return ret;
     }
+
 
     //hitdefApply is called for everything.. 
     //Projectileも同様に管理.
