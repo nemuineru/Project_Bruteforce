@@ -216,7 +216,8 @@ public class gameState : MonoBehaviour
     //2026-04-08 HitCheckにバグが有るのを確認. うーん..
     //そも　selectedEntityがなんかおかしいことになってるならnullになる筈..
     //追記 AnimDefの登録がヤバかったみたいです. 今は治った.
-    //2026-06-02 ProjとEntityの共通化をAI君に任せた.
+    //2026-06-02 ProjとEntityの共通化をAI君に任せた. 
+    //..ただ、refOwnerTargetContactがProjのときに機能していないのがちょっとなー
     public bool ProvokeHitDef(hitDefParams refHitParam, clssSetting projSets = null)
     {
         bool ret = false;
@@ -253,11 +254,19 @@ public class gameState : MonoBehaviour
 
                 bool isIntervalAvailable = true;
                 hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == refHitParam.hitID);
-                if (FindP != null && refOwnerTargetContact != 0)
+                if ((FindP != null && refOwnerTargetContact != 0))
                 {
+                    //これ、revTimeがrealTimeになってるのでframe単位で設定せねば..
                     float recentRevTime = elapsedTime - FindP.HitRegisterTime;
                     if (refHitParam.sameHitInterval <= 0 || recentRevTime < refHitParam.sameHitInterval)
+                    {
+                        Debug.Log("Interval false : " + recentRevTime);
                         isIntervalAvailable = false;
+                    }
+                    else
+                    {
+                        Debug.Log("Interval true : " + recentRevTime);
+                    }
                 }
 
                 bool isContactable = hitCheck &&

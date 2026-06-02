@@ -181,7 +181,7 @@ export function StateDef_500_Value(entity)
     Qt = Quaternion.AngleAxis(CS.Elem.getTargetHorizonAngle(entity) * CS.UnityEngine.Time.fixedDeltaTime * 5.0 ,Vector3.up);
 
     FwPos = entity.transform.position
-    FwPos.y = FwPos.y + 0.3;
+    FwPos.y = FwPos.y + 0.7;
 
     FwVect = CS.Elem.getTargetForward(entity);
     FwVect = Vector3.op_Multiply(FwVect, 30.0);

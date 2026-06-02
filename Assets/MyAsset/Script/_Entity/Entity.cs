@@ -384,9 +384,17 @@ public class Entity : MonoBehaviour
         {
             gameState.self.target.MainTarget_to = mainTargetEntity.gameObject;
         }
+
+        //IK solvers
+        Entity tgts = Elem.getTargetEntity(this);
         
         if(vCam != null && tag == "Player")
         {
+            if(tgts != null)
+            {
+                gameState.self.target.transform.position = Vector3.Lerp(gameState.self.target.transform.position, tgts.transform.position + Vector3.up * 0.5f,0.1f);
+            }
+            gameState.self.target.isVisible = tgts != null;
             if(mainTargetEntity != null)
             {
                 gameState.self.target.MainTarget_to = mainTargetEntity.gameObject;
@@ -399,17 +407,9 @@ public class Entity : MonoBehaviour
             }
         }
         
-        //IK solvers
-        Entity tgts = Elem.getTargetEntity(this);
         if(tgts != null)
         {
             LookPos.transform.position = tgts.transform.position + Vector3.up * 0.5f;
-            gameState.self.target.transform.position = Vector3.Lerp(gameState.self.target.transform.position,tgts.transform.position + Vector3.up * 0.5f,0.1f);
-            gameState.self.target.gameObject.SetActive(true);
-        }
-        else
-        {
-            gameState.self.target.gameObject.SetActive(false);
         }
         LookPos.transform.rotation = transform.rotation;
     }

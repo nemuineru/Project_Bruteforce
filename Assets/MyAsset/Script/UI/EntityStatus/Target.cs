@@ -7,6 +7,7 @@ using System;
 
 public class Target : MonoBehaviour
 {
+    public bool isVisible = true;
     [SerializeField]
     Color Nearby;
 
@@ -56,12 +57,18 @@ public class Target : MonoBehaviour
             Quaternion RandRotate = Quaternion.Euler(1f,-1f * UnityEngine.Random.value ,1f) ;
             MainTarget.transform.rotation *= RandRotate;
 
-        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward,Camera.main.transform.up);
+        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward,Camera.main.transform.up);        
+        Base.gameObject.SetActive(isVisible);
+        DistChange();
+    }
+
+    void DistChange()
+    {
         float dist = Vector3.Magnitude(gameState.self.Player.transform.position - transform.position);
         if(dist < 2.0f)
         {
-            NearestSet.gameObject.SetActive(true);
-            NonHit.gameObject.SetActive(false);
+            NearestSet.gameObject.SetActive(true && isVisible);
+            NonHit.gameObject.SetActive(false && isVisible);
             NearestSet.transform.localRotation *= Quaternion.Euler(0,0,300.0f * Time.deltaTime);
             NearestSet.SetColors(Nearby);
             MainTarget.SetColors(Nearby);
@@ -69,15 +76,15 @@ public class Target : MonoBehaviour
         }
         else if(dist < 5.0f)
         {
-            NearestSet.gameObject.SetActive(false);
-            NonHit.gameObject.SetActive(false);
+            NearestSet.gameObject.SetActive(false && isVisible);
+            NonHit.gameObject.SetActive(false && isVisible);
             MainTarget.SetColors(Ranged);
             Base.SetColors(Ranged);
         }
         else
         {
-            NearestSet.gameObject.SetActive(false);
-            NonHit.gameObject.SetActive(true);
+            NearestSet.gameObject.SetActive(false && isVisible);
+            NonHit.gameObject.SetActive(true && isVisible);
             MainTarget.SetColors(Disabled);
             Base.SetColors(Disabled);
             NonHit.SetColors(Disabled);

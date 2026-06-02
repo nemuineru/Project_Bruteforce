@@ -33,6 +33,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hitDefParams.ownerEntity = proj_Controller;
         clssDef.initTransform(this.transform);
         cSet.clssDefs.Add(clssDef);
         rb = GetComponent<Rigidbody>();
