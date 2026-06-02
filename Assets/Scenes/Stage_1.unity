@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000055046083, g: 0.00014094963, b: 0.0042733354, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2632,17 +2631,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 42854201}
   m_VersionIndex: 1853
   m_IsSelectable: 1
-  m_SelectedFaces: 01000000
-  m_SelectedEdges:
-  - a: 4
-    b: 5
-  - a: 6
-    b: 4
-  - a: 5
-    b: 7
-  - a: 7
-    b: 6
-  m_SelectedVertices: 04000000050000000600000007000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1001 &293639730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11183,6 +11174,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4684578383846981625, guid: bdd2837a44ee15846a319287d8066f8d, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 8049646034409798506, guid: 19f1906c09375144f9ec3486d5b064f2, type: 3}
+    - target: {fileID: 4684578383846981625, guid: bdd2837a44ee15846a319287d8066f8d, type: 3}
+      propertyPath: MainGUI
+      value: 
+      objectReference: {fileID: 9108614754104860502, guid: 7483b3ccf83cf6f409241b154f1ddee7, type: 3}
+    - target: {fileID: 4684578383846981625, guid: bdd2837a44ee15846a319287d8066f8d, type: 3}
+      propertyPath: target_inst
+      value: 
+      objectReference: {fileID: 8049646034409798506, guid: 19f1906c09375144f9ec3486d5b064f2, type: 3}
     - target: {fileID: 4684578383846981625, guid: bdd2837a44ee15846a319287d8066f8d, type: 3}
       propertyPath: InitSpawnPos
       value: 

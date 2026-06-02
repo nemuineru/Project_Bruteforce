@@ -27,7 +27,10 @@ public class gameState : MonoBehaviour
     public GameObject defaultGuardBreakEff;
     public GameObject defaultDeathEff;
     public AudioClip[] defaultFootSound;
-    public Target target;
+    public Target target_inst;
+
+    [HideInInspector]
+    internal Target target;
 
 
     public AudioSource inGameAuds;
@@ -87,6 +90,7 @@ public class gameState : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        target = Instantiate(target_inst);
         Transform tr = InitSpawnPos != null ? InitSpawnPos : gameObject.transform;
         Quaternion qt = Quaternion.LookRotation(tr.forward);
         GameObject findPlayer = GameObject.FindGameObjectWithTag("Player");
