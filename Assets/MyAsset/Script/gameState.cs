@@ -225,6 +225,96 @@ public class gameState : MonoBehaviour
     //2026-06-02 ProjとEntityの共通化をAI君に任せた. 
     //..ただ、refOwnerTargetContactがProjのときに機能していないのがちょっとなー
 
+    // public bool ProvokeHitDef_Entity(hitDefParams refHitParam)
+    // {
+    //     bool ret = false;
+    //     int refNumRemaining;
+    //     hitDefParams useParam = new hitDefParams();        
+    //     if (refHitParam != null)
+    //     {
+    //         useParam = refHitParam;
+    //     }
+
+    //     //contact数を考える..
+    //     int refOwnerTargetContact = useParam.ownerEntity.hitdefSameTime.FindAll(h => h == useParam.hitID).Count;
+
+    //     refNumRemaining = useParam.maxEntityHits - refOwnerTargetContact;
+
+    //     //Debug.Log(entityList.Count());
+
+    //     foreach (Entity selectedEntity in entityList)
+    //     {
+    //         //selfには反応しない. また当たる数が設定されているなら0にならない限り設定される.
+    //         if (selectedEntity != useParam.ownerEntity && 
+    //         selectedEntity.tag != useParam.ownerEntity.tag &&
+    //         refNumRemaining > 0)
+    //         {
+    //             Debug.Log(selectedEntity.gameObject.name);
+    //             bool hitCheck = 
+    //             useParam.ownerEntity.hitCheck(selectedEntity, out Vector3 HitPt);
+    //             Debug.Log(hitCheck);
+
+    //             bool isIntervalAvailable = true;
+    //             //もし見つけられなかったら新規登録なので..
+    //             hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == useParam.hitID);
+    //             if(FindP != null && refOwnerTargetContact != 0)
+    //             {
+    //                 float recentRevTime = elapsedTime - FindP.HitRegisterTime;
+    //                 //インターバル未設定なら一回のみ. インターバル設定済みなら...
+    //                 if(useParam.sameHitInterval <= 0 || recentRevTime < useParam.sameHitInterval)
+    //                 {
+    //                     isIntervalAvailable = false;
+    //                 }
+    //             }
+
+    //             //それぞれのentityの現在再生中のAnimatorが持つClssに対して衝突判定.
+    //             //また、entityの無敵判定に関しても考える.
+    //             //呼び出しentityのstateDef値が同じ指定値なら..等　考えることが多い..
+    //             //Juggle追加.. これ管理しきれねえ.
+    //             bool isContactable = hitCheck && selectedEntity.status.currentJugglePoint >= 0 && 
+    //             refHitParam.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
+    //             refHitParam.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
+    //             !refHitParam.HitExcludeList.Contains(selectedEntity.CurrentStateID) && isIntervalAvailable;
+    //             //hitしたなら一先ずAnim番号を5000に飛ばしたい. ChangeState(5000)の最優先Queueとして組み込む.
+    //             if (isContactable)
+    //             {
+    //                 ret = true;
+    //                 hitDefApply(selectedEntity, useParam.ownerEntity, useParam, HitPt);
+    //                 Debug.Log("Hit To " + selectedEntity.name);
+    //                 //当てた分キャラ指定の値が減少..
+    //                 refNumRemaining--;
+    //                 useParam.ownerEntity.status.currentEnergy += 3;
+    //             }
+    //             if(hitCheck)
+    //             {
+    //                 Debug.Log("HitID" + useParam.hitID);                    
+    //             }
+    //         }
+    //         else if(selectedEntity == useParam.ownerEntity)
+    //         {
+    //             Debug.Log("selectetEntity is same value.");
+    //         }
+    //     }
+    //     foreach(Props prop in propList)
+    //     {
+    //         if(useParam.ownerEntity.hitCheck(prop.hitBox, out Vector3 hits))
+    //         {
+    //             if(prop.isHit == false && prop.isPausable())
+    //             {
+    //                 //雑ぅ. でもひとまずこれでなんとかなるか..
+    //                 prop.OnHit(refHitParam, hits);
+    //                 Instantiate
+    //                 ((refHitParam.HitEff != null ? refHitParam.HitEff : defaultEff), hits, Quaternion.identity);
+    //                 //onHit, entity will stop. but props wont.
+    //                 //I'll set high pause for each.
+    //                 (useParam.ownerEntity.status.HitPauseTime , prop.disableTime) = (4, 30);
+    //             }
+    //             prop.isHit = true;
+    //         }
+    //     }
+    //     return ret;
+    // }
+
     //refOwnerTargetContact, Projだと判別できてない.
     //キャラクターのStateIDが代わる時, HitDefSameTimeがトラッシュされるのでそれが原因？
     //敵側が覚える必要あるかも, 
@@ -350,13 +440,15 @@ public class gameState : MonoBehaviour
         hitDefParams generatedParam = new hitDefParams();
 
         //call Parameter for damages..
-        generatedParam = calledEParam;
+        generatedParam = calledEParam.Clone();
         
         generatedParam.HitRegisterTime = elapsedTime;
 
         generatedParam.ownerEntity = calledEntity;
         generatedParam.targetEntity = target;
         generatedParam.ContactPoint = hitContactPoint;
+
+        Debug.Log("target Name : " + target.gameObject.name);
 
         //ステータス設定.
         onOneFrameHitdefs.Add(generatedParam);

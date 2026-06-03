@@ -135,6 +135,13 @@ public class hitDefParams
     //MoveReversed..は今は考えない(難しくなりそー。)
     */
 
+    public hitDefParams Clone()
+    {
+        var clone = (hitDefParams)MemberwiseClone();
+        clone.HitExcludeList = new List<int>(HitExcludeList);
+        return clone;
+    }
+
     //ガードされたかどうかに関わらず、当たってからの経過時間を考える.
     //一番近い時間としてソートして..という形で.
     public float GetRegisteredTime()
@@ -152,6 +159,7 @@ public class hitDefParams
     public void SetStatus()
     {
         if(targetEntity == null || ownerEntity == null) return;
+        Debug.Log("Set Status target of : " + targetEntity.gameObject.name);
         //基本的に当たったものとする.
         MoveContact = true;
         //ガードが入ってるか？ あと、ガード可能な攻撃？

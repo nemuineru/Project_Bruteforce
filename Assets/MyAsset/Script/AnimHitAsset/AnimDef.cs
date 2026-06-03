@@ -500,7 +500,7 @@ public class clssSetting
         //初期ロード時rootが登録されていない. 何故だろう？
         else
         {
-            Debug.Log("cant find default");
+            //Debug.Log("cant find default");
         }
         return findDefs;
     }
