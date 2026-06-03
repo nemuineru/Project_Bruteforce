@@ -703,8 +703,8 @@ public class Entity : MonoBehaviour
                 //BOLD tagging gamechanger system that I hate to implement.
                 if (gameObject.tag == "Player")
                 {
-                    gameState.self.gameStatus = gameState._GameStatus.OutGame;
-                    gameState.self.menuStatus = gameState._MenuStatus.GameOver;
+                    // gameState.self.gameStatus = gameState._GameStatus.OutGame;
+                    // gameState.self.menuStatus = gameState._MenuStatus.GameOver;
                 }
                 else
                 {
@@ -793,12 +793,12 @@ public class Entity : MonoBehaviour
     {
         //プレイヤーなら、ゲームクリア時にこのステートに戻す.
         //180はMUGENでいうと勝利ポーズ..
-        if (gameObject.tag == "Player" && gameState.self.menuStatus == gameState._MenuStatus.GameClear && CurrentStateID != 180)
-        {
-            ChangeStateQueue queue = new ChangeStateQueue();
-            queue.stateDefID = 180;
-            CListQueue.Add(queue);
-        }
+        // if (gameObject.tag == "Player" && gameState.self.menuStatus == gameState._MenuStatus.GameClear && CurrentStateID != 180)
+        // {
+        //     ChangeStateQueue queue = new ChangeStateQueue();
+        //     queue.stateDefID = 180;
+        //     CListQueue.Add(queue);
+        // }
     }
 
     [SerializeField]

@@ -56,7 +56,7 @@ public class gameState : MonoBehaviour
     public List<hitDefParams> onOneFrameHitdefs;
 
     public _GameStatus gameStatus;
-    public _MenuStatus menuStatus;
+    //public _MenuStatus menuStatus;
 
     public int KillNo = 0;
 
@@ -135,30 +135,32 @@ public class gameState : MonoBehaviour
 
     void FixedUpdate()
     {
+        //ゲームの外のときは止める.. TimeLine等、別のオブジェクトで管理したい. Projectileの方もそうする予定
         if(gameStatus != _GameStatus.OutGame)
         {
             elapsedTime += Time.fixedDeltaTime;
-        }
-        entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
-        .OrderBy(t => !t.attrs.alive)
-        .ToList();
+            entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
+            .OrderBy(t => !t.attrs.alive)
+            .ToList();
 
-        propList = FindObjectsByType<Props>(FindObjectsSortMode.None).ToList();
-        foreach(Entity et in entityList)
-        {
-            et.EntityUpdate();
-        }
+            propList = FindObjectsByType<Props>(FindObjectsSortMode.None).ToList();
+            foreach(Entity et in entityList)
+            {
+                et.EntityUpdate();
+            }
 
-        foreach(hitDefParams HParam in queuedHitDefs)
-        {
-            ProvokeHitDef(HParam);
-        }
-        HitParamFrame();
-        queuedHitDefs = new List<hitDefParams>();
+            foreach(hitDefParams HParam in queuedHitDefs)
+            {
+                int f = -1;
+                ProvokeHitDef(HParam, ref f);
+            }
+            HitParamFrame();
+            queuedHitDefs = new List<hitDefParams>();
 
-        foreach(Entity et in entityList)
-        {
-            et.resetStates();
+            foreach(Entity et in entityList)
+            {
+                et.resetStates();
+            }
         }
     }
 
@@ -222,7 +224,11 @@ public class gameState : MonoBehaviour
     //追記 AnimDefの登録がヤバかったみたいです. 今は治った.
     //2026-06-02 ProjとEntityの共通化をAI君に任せた. 
     //..ただ、refOwnerTargetContactがProjのときに機能していないのがちょっとなー
-    public bool ProvokeHitDef(hitDefParams refHitParam, clssSetting projSets = null)
+
+    //refOwnerTargetContact, Projだと判別できてない.
+    //キャラクターのStateIDが代わる時, HitDefSameTimeがトラッシュされるのでそれが原因？
+    //敵側が覚える必要あるかも, 
+    public bool ProvokeHitDef(hitDefParams refHitParam,  ref int projContactNums, clssSetting projSets = null)
     {
         bool ret = false;
         if (refHitParam == null) return false;
@@ -231,6 +237,11 @@ public class gameState : MonoBehaviour
         int refOwnerTargetContact = ownerEntity != null
             ? ownerEntity.hitdefSameTime.FindAll(h => h == refHitParam.hitID).Count
             : 0;
+        //Projectile用. 弾が当たった回数を数える. それぞれの弾に対しhitIDを付けるような感じ.
+        if(projContactNums > -1)
+        {
+            refOwnerTargetContact = projContactNums;
+        }
         int refNumRemaining = refHitParam.maxEntityHits - refOwnerTargetContact;
 
         foreach (Entity selectedEntity in entityList)
@@ -258,7 +269,7 @@ public class gameState : MonoBehaviour
 
                 bool isIntervalAvailable = true;
                 hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == refHitParam.hitID);
-                if ((FindP != null && refOwnerTargetContact != 0))
+                if ((FindP != null && refOwnerTargetContact != 0) || (projSets != null && FindP != null))
                 {
                     //これ、revTimeがrealTimeになってるのでframe単位で設定せねば..
                     float recentRevTime = elapsedTime - FindP.HitRegisterTime;
@@ -288,6 +299,9 @@ public class gameState : MonoBehaviour
                         Debug.Log("HitID" + refHitParam.hitID);
                     ret = true;
                     hitDefApply(selectedEntity, ownerEntity, refHitParam, HitPt);
+                    //projContact is decreased at this moment.
+                    projContactNums++;
+
                     refNumRemaining--;
                     if (ownerEntity != null)
                         ownerEntity.status.currentEnergy += 3;
@@ -430,63 +444,63 @@ public class gameState : MonoBehaviour
     //PauseMode.
     public void TogglePauseMode()
     {
-        if (menuStatus == _MenuStatus.OnGame)
-        {
-            menuStatus = _MenuStatus.Pause;
-        }
-        else if(menuStatus == _MenuStatus.Pause)
-        { 
-            menuStatus = _MenuStatus.OnGame;
-        }
+        // if (menuStatus == _MenuStatus.OnGame)
+        // {
+        //     menuStatus = _MenuStatus.Pause;
+        // }
+        // else if(menuStatus == _MenuStatus.Pause)
+        // { 
+        //     menuStatus = _MenuStatus.OnGame;
+        // }
     }
 
     void GameDescApply()
     {
-        switch (menuStatus)
-        {
-            case _MenuStatus.PreStart:
-                {
-                    timeStartBy -= Time.deltaTime;
-                    gameStatus = _GameStatus.OutGame;
-                    setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);                    
-                    //prestartから時間がたてばOnGameに移行.
-                    if (timeStartBy < 0)
-                    {
-                        menuStatus = _MenuStatus.OnGame;
-                    }
-                    break;
-                }
-                //メインゲーム中
-            case _MenuStatus.OnGame:
-                {
-                    gameStatus = _GameStatus.InGame;
-                    setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);
+        // switch (menuStatus)
+        // {
+        //     case _MenuStatus.PreStart:
+        //         {
+        //             timeStartBy -= Time.deltaTime;
+        //             gameStatus = _GameStatus.OutGame;
+        //             setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);                    
+        //             //prestartから時間がたてばOnGameに移行.
+        //             if (timeStartBy < 0)
+        //             {
+        //                 menuStatus = _MenuStatus.OnGame;
+        //             }
+        //             break;
+        //         }
+        //         //メインゲーム中
+        //     case _MenuStatus.OnGame:
+        //         {
+        //             gameStatus = _GameStatus.InGame;
+        //             setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);
                     
-                    SetPauseToggle(false);
-                    break;
-                }
-            case _MenuStatus.GameOver:
-                {
-                    gameStatus = _GameStatus.OutGame;
-                    SetPauseToggle(true);
-                    setCams(isPlayerCam: false, isBirdCam: true, isCloseCam: false);
-                    break;
-                }
-            case _MenuStatus.GameClear:
-                {
-                    gameStatus = _GameStatus.OutGame;
+        //             SetPauseToggle(false);
+        //             break;
+        //         }
+        //     case _MenuStatus.GameOver:
+        //         {
+        //             gameStatus = _GameStatus.OutGame;
+        //             SetPauseToggle(true);
+        //             setCams(isPlayerCam: false, isBirdCam: true, isCloseCam: false);
+        //             break;
+        //         }
+        //     case _MenuStatus.GameClear:
+        //         {
+        //             gameStatus = _GameStatus.OutGame;
 
-                    setCams(isPlayerCam: false, isBirdCam: false, isCloseCam: true);
-                    break;
-                }
-            case _MenuStatus.Pause:
-                {
-                    gameStatus = _GameStatus.OutGame;
-                    setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);
-                    SetPauseToggle(true);
-                    break;
-                }
-        }
+        //             setCams(isPlayerCam: false, isBirdCam: false, isCloseCam: true);
+        //             break;
+        //         }
+        //     case _MenuStatus.Pause:
+        //         {
+        //             gameStatus = _GameStatus.OutGame;
+        //             setCams(isPlayerCam: true, isBirdCam: false, isCloseCam: false);
+        //             SetPauseToggle(true);
+        //             break;
+        //         }
+        // }
     }
 
     //ポーズ状態のとき、時間の流れを止める関数を作った.

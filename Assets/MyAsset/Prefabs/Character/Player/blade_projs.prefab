@@ -408,7 +408,7 @@ Rigidbody:
   m_GameObject: {fileID: 4287240800322272450}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 5
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -564,13 +564,13 @@ MonoBehaviour:
     attachTransform: {fileID: 0}
     startPos: {x: 1, y: 0, z: 0}
     endPos: {x: -1, y: 0, z: 0}
-    width: 0.25
+    width: 0.61
     _lastcalcStartPos: {x: 0, y: 0, z: 0}
     _lastcalcEndPos: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Accel: {x: 0, y: 0, z: 0}
   CustomVectorParam: {x: 0, y: 0, z: 0}
-  RemainTime: 0.5
+  RemainTime: 0.6
   EffectObject: {fileID: 0}
   proj_Controller: {fileID: 0}
   proj_Target: {fileID: 0}
@@ -582,7 +582,7 @@ MonoBehaviour:
     JugglePoint: 1
     Kill: 1
     GuardOnKill: 0
-    velset: {x: 2, y: 4, z: 0}
+    velset: {x: 1, y: 1, z: 0}
     guard_velset: {x: 0, y: 0, z: 0}
     pl_velset: {x: 0, y: 0, z: 0}
     pl_guard_velset: {x: 0, y: 0, z: 0}
@@ -593,8 +593,8 @@ MonoBehaviour:
     GuardHitEff: {fileID: 0}
     HitPriority: 0
     HitPriorityBehavior: 72
-    sameHitInterval: 0.2
-    maxEntityHits: 4
+    sameHitInterval: 0
+    maxEntityHits: 20
     fallTime: 8
     ChangeState_Target: -1
     TargetRefsOwnerNum: 0

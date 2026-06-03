@@ -125,8 +125,8 @@ public class EWaveManager : MonoBehaviour
                     currentLevel++;
                     if (currentLevel > MaxLevel)
                     {
-                        gameState.self.gameStatus = gameState._GameStatus.OutGame;
-                        gameState.self.menuStatus = gameState._MenuStatus.GameClear;
+                        // gameState.self.gameStatus = gameState._GameStatus.OutGame;
+                        // gameState.self.menuStatus = gameState._MenuStatus.GameClear;
                     }
                     else
                     {

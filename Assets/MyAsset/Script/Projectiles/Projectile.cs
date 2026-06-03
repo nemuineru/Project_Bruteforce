@@ -26,6 +26,9 @@ public class Projectile : MonoBehaviour
     public hitDefParams hitDefParams;
 
     internal Rigidbody rb;
+    
+    //弾が当たった回数.
+    public int ColliderNums = 0;
 
     
     //当たり判定 - 

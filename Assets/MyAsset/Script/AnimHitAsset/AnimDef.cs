@@ -250,6 +250,7 @@ public class AnimancerManager
     }
 
     //Set Animancer TickStates.
+    //it should stop if gamestate is not played..
     public float Tick(bool isPause)
     {
         float resumeSpeed = 1f;

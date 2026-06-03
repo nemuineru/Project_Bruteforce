@@ -29,9 +29,9 @@ public class CollidableProjectile : Projectile
         {
             //Debug.Log("drawing clssDefs");
             c.getGlobalPos();
-            //c.DrawCapsule();
+            c.DrawCapsule();
         }
-        if(gameState.self.ProvokeHitDef(this.hitDefParams, cSet))
+        if(gameState.self.ProvokeHitDef(this.hitDefParams, ref ColliderNums ,cSet))
         {
             //destroyEmit();
         }

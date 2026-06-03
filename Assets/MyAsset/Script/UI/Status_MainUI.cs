@@ -25,24 +25,24 @@ public class Status_MainUI : MonoBehaviour
     {
         if (gameState.self != null)
         {
-            switch (gameState.self.menuStatus)
-            {
-                case gameState._MenuStatus.PreStart:
-                    SetPreGameUIActive();
-                    break;
-                case gameState._MenuStatus.OnGame:
-                    SetOnGameActive();
-                    break;
-                case gameState._MenuStatus.Pause:
-                    SetGamePauseActive();
-                    break;
-                case gameState._MenuStatus.GameClear:
-                    SetGameClearActive();
-                    break;
-                case gameState._MenuStatus.GameOver:
-                    SetGameOverActive();
-                    break;
-            }
+            // switch (gameState.self.menuStatus)
+            // {
+            //     case gameState._MenuStatus.PreStart:
+            //         SetPreGameUIActive();
+            //         break;
+            //     case gameState._MenuStatus.OnGame:
+            //         SetOnGameActive();
+            //         break;
+            //     case gameState._MenuStatus.Pause:
+            //         SetGamePauseActive();
+            //         break;
+            //     case gameState._MenuStatus.GameClear:
+            //         SetGameClearActive();
+            //         break;
+            //     case gameState._MenuStatus.GameOver:
+            //         SetGameOverActive();
+            //         break;
+            // }
         }
     }
 
