@@ -228,21 +228,25 @@ public class gameState : MonoBehaviour
     //refOwnerTargetContact, Projだと判別できてない.
     //キャラクターのStateIDが代わる時, HitDefSameTimeがトラッシュされるのでそれが原因？
     //敵側が覚える必要あるかも, 
-    public bool ProvokeHitDef(hitDefParams refHitParam,  ref int projContactNums, clssSetting projSets = null)
+    public bool ProvokeHitDef(hitDefParams Params,  ref int projContactNums, clssSetting projSets = null)
     {
         bool ret = false;
-        if (refHitParam == null) return false;
+        hitDefParams useParams = new hitDefParams();
+        if (Params != null)
+        {
+            useParams = Params; 
+        }
 
-        Entity ownerEntity = refHitParam.ownerEntity;
+        Entity ownerEntity = useParams.ownerEntity;
         int refOwnerTargetContact = ownerEntity != null
-            ? ownerEntity.hitdefSameTime.FindAll(h => h == refHitParam.hitID).Count
+            ? ownerEntity.hitdefSameTime.FindAll(h => h == useParams.hitID).Count
             : 0;
         //Projectile用. 弾が当たった回数を数える. それぞれの弾に対しhitIDを付けるような感じ.
         if(projContactNums > -1)
         {
             refOwnerTargetContact = projContactNums;
         }
-        int refNumRemaining = refHitParam.maxEntityHits - refOwnerTargetContact;
+        int refNumRemaining = useParams.maxEntityHits - refOwnerTargetContact;
 
         foreach (Entity selectedEntity in entityList)
         {
@@ -268,12 +272,14 @@ public class gameState : MonoBehaviour
                 }
 
                 bool isIntervalAvailable = true;
-                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == refHitParam.hitID);
-                if ((FindP != null && refOwnerTargetContact != 0) || (projSets != null && FindP != null))
+                //2026-06-03
+                //困った. projの当たり判定の設定で、 registeredHitDefsでなんかバグってる？
+                hitDefParams FindP = selectedEntity.registeredHitDefs.Find(hDef => hDef.hitID == useParams.hitID);
+                if ((FindP != null && refOwnerTargetContact != 0))
                 {
                     //これ、revTimeがrealTimeになってるのでframe単位で設定せねば..
                     float recentRevTime = elapsedTime - FindP.HitRegisterTime;
-                    if (refHitParam.sameHitInterval <= 0 || recentRevTime < refHitParam.sameHitInterval)
+                    if (useParams.sameHitInterval <= 0 || recentRevTime < useParams.sameHitInterval)
                     {
                         Debug.Log("Interval false : " + recentRevTime);
                         isIntervalAvailable = false;
@@ -283,12 +289,13 @@ public class gameState : MonoBehaviour
                         Debug.Log("Interval true : " + recentRevTime);
                     }
                 }
+                Debug.Log("Count : " + refOwnerTargetContact);
 
                 bool isContactable = hitCheck &&
                     selectedEntity.status.currentJugglePoint >= 0 &&
-                    refHitParam.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
-                    refHitParam.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
-                    !refHitParam.HitExcludeList.Contains(selectedEntity.CurrentStateID) &&
+                    useParams.HitMoveFlag.Contains(selectedEntity.moveType.ToString()) &&
+                    useParams.hitStateFlag.Contains(selectedEntity.stateType.ToString()) &&
+                    !useParams.HitExcludeList.Contains(selectedEntity.CurrentStateID) &&
                     isIntervalAvailable;
 
                 if (isContactable)
@@ -296,9 +303,9 @@ public class gameState : MonoBehaviour
                     if (projSets != null)
                         Debug.LogWarning("Proj Collided");
                     else
-                        Debug.Log("HitID" + refHitParam.hitID);
+                        Debug.Log("HitID" + useParams.hitID);
                     ret = true;
-                    hitDefApply(selectedEntity, ownerEntity, refHitParam, HitPt);
+                    hitDefApply(selectedEntity, ownerEntity, useParams, HitPt);
                     //projContact is decreased at this moment.
                     projContactNums++;
 
@@ -321,9 +328,9 @@ public class gameState : MonoBehaviour
                 {
                     if (prop.isHit == false && prop.isPausable())
                     {
-                        prop.OnHit(refHitParam, hits);
+                        prop.OnHit(useParams, hits);
                         Instantiate(
-                            refHitParam.HitEff ?? defaultEff, hits, Quaternion.identity);
+                            useParams.HitEff ?? defaultEff, hits, Quaternion.identity);
                         (ownerEntity.status.HitPauseTime, prop.disableTime) = (4, 30);
                     }
                     prop.isHit = true;
