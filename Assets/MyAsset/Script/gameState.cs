@@ -48,6 +48,9 @@ public class gameState : MonoBehaviour
     public List<Entity> entityList;
 
     [SerializeField]
+    public List<Projectile> projList;
+
+    [SerializeField]
     public List<Props> propList;
 
     public Transform InitSpawnPos;
@@ -142,11 +145,16 @@ public class gameState : MonoBehaviour
             entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
             .OrderBy(t => !t.attrs.alive)
             .ToList();
+            projList = FindObjectsByType<Projectile>(FindObjectsSortMode.None).ToList();
 
             propList = FindObjectsByType<Props>(FindObjectsSortMode.None).ToList();
             foreach(Entity et in entityList)
             {
                 et.EntityUpdate();
+            }
+            foreach(Projectile proj in projList)
+            {
+                proj.ProjUpdate();
             }
 
             foreach(hitDefParams HParam in queuedHitDefs)

@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void ProjUpdate()
     {
         cSet.clssPosUpdate();
         RemainTime -= Time.fixedDeltaTime;
