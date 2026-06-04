@@ -1,4 +1,11 @@
+<2026-06-04 InGame/OutGame再考・有用アセットメモ>
+Poly Pizzaで色々見たり, PSX Model Packとか色々よさげなモデルが有るので使う
 
+OutGame中はシーン遷移やイベントのためEntity, ProjctileのRigidBody含めた更新をStopし、Animancerの設定をStopする.
+
+SubUrb Station Entryway - 郊外 旧メトロ 侵入口付近
+ステージ0 -> 1
+移動とジャンプ・基礎の攻撃を教える.
 
 <--戦闘システム>
 4(+2ボタン) + 1(+1スティック)による操作
