@@ -1,3 +1,7 @@
+<2026-06-05 TimeLineについて>
+ゲームイベント設定ではTimeLineを使う. 生成済みEntityを指定/Entityを生成し, Spline, AnimancerClipの再生等を行う
+SetReferenceValueを使ってGameObject/EntityをBind, Splineを使用..
+
 <2026-06-04 InGame/OutGame再考・有用アセットメモ>
 Poly Pizzaで色々見たり, PSX Model Packとか色々よさげなモデルが有るので使う
 
