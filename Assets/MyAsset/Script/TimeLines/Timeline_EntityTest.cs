@@ -21,48 +21,43 @@ public class Timeline_EntityTest : MonoBehaviour, ITimeControl
 
     //dulations
     [SerializeField] private double _duration = 1;
+
+    bool isStopped = false;
+
     public void OnControlTimeStart()
     {
         //throw new System.NotImplementedException();
     }
 
-    public void OnDisable()
-    {
-        if(spls != null && entity != null)
-        {
-            entity.transform.position = spls.EvaluatePosition(1.0f);
-        }
-    }
+    // public void OnDisable()
+    // {
+    //     if(spls != null && entity != null)
+    //     {
+    //         entity.transform.position = spls.EvaluatePosition(2.0f);
+    //     }
+    // }
 
     public void OnControlTimeStop()
     {
-        Debug.Log("Timeline_EntityTest: OnControlTimeStop");
-        if(spls != null && entity != null)
-        {
-            entity.transform.position = spls.EvaluatePosition(1.0f);
-        }
-        //throw new System.NotImplementedException();
+        
     }
 
-    public void OnControlTimeEnd()
+    public void OnBehaviourPause()
     {
-        if(spls != null && entity != null)
-        {
-            entity.transform.position = spls.EvaluatePosition(1.0f);
-        }
-        //throw new System.NotImplementedException();
+        
     }
 
     //time will set.
     public void SetTime(double time)
     {
-        if(spls != null && entity != null)
+        if( entity != null)
+        {
+            
+        if(spls != null && isStopped == false)
         {
             var percentage = (float)(time/_duration);
-            if(time >= _duration)
-            {
-                percentage = 1;
-            }
+            Debug.Log($"Timeline_EntityTest: SetTime: time={time}, percentage={percentage}");
+
             entity.transform.position = spls.EvaluatePosition(percentage);
             Vector3 forward = spls.EvaluateTangent(percentage);
             float angle = Vector3.SignedAngle(Vector3.up, spls.EvaluateUpVector(percentage), forward);
@@ -72,6 +67,7 @@ public class Timeline_EntityTest : MonoBehaviour, ITimeControl
             entity.animancerManager.main;
             if(AM != null)
             AM.Play(clip);
+        }
     }
 
     // Start is called before the first frame update

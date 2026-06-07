@@ -548,6 +548,17 @@ public class gameState : MonoBehaviour
         }
     }
 
+    public void ToggleGameState(bool isIngame){
+        if(isIngame)
+        {
+            gameStatus = _GameStatus.InGame;
+        }
+        else
+        {
+            gameStatus = _GameStatus.OutGame;
+        }
+    }
+
     //PauseMode.
     public void TogglePauseMode()
     {
@@ -648,6 +659,22 @@ public class gameState : MonoBehaviour
         if (gameStatus == _GameStatus.OutGame)
         {
             SceneManager.LoadScene("Title");
+        }
+    }
+
+    //currently, its called at gamescene ended, so no need to make it complicated..
+    public void ResetEntityAnims()
+    {
+        entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None).ToList();
+        Debug.Log("gameState: ResetEntityAnims: entityList count = " + entityList.Count());
+        if(entityList == null)
+        {
+            Debug.Log("gameState: ResetEntityAnims: entityList is null");
+            return;
+        }
+        foreach(Entity ent in entityList)
+        {
+            ent.ChangeAnim(ent.animancerManager.primaryAnimDef,0,0.0f);
         }
     }
 }

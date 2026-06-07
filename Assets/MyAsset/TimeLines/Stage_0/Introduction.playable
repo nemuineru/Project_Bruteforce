@@ -16,6 +16,22 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 1325c795ad22e3844a283df3985db338, type: 2}
+--- !u!114 &-7046478406926293562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 2.4833333333333334
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 0c6828f3eceda8b4c9f3ef4bdf8e5dd0, type: 2}
 --- !u!114 &-6049206354829667037
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -32,6 +48,29 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 0}
+--- !u!114 &-4419995094110173433
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
+  m_Name: Control Track (3)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
 --- !u!114 &-3500459204745983132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,6 +118,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -7946993880683356630}
+    - {fileID: -7046478406926293562}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +137,7 @@ MonoBehaviour:
   - {fileID: 877731957964249344}
   - {fileID: -2303684889727893201}
   - {fileID: 7445988479888729985}
+  - {fileID: -4419995094110173433}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -151,7 +192,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 1520170737584378937}
-    m_Duration: 0.6333333333333333
+    m_Duration: 1.1833333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 877731957964249344}
     m_EaseInDuration: 0
@@ -217,10 +258,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: TimeLine_1
   - m_Version: 1
-    m_Start: 0.6333333333333333
+    m_Start: 1.1833333333333333
     m_ClipIn: 0
-    m_Asset: {fileID: 8094600219462657568}
-    m_Duration: 1.4666666666666668
+    m_Asset: {fileID: 4972387875237825489}
+    m_Duration: 1.2666666666666668
     m_TimeScale: 1
     m_ParentTrack: {fileID: 877731957964249344}
     m_EaseInDuration: 0
@@ -284,7 +325,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: TimeLine_2
+    m_DisplayName: TimeLine_1
   m_Markers:
     m_Objects: []
 --- !u!114 &1520170737584378937
@@ -309,7 +350,7 @@ MonoBehaviour:
   updateITimeControl: 1
   searchHierarchy: 0
   active: 1
-  postPlayback: 2
+  postPlayback: 1
 --- !u!114 &3545368695564773685
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,6 +397,29 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects: []
+--- !u!114 &4972387875237825489
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
+  m_Name: ControlPlayableAsset
+  m_EditorClassIdentifier: 
+  sourceGameObject:
+    exposedName: 4019472387b5e2f49a41807d45f9c1a8
+    defaultValue: {fileID: 0}
+  prefabGameObject: {fileID: 0}
+  updateParticle: 1
+  particleRandomSeed: 6405
+  updateDirector: 1
+  updateITimeControl: 1
+  searchHierarchy: 0
+  active: 1
+  postPlayback: 2
 --- !u!114 &7445988479888729985
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,29 +512,6 @@ MonoBehaviour:
     m_DisplayName: MagicSoftExplosionFire
   m_Markers:
     m_Objects: []
---- !u!114 &8094600219462657568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset
-  m_EditorClassIdentifier: 
-  sourceGameObject:
-    exposedName: 535979b06054aaf4ab7f7f71dd18cdf5
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 0}
-  updateParticle: 1
-  particleRandomSeed: 1754
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
 --- !u!114 &8395808576690145629
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -496,7 +537,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 595271545607423936}
-    m_Duration: 2.3333333333333335
+    m_Duration: 1.6333333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8395808576690145629}
     m_EaseInDuration: 0
@@ -562,7 +603,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: OnIntroCamera
   - m_Version: 1
-    m_Start: 2.3333333333333335
+    m_Start: 1.6333333333333333
     m_ClipIn: 0.9833333333333334
     m_Asset: {fileID: -3500459204745983132}
     m_Duration: 0.6166666666666663

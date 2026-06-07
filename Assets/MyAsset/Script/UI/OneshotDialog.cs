@@ -62,4 +62,9 @@ public class OneshotDialog : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void ExtendTime(float extendTime = 0)
+    {
+        baseShowTime += extendTime;
+    }
 }

@@ -28,7 +28,19 @@ public class HintDialog_On_Inspect : MonoBehaviour
     //if trigger is entered : 
     void OnTriggerEnter()
     {
-        dialogCurrentShowing = prepDialog();
+        if(type == InspectType.Entering)
+        {
+            dialogCurrentShowing = prepDialog();
+        }
+    }
+
+    void OnTriggerStay()
+    {
+        if(type == InspectType.Touch && dialogCurrentShowing == null)
+        {
+            dialogCurrentShowing = prepDialog();
+        }
+        dialogCurrentShowing.ExtendTime(Time.deltaTime);
     }
     
     //MainUI is called : 
