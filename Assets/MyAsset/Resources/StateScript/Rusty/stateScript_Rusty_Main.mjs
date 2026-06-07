@@ -110,7 +110,7 @@ export function StateDef_50_ID(entity)
     return verdList
 }
 
-//Function for jump.
+//Function for Fall.
 export function StateDef_51_ID(entity) 
 {
     //List<Int>

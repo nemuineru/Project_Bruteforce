@@ -55,9 +55,8 @@ public class Timeline_EntityTest : MonoBehaviour, ITimeControl
             
         if(spls != null && isStopped == false)
         {
-            var percentage = (float)(time/_duration);
+            var percentage = Mathf.Clamp01((float)(time/_duration));
             Debug.Log($"Timeline_EntityTest: SetTime: time={time}, percentage={percentage}");
-
             entity.transform.position = spls.EvaluatePosition(percentage);
             Vector3 forward = spls.EvaluateTangent(percentage);
             float angle = Vector3.SignedAngle(Vector3.up, spls.EvaluateUpVector(percentage), forward);
@@ -65,7 +64,7 @@ public class Timeline_EntityTest : MonoBehaviour, ITimeControl
         }
         AnimancerComponent AM = 
             entity.animancerManager.main;
-            if(AM != null)
+            if(AM != null && clip != null)
             AM.Play(clip);
         }
     }

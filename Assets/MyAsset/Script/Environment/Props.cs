@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Props : MonoBehaviour
+public class Prop : MonoBehaviour
 {
     [SerializeField]
     internal clssSetting hitBox;

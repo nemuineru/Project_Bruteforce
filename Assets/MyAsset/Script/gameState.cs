@@ -51,7 +51,7 @@ public class gameState : MonoBehaviour
     public List<Projectile> projList;
 
     [SerializeField]
-    public List<Props> propList;
+    public List<Prop> propList;
 
     public Transform InitSpawnPos;
 
@@ -147,7 +147,7 @@ public class gameState : MonoBehaviour
             .ToList();
             projList = FindObjectsByType<Projectile>(FindObjectsSortMode.None).ToList();
 
-            propList = FindObjectsByType<Props>(FindObjectsSortMode.None).ToList();
+            propList = FindObjectsByType<Prop>(FindObjectsSortMode.None).ToList();
             foreach(Entity et in entityList)
             {
                 et.EntityUpdate();
@@ -420,7 +420,7 @@ public class gameState : MonoBehaviour
 
         if (projSets == null && ownerEntity != null)
         {
-            foreach (Props prop in propList)
+            foreach (Prop prop in propList)
             {
                 if (ownerEntity.hitCheck(prop.hitBox, out Vector3 hits))
                 {

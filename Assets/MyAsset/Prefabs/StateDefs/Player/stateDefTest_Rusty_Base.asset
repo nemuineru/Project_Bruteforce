@@ -57,6 +57,7 @@ MonoBehaviour:
     physType: 65
     StateList:
     - rid: 4404389163807801372
+    - rid: 3979540672154697728
     - rid: 4404389163807801373
     - rid: 4404389163807801374
     - rid: 503850271682330670
@@ -92,6 +93,7 @@ MonoBehaviour:
     - rid: 3324167878465552384
     - rid: 503850271682330671
     - rid: 3324167878465552385
+    - rid: 3979540672154697729
     Dir: 
     setCtrl: 0
   - StateDefName: Crouch
@@ -791,6 +793,78 @@ MonoBehaviour:
         stateControllerSubName: rotate
         doLoadAfterChangeState: 0
         RotateWeight: 0.5
+    - rid: 3979540672154697728
+      type: {class: scBasicInputMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Weal Air Controll
+        doLoadAfterChangeState: 0
+        MutipleVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        MutipleMoveVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0.7, y: 0.7, z: 0.7}
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+    - rid: 3979540672154697729
+      type: {class: scBasicInputMove, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 0
+          stLuaLoads: 
+        stateControllerSubName: Air Control
+        doLoadAfterChangeState: 0
+        MutipleVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
+        MutipleMoveVelocity:
+          _setHidden: 1
+          _setEssential: 1
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: {x: 0.5, y: 0.5, z: 0.5}
+          useID: -1
+          stLuaLoads: 
+        isIgnorePause:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 4404389163807801372
       type: {class: scJump, ns: , asm: Assembly-CSharp}
       data:
