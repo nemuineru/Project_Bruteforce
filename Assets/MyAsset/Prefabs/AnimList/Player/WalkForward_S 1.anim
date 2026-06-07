@@ -18046,7 +18046,7 @@ AnimationClip:
         time: 0.40000004
         value: -0.6760146
         inSlope: 0
-        outSlope: 4
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
