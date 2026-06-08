@@ -31,12 +31,20 @@ public class Entity_PlayableMixer : PlayableBehaviour
 
             //有るクリップの設定値を考える.
             if (clipProgress >= 0.0f && clipProgress <= 1.0f) {
-                AnimancerComponent AMS = new AnimancerComponent();
-                Vector3 forwards = clipAsset.behaviour.spline.EvaluateTangent(clipProgress);
+                //set clip position.
                 Vector3 positon = clipAsset.behaviour.spline.EvaluateTangent(clipProgress);
+
+                //set forward position.
+                Vector3 forwards = clipAsset.behaviour.spline.EvaluateTangent(clipProgress);
                 float angle = Vector3.SignedAngle(Vector3.up, clipAsset.behaviour.spline.EvaluateUpVector(clipProgress), forwards);
                 Quaternion rots = Quaternion.LookRotation(forwards) * Quaternion.Euler(0, -angle, 0);
 
+                //Animancer State Set. mixes after the blenders.
+                TransitionAsset Transit = clipAsset.behaviour.transitter;
+                //CreateState will inheriet the transitionAsset setting.. I guess
+                AnimancerState st = Transit.CreateState();
+                st.NormalizedTime = clipProgress;
+                st.Weight = st.Weight * clipWeight;
                 //Rots = 
                 //color += Color.Lerp(clipAsset.behaviour.startColor, clipAsset.behaviour.endColor, clipProgress) * clipWeight;
             }
