@@ -1,3 +1,4 @@
+using Animancer;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Splines;
@@ -7,7 +8,8 @@ using UnityEngine.Splines;
 public class Entity_PlayableBehavior : PlayableBehaviour
 {
     //Animancerのクリップシーケンス等を登録.
-    public PlayableAsset asset;
+    public TransitionAsset transitter;
+
     //移動情報.
     public Spline spline;
 }
