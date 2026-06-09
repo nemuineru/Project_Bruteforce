@@ -61,20 +61,10 @@ MonoBehaviour:
   m_Name: Entity_PlayableClip
   m_EditorClassIdentifier: 
   behaviour:
-    transitter: {fileID: 0}
+    transitter: {fileID: 11400000, guid: ae23b5d2beec98244a7b61b4d66e5ccc, type: 2}
     spline:
-      m_EditModeType: 1
-      m_Knots: []
-      m_MetaData: []
-      m_Closed: 0
-      m_IntData:
-        m_Data: []
-      m_FloatData:
-        m_Data: []
-      m_Float4Data:
-        m_Data: []
-      m_ObjectData:
-        m_Data: []
+      exposedName: e7d857fd6823b6c46af11dda3932919c
+      defaultValue: {fileID: 0}
 --- !u!114 &-4419995094110173433
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -36,7 +36,7 @@ public class Entity_PlayableMixer : PlayableBehaviour
             var behaviour = clipAsset.behaviour; // クリップが持つBehaviour
             var clipWeight = playable.GetInputWeight(i); // クリップのブレンドウェイト
             var clipProgress = (float)((time - clip.start) / clip.duration); // クリップの進行率
-            SplineContainer Spline = new SplineContainer(); // = clipAsset.behaviour.spline.Resolve();
+            SplineContainer Spline = new SplineContainer();//clipAsset.behaviour.spline.Resolve();
 
             //有るクリップの設定値を考える.
             if (clipProgress >= 0.0f && clipProgress <= 1.0f)
