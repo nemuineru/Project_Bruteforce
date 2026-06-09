@@ -1,3 +1,5 @@
+
+
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -12,7 +14,6 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Entity_PlayableTrack : TrackAsset
 {
-    
     public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
     {
         // Mixerを作って返す
@@ -25,11 +26,12 @@ public class Entity_PlayableTrack : TrackAsset
     public override void GatherProperties(PlayableDirector director, IPropertyCollector driver)
     {
         // Timelineから外したときに値を戻したい場合はこのように書く
-#if UNITY_EDITOR
-        Graphic trackBinding = director.GetGenericBinding(this) as Graphic;
-        if (trackBinding == null)
-            return;
-        driver.AddFromName<Graphic>(trackBinding.gameObject, "m_Color");
-#endif
+        #if UNITY_EDITOR
+            Entity trackBinding = director.GetGenericBinding(this) as Entity;
+            if (trackBinding == null)
+                return;
+            driver.AddFromName<Entity>(trackBinding.gameObject, "Entity");
+        #endif
     }
 }
+
