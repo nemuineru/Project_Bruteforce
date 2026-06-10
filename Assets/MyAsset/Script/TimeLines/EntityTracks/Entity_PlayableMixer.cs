@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections.Generic;
 
+//PlayableBehaviorに対し、登録を行う..
 public class Entity_PlayableMixer : PlayableBehaviour
 { 
     public TimelineClip[] Clips { get; set; }

@@ -5,6 +5,7 @@ using UnityEngine.Timeline;
 using UnityEngine.Splines;
 
 
+//https://yutokun.com/writing/knowledges/unity-timeline-extension/index.htmlを参考にしたほうがええかも
 
 //EntityのPlayableAssetにアタッチするPlayableBehaviour.
 [System.Serializable]
@@ -21,6 +22,7 @@ public class Entity_PlayableClip : PlayableAsset, ITimelineClipAsset
         }
     }
 
+    //Playable生成は一度のみ行われる.
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {
         // BehaviourのPlayableを作り、ExposedReferenceに登録された値を出力する.

@@ -8,7 +8,7 @@ using UnityEngine.Splines;
 public class Entity_PlayableBehavior : PlayableBehaviour
 {
     //Animancerのクリップシーケンス等を登録.
-    public TransitionAsset transitter;
+    //public TransitionAsset transitter;
 
     [SerializeField]
     //移動情報.
