@@ -12,5 +12,5 @@ public class Entity_PlayableBehavior : PlayableBehaviour
 
     [SerializeField]
     //移動情報.
-    public ExposedReference<SplineContainer> spline;
+    public SplineContainer spline;
 }
