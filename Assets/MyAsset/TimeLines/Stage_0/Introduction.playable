@@ -60,11 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd202acb12cc7a84d829911165b7d6d8, type: 3}
   m_Name: Entity_PlayableClip
   m_EditorClassIdentifier: 
-  behaviour:
-    transitter: {fileID: 11400000, guid: ae23b5d2beec98244a7b61b4d66e5ccc, type: 2}
-    spline:
-      exposedName: e7d857fd6823b6c46af11dda3932919c
-      defaultValue: {fileID: 0}
+  container:
+    exposedName: ad009297a0a259942b4af6b979c3585b
+    defaultValue: {fileID: 0}
 --- !u!114 &-4419995094110173433
 MonoBehaviour:
   m_ObjectHideFlags: 1
