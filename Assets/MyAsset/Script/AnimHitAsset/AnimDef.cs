@@ -61,6 +61,31 @@ public class AnimancerManager
         }
     }
 
+    public void TimelineAnimLoad(List<AnimancerState> sts)
+    {
+        int LayerNum = sts.Count;
+        for(int ls = 0; ls < main.Layers.Count; ls++)
+        {
+            float Wg = main.Layers[ls].Weight;
+            if(Wg > 0)
+            {
+                main.Layers[ls].DestroyStates();
+            }
+        }
+        if(LayerNum > 0)
+        //MainLayerのみを考える..
+        {
+            ManualMixerState mxState = new ManualMixerState();
+            for(int i = 0; i < LayerNum; i++)
+            {
+                AnimancerLayer inserterLayer = main.Layers[i];
+                inserterLayer.IsAdditive = false;
+                inserterLayer.Weight = sts[i].Weight;
+                inserterLayer.Play(sts[i]);
+            }
+        }
+    }
+
     //AnimancerStateをanimDefより作成
     public AnimancerState MakeState(AnimDef animDef)
     {

@@ -7,10 +7,11 @@ using UnityEngine.Splines;
 [System.Serializable]
 public class Entity_PlayableBehavior : PlayableBehaviour
 {
+    [SerializeField]
     //Animancerのクリップシーケンス等を登録.
-    //public TransitionAsset transitter;
+    public TransitionAsset transitter;
 
     [SerializeField]
     //移動情報.
-    public SplineContainer spline;
+    public ExposedReference<SplineContainer> spline;
 }

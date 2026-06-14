@@ -11,8 +11,7 @@ using UnityEngine.Splines;
 [System.Serializable]
 public class Entity_PlayableClip : PlayableAsset, ITimelineClipAsset
 {
-    //public TransitionAsset Asset;
-    public ExposedReference<SplineContainer> container;
+    public Entity_PlayableBehavior Asset = new Entity_PlayableBehavior();
 
     // このクリップの特徴を定義
     public ClipCaps clipCaps {
@@ -23,13 +22,12 @@ public class Entity_PlayableClip : PlayableAsset, ITimelineClipAsset
     }
 
     //Playable生成は一度のみ行われる.
+    // handle先の情報パイプ...はどこ行った？
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {
-        // BehaviourのPlayableを作り、ExposedReferenceに登録された値を出力する.
-        var handle = ScriptPlayable<Entity_PlayableBehavior>.Create(graph);
-        handle.GetBehaviour().spline = container.Resolve(graph.GetResolver());
-        Debug.Log("Setting Playable");        
-        return handle;
+        // BehaviourのPlayableを作って返すだけ
+        // ExposedReferenceに登録された値はMixerで取得できるように.
+        return ScriptPlayable<Entity_PlayableBehavior>.Create(graph);
     }
     
     public void GatherProperties(PlayableDirector director, IPropertyCollector driver)
@@ -59,3 +57,4 @@ public class Entity_PlayableClip : PlayableAsset, ITimelineClipAsset
 //         return ScriptPlayable<Entity_PlayableBehavior>.Create(graph);
 //     }
 // }
+
