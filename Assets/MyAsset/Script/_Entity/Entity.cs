@@ -537,7 +537,11 @@ public class Entity : MonoBehaviour
         status.currentJugglePoint = JugglePt;
     }
 
-
+    internal void SetPhysicsUpdatable(bool isTrue)
+    {
+        
+    }
+    
     void statusAlign()
     {
         status.currentHP = Mathf.Clamp(status.currentHP , 0 , status.maxHP);

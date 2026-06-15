@@ -25,11 +25,13 @@ public class Prop : MonoBehaviour
 
     internal void OnHit(hitDefParams hitParam,Vector3 hitPos)
     {
+        float muls = 3.0f;
         Transform selectedTrfm = hitParam.ownerEntity.transform;
         Vector3 AddVelocity = 
         Vector3.Normalize(selectedTrfm.forward) * hitParam.velset.x +
         Vector3.Normalize(selectedTrfm.up) * hitParam.velset.y +
-        Vector3.Normalize(selectedTrfm.right) * hitParam.velset.z;
+        Vector3.Normalize(selectedTrfm.right) * hitParam.velset.z ;
+        AddVelocity *= muls;
         //POWER!!
         rigid.AddForceAtPosition(AddVelocity,hitPos, ForceMode.Impulse);
         disableTime += hitParam.hitStopTime.y;

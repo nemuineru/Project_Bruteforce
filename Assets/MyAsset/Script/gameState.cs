@@ -138,14 +138,14 @@ public class gameState : MonoBehaviour
 
     void FixedUpdate()
     {
+        entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
+        .OrderBy(t => !t.attrs.alive)
+        .ToList();
+        projList = FindObjectsByType<Projectile>(FindObjectsSortMode.None).ToList();
         //ゲームの外のときは止める.. TimeLine等、別のオブジェクトで管理したい. Projectileの方もそうする予定
         if(gameStatus != _GameStatus.OutGame)
         {
             elapsedTime += Time.fixedDeltaTime;
-            entityList = FindObjectsByType<Entity>(FindObjectsSortMode.None)
-            .OrderBy(t => !t.attrs.alive)
-            .ToList();
-            projList = FindObjectsByType<Projectile>(FindObjectsSortMode.None).ToList();
 
             propList = FindObjectsByType<Prop>(FindObjectsSortMode.None).ToList();
             foreach(Entity et in entityList)
@@ -169,6 +169,15 @@ public class gameState : MonoBehaviour
             {
                 et.resetStates();
             }
+        }
+        else
+        {
+            target.isVisible = false;
+        }
+        //Ingameで無ければ物理法則を無視させる.
+        foreach(Entity et in entityList)
+        {
+            et.rigid.isKinematic = et.rigid.isKinematic || gameStatus == _GameStatus.OutGame;
         }
     }
 

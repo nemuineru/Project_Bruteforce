@@ -18,21 +18,24 @@ public class Entity_PlayableMarker : Marker, INotification
         Component
     }
     
-    public EntityFindType FindType;
+    public Entity_PlayableTrack TAsset;
 
     // generates Entity when its not null. 
     // also, I want to make the TrackBinding controls this..
     public Entity generatingEntity;
-
+    
+    public EntityFindType FindType;
     //if generatingEntity is null, find the Entity with this name or tag or component.
     public string findName;
 
-    public PropertyName id
+    public PropertyName id => new PropertyName("CustomMarkerID");
+
+    public override void OnInitialize(TrackAsset parentTrack)
     {
-        get
-        {
-            return new PropertyName("method");
-        }
+        base.OnInitialize(parentTrack);
+        
+        // This executes when the timeline initializes the marker
+        Debug.Log($"Initialized marker on track: {parentTrack.name}");
     }
 }
 

@@ -105,7 +105,7 @@ public class Entity_PlayableMixer : PlayableBehaviour
         {
             controllingEntity.transform.position = Vector3.Lerp(controllingEntity.transform.position,position, 0.5f);
             controllingEntity.transform.rotation = setRots;
-            Debug.Log("clip played");
+            //Debug.Log("clip played");
             
             if(mms.Count() > 0 && controllingEntity.animancerManager != null)
             {
