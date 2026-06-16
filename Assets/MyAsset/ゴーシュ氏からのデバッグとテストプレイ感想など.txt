@@ -1,3 +1,17 @@
+<2026-06-16 TimeLine設定のセットアップ完了等.>
+Timelineの活用方法が少しずつ理解できた スクリーンフェードのエフェクトとかは未だ考えてない..
+InGameの時のみHP等のステータスを表示
+Entity毎の変数値(int_val, int_mn, int_mx/float_val, float_mn, float_mx/Vector3_1, Vector3_2/)を複数搭載できるコンポーネントの搭載..
+AddVarとかSetVarをStateDef.csに導入したい.
+
+アイテムホルダーとかはOverrideするStateDefを切り替えておくかな.
+EquipableProps <-> Equipment <-> Entity...的な感じで
+EquipmentにはStateDefListが存在してて、それを読み出せるようにする感じ.
+Equipment用に1000-を汎用Equipmentに指定する.
+AnimDefはOverrideしてもいいし、しなくても良い
+
+で、propsに関しては(BreakableProp)とかに引き継げるようにする.
+
 <2026-06-11 着地点を決定する>
 TimeLineで出来ることが増える => 導入したいものが出てくる -> 開発に時間がかかる... の繰り返しになるので
 決めどきを考えてそろそろ作る！
