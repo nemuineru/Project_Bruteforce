@@ -1,3 +1,5 @@
+
+
 //現状, debugやexeでは出ない(IndexWasOutOfRange)
 
 using System.Collections;
@@ -209,6 +211,9 @@ public class Entity : MonoBehaviour
 
     [SerializeField]
     internal List<hitDefParams> registeredHitDefs = new List<hitDefParams>();
+
+    //装着中の装備品. 投げつけたり攻撃したり.
+    public Equipments equipmentInHand;
 
     //for Animancer Rebind..
     void OnEnable()
