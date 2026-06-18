@@ -1,5 +1,6 @@
 
 
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -1710,6 +1711,20 @@ public class scPlayOneshotSound : StateController
 //set the entity collision. it resets after 1 frames.
 [SCHiearchy("Physics/Entity Collision Ignore for 1 frame")]
 public class scIgnoreEntityCollisions : StateController
+{
+    [SerializeField]
+    stParams<int> priority;
+
+    internal override void OnExecute(Entity entity)
+    {
+        entity.ignoreCollider();
+    }
+}
+
+
+//set the entity collision. it resets after 1 frames.
+[SCHiearchy("System/send and get Entity Pickupable with this command.")]
+public class scInvokePickup : StateController
 {
     [SerializeField]
     stParams<int> priority;
