@@ -1731,7 +1731,19 @@ public class scInvokePickup : StateController
 
     internal override void OnExecute(Entity entity)
     {
-        entity.ignoreCollider();
+        //objを読み出し, Equipmentsでhit可能かを考える..
+        List<Equipments> objList = GameObject.FindObjectsByType<Equipments>(FindObjectsSortMode.None).ToList();
+        foreach(Equipments eq in objList)
+        {
+            bool isGetting = eq.hitBox.clssCollided(out var v1, out var v2, out float dist, 
+            clssDef.ClssType.Hit, entity.animancerManager.primaryAnimDef.clssSetting, 0f);
+            if(isGetting == true)
+            {
+                entity.equipmentInHand = eq;
+                eq.setPhysics = false;
+                break;
+            }
+        }
     }
 }
 

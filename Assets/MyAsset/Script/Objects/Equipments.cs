@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class Equipments : MonoBehaviour
 {
+    //if it is on, set physics to none.
+    public bool setPhysics = true;
+
+
     //hitbox for pickup. 
     [SerializeField]
     internal clssSetting hitBox;

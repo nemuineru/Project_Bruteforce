@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5954595
+      value: -3.209
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.7520466
+      value: -6.842
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -97,13 +97,13 @@ PrefabInstance:
       addedObject: {fileID: 4865432103792100180}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2304511110234126648}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8249159046548184714}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8032932539458125655}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4942154404652509400}
   m_SourcePrefab: {fileID: 100100000, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
 --- !u!1 &2372984363619093360 stripped
 GameObject:
@@ -118,7 +118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2372984363619093360}
   serializedVersion: 4
-  m_Mass: 4
+  m_Mass: 1.8
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -137,38 +137,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2304511110234126648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372984363619093360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6f8186017bc5e4aa63c8c1748146a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitBox:
-    clssDefs:
-    - drawColor: {r: 0, g: 0, b: 0, a: 1}
-      clssType: 0
-      attachTo: 
-      showGizmo: 0
-      _entity: {fileID: 0}
-      attachTransform: {fileID: 3145016776394461642}
-      startPos: {x: 0, y: 0.46, z: 0}
-      endPos: {x: 0, y: 0.19, z: 0}
-      width: 0.25
-      _lastcalcStartPos: {x: 0, y: 0, z: 0}
-      _lastcalcEndPos: {x: 0, y: 0, z: 0}
-    disableClssList: []
-    root: {fileID: 0}
-    eraseAllClss: 0
-  isHit: 0
-  disableTime: 0
-  onDestroyInstantiate: {fileID: 0}
-  HP: 10
 --- !u!64 &8249159046548184714
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -212,8 +180,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &3145016776394461642 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea98d886f701faf47bc693317f76dc1c, type: 3}
-  m_PrefabInstance: {fileID: 3184011286138566177}
+--- !u!114 &4942154404652509400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372984363619093360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea663888e173bb645a35bd5f39653a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBox:
+    clssDefs:
+    - drawColor: {r: 0, g: 0, b: 0, a: 0}
+      clssType: 0
+      attachTo: 
+      showGizmo: 0
+      _entity: {fileID: 0}
+      attachTransform: {fileID: 0}
+      startPos: {x: 0, y: 0.3, z: 0}
+      endPos: {x: 0, y: -0.3, z: 0}
+      width: 0.13
+      _lastcalcStartPos: {x: 0, y: 0, z: 0}
+      _lastcalcEndPos: {x: 0, y: 0, z: 0}
+    disableClssList: []
+    root: {fileID: 0}
+    eraseAllClss: 0
+  isHit: 0
+  disableTime: 0
+  onDestroyInstantiate: {fileID: 0}
+  HP: 10
+  DestroyTime: 1
