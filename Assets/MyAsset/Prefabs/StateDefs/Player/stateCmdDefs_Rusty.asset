@@ -55,6 +55,7 @@ MonoBehaviour:
     - rid: 7982027888260546560
     - rid: 7982027949219512324
     - rid: 7982028315445428230
+    - rid: 3979541056796229632
     Dir: 
     setCtrl: 0
   references:
@@ -115,6 +116,24 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 50
         priority: 0
+    - rid: 3979541056796229632
+      type: {class: scInvokePickup, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 11111111
+          stLuaLoads: 
+        stateControllerSubName: Set Pickup  11111111
+        doLoadAfterChangeState: 0
+        priority:
+          _setHidden: 1
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
     - rid: 4404388664824299527
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:
