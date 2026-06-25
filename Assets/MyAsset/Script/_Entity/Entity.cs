@@ -284,7 +284,7 @@ public class Entity : MonoBehaviour
                 animDefs.Add(Anims.Clone());
             }
         }
-        if(equipmentInHand != null)
+        if(equipmentInHand != null && equipmentInHand.animlist != null)
         {
             foreach(AnimDef Anims in equipmentInHand.animlist.animDef)
             {
@@ -319,7 +319,7 @@ public class Entity : MonoBehaviour
             }
         }
         //装備品のstatedefを確認.
-        if(equipmentInHand != null)
+        if(equipmentInHand != null && equipmentInHand.statedefList != null)
         {
             foreach (StateDef state in equipmentInHand.statedefList.stateDefs)
             {

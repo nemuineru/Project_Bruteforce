@@ -1737,11 +1737,22 @@ public class scInvokePickup : StateController
         {
             Debug.Log(eq.gameObject.name);
             bool isGetting = eq.hitBox.clssCollided(out var v1, out var v2, out float dist, 
-            clssDef.ClssType.Hit, entity.animancerManager.primaryAnimDef.clssSetting, 0f);
+            clssDef.ClssType.Attack, entity.animancerManager.primaryAnimDef.clssSetting, 0f);
             if(isGetting == true)
             {
                 entity.equipmentInHand = eq;
                 eq.setPhysics = false;
+                Transform trf = entity.transform.Find(eq.boneTarget);
+                if(trf != null)
+                {
+                    eq.transform.parent = trf;
+                    eq.transform.position = trf.position;
+                    eq.transform.rotation = trf.rotation;
+                }
+                else
+                {
+                    eq.transform.parent = entity.transform;
+                }
                 entity.initAnimSetting();
                 entity.initStateSetting();
                 break;
