@@ -228,6 +228,7 @@ public class Entity : MonoBehaviour
         else
         {
             initAnimSetting();
+            initStateSetting();
             defaultClss.initClss(this);
         }
     }
@@ -263,17 +264,6 @@ public class Entity : MonoBehaviour
 
         //アニメ設定.
 
-        foreach (StateDefListObject dObj in DefLists)
-        {
-            foreach (StateDef state in dObj.stateDefs)
-            {
-                //set ScriptDirectory for Load.
-                state.ScriptDirectory = dObj.ScriptDirectory;
-                //Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
-                loadedDefs.Add(state.Clone());
-            }
-        }
-
         //initialize behaviors.
         if (LoadedBehavior != null)
         {
@@ -284,11 +274,19 @@ public class Entity : MonoBehaviour
         selfSource = GetComponent<AudioSource>();
     }
 
-    void initAnimSetting()
+    internal void initAnimSetting()
     {
+        animDefs = new List<AnimDef>();
         foreach (AnimlistObject list in animListObject)
         {
             foreach(AnimDef Anims in list.animDef)
+            {
+                animDefs.Add(Anims.Clone());
+            }
+        }
+        if(equipmentInHand != null)
+        {
+            foreach(AnimDef Anims in equipmentInHand.animlist.animDef)
             {
                 animDefs.Add(Anims.Clone());
             }
@@ -303,6 +301,33 @@ public class Entity : MonoBehaviour
             //..man why I wasted the times..
             animancerManager.main.ActionOnDisable = AnimancerComponent.DisableAction.Pause;
             ChangeAnim();           
+        }
+    }
+
+    internal void initStateSetting()
+    {
+        loadedDefs = new List<StateDef>();
+
+        foreach (StateDefListObject dObj in DefLists)
+        {
+            foreach (StateDef state in dObj.stateDefs)
+            {
+                //set ScriptDirectory for Load.
+                state.ScriptDirectory = dObj.ScriptDirectory;
+                //Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
+                loadedDefs.Add(state.Clone());
+            }
+        }
+        //装備品のstatedefを確認.
+        if(equipmentInHand != null)
+        {
+            foreach (StateDef state in equipmentInHand.statedefList.stateDefs)
+            {
+                //set ScriptDirectory for Load.
+                state.ScriptDirectory = equipmentInHand.statedefList.ScriptDirectory;
+                //Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
+                loadedDefs.Add(state.Clone());
+            }
         }
     }
 

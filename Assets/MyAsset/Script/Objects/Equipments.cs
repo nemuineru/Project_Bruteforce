@@ -23,17 +23,19 @@ public class Equipments : MonoBehaviour
 
     // Additional StateDef for loading / OverRiding.
     [SerializeField]
-    StateDefListObject statedefList;
+    public StateDefListObject statedefList;
 
     // ...with including Anims.
     [SerializeField]
-    AnimlistObject animlist;
+    public AnimlistObject animlist;
 
     [SerializeField]
     GameObject DestroyEffs;
 
     void FixedUpdate()
     {
+        hitBox.clssPosUpdate();
+        hitBox.clssDraw();
         //耐久値0なら壊れる
         if (durability <= 0)
         {

@@ -1735,12 +1735,15 @@ public class scInvokePickup : StateController
         List<Equipments> objList = GameObject.FindObjectsByType<Equipments>(FindObjectsSortMode.None).ToList();
         foreach(Equipments eq in objList)
         {
+            Debug.Log(eq.gameObject.name);
             bool isGetting = eq.hitBox.clssCollided(out var v1, out var v2, out float dist, 
             clssDef.ClssType.Hit, entity.animancerManager.primaryAnimDef.clssSetting, 0f);
             if(isGetting == true)
             {
                 entity.equipmentInHand = eq;
                 eq.setPhysics = false;
+                entity.initAnimSetting();
+                entity.initStateSetting();
                 break;
             }
         }
