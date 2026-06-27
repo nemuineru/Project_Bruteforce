@@ -646,7 +646,7 @@ public class clssDef
         EndTime = this.EndTime        
     };
 
-    public Color drawColor = Color.black;
+    public Color drawColor = Color.white;
 
     //やられ判定と当たり判定をenumで管理する
     public enum ClssType
@@ -742,8 +742,7 @@ public class clssDef
         Vector3 pos_1, pos_2;
         (pos_1, pos_2) = getGlobalPos();
         //Debug.Log(attachTo + " Drawin Capsules at" + pos_1.ToString() + pos_2.ToString());
-        DrawCapsuleGizmo_Tool(pos_1, pos_2, width,
-        drawColor != Color.black ? drawColor : (clssType == ClssType.Hit ? Color.blue : Color.red));
+        DrawCapsuleGizmo_Tool(pos_1, pos_2, width, drawColor != Color.white ? drawColor : (clssType == ClssType.Hit ? Color.blue : Color.red));
         Debug.DrawLine(pos_1,pos_2);
     }
 

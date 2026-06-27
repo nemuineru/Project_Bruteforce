@@ -1731,6 +1731,14 @@ public class scInvokePickup : StateController
 
     internal override void OnExecute(Entity entity)
     {
+        Transform childTrfmFind(Transform trf, string name)
+        {
+            var allTransform = trf.GetComponentsInChildren<Transform>(true);
+            var match = allTransform.Where((_ => _.name == name));
+
+            return match.FirstOrDefault();
+        }
+
         //objを読み出し, Equipmentsでhit可能かを考える..
         List<Equipments> objList = GameObject.FindObjectsByType<Equipments>(FindObjectsSortMode.None).ToList();
         foreach(Equipments eq in objList)
@@ -1742,9 +1750,10 @@ public class scInvokePickup : StateController
             {
                 entity.equipmentInHand = eq;
                 eq.setPhysics = false;
-                Transform trf = entity.transform.Find(eq.boneTarget);
+                Transform trf = childTrfmFind(entity.transform, eq.boneTarget);
                 if(trf != null)
                 {
+                    Debug.Log("Bone Found");
                     eq.transform.parent = trf;
                     eq.transform.position = trf.position;
                     eq.transform.rotation = trf.rotation;

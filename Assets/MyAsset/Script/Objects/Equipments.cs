@@ -32,10 +32,23 @@ public class Equipments : MonoBehaviour
     [SerializeField]
     GameObject DestroyEffs;
 
+    void OnEnable()
+    {
+        hitBox.initClss(transform);
+        foreach(clssDef clss in hitBox.clssDefs)
+        {
+            clss.drawColor = Color.cyan;
+        }
+    }
+
     void FixedUpdate()
     {
         hitBox.clssPosUpdate();
-        hitBox.clssDraw();
+        foreach(clssDef clss in hitBox.clssDefs)
+        {
+            clss.getGlobalPos();
+            clss.DrawCapsule();
+        }
         //耐久値0なら壊れる
         if (durability <= 0)
         {
