@@ -404,9 +404,10 @@ public class AnimDef
     public void checkClssCapsule()
     {
         clssSetting.clssPosUpdate();
+        //見つけたClssはCapsuleを描写する.
         List<clssDef> ca = clssSetting.findclss(clssDef.ClssType.Hit, 0f);
         ca.AddRange(clssSetting.findclss(clssDef.ClssType.Attack, 0f));
-        clssSetting.clssDraw();
+        //clssSetting.clssDraw();
         
         foreach (clssDef c in ca)
         {
@@ -526,6 +527,12 @@ public class clssSetting
         else
         {
             //Debug.Log("cant find default");
+        }
+
+        //draw clsses after for finding defs
+        foreach(clssDef cs in findDefs)
+        {
+            cs.DrawCapsule();
         }
         return findDefs;
     }
@@ -742,7 +749,10 @@ public class clssDef
         Vector3 pos_1, pos_2;
         (pos_1, pos_2) = getGlobalPos();
         //Debug.Log(attachTo + " Drawin Capsules at" + pos_1.ToString() + pos_2.ToString());
-        DrawCapsuleGizmo_Tool(pos_1, pos_2, width, drawColor != Color.white ? drawColor : (clssType == ClssType.Hit ? Color.blue : Color.red));
+        var Dcol = (drawColor.a != 1 && drawColor != Color.white ) ? drawColor : 
+        (clssType == ClssType.Hit ? Color.blue : Color.red);
+        
+        DrawCapsuleGizmo_Tool(pos_1, pos_2, width, Dcol);
         Debug.DrawLine(pos_1,pos_2);
     }
 

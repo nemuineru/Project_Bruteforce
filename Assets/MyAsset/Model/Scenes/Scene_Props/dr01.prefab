@@ -200,9 +200,9 @@ MonoBehaviour:
       showGizmo: 0
       _entity: {fileID: 0}
       attachTransform: {fileID: 0}
-      startPos: {x: 0, y: 0.3, z: 0}
-      endPos: {x: 0, y: -0.3, z: 0}
-      width: 0.13
+      startPos: {x: 0, y: 0.42, z: 0}
+      endPos: {x: 0, y: 0.05, z: 0}
+      width: 0.4
       _lastcalcStartPos: {x: 0, y: 0, z: 0}
       _lastcalcEndPos: {x: 0, y: 0, z: 0}
     disableClssList: []

@@ -423,7 +423,7 @@ public class gameState : MonoBehaviour
             }
             else if (ownerEntity != null && selectedEntity == ownerEntity)
             {
-                Debug.Log("selectetEntity is same value.");
+                //Debug.Log("selectetEntity is same value.");
             }
         }
 
