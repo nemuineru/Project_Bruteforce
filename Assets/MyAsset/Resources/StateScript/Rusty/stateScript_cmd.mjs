@@ -76,6 +76,13 @@ export function stateCmd(entity) {
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let isReversable = isChainable || (StateDefID == 5000 || StateDefID == 5050 || StateDefID == 5100 || StateDefID == 5110)
 
+    //装備品が有る場合の設定 - 
+    let isWeaponhold = entity.equipmentInHand != null;
+    if(isWeaponhold)
+    {
+        CS.UnityEngine.Debug.Log("Weapon holding");
+    }
+
     //this must be set as 0.
     let selfStTime = CS.Elem.CheckStateTime(entity) 
 
