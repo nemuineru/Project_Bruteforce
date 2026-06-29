@@ -8092,8 +8092,8 @@ MonoBehaviour:
     eraseAllClss: 0
   boneTarget: hand.r
   durability: 10
-  statedefList: {fileID: 0}
-  animlist: {fileID: 0}
+  statedefList: {fileID: 11400000, guid: 9dbe70a9ca249dd429dbc28dfb4a10a7, type: 2}
+  animlist: {fileID: 11400000, guid: 758c1ebfc6b85764dbbbca7fe52588f6, type: 2}
   DestroyEffs: {fileID: 0}
 --- !u!4 &256735608 stripped
 Transform:
