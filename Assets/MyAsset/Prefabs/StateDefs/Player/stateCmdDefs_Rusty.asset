@@ -55,6 +55,7 @@ MonoBehaviour:
     - rid: 7982027888260546560
     - rid: 7982027949219512324
     - rid: 7982028315445428230
+    - rid: 3979541191707328512
     Dir: 
     setCtrl: 0
   references:
@@ -114,6 +115,17 @@ MonoBehaviour:
         stateControllerSubName: 50 Jump/JumpCancel
         doLoadAfterChangeState: 0
         changeTo: 50
+        priority: 0
+    - rid: 3979541191707328512
+      type: {class: scChangeState, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 1000
+          stLuaLoads: 
+        stateControllerSubName: Weapon Shooting
+        doLoadAfterChangeState: 0
+        changeTo: 1000
         priority: 0
     - rid: 4404388664824299527
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}

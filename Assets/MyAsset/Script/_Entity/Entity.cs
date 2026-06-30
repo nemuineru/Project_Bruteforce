@@ -321,12 +321,13 @@ public class Entity : MonoBehaviour
         //装備品のstatedefを確認.
         if(equipmentInHand != null && equipmentInHand.statedefList != null)
         {
-            foreach (StateDef state in equipmentInHand.statedefList.stateDefs)
+            Debug.Log("equipment found");
+            foreach (StateDef eqState in equipmentInHand.statedefList.stateDefs)
             {
                 //set ScriptDirectory for Load.
-                state.ScriptDirectory = equipmentInHand.statedefList.ScriptDirectory;
-                //Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
-                loadedDefs.Add(state.Clone());
+                eqState.ScriptDirectory = equipmentInHand.statedefList.ScriptDirectory;
+                Debug.Log("scrDirectory_Loaded " + eqState.StateDefID);
+                loadedDefs.Add(eqState.Clone());
             }
         }
     }

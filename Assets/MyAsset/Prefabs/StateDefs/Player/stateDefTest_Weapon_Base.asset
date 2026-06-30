@@ -17,8 +17,8 @@ MonoBehaviour:
   - StateDefName: Pipe Attack 1
     StateDefID: 1000
     ScriptDirectory: StateScript/Rusty
-    ScriptName: stateScript_Rusty_Attack_Base.mjs
-    preStateVerdictName: StateDef_200_ID
+    ScriptName: stateScript_Equipments_base.mjs
+    preStateVerdictName: StateDef_1000_ID_Equipment_Pipe
     ParamLoadName: LuaOutput
     stateType: 83
     moveType: 65
@@ -184,7 +184,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Base
           loadTypes: 0
-          stParamValue: 200
+          stParamValue: 1000
           useID: -1
           stLuaLoads: 
         damage:

@@ -1,6 +1,5 @@
 
 
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -1722,8 +1721,8 @@ public class scIgnoreEntityCollisions : StateController
 }
 
 
-//set the entity collision. it resets after 1 frames.
-[SCHiearchy("System/send and get Entity Pickupable with this command.")]
+//set Equipments pickup enabled.
+[SCHiearchy("System/send and get Entity Pickupable")]
 public class scInvokePickup : StateController
 {
     [SerializeField]
@@ -1741,17 +1740,17 @@ public class scInvokePickup : StateController
 
         //objを読み出し, Equipmentsでhit可能かを考える..
         List<Equipments> objList = GameObject.FindObjectsByType<Equipments>(FindObjectsSortMode.None).ToList();
-        foreach(Equipments eq in objList)
+        foreach (Equipments eq in objList)
         {
             Debug.Log(eq.gameObject.name);
-            bool isGetting = eq.hitBox.clssCollided(out var v1, out var v2, out float dist, 
+            bool isGetting = eq.hitBox.clssCollided(out var v1, out var v2, out float dist,
             clssDef.ClssType.Attack, entity.animancerManager.primaryAnimDef.clssSetting, 0f);
-            if(isGetting == true)
+            if (isGetting == true)
             {
                 entity.equipmentInHand = eq;
                 eq.setPhysics = false;
                 Transform trf = childTrfmFind(entity.transform, eq.boneTarget);
-                if(trf != null)
+                if (trf != null)
                 {
                     Debug.Log("Bone Found");
                     eq.transform.parent = trf;
@@ -1770,3 +1769,44 @@ public class scInvokePickup : StateController
     }
 }
 
+//set Equipments pickup disable.
+[SCHiearchy("System/remove Entity Pickupable")]
+public class scDevokePickup : StateController
+{
+    [SerializeField]
+    stParams<int> priority;
+
+    internal override void OnExecute(Entity entity)
+    {
+        Equipments eq = entity.equipmentInHand;
+        if (eq != null)
+        {
+            //set drop.
+            eq.transform.parent = null;
+            eq.setPhysics = true;
+
+            entity.initAnimSetting();
+            entity.initStateSetting();
+        }
+    }
+}
+
+//set Equipments pickup disable.
+[SCHiearchy("System/add or decrease Durability of Pickupable with this command.")]
+public class durabilityAdd : StateController
+{
+    [SerializeField]
+    stParams<int> priority;
+
+    [SerializeField]
+    stParams<float> value;
+
+    internal override void OnExecute(Entity entity)
+    {
+        Equipments eq = entity.equipmentInHand;
+        if (eq != null)
+        {
+            eq.durability += value.valueGet(loadParams, entity);
+        }
+    }
+}

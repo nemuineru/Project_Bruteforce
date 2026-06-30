@@ -1,3 +1,5 @@
+
+
 //いわゆるMAP上に置かれる装備可能なオブジェクト.
 
 using System.Collections;
@@ -32,6 +34,8 @@ public class Equipments : MonoBehaviour
     [SerializeField]
     GameObject DestroyEffs;
 
+    Rigidbody rb;
+
     void OnEnable()
     {
         hitBox.initClss(transform);
@@ -41,8 +45,15 @@ public class Equipments : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void FixedUpdate()
     {
+        //if not physic is updated, set kinematically off
+        rb.isKinematic = !setPhysics;
         hitBox.clssPosUpdate();
         foreach(clssDef clss in hitBox.clssDefs)
         {
@@ -61,4 +72,3 @@ public class Equipments : MonoBehaviour
         Instantiate(DestroyEffs,transform.position, Quaternion.identity);
     }
 }
-
