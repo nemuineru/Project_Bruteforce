@@ -131,6 +131,7 @@ public class Entity : MonoBehaviour
     //List化されたanimListObjectからanimDefsのリストを作成する.
     //他Entityが自分のAnimを参照する際、パラメータ変更を共有してしまうことを懸念.
 
+    [SerializeField]
     internal List<AnimDef> animDefs = new List<AnimDef>();
 
     //アニメーターベース.
@@ -242,7 +243,7 @@ public class Entity : MonoBehaviour
         
         ik.solver.target = LookPos.transform;
 
-        allChildTransforms = GetComponentsInChildren<Transform>(true);
+        initChilds();
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
 
         if (renderers.Count > 0) mat = renderers[0].material;
@@ -274,6 +275,11 @@ public class Entity : MonoBehaviour
         selfSource = GetComponent<AudioSource>();
     }
 
+    public void initChilds()
+    {
+        allChildTransforms = GetComponentsInChildren<Transform>(true);
+    }
+
     internal void initAnimSetting()
     {
         animDefs = new List<AnimDef>();
@@ -291,7 +297,7 @@ public class Entity : MonoBehaviour
                 animDefs.Add(Anims.Clone());
             }
         }
-        if (mainAnimancer != null && animator != null)
+        if (mainAnimancer != null && animator != null && animancerManager == null)
         {
             Debug.Log("init Animancer");
             animancerManager = new AnimancerManager();

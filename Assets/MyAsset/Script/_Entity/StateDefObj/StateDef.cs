@@ -1748,7 +1748,7 @@ public class scInvokePickup : StateController
             if (isGetting == true)
             {
                 entity.equipmentInHand = eq;
-                eq.setPhysics = false;
+                eq.isTaken = false;
                 Transform trf = childTrfmFind(entity.transform, eq.boneTarget);
                 if (trf != null)
                 {
@@ -1761,6 +1761,9 @@ public class scInvokePickup : StateController
                 {
                     eq.transform.parent = entity.transform;
                 }
+                //なにかアニメーションしている最中にinitAnimSettingを走らせてしまうと、
+                // アニメーション遷移に異常発生.
+                entity.initChilds();
                 entity.initAnimSetting();
                 entity.initStateSetting();
                 break;
@@ -1783,7 +1786,7 @@ public class scDevokePickup : StateController
         {
             //set drop.
             eq.transform.parent = null;
-            eq.setPhysics = true;
+            eq.isTaken = true;
 
             entity.initAnimSetting();
             entity.initStateSetting();
