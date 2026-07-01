@@ -1,3 +1,11 @@
+<2026-07-01 Equipable取得時のAnimSlotのごみ取り>
+Name suggests.
+Statedef/scInvokePickup の時の
+                entity.initAnimSetting();
+を宣言した時、slot1以降再生済みのアニメーションが削除されない問題について.
+
+StateDefのAnimEndを宣言しても、スロットに指定したAnimのOverrideが指定されないので直さねば.
+
 <2026-06-16 TimeLine設定のセットアップ完了等.>
 Timelineの活用方法が少しずつ理解できた スクリーンフェードのエフェクトとかは未だ考えてない..
 InGameの時のみHP等のステータスを表示
