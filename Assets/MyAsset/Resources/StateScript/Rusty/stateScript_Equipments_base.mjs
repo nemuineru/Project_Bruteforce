@@ -28,7 +28,7 @@ export function StateDef_1000_ID_Equipment_Pipe(entity)
         verdList.Add(0);
     }
     //Aight, does native JS supports math function?
-    if (Math.abs(CurrentTime - 5) < 2 &&
+    if (Math.abs(CurrentAnimTime - 8) < 2 &&
         entity.attrs.isStateHit == 0)
     {
         verdList.Add(10);
