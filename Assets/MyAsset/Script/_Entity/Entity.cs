@@ -1,5 +1,6 @@
 
 
+
 //現状, debugやexeでは出ない(IndexWasOutOfRange)
 
 using System.Collections;
@@ -25,7 +26,7 @@ public class Entity : MonoBehaviour
     //set Entity Name.
     [SerializeField]
     internal string EntityName;
-    
+
     //set Entity team Name. Avoiding Friendly Fire.
     [SerializeField]
     internal string EntityTeamName;
@@ -111,7 +112,7 @@ public class Entity : MonoBehaviour
     //メインロックオン時に優先的に設定.
     [SerializeField]
     public Entity mainTargetEntity;
-    
+
     //攻撃を当てた際の短時間で設定される
     //近接ギア・遠距離ギア対応他
     [SerializeField]
@@ -220,7 +221,7 @@ public class Entity : MonoBehaviour
     void OnEnable()
     {
         //Animancerが存在していれば、リセット.
-        if(animancerManager != null)
+        if (animancerManager != null)
         {
             Debug.Log("Recalled!");
             animancerManager.AM_Recall();
@@ -240,16 +241,16 @@ public class Entity : MonoBehaviour
         ik = GetComponent<AimIK>() ?? gameObject.AddComponent<AimIK>();
 
         LookPos = new GameObject(gameObject.name + ".LookerObject");
-        
+
         ik.solver.target = LookPos.transform;
 
         initChilds();
         renderers = GetComponentsInChildren<Renderer>(true).ToList();
 
         if (renderers.Count > 0) mat = renderers[0].material;
-        
+
         animator = GetComponent<Animator>();
-        
+
         mainAnimancer = gameObject.AddComponent<AnimancerComponent>();
         mainAnimancer.Animator = animator;
 
@@ -285,16 +286,16 @@ public class Entity : MonoBehaviour
         animDefs = new List<AnimDef>();
         foreach (AnimlistObject list in animListObject)
         {
-            foreach(AnimDef Anims in list.animDef)
+            foreach (AnimDef Anims in list.animDef)
             {
-                animDefs.Add(Anims.Clone());
+                AddAnimDef(Anims);
             }
         }
-        if(equipmentInHand != null && equipmentInHand.animlist != null)
+        if (equipmentInHand != null && equipmentInHand.animlist != null)
         {
-            foreach(AnimDef Anims in equipmentInHand.animlist.animDef)
+            foreach (AnimDef Anims in equipmentInHand.animlist.animDef)
             {
-                animDefs.Add(Anims.Clone());
+                AddAnimDef(Anims);
             }
         }
         if (mainAnimancer != null && animator != null && animancerManager == null)
@@ -306,7 +307,7 @@ public class Entity : MonoBehaviour
             //this is where should I start.. pause anim on disabled?
             //..man why I wasted the times..
             animancerManager.main.ActionOnDisable = AnimancerComponent.DisableAction.Pause;
-            ChangeAnim();           
+            ChangeAnim();
         }
     }
 
@@ -321,20 +322,47 @@ public class Entity : MonoBehaviour
                 //set ScriptDirectory for Load.
                 state.ScriptDirectory = dObj.ScriptDirectory;
                 //Debug.Log("scrDirectory_Loaded" + state.ScriptDirectory);
-                loadedDefs.Add(state.Clone());
+                AddStateDef(state);
             }
         }
         //装備品のstatedefを確認.
-        if(equipmentInHand != null && equipmentInHand.statedefList != null)
+        if (equipmentInHand != null && equipmentInHand.statedefList != null)
         {
             Debug.Log("equipment found");
             foreach (StateDef eqState in equipmentInHand.statedefList.stateDefs)
             {
                 //set ScriptDirectory for Load.
                 eqState.ScriptDirectory = equipmentInHand.statedefList.ScriptDirectory;
-                Debug.Log("scrDirectory_Loaded " + eqState.StateDefID);
-                loadedDefs.Add(eqState.Clone());
+                AddStateDef(eqState);
             }
+        }
+    }
+
+    //both wont applicate the duplicates.
+    internal void AddAnimDef(AnimDef ad)
+    {
+        int Index = animDefs.FindIndex(lD => lD.ID == ad.ID);
+        if (Index != -1)
+        {
+            animDefs[Index] = ad.Clone();
+        }
+        else
+        {
+            animDefs.Add(ad.Clone());
+        }
+    }
+
+    internal void AddStateDef(StateDef sd)
+    {
+        //replace or override it
+        int Index = loadedDefs.FindIndex(lD => lD.StateDefID == sd.StateDefID);
+        if (Index != -1)
+        {
+            loadedDefs[Index] = sd.Clone();
+        }
+        else
+        {
+            loadedDefs.Add(sd.Clone());
         }
     }
 
@@ -349,7 +377,7 @@ public class Entity : MonoBehaviour
             min.SetEntity(this);
             min.transform.parent = transform;
             min.transform.localPosition = Vector3.up;
-        }        
+        }
     }
 
     // Update is called once per frame
@@ -398,14 +426,14 @@ public class Entity : MonoBehaviour
         //のけぞり計算
         status.HitFallTime -= status.HitPauseTime < 0 ? 1 : 0;
         status.HitTime -= status.HitFallTime < 0 ? 1 : 0;
-        
+
     }
 
     public void SetTarget()
     {
         //get Nearest Entity.
         List<Entity> EList = gameState.self.entityList.Where(x => x != this && x.tag != gameObject.tag).OrderBy(x => (x.transform.position - transform.position).magnitude).ToList();
-        if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
+        if (EList.Count > 0 && gameState.self.target != null && tag == "Player")
         {
             nearestTargetEntity = EList.First();
         }
@@ -413,26 +441,26 @@ public class Entity : MonoBehaviour
         //get latest hitdef entity for registering Entity.
         EList = registeredHitDefs.Where(x => x.targetEntity != this && x.ownerEntity == this)
         .OrderBy(x => gameState.self.elapsedTime - x.HitRegisterTime).Select(x => x.targetEntity).ToList();
-        if(EList.Count > 0 && gameState.self.target != null && tag == "Player")
+        if (EList.Count > 0 && gameState.self.target != null && tag == "Player")
         {
             shortTargetEntity = EList.First();
         }
-        if(mainTargetEntity != null)
+        if (mainTargetEntity != null)
         {
             gameState.self.target.MainTarget_to = mainTargetEntity.gameObject;
         }
 
         //IK solvers
         Entity tgts = Elem.getTargetEntity(this);
-        
-        if(vCam != null && tag == "Player")
+
+        if (vCam != null && tag == "Player")
         {
-            if(tgts != null)
+            if (tgts != null)
             {
-                gameState.self.target.transform.position = Vector3.Lerp(gameState.self.target.transform.position, tgts.transform.position + Vector3.up * 0.5f,0.1f);
+                gameState.self.target.transform.position = Vector3.Lerp(gameState.self.target.transform.position, tgts.transform.position + Vector3.up * 0.5f, 0.1f);
             }
             gameState.self.target.isVisible = tgts != null;
-            if(mainTargetEntity != null)
+            if (mainTargetEntity != null)
             {
                 gameState.self.target.MainTarget_to = mainTargetEntity.gameObject;
                 vCam.LookAt = LookPos.transform;
@@ -443,8 +471,8 @@ public class Entity : MonoBehaviour
                 vCam.LookAt = null;
             }
         }
-        
-        if(tgts != null)
+
+        if (tgts != null)
         {
             LookPos.transform.position = tgts.transform.position + Vector3.up * 0.5f;
         }
@@ -455,7 +483,7 @@ public class Entity : MonoBehaviour
     public void LockCamFuncions()
     {
         //存在するならリセット
-        if(mainTargetEntity != null)
+        if (mainTargetEntity != null)
         {
             Debug.Log("Reset!");
             mainTargetEntity = null;
@@ -472,14 +500,14 @@ public class Entity : MonoBehaviour
             clssSetting LaysTo = new clssSetting();
             clssDef def = new clssDef();
             def.startPos = transform.position + Vector3.up + (vCam != null ? vCam.transform.forward * FindRadius : targetTo_fw * FindRadius);
-            def.endPos = def.startPos +(vCam != null ? vCam.transform.forward * FindLength : targetTo_fw * FindLength); 
+            def.endPos = def.startPos + (vCam != null ? vCam.transform.forward * FindLength : targetTo_fw * FindLength);
             def.width = FindRadius;
             def.attachTransform = null;
             def.clssType = clssDef.ClssType.Attack;
-            def.drawColor = Color.cyan;            
+            def.drawColor = Color.cyan;
 
             LaysTo.clssDefs.Add(def);
-            foreach(var cr in LaysTo.clssDefs)
+            foreach (var cr in LaysTo.clssDefs)
             {
                 StartCoroutine(cr.DrawCapsuleEnums(.5f));
             }
@@ -487,15 +515,15 @@ public class Entity : MonoBehaviour
             List<Entity> FindObj = new List<Entity>();
 
             //射線が通るもののみを選択 自分は選択しない
-            foreach(Entity et in gameState.self.entityList)
+            foreach (Entity et in gameState.self.entityList)
             {
-                if(et == this)
+                if (et == this)
                     continue;
                 else
                 {
-                    bool isHit = LaysTo.clssCollided(out Vector3 v1,out Vector3 v2,out float f,
-                    clssDef.ClssType.Attack,et.animancerManager.primaryAnimDef.clssSetting,0);
-                    if(isHit)
+                    bool isHit = LaysTo.clssCollided(out Vector3 v1, out Vector3 v2, out float f,
+                    clssDef.ClssType.Attack, et.animancerManager.primaryAnimDef.clssSetting, 0);
+                    if (isHit)
                     {
                         FindObj.Add(et);
                     }
@@ -503,15 +531,15 @@ public class Entity : MonoBehaviour
             }
 
             //Entityが見つからなければそのまま
-            if(FindObj?.Count == 0)
+            if (FindObj?.Count == 0)
             {
                 return;
             }
-                Debug.Log("HitCheck");
+            Debug.Log("HitCheck");
             float optimalObjDist = Mathf.Infinity;
             Entity optimalObject;
             (optimalObjDist, optimalObject) = getOptimalObjs(FindObj);
-            if(optimalObject != null)
+            if (optimalObject != null)
             {
                 mainTargetEntity = optimalObject.GetComponent<Entity>();
             }
@@ -539,7 +567,7 @@ public class Entity : MonoBehaviour
             pos2.Normalize();
 
             // degree: pos2のX,Z成分からなる角度. カメラの前方からどれだけ回転しているか
-            float degree = Vector3.SignedAngle(pos2,cameraTrn.forward,Vector3.up);
+            float degree = Vector3.SignedAngle(pos2, cameraTrn.forward, Vector3.up);
             // degreeを-180°～180°に正規化
             // degree = degreeNormalize(degree, degreep);
 
@@ -554,7 +582,7 @@ public class Entity : MonoBehaviour
                 target = enemy;
             }
         }
-            return (degreemum, target);
+        return (degreemum, target);
     }
 
     public void addBalancePoint(float AddBalancePt)
@@ -563,9 +591,9 @@ public class Entity : MonoBehaviour
         // ただし負数のmaxBalancePoint以下にはならない
         // status.currentBalancePoint = moveType != _MoveType.H && status.HitPauseTime < -10 ? 
         status.currentBalancePoint = Mathf.Min(status.currentBalancePoint + AddBalancePt, status.maxBalancePoint);
-        status.currentBalancePoint = Mathf.Max(-status.maxBalancePoint,status.currentBalancePoint);
+        status.currentBalancePoint = Mathf.Max(-status.maxBalancePoint, status.currentBalancePoint);
     }
-    
+
     public void setJugglePoint(float JugglePt)
     {
         //ジャグルはstateChangeの値が反映.
@@ -576,13 +604,13 @@ public class Entity : MonoBehaviour
 
     internal void SetPhysicsUpdatable(bool isTrue)
     {
-        
+
     }
-    
+
     void statusAlign()
     {
-        status.currentHP = Mathf.Clamp(status.currentHP , 0 , status.maxHP);
-        status.currentEnergy = Mathf.Clamp(status.currentEnergy , 0 , status.maxEnergy);
+        status.currentHP = Mathf.Clamp(status.currentHP, 0, status.maxHP);
+        status.currentEnergy = Mathf.Clamp(status.currentEnergy, 0, status.maxEnergy);
     }
 
     internal void resetStates()
@@ -632,7 +660,7 @@ public class Entity : MonoBehaviour
             Physics.CapsuleCast
             (pos_1, pos_2,
             capCol.radius - minimumLength, Vector3.down,
-            out hitInfo, MaxLength , LayerMask.GetMask("Terrain"));
+            out hitInfo, MaxLength, LayerMask.GetMask("Terrain"));
 
         //Debug.Log(isCapsuleHit + " - capsuleSet?");
 
@@ -677,7 +705,7 @@ public class Entity : MonoBehaviour
             stateTime = 0;
         }
     }
-    
+
     StateDef prevState = null;
 
     void executeStates()
@@ -740,7 +768,7 @@ public class Entity : MonoBehaviour
             {
                 //倒したときの一瞬スローモー.
                 StartCoroutine(gameState.self.OneShotSlo_mo(0.45f));
-                Instantiate(gameState.self.defaultDeathEff,transform.position + Vector3.up * 0.5f,Quaternion.identity);
+                Instantiate(gameState.self.defaultDeathEff, transform.position + Vector3.up * 0.5f, Quaternion.identity);
                 //BOLD tagging gamechanger system that I hate to implement.
                 if (gameObject.tag == "Player")
                 {
@@ -760,7 +788,7 @@ public class Entity : MonoBehaviour
         {
             CurrentStateID = 5000;
         }
-        
+
         onGameFinished();
 
         //state実行.. これは一つだけに実行されるはず.
@@ -779,8 +807,8 @@ public class Entity : MonoBehaviour
             StateDef found = controlledEntity.loadedDefs.Find(st => st.StateDefID == CurrentStateID);
             StateDef findDef = found?.Clone();
             currentState = findDef;
-        }        
-        
+        }
+
         //ステート奪取後も実行される.
         if (prevState != null && isStateChanged == true)
         {
@@ -788,7 +816,7 @@ public class Entity : MonoBehaviour
             //なんか, StateExecute時にWebGLだとIndexOutofBoundsとなるみたいなので対策せねば.
             List<int> ExID = prevState.Execute(this, true);
             //過去のStateを実行(ChangeStateが実行された後の1フレームのみ.)
-            if(ExID.Count() > 0)
+            if (ExID.Count() > 0)
                 foreach (int ID in ExID)
                 {
                     Debug.Log(ID);
@@ -805,7 +833,7 @@ public class Entity : MonoBehaviour
             //こちらも対策せねば.
             List<int> ExID = currentState.Execute(this, false);
             //実行したSTATEIDを格納. 実行回数はまだ記録してない.
-            if(ExID.Count() > 0)
+            if (ExID.Count() > 0)
                 foreach (int ID in ExID)
                 {
                     if (!executedStateIDs.Any(i => i == ID))
@@ -818,7 +846,7 @@ public class Entity : MonoBehaviour
             //Debug.Log("Executed stateDef - " + CurrentStateID + " at state time of - "  + Time.frameCount + "/"+ stateTime +
             //" " + this.gameObject.name);
             //前回ステートにcurrentStateの情報を登録
-            if( isStateChanged == true )
+            if (isStateChanged == true)
             {
                 prevState = currentState;
             }
@@ -853,9 +881,9 @@ public class Entity : MonoBehaviour
         //これ消したい.
         Vector2 wish = Vector2.zero;
         Vector2 look = Vector2.zero;
-        if(entityInput.commandBuffer.Count() > 0)
+        if (entityInput.commandBuffer.Count() > 0)
         {
-            wish = entityInput.commandBuffer[0].MoveAxis;        
+            wish = entityInput.commandBuffer[0].MoveAxis;
             look = entityInput.commandBuffer[0].LookAxis;
         }
         //(InputInstance.self.inputValues.MovingAxisRead);
@@ -867,7 +895,7 @@ public class Entity : MonoBehaviour
         {
             //Debug.Log("Transpose Camera setting..");
             targetTo_fw = Vector3.ProjectOnPlane(vCam.transform.forward, Vector3.up).normalized;
-            if(transposer_Orbit != null)
+            if (transposer_Orbit != null)
             {
                 transposer_Orbit.m_XAxis.Value += look.x * 3.0f;
             }
@@ -875,15 +903,15 @@ public class Entity : MonoBehaviour
             {
                 //set -180 to 180, for which rotation should not flipped..
                 Vector3 currentRotCam = vCam.transform.rotation.eulerAngles;
-                currentRotCam.x -= currentRotCam.x > 180 ? 360 : 0; 
+                currentRotCam.x -= currentRotCam.x > 180 ? 360 : 0;
 
-                if(vCam.LookAt == null)
+                if (vCam.LookAt == null)
                 {
                     rotCam = rotCam == Vector3.zero ? currentRotCam : rotCam;
-                    rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f,-25f,80f);
+                    rotCam.x = Mathf.Clamp(rotCam.x - look.y * 3.0f, -25f, 80f);
                     rotCam.y = rotCam.y + look.x * 3.0f;
                     //Debug.Log(rotCam.x);
-                    vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation,Quaternion.Euler(rotCam.x,rotCam.y,0f),0.24f);
+                    vCam.transform.rotation = Quaternion.Lerp(vCam.transform.rotation, Quaternion.Euler(rotCam.x, rotCam.y, 0f), 0.24f);
                 }
                 else
                 {
@@ -895,7 +923,7 @@ public class Entity : MonoBehaviour
         {
             targetTo_fw = Quaternion.Euler(0f, look.x, 0f) * targetTo_fw;
         }
-        
+
         if (targetTo_fw != null)
         {
             wishingVect = targetTo_fw * wish.y
@@ -914,17 +942,17 @@ public class Entity : MonoBehaviour
     void setanimPlay()
     {
         //Animancer版.
-        if(animancerManager != null)
+        if (animancerManager != null)
         {
             animancerManager.Tick((status.HitPauseTime <= 0));
             animationFrameTime = animancerManager.AM_AnimCurrentTime(0);
             animationEndTime = animancerManager.AM_AnimEndTime(0);
         }
     }
-    
+
     //基本はAnimDefを呼び出し.
     //多分これでChangeAnimFromParantでも行けるはず
-    public void ChangeAnim(AnimDef animDef = null, int LayerID = 0, 
+    public void ChangeAnim(AnimDef animDef = null, int LayerID = 0,
     float timeoffset = 0.0f, Entity refEntity = null, AvatarMask mask = null, bool isAdditive = false)
     {
         if (mainAnimancer != null && animator != null)
@@ -937,7 +965,7 @@ public class Entity : MonoBehaviour
             else
             {
                 AnimDef initDef = animDefs.Find(fs => fs.ID == animID);
-                if(initDef != null)
+                if (initDef != null)
                 {
                     animancerManager.TransitLayer(initDef, LayerID, timeoffset, mask, isAdditive);
                 }
@@ -948,7 +976,7 @@ public class Entity : MonoBehaviour
             }
         }
     }
-    
+
     public void ChangeAnimParam(Vector2 animParamValue, int LayerID = 0)
     {
         if (mainAnimancer != null && animator != null)
@@ -958,10 +986,10 @@ public class Entity : MonoBehaviour
     }
 
     public void FadeAnim(int LayerID = 0, float fadeTime = 0)
-    { 
+    {
         if (mainAnimancer != null && animator != null)
         {
-            animancerManager.AM_FadeLayer(LayerID,fadeTime);
+            animancerManager.AM_FadeLayer(LayerID, fadeTime);
         }
     }
 
@@ -976,7 +1004,7 @@ public class Entity : MonoBehaviour
         bool isPaused = (status.HitPauseTime > 0);
         if (isPaused)
         {
-            if(!rigid.isKinematic)
+            if (!rigid.isKinematic)
             {
                 pausedVel = rigid.velocity;
             }
@@ -1018,7 +1046,7 @@ public class Entity : MonoBehaviour
         }
         return resl;
     }
-    
+
     //2026-01-17
     //Animancer
     public bool hitCheck(clssSetting checkerSetting, out Vector3 HitPoint)
@@ -1050,25 +1078,25 @@ public class Entity : MonoBehaviour
 
         //POnPlaneが0になるのだけは防ぐ
         //現在の速度を地上法線方向で考える.  (プレイヤー前向きとなる移動値 + プレイヤー右向きの移動値)
-        Vector3 CurrentForwardVect = Vector3.ProjectOnPlane(rigid.velocity + transform.forward * 0.0001f , GroundNormal);
+        Vector3 CurrentForwardVect = Vector3.ProjectOnPlane(rigid.velocity + transform.forward * 0.0001f, GroundNormal);
         Vector3 CurrentRightVect = (Quaternion.AngleAxis(90f, GroundNormal) * CurrentForwardVect);
-        
+
         //このLimiterが1以上あるなら、その速度を加算しない、と考える..
         //プレイヤーの一定速度値を超えた際は1以上を与える.
         //MoveAxisInputを考慮して、異常な加速を抑える.
         //また、wishingVectが0ならDotも0となるので..
-        float ForwardMean = 
+        float ForwardMean =
         Vector3.Dot(wishVect, CurrentForwardVect.normalized);
-        float RightMean = 
+        float RightMean =
         Vector3.Dot(wishVect, CurrentRightVect.normalized);
 
         //wishingVectのSpeedMaxを考慮したMean値.
-        Vector3 FWMean = CurrentForwardVect.normalized * ForwardMean * 
-        (1.001f - Mathf.Clamp((CurrentForwardVect.magnitude * Mathf.Sign(ForwardMean)) / speed.x, -Mathf.Infinity, 1f )) * forceMean.x;
+        Vector3 FWMean = CurrentForwardVect.normalized * ForwardMean *
+        (1.001f - Mathf.Clamp((CurrentForwardVect.magnitude * Mathf.Sign(ForwardMean)) / speed.x, -Mathf.Infinity, 1f)) * forceMean.x;
         //これが無いと方向転換が不可能.
-        Vector3 RGMean = CurrentRightVect.normalized * RightMean * 
-        (1.001f - Mathf.Clamp((CurrentRightVect.magnitude * Mathf.Sign(RightMean)) / speed.z, -Mathf.Infinity , 1f)) * forceMean.z; 
-        
+        Vector3 RGMean = CurrentRightVect.normalized * RightMean *
+        (1.001f - Mathf.Clamp((CurrentRightVect.magnitude * Mathf.Sign(RightMean)) / speed.z, -Mathf.Infinity, 1f)) * forceMean.z;
+
 
         //ひとまず、CurrentVect値の速度を演算
         //速度以上のwishVectが加算された場合はごく僅かな値を加算する
@@ -1097,8 +1125,8 @@ public class Entity : MonoBehaviour
 
     internal GameObject makeInstantiate(GameObject gObj, Vector3? position, string boneName = "", bool isAligned = false)
     {
-        Transform findBone = Elem.getEntityBoneTransform(this,boneName);
-        Vector3 pos = position.HasValue ? position.Value : Vector3.zero; 
+        Transform findBone = Elem.getEntityBoneTransform(this, boneName);
+        Vector3 pos = position.HasValue ? position.Value : Vector3.zero;
         Quaternion rot = isAligned ? transform.rotation : Quaternion.identity;
         return Instantiate(gObj, findBone.position + pos, rot);
     }
@@ -1179,12 +1207,31 @@ public class Entity : MonoBehaviour
     public void SetStepSound(int iVal = 0)
     {
         AudioClip[] clip = gameState.self.defaultFootSound;
-            if (clip == null || clip.Length == 0) return;
+        if (clip == null || clip.Length == 0) return;
         AudioClip select_cl = clip[UnityEngine.Random.Range(0, clip.Length)];
-        if(select_cl != null)
+        if (select_cl != null)
         {
-            selfSource.PlayOneShot(select_cl,0.25f);            
+            selfSource.PlayOneShot(select_cl, 0.25f);
         }
+    }
+
+    public void setEntityFloatValue(float value, string str)
+    {
+        EntityValue val = status.vals.Find(v => v.valueName == str);
+        if(val != null)
+        {
+            val.valueName = str;
+            val.FValue = value;
+        }
+        else
+        {
+            status.vals.Add(new EntityValue(value,str));
+        }
+    }
+
+    public void setEntityFlag(int set, string str)
+    {
+        //EntityFlag flg = status.flags.Find();
     }
 }
 

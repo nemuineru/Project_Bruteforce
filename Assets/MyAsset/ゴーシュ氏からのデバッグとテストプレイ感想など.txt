@@ -1,3 +1,6 @@
+<2026-07-04 Entity毎の変数値設定など>
+
+
 <2026-07-01 Equipable取得時のAnimSlotのごみ取り>
 Name suggests.
 Statedef/scInvokePickup の時の

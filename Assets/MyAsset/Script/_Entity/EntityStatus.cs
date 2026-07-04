@@ -73,29 +73,6 @@ public class EntityAttr
         isBeingStateContact = 0;
         isBeingStateGuarded = 0;
     }
-
-    public List<EntityFlag> flags = new List<EntityFlag>();
-    public void flagUpdate()
-    {
-        foreach(EntityFlag flagSel in flags)
-        {
-            flagSel.Tick();
-        }
-    }
-}
-
-//キャラクターの特殊フラッグ指定管理..
-public class EntityFlag
-{
-    public string flagName;
-    //isEternal Meant as not erasing if it beyonds flagDefault
-    public bool isEternal;
-    public int flagDefaultTime;
-    internal int flagElapsedTime = 0;
-    public void Tick()
-    {
-        flagElapsedTime++;
-    }
 }
 
 
@@ -112,8 +89,8 @@ public class EntityStatus
     //ガード中はこの値を先に減少させてから、適応
     public float currentStancePoint = 25f;
     public float maxStancePoint = 25f;
-    
-    public float stanceRecoverRate= .8f;
+
+    public float stanceRecoverRate = .8f;
     public int stanceRecoverParsedTime = 0;
     public int stanceRecoverMinTime = 20;
 
@@ -135,16 +112,16 @@ public class EntityStatus
     public float GuardReductDmgrate = 1.0f;
 
     //スピードとかの設定.
-    public Vector3 BaseMoveVelocityParam = new Vector3(5f,4f,5f);
+    public Vector3 BaseMoveVelocityParam = new Vector3(5f, 4f, 5f);
     //スピードとかの設定.
-    public Vector3 BaseAccelParam = new Vector3(40f,40f,40f);
+    public Vector3 BaseAccelParam = new Vector3(40f, 40f, 40f);
 
-    
+
     //この秒数が0にならない限り動きを止める. stateTimeなども同様.
     //ヒットのポーズ用(ガード含む). entityがhitPause時は減少しない.
     [SerializeField]
     public int HitPauseTime = 0;
-    
+
     //ヒットののけぞり用(ガード含む). entityがhitPause時は減少しない.
     [SerializeField]
     public int HitTime = 0;
@@ -156,7 +133,7 @@ public class EntityStatus
     //チャージ. 特殊ボタンの押しっぱなしを判別.
     //ダメージを受けたりすると0に戻る.
     //こういう変数はあんまり設定したくないんだよね
-    public float ChargeTime = 0f;    
+    public float ChargeTime = 0f;
     internal float setChargeTime_Lv1 = 0.15f;
     internal float setChargeTime_Lv2 = .4f;
     internal float setChargeTime_End = 2f;
@@ -164,8 +141,8 @@ public class EntityStatus
     public void setCurrentValue()
     {
         float MaxEnergyOverflowValue = 3.0f;
-        currentHP = Mathf.Clamp(currentHP , 0 , maxHP);
-        currentEnergy = Mathf.Clamp(currentEnergy , 0 , maxEnergy * MaxEnergyOverflowValue);
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy * MaxEnergyOverflowValue);
     }
 
     //get CurrentHP. might needs to update current..
@@ -177,11 +154,49 @@ public class EntityStatus
     public void GuardGain(bool isImmidiate, float multiValue)
     {
         stanceRecoverParsedTime++;
-        if(isImmidiate || stanceRecoverParsedTime > stanceRecoverMinTime)
+        if (isImmidiate || stanceRecoverParsedTime > stanceRecoverMinTime)
         {
             currentStancePoint += stanceRecoverRate * multiValue;
         }
-        currentStancePoint = Mathf.Min(currentStancePoint,maxStancePoint);
+        currentStancePoint = Mathf.Min(currentStancePoint, maxStancePoint);
+    }
+
+
+    public List<EntityFlag> flags = new List<EntityFlag>();
+    public List<EntityValue> vals = new List<EntityValue>();
+    public void flagUpdate()
+    {
+        foreach (EntityFlag flagSel in flags)
+        {
+            flagSel.Tick();
+        }
     }
 }
 
+
+//キャラクターの特殊フラッグ指定管理..
+public class EntityFlag
+{
+    public string flagName;
+    //isEternal Meant as not erasing if it beyonds flagDefault
+    public bool isEternal;
+    public int flagDefaultTime;
+    internal int flagElapsedTime = 0;
+    public void Tick()
+    {
+        flagElapsedTime++;
+    }
+}
+
+//Entity Value for 
+public class EntityValue
+{
+    public string valueName;
+    public float FValue;
+
+    public EntityValue(float value, string strs)
+    {
+        valueName = strs;
+        FValue = value;
+    }
+}
