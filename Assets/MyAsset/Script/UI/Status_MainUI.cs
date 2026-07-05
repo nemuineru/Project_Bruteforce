@@ -9,6 +9,8 @@ public class Status_MainUI : MonoBehaviour
     public ChargerGaugeComponent Charger;
     public GuardGaugeComponent Guard;
 
+    public EquipmentUI EquipUI;
+
     public GameObject PreGameScreen;
     public GameObject OnGameScreen;
     public GameObject GameOverScreen;
@@ -52,6 +54,7 @@ public class Status_MainUI : MonoBehaviour
         Health.valueEntity = playerEntity;
         Energy.valueEntity = playerEntity;
         Charger.valueEntity = playerEntity;
+        EquipUI.mainEntity = playerEntity;
         // Guard.valueEntity = playerEntity;
     }
     

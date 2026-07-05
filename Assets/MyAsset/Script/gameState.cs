@@ -61,6 +61,10 @@ public class gameState : MonoBehaviour
     public _GameStatus gameStatus;
     //public _MenuStatus menuStatus;
 
+    
+    [SerializeField]
+    public Sprite DefaultEquipmentImage; 
+
     public int KillNo = 0;
 
     float timeStartBy = 2.2f;
@@ -106,7 +110,6 @@ public class gameState : MonoBehaviour
             Player = Instantiate(Player_Instantiate,tr.position,qt).GetComponent<Entity>();
         }
 
-        GameObject objs = Instantiate(MainGUI.gameObject);
         GameObject GUI_Top = GameObject.FindGameObjectWithTag("UI");
         if(Player_Vcam != null)
         {
@@ -132,7 +135,13 @@ public class gameState : MonoBehaviour
             BirdView_vcam.gameObject.SetActive(false);
         }
 
-        objs.transform.SetParent(GUI_Top.transform, false);
+
+        GameObject objs = GameObject.Find(MainGUI.name);
+        if(objs == null)
+        {
+            objs = Instantiate(MainGUI.gameObject);
+            objs.transform.SetParent(GUI_Top.transform, false);
+        }
         mainInstGUI = objs.GetComponent<Status_MainUI>();
     }
 

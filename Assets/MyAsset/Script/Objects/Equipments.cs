@@ -22,6 +22,8 @@ public class Equipments : MonoBehaviour
 
     // set Durability for this.
     public float durability = 10.0f;
+    
+    public float maxDurability = 10.0f;
 
     // Additional StateDef for loading / OverRiding.
     [SerializeField]
@@ -36,6 +38,13 @@ public class Equipments : MonoBehaviour
 
     [SerializeField]
     List<GameObject> enableOnTaken;
+
+    [SerializeField]
+    public Sprite GUIImage; 
+
+    [SerializeField]
+    public Color color;
+
 
     Rigidbody rb;
 

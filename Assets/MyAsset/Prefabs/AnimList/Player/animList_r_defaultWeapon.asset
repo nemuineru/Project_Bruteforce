@@ -13,6 +13,45 @@ MonoBehaviour:
   m_Name: animList_r_defaultWeapon
   m_EditorClassIdentifier: 
   animDef:
+  - mixType: 3
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
+    ID: 0
+    Name: Movement
+    animClip:
+    - Clip: {fileID: 7400000, guid: cf98c415289597c4a890a27a6f638c2c, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    - Clip: {fileID: 7400000, guid: c282b2ca9b9cc964e92e90110216f42f, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: -1, y: 0}
+    - Clip: {fileID: 7400000, guid: 7d0f54bc739fa0341b4f22280e8b09ed, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 1}
+    - Clip: {fileID: 7400000, guid: 6730f304378e0734894142faad037be9, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: -1}
+    - Clip: {fileID: 7400000, guid: 7e7a0c051d10a7a469cc45e52a2fe01c, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 1, y: 0}
+    blendInTime: 0.05
+    blendOutTime: 0
+    useDefaultClss: 1
+    clssSetting:
+      clssDefs: []
+      disableClssList: []
+      root: {fileID: 0}
+      eraseAllClss: 0
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
