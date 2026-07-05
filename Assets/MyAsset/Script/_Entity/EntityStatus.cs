@@ -161,6 +161,7 @@ public class EntityStatus
         currentStancePoint = Mathf.Min(currentStancePoint, maxStancePoint);
     }
 
+    public EntityValue BaseValue;
 
     public List<EntityFlag> flags = new List<EntityFlag>();
     public List<EntityValue> vals = new List<EntityValue>();

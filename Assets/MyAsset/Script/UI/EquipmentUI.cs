@@ -33,19 +33,27 @@ public class EquipmentUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //一先ず暫定処理 Entityからの呼び出しで指定できるようにしたい.
         if(mainEntity.equipmentInHand != null)
         {
             icon.sprite = mainEntity.equipmentInHand.GUIImage;
             labeltext = mainEntity.equipmentInHand.name;
             valuetext =  mainEntity.equipmentInHand.durability.ToString("F0");
             BarValue = mainEntity.equipmentInHand.durability / mainEntity.equipmentInHand.maxDurability;
+            textColor = Color.cyan;
         }
         else
         {
             icon.sprite = gameState.self.DefaultEquipmentImage;
+            labeltext = mainEntity.status.BaseValue.valueName;
+            valuetext = mainEntity.status.BaseValue.FValue.ToString("F0");
+            BarValue = Mathf.Min(mainEntity.status.BaseValue.FValue , 1.0f);
+            textColor = Color.white;
         }
         GUITextMesh.text = labeltext;
         VTextMesh.text = valuetext;
+        GUITextMesh.color = textColor;
+        VTextMesh.color = textColor;
         BarImage.fillAmount = BarValue;
     }
 }

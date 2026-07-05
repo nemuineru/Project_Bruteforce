@@ -70,7 +70,7 @@ MonoBehaviour:
       clssDefs:
       - drawColor: {r: 1, g: 1, b: 1, a: 1}
         clssType: 1
-        attachTo: Pipe
+        attachTo: KAJIKI
         showGizmo: 1
         _entity: {fileID: 0}
         attachTransform: {fileID: 0}

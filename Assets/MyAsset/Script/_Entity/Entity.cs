@@ -272,6 +272,10 @@ public class Entity : MonoBehaviour
             BTree = gameObject.AddComponent<BehaviorTree>();
             BTree.ExternalBehavior = LoadedBehavior;
         }
+
+        //statusに基本のEntityValue値を登録
+        status.BaseValue = new EntityValue(2.0f,"Power");
+
         rigid.useGravity = physicsType != _PhysicsType.N;
         selfSource = GetComponent<AudioSource>();
     }
