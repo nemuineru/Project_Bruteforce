@@ -41,6 +41,21 @@ export function setStatus(entity)
     if(entity.status.HitTime < -120)
         entity.setJugglePoint(entity.status.maxJugglePoint);
 
+    let isEquipmentHold = entity.equipmentInHand != null;
+    if(isEquipmentHold)
+    {
+        //CS.UnityEngine.Debug.Log("equipment holding");
+        entity.status.labels = entity.equipmentInHand.name;
+        CS.UnityEngine.Debug.Log(entity.equipmentInHand.name);
+        entity.status.subUIVals = entity.equipmentInHand.durability;
+        entity.status.subUIicons = entity.equipmentInHand.GUIImage;
+        entity.status.subUIColors = CS.UnityEngine.Color.cyan;
+    }
+    else
+    {
+        entity.status.subUIColors = CS.UnityEngine.Color.white;
+    }
+
     return verdList;
 }
 

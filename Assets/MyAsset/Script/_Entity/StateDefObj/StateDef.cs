@@ -1795,7 +1795,7 @@ public class scDevokePickup : StateController
 }
 
 //set Equipments pickup disable.
-[SCHiearchy("System/add or decrease Durability of Pickupable with this command.")]
+[SCHiearchy("System/add or decrease Durability")]
 public class durabilityAdd : StateController
 {
     [SerializeField]

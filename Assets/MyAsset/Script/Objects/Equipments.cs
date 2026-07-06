@@ -46,7 +46,7 @@ public class Equipments : MonoBehaviour
     public Color color;
 
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     void OnEnable()
     {

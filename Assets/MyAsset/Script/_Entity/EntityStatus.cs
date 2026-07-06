@@ -138,6 +138,13 @@ public class EntityStatus
     internal float setChargeTime_Lv2 = .4f;
     internal float setChargeTime_End = 2f;
 
+    public Sprite subUIicons;
+    public Color subUIColors = Color.white;
+    public string labels;
+    
+    public float subUIVals;
+    public float subUImeterVals;
+
     public void setCurrentValue()
     {
         float MaxEnergyOverflowValue = 3.0f;

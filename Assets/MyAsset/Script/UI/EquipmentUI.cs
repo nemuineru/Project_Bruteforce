@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,21 +36,13 @@ public class EquipmentUI : MonoBehaviour
     void Update()
     {
         //一先ず暫定処理 Entityからの呼び出しで指定できるようにしたい.
-        if(mainEntity.equipmentInHand != null)
+        if (mainEntity != null)
         {
-            icon.sprite = mainEntity.equipmentInHand.GUIImage;
-            labeltext = mainEntity.equipmentInHand.name;
-            valuetext =  mainEntity.equipmentInHand.durability.ToString("F0");
-            BarValue = mainEntity.equipmentInHand.durability / mainEntity.equipmentInHand.maxDurability;
-            textColor = Color.cyan;
-        }
-        else
-        {
-            icon.sprite = gameState.self.DefaultEquipmentImage;
-            labeltext = mainEntity.status.BaseValue.valueName;
-            valuetext = mainEntity.status.BaseValue.FValue.ToString("F0");
-            BarValue = Mathf.Min(mainEntity.status.BaseValue.FValue , 1.0f);
-            textColor = Color.white;
+            icon.sprite = mainEntity.status.subUIicons ?? gameState.self.DefaultEquipmentImage;
+            textColor = mainEntity.status.subUIColors;
+            labeltext = mainEntity.status.labels;
+            valuetext = mainEntity.status.subUIVals.ToString("F0");
+            BarValue = mainEntity.status.subUImeterVals;
         }
         GUITextMesh.text = labeltext;
         VTextMesh.text = valuetext;

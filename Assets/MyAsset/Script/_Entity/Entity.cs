@@ -1,6 +1,3 @@
-
-
-
 //現状, debugやexeでは出ない(IndexWasOutOfRange)
 
 using System.Collections;
@@ -274,7 +271,7 @@ public class Entity : MonoBehaviour
         }
 
         //statusに基本のEntityValue値を登録
-        status.BaseValue = new EntityValue(2.0f,"Power");
+        status.BaseValue = new EntityValue(2.0f, "Power");
 
         rigid.useGravity = physicsType != _PhysicsType.N;
         selfSource = GetComponent<AudioSource>();
@@ -1222,14 +1219,42 @@ public class Entity : MonoBehaviour
     public void setEntityFloatValue(float value, string str)
     {
         EntityValue val = status.vals.Find(v => v.valueName == str);
-        if(val != null)
+        if (val != null)
         {
             val.valueName = str;
             val.FValue = value;
         }
         else
         {
-            status.vals.Add(new EntityValue(value,str));
+            status.vals.Add(new EntityValue(value, str));
+        }
+    }
+
+    public void addEntityFloatValue(float value, string str)
+    {
+        EntityValue val = status.vals.Find(v => v.valueName == str);
+        if (val != null)
+        {
+            val.valueName = str;
+            val.FValue += value;
+        }
+        else
+        {
+            status.vals.Add(new EntityValue(value, str));
+        }
+    }
+
+    public float getEntityFloatValue(string str)
+    {
+        EntityValue val = status.vals.Find(v => v.valueName == str);
+        if (val != null)
+        {
+            return val.FValue;
+        }
+        //負の最大数を返す. 要はエラーってことですね
+        else
+        {
+            return -Mathf.Infinity;
         }
     }
 
@@ -1237,5 +1262,14 @@ public class Entity : MonoBehaviour
     {
         //EntityFlag flg = status.flags.Find();
     }
-}
 
+    //手に持ったものを投げつけ.
+    public void throwEquipment(Vector3 forward)
+    {
+        if (equipmentInHand != null)
+        {
+            equipmentInHand.rb.isKinematic = false;
+            equipmentInHand.rb.velocity = forward;
+        }
+    }
+}

@@ -1361,6 +1361,11 @@ MonoBehaviour:
     HitTime: 0
     HitFallTime: 0
     ChargeTime: 0
+    subUIicons: {fileID: 0}
+    subUIColors: {r: 1, g: 1, b: 1, a: 1}
+    labels: 
+    subUIVals: 0
+    subUImeterVals: 0
   attrs:
     ctrl: 1
     alive: 1
@@ -1388,6 +1393,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9440267e69a0fb5499f1e463af0fde5b, type: 2}
   - {fileID: 11400000, guid: bb892083bf0420448aab1efe090b6383, type: 2}
   - {fileID: 11400000, guid: 3f6dd79841823004297e089361b89225, type: 2}
+  animDefs: []
   mainAnimancer: {fileID: 0}
   CurColor: {r: 0, g: 0, b: 0, a: 0}
   isOnGround: 1
@@ -1400,6 +1406,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a49478fa449368048a98781f2140a6e2, type: 2}
   - {fileID: 11400000, guid: 323bc2a914caab44a8fd2b272caaf2a7, type: 2}
   wishingVect: {x: 0, y: 0, z: 0}
+  baseIKWeight: 0
   LoadedBehavior: {fileID: 11400000, guid: 03f10cc9c0671a049adf2ebf5f2e8fc4, type: 2}
   executedStateIDs: 
   hitdefSameTime: 
@@ -1447,7 +1454,10 @@ MonoBehaviour:
     bufferMaxTime: 1
     readLength: 1
   TotalHitNo: 0
+  ik: {fileID: 0}
+  LookPos: {fileID: 0}
   registeredHitDefs: []
+  equipmentInHand: {fileID: 0}
   rotCam: {x: 0, y: 0, z: 0}
 --- !u!54 &3814792367533234285
 Rigidbody:

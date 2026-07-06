@@ -8299,6 +8299,7 @@ MonoBehaviour:
   enableOnTaken: []
   GUIImage: {fileID: 21300000, guid: a4a76a941bb0ee64f8bb30cccd44e9ad, type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
+  rb: {fileID: 0}
 --- !u!4 &256735608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a62dff0bc1b02a14bb88e31250ac6638, type: 3}
