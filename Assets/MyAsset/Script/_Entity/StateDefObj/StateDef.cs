@@ -1813,3 +1813,18 @@ public class durabilityAdd : StateController
         }
     }
 }
+
+[SCHiearchy("Attack/Throwing Equipments")]
+public class throwEquipment : StateController
+{
+    [SerializeField]
+    stParams<int> priority;
+
+    [SerializeField]
+    stParams<float> value;
+
+    internal override void OnExecute(Entity entity)
+    {
+        entity.throwEquipment(entity.transform.forward * value.valueGet(loadParams, entity));
+    }
+}

@@ -31,7 +31,7 @@ public class CollidableProjectile : Projectile
             c.getGlobalPos();
             c.DrawCapsule();
         }
-        if(gameState.self.ProvokeHitDef(this.hitDefParams, ref ColliderNums ,cSet))
+        if(gameState.self.ProvokeHitDef(this.hitDefParams, ref colliderNum ,cSet))
         {
             //destroyEmit();
         }

@@ -17,6 +17,10 @@ public class Equipments : MonoBehaviour
     [SerializeField]
     internal clssSetting hitBox;
 
+    //hitDef for throw. 
+    [SerializeField]
+    internal hitDefParams hitDefs;
+
     // set Entity parent position with use of finding bone names
     public string boneTarget = "hand.R";
 
@@ -24,6 +28,10 @@ public class Equipments : MonoBehaviour
     public float durability = 10.0f;
     
     public float maxDurability = 10.0f;
+
+    //基本的にこれが0になるまでHitDefが設定される. 当たるのは一つだけ.
+    //また、Projectileの様に呼び出す.
+    public float ThrowTime;
 
     // Additional StateDef for loading / OverRiding.
     [SerializeField]
@@ -44,6 +52,8 @@ public class Equipments : MonoBehaviour
 
     [SerializeField]
     public Color color;
+
+    int collderNum = 0;
 
 
     public Rigidbody rb;
@@ -76,6 +86,15 @@ public class Equipments : MonoBehaviour
         if (durability <= 0)
         {
             invokeDestroy();
+        }
+        //投げられているときのみProjの様に.
+        if(ThrowTime > 0f)
+        {
+            if(gameState.self.ProvokeHitDef(hitDefs, ref collderNum ,hitBox))
+            {
+                ThrowTime = 0f;
+            }
+            ThrowTime -= Time.fixedDeltaTime;
         }
     }
 

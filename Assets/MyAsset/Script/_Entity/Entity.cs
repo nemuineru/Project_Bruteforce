@@ -1270,6 +1270,9 @@ public class Entity : MonoBehaviour
         {
             equipmentInHand.rb.isKinematic = false;
             equipmentInHand.rb.velocity = forward;
+            equipmentInHand.transform.parent = null;
+            equipmentInHand.ThrowTime = 1.0f;
+            equipmentInHand = null;
         }
     }
 }
