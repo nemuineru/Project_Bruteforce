@@ -169,6 +169,38 @@ MonoBehaviour:
   - mixType: 0
     MixParamName: 
     CurrentParamPos: {x: 0, y: 0}
+    ID: 230
+    Name: GunAttack_Normal
+    animClip:
+    - Clip: {fileID: 7400000, guid: d6ea36dd14f5bd94d8663430bb3d6f11, type: 2}
+      speed: 0
+      startFrame: 0
+      cycleOffset: 0
+      mixPosition: {x: 0, y: 0}
+    blendInTime: 0.02
+    blendOutTime: 0.12
+    useDefaultClss: 0
+    clssSetting:
+      clssDefs:
+      - drawColor: {r: 0, g: 0, b: 0, a: 1}
+        clssType: 1
+        attachTo: lowerleg.r
+        showGizmo: 1
+        _entity: {fileID: 0}
+        attachTransform: {fileID: 0}
+        startPos: {x: 0, y: 0.62, z: 0}
+        endPos: {x: 0, y: -0.57, z: 0}
+        width: 0.51
+        _lastcalcStartPos: {x: -1.87272, y: 0.31435484, z: 3.832837}
+        _lastcalcEndPos: {x: -2.375192, y: 0.73898786, z: 3.377635}
+      disableClssList:
+      - head
+      - hip
+      root: {fileID: 0}
+      eraseAllClss: 0
+  - mixType: 0
+    MixParamName: 
+    CurrentParamPos: {x: 0, y: 0}
     ID: 250
     Name: Hard_Knifes
     animClip:

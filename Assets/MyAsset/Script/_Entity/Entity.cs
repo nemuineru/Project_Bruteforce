@@ -1,3 +1,5 @@
+
+
 //現状, debugやexeでは出ない(IndexWasOutOfRange)
 
 using System.Collections;
@@ -1270,9 +1272,13 @@ public class Entity : MonoBehaviour
         {
             equipmentInHand.rb.isKinematic = false;
             equipmentInHand.rb.velocity = forward;
+            //ぐるぐるさせる.
+            equipmentInHand.rb.AddTorque(Vector3.up * 360f);
             equipmentInHand.transform.parent = null;
+            //これが設定されている間はAttackが有効化.
             equipmentInHand.ThrowTime = 1.0f;
             equipmentInHand = null;
+            
         }
     }
 }

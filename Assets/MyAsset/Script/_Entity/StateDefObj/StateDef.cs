@@ -1815,16 +1815,34 @@ public class durabilityAdd : StateController
 }
 
 [SCHiearchy("Attack/Throwing Equipments")]
-public class throwEquipment : StateController
+public class scThrowEquipment : StateController
 {
     [SerializeField]
     stParams<int> priority;
 
     [SerializeField]
-    stParams<float> value;
+    stParams<Vector3> value;
 
     internal override void OnExecute(Entity entity)
     {
-        entity.throwEquipment(entity.transform.forward * value.valueGet(loadParams, entity));
+        Vector3 calcVals = value.valueGet(loadParams, entity);
+        Vector3 fws = entity.transform.forward * calcVals.z + entity.transform.up * calcVals.y;
+        entity.throwEquipment(fws);
+    }
+}
+
+[SCHiearchy("Misc/Change Entity Instructions")]
+public class scChangeInstruction : StateController
+{
+    [SerializeField]
+    stParams<int> priority;
+
+    [SerializeField]
+    stParams<string> value;
+
+    internal override void OnExecute(Entity entity)
+    {
+        string strs = value.valueGet(loadParams, entity);
+        entity.status.instructionLabels = strs;
     }
 }

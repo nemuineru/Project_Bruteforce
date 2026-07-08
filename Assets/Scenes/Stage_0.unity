@@ -1514,6 +1514,10 @@ PrefabInstance:
       value: InGameGUI_OVR
       objectReference: {fileID: 0}
     - target: {fileID: 9108614754104860502, guid: 7483b3ccf83cf6f409241b154f1ddee7, type: 3}
+      propertyPath: strsUI
+      value: 
+      objectReference: {fileID: 285572534}
+    - target: {fileID: 9108614754104860502, guid: 7483b3ccf83cf6f409241b154f1ddee7, type: 3}
       propertyPath: EquipUI
       value: 
       objectReference: {fileID: 125639186}
@@ -8514,6 +8518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 285572531}
   - component: {fileID: 285572533}
+  - component: {fileID: 285572534}
   m_Layer: 5
   m_Name: ControllerDesc
   m_TagString: Untagged
@@ -8549,6 +8554,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285572530}
   m_CullTransparentMesh: 1
+--- !u!114 &285572534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285572530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf92b50be3a27a046a7252043b77a8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainEntity: {fileID: 0}
+  valuetext: 
+  ShowText: {fileID: 1205241646}
 --- !u!1 &293639767
 GameObject:
   m_ObjectHideFlags: 0

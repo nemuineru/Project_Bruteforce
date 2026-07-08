@@ -50,10 +50,12 @@ export function setStatus(entity)
         entity.status.subUIVals = entity.equipmentInHand.durability;
         entity.status.subUIicons = entity.equipmentInHand.GUIImage;
         entity.status.subUIColors = CS.UnityEngine.Color.cyan;
+        entity.status.instructionLabels = "[X] - Use Weapon \n[Y] - Throw";
     }
     else
     {
         entity.status.subUIColors = CS.UnityEngine.Color.white;
+        entity.status.instructionLabels = "[X] - Combo Attack \n[Y] - Power Attack";
     }
 
     return verdList;
@@ -116,6 +118,13 @@ export function stateCmd(entity) {
             CS.UnityEngine.Debug.Log("Weapon holding");
             verdList.Add(1000);
         }
+        //Throwing Weapons
+        if(selfOnGrd == true && AttackCmd_y_isPressed && StateDefID == 0)
+        {
+            CS.UnityEngine.Debug.Log("Weapon throwing");
+            verdList.Add(230);
+        }
+
     }
     //そうでないなら通常攻撃
     else

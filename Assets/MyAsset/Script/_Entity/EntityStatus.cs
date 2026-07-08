@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -144,6 +146,8 @@ public class EntityStatus
     
     public float subUIVals;
     public float subUImeterVals;
+
+    public string instructionLabels;
 
     public void setCurrentValue()
     {

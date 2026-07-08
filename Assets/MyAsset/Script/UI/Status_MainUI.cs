@@ -11,6 +11,8 @@ public class Status_MainUI : MonoBehaviour
 
     public EquipmentUI EquipUI;
 
+    public EquipmentStrings strsUI;
+
     public GameObject PreGameScreen;
     public GameObject OnGameScreen;
     public GameObject GameOverScreen;
@@ -55,6 +57,7 @@ public class Status_MainUI : MonoBehaviour
         Energy.valueEntity = playerEntity;
         Charger.valueEntity = playerEntity;
         EquipUI.mainEntity = playerEntity;
+        strsUI.mainEntity = playerEntity;
         // Guard.valueEntity = playerEntity;
     }
     

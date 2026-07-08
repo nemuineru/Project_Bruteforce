@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -165,7 +167,7 @@ public class Elem
         hitDefParams retParam = null;
         List<hitDefParams> findParamList;
         //一番最後の項目が最新の筈なので
-        if(isOwner)
+        if (isOwner)
         {
             findParamList = et.registeredHitDefs.FindAll(par => par.targetEntity == et);
         }
@@ -173,13 +175,13 @@ public class Elem
         {
             findParamList = et.registeredHitDefs.FindAll(par => par.ownerEntity == et);
         }
-        if(findParamList != null)
+        if (findParamList != null)
         {
             retParam = findParamList.Last();
         }
         return retParam;
     }
-    
+
     //Get selected hitParams. check for owners/get beaten by.
     public static hitDefParams getHitParam(Entity et, bool isOwner, int hitID)
     {
@@ -191,7 +193,7 @@ public class Elem
     {
         return et.controlledEntity != null;
     }
-    
+
     //get the movement stick. Digital movement should be considered..
     //(0,0) -> (1,1) or (0,0) -> (-1,-1) should be counted but reversed wont. (1,-1) -> (0,0)
     //should be considered as "how is the distance from (0,0) differed between the keyNumber".
@@ -215,15 +217,15 @@ public class Elem
     public static Entity getTargetEntity(Entity et)
     {
         Entity tgt = null;
-        if(et.mainTargetEntity != null)
+        if (et.mainTargetEntity != null)
         {
             tgt = et.mainTargetEntity;
         }
-        else if(et.shortTargetEntity != null)
+        else if (et.shortTargetEntity != null)
         {
             tgt = et.shortTargetEntity;
         }
-        else if(et.nearestTargetEntity != null)
+        else if (et.nearestTargetEntity != null)
         {
             tgt = et.nearestTargetEntity;
         }
@@ -234,7 +236,7 @@ public class Elem
     {
         Vector3 ret = et.transform.forward;
         Entity target = getTargetEntity(et);
-        if(target != null)
+        if (target != null)
         {
             ret = (target.transform.position - et.transform.position).normalized;
         }
@@ -245,23 +247,23 @@ public class Elem
     {
         float ret = Mathf.Infinity;
         Entity target = getTargetEntity(et);
-        if(target != null)
+        if (target != null)
         {
             Vector3 diffs = target.transform.position - et.transform.position;
             ret = diffs.magnitude;
         }
         return ret;
     }
-    
+
     //水平方向のアングルを取得
     public static float getTargetHorizonAngle(Entity et)
     {
         float ret = 0f;
         Entity target = getTargetEntity(et);
-        if(target != null)
+        if (target != null)
         {
             Vector3 diffs = target.transform.position - et.transform.position;
-            ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.up);
+            ret = Vector3.SignedAngle(et.transform.forward, diffs, Vector3.up);
         }
         return ret;
     }
@@ -271,11 +273,17 @@ public class Elem
     {
         float ret = 0f;
         Entity target = getTargetEntity(et);
-        if(target != null)
+        if (target != null)
         {
             Vector3 diffs = target.transform.position - et.transform.position;
-            ret = Vector3.SignedAngle(et.transform.forward,diffs,Vector3.right);
+            ret = Vector3.SignedAngle(et.transform.forward, diffs, Vector3.right);
         }
         return ret;
+    }
+
+    //指定した値が存在するか？
+    public static bool isCustomvalueExist(Entity et, string strs)
+    {
+        return et.status.vals.Find(v => v.valueName == strs) != null;
     }
 }

@@ -136,6 +136,35 @@ export function StateDef_220_ID(entity){
     return verdList;
 }
 
+//RoundKicker Finisher states for stateDef 220()
+export function StateDef_230_ID(entity){ 
+    //List<Int>
+    let List_Int = puer.$generic(CS.System.Collections.Generic.List$1, CS.System.Int32);    
+    
+    let verdList = new List_Int();
+
+    let CurrentTime = CS.Elem.CheckStateTime(entity);
+    let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
+    let CurrentAnimID = CS.Elem.CheckAnimID(entity);
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentAnimTime > 9 && CurrentAnimID == 220;
+
+    if (CurrentAnimTime > 20 && CurrentAnimID == 230)
+    {
+        verdList.Add(100);
+    }
+    //SetAnim
+    if (CurrentTime == 0)
+    {
+        verdList.Add(0);
+    }
+    //Aight, does native JS supports math function?
+    //current Animtime needs to be set more than 8
+    if ( CurrentAnimID == 230 && CurrentAnimTime > 9 && CurrentAnimTime < 14)
+    {
+        verdList.Add(10);
+    }
+    return verdList;
+}
 
 //Air Kicker states for stateDef 300()
 export function StateDef_300_ID_JumpKick(entity){ 
