@@ -1748,7 +1748,7 @@ public class scInvokePickup : StateController
             if (isGetting == true)
             {
                 entity.equipmentInHand = eq;
-                eq.isTaken = false;
+                eq.isTaken = true;
                 Transform trf = childTrfmFind(entity.transform, eq.boneTarget);
                 if (trf != null)
                 {

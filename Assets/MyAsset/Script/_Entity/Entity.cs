@@ -1277,8 +1277,11 @@ public class Entity : MonoBehaviour
             equipmentInHand.transform.parent = null;
             //これが設定されている間はAttackが有効化.
             equipmentInHand.ThrowTime = 1.0f;
+            equipmentInHand.isTaken = false;
             equipmentInHand = null;
-            
+
+            initAnimSetting();
+            initStateSetting();
         }
     }
 }

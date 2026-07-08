@@ -10,7 +10,7 @@ using UnityEngine;
 public class Equipments : MonoBehaviour
 {
     //if it is on, set physics to none.
-    public bool isTaken = true;
+    public bool isTaken = false;
 
 
     //hitbox for pickup. 
@@ -75,7 +75,7 @@ public class Equipments : MonoBehaviour
     void FixedUpdate()
     {
         //if not physic is updated, set kinematically off
-        rb.isKinematic = !isTaken;
+        rb.isKinematic = isTaken;
         hitBox.clssPosUpdate();
         foreach(clssDef clss in hitBox.clssDefs)
         {
