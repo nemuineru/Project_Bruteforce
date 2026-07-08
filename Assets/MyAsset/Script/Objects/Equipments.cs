@@ -58,6 +58,8 @@ public class Equipments : MonoBehaviour
 
     public Rigidbody rb;
 
+    GameObject EquipmentSimbol;
+
     void OnEnable()
     {
         hitBox.initClss(transform);
