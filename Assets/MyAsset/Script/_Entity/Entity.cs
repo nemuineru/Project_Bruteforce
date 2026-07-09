@@ -1218,7 +1218,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void setEntityFloatValue(float value, string str)
+    public void setEntityFloatValue(string str, float value)
     {
         EntityValue val = status.vals.Find(v => v.valueName == str);
         if (val != null)
@@ -1228,11 +1228,12 @@ public class Entity : MonoBehaviour
         }
         else
         {
+            Debug.Log("Adding " + str);
             status.vals.Add(new EntityValue(value, str));
         }
     }
 
-    public void addEntityFloatValue(float value, string str)
+    public void addEntityFloatValue(string str, float value)
     {
         EntityValue val = status.vals.Find(v => v.valueName == str);
         if (val != null)
