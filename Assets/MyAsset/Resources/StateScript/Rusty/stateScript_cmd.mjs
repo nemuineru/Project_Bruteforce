@@ -1,3 +1,5 @@
+
+
 // any meant as any type.
 // also use 'let' at first declearation,
 // put the variable type name after colon,
@@ -46,15 +48,31 @@ export function setStatus(entity)
     {
         //CS.UnityEngine.Debug.Log("equipment holding");
         entity.status.labels = entity.equipmentInHand.name;
-        CS.UnityEngine.Debug.Log(entity.equipmentInHand.name);
         entity.status.subUIVals = entity.equipmentInHand.durability;
+        entity.status.subUImeterVals = entity.equipmentInHand.durability / entity.equipmentInHand.maxDurability;
         entity.status.subUIicons = entity.equipmentInHand.GUIImage;
         entity.status.subUIColors = CS.UnityEngine.Color.cyan;
         entity.status.instructionLabels = "[X] - Use Weapon \n[Y] - Throw";
     }
     else
     {
+        //パワーはmaxPowerValを超えない.
+        let maxPowerVal = 2.0;
         entity.status.subUIColors = CS.UnityEngine.Color.white;
+        if (CS.Elem.isCustomvalueExist(entity, "PowerAmmoRemain"))
+        {
+            CS.UnityEngine.Debug.Log("loading PowerAmmos");
+            let surf = entity.getEntityFloatValue("PowerAmmoRemain");
+            entity.status.subUIVals = surf;
+            entity.status.subUImeterVals = surf / maxPowerVal; 
+            entity.setEntityFloatValue("PowerAmmoRemain", surf > maxPowerVal ? maxPowerVal : surf + CS.UnityEngine.Time.fixedDeltaTime)
+        }
+        else
+        {
+            entity.setEntityFloatValue("PowerAmmoRemain", maxPowerVal);
+            entity.status.subUImeterVals = 1.0;
+        }
+        entity.status.subUIicons = CS.gameState.DefaultEquipmentImage;
         entity.status.instructionLabels = "[X] - Combo Attack \n[Y] - Power Attack";
     }
 

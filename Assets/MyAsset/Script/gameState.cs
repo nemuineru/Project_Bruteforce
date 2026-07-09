@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -436,17 +438,25 @@ public class gameState : MonoBehaviour
             }
         }
 
-        if (projSets == null && ownerEntity != null)
+        //弾に当たったときも設定する.
+        if (ownerEntity != null)
         {
             foreach (Prop prop in propList)
             {
-                if (ownerEntity.hitCheck(prop.hitBox, out Vector3 hits))
+                bool hitCheck = ownerEntity.hitCheck(prop.hitBox, out Vector3 hits);
+                Vector3 v1 = Vector3.zero , v2 = Vector3.zero;
+                bool hitProjCheck = 
+                projSets != null ? projSets.clssCollided(out v1, out v2, out var dist, clssDef.ClssType.Attack, prop.hitBox, .1f) : false;
+
+                if (hitCheck || hitProjCheck)
                 {
+                    hits = hitCheck ? hits : ( v1 + v2) / 2f ;
                     if (prop.isHit == false && prop.isPausable())
                     {
+                        GameObject effObj = useParams.HitEff != null ? useParams.HitEff : defaultEff;
                         prop.OnHit(useParams, hits);
-                        Instantiate(
-                            useParams.HitEff ?? defaultEff, hits, Quaternion.identity);
+                        Instantiate( effObj
+                            , hits, Quaternion.identity);
                         (ownerEntity.status.HitPauseTime, prop.disableTime) = (4, 30);
                     }
                     prop.isHit = true;

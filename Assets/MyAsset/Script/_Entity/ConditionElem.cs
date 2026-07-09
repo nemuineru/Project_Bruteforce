@@ -284,6 +284,8 @@ public class Elem
     //指定した値が存在するか？
     public static bool isCustomvalueExist(Entity et, string strs)
     {
-        return et.status.vals.Find(v => v.valueName == strs) != null;
+        bool isFind = et.status.vals.Find(v => v.valueName == strs) != null;
+        Debug.Log(strs + isFind.ToString());
+        return isFind;
     }
 }

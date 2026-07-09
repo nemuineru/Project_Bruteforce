@@ -1272,6 +1272,7 @@ public class Entity : MonoBehaviour
         {
             equipmentInHand.rb.isKinematic = false;
             equipmentInHand.rb.velocity = forward;
+            equipmentInHand.hitDefs.ownerEntity = this;
             //ぐるぐるさせる.
             equipmentInHand.rb.AddTorque(Vector3.up * 360f);
             equipmentInHand.transform.parent = null;
