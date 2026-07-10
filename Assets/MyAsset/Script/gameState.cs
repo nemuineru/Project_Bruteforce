@@ -453,10 +453,11 @@ public class gameState : MonoBehaviour
                     hits = hitCheck ? hits : ( v1 + v2) / 2f ;
                     if (prop.isHit == false && prop.isPausable())
                     {
-                        GameObject effObj = useParams.HitEff != null ? useParams.HitEff : defaultEff;
+                        GameObject hitEffect = useParams.HitEff != null ? useParams.HitEff : defaultEff;
                         prop.OnHit(useParams, hits);
-                        Instantiate( effObj
+                        GameObject instObj = Instantiate( hitEffect
                             , hits, Quaternion.identity);
+                        instObj.transform.parent = prop.transform;
                         (ownerEntity.status.HitPauseTime, prop.disableTime) = (4, 30);
                     }
                     prop.isHit = true;
@@ -568,12 +569,14 @@ public class gameState : MonoBehaviour
         }
     }
 
-    public void GenerateEffect(GameObject obj, Vector3 pos, Quaternion rot)
+    public GameObject GenerateEffect(GameObject obj, Vector3 pos, Quaternion rot)
     {
+        GameObject retObj = new GameObject();
         if(obj != null)
         {
-            Instantiate(obj, pos, rot);
+            retObj = Instantiate(obj, pos, rot);
         }
+        return retObj;
     }
 
     public void ToggleGameState(bool isIngame){

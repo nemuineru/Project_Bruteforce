@@ -362,7 +362,8 @@ public class hitDefParams
                 instanceEff = GuardHitEff != null ? GuardHitEff : gameState.self.defaultGuardEff;
             }
         }
-        gameState.self.GenerateEffect(instanceEff, ContactPoint, targetEntity.transform.rotation);
+        GameObject effObj = gameState.self.GenerateEffect(instanceEff, ContactPoint, targetEntity.transform.rotation);
+        effObj.transform.parent = targetEntity.transform;
     }
 
     //CListQueueに追加する.

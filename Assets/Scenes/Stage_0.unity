@@ -8332,7 +8332,7 @@ MonoBehaviour:
     hitStopTime: {x: 0, y: 0}
     guard_hitStopTime: {x: 0, y: 0}
     HitTime: {x: 0, y: 0}
-    HitEff: {fileID: 0}
+    HitEff: {fileID: 2006185334881284908, guid: 7c9ab8b7158b5b94488c41e0c9321ef5, type: 3}
     GuardHitEff: {fileID: 0}
     HitPriority: 0
     HitPriorityBehavior: 72
