@@ -35,6 +35,8 @@ export function setStatus(entity)
     if(entity.status.HitTime && entity.moveType != enumVal.H)
         entity.setJugglePoint(entity.status.maxJugglePoint);
 
+    //  if(entity.)
+
     return verdList;
 }
 

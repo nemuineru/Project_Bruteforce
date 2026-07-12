@@ -67,6 +67,8 @@ public class gameState : MonoBehaviour
     [SerializeField]
     public Sprite DefaultEquipmentImage; 
 
+    public GameObject DefaultEquipmentSimbolObj;
+
     public int KillNo = 0;
 
     float timeStartBy = 2.2f;

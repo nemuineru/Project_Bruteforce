@@ -99,6 +99,7 @@ public class AnimancerManager
                     MakeState = new LinearMixerState();
                     foreach (AnimDef.Anims anims in animDef.animClip)
                     {
+                        if(anims.Clip != null)
                         ((LinearMixerState)MakeState).Add
                         (anims.Clip, anims.mixPosition.x);
                     }
@@ -109,6 +110,7 @@ public class AnimancerManager
                     MakeState = new DirectionalMixerState();
                     foreach (AnimDef.Anims anims in animDef.animClip)
                     {
+                        if(anims.Clip != null)
                         ((DirectionalMixerState)MakeState).Add
                         (anims.Clip, anims.mixPosition);
                     }
@@ -119,6 +121,7 @@ public class AnimancerManager
                     MakeState = new CartesianMixerState();
                     foreach (AnimDef.Anims anims in animDef.animClip)
                     {
+                        if(anims.Clip != null)
                         ((CartesianMixerState)MakeState).Add
                         (anims.Clip, anims.mixPosition);
                     }
@@ -130,6 +133,7 @@ public class AnimancerManager
                     MakeState = new LinearMixerState();
                     foreach (AnimDef.Anims anims in animDef.animClip)
                     {
+                        if(anims.Clip != null)
                         ((LinearMixerState)MakeState).Add
                         (anims.Clip, anims.mixPosition.x);
                     }

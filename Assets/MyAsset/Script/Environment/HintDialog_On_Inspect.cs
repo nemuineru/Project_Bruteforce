@@ -26,17 +26,17 @@ public class HintDialog_On_Inspect : MonoBehaviour
     string text;
 
     //if trigger is entered : 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        if(type == InspectType.Entering)
+        if(type == InspectType.Entering && other.CompareTag("Player") && dialogCurrentShowing == null)
         {
             dialogCurrentShowing = prepDialog();
         }
     }
 
-    void OnTriggerStay()
+    void OnTriggerStay(Collider other)
     {
-        if(type == InspectType.Touch && dialogCurrentShowing == null)
+        if(type == InspectType.Touch && other.CompareTag("Player") && dialogCurrentShowing == null)
         {
             dialogCurrentShowing = prepDialog();
         }

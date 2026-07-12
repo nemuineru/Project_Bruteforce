@@ -499,21 +499,7 @@ public class Entity : MonoBehaviour
             //get Entity-Mask only.
             LayerMask EntityMask = LayerMask.NameToLayer("Entity");
 
-            //先ず、カメラ方向へ極太のClssDefをプレイヤーから発射する.
-            clssSetting LaysTo = new clssSetting();
-            clssDef def = new clssDef();
-            def.startPos = transform.position + Vector3.up + (vCam != null ? vCam.transform.forward * FindRadius : targetTo_fw * FindRadius);
-            def.endPos = def.startPos + (vCam != null ? vCam.transform.forward * FindLength : targetTo_fw * FindLength);
-            def.width = FindRadius;
-            def.attachTransform = null;
-            def.clssType = clssDef.ClssType.Attack;
-            def.drawColor = Color.cyan;
-
-            LaysTo.clssDefs.Add(def);
-            foreach (var cr in LaysTo.clssDefs)
-            {
-                StartCoroutine(cr.DrawCapsuleEnums(.5f));
-            }
+            
 
             List<Entity> FindObj = new List<Entity>();
 
@@ -524,9 +510,12 @@ public class Entity : MonoBehaviour
                     continue;
                 else
                 {
-                    bool isHit = LaysTo.clssCollided(out Vector3 v1, out Vector3 v2, out float f,
-                    clssDef.ClssType.Attack, et.animancerManager.primaryAnimDef.clssSetting, 0);
-                    if (isHit)
+                    bool isFind = getNearestTarget(FindRadius, FindLength, et);
+                    bool isNotCollidedTerrain = 
+                    !Physics.Raycast(transform.position + Vector3.up, 
+                    (et.transform.position - transform.position).normalized, 
+                    out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+                    if (isNotCollidedTerrain && isFind)
                     {
                         FindObj.Add(et);
                     }
@@ -548,6 +537,56 @@ public class Entity : MonoBehaviour
             }
             mainTargetEntity = FindObj.First();
         }
+    }
+
+    //StateScriptでも読み出せるように.
+    public bool findObjs(string FindTarget)
+    {
+        float FindLength = 4f;
+        float FindRadius = 3f;
+        foreach (Entity et in gameState.self.entityList)
+        {
+            //自分自身、若しくはTargetが見つからなければお通し
+            if (et == this || et.tag != FindTarget)
+                continue;
+            else
+            {
+                bool isFind = getNearestTarget(FindRadius, FindLength, et);
+                bool isNotCollidedTerrain = 
+                !Physics.Raycast(transform.position + Vector3.up, 
+                (et.transform.position - transform.position).normalized, 
+                out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+                if (isNotCollidedTerrain && isFind)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool getNearestTarget(float radius, float length, Entity tgtEntity)
+    {
+    //先ず、カメラ方向へ極太のClssDefをプレイヤーから発射する.
+        clssSetting LaysTo = new clssSetting();
+        clssDef def = new clssDef();
+        def.startPos = transform.position + Vector3.up + (vCam != null ? vCam.transform.forward * radius : targetTo_fw * radius);
+        def.endPos = def.startPos + (vCam != null ? vCam.transform.forward * length : targetTo_fw * length);
+        def.width = radius;
+        def.attachTransform = null;
+        def.clssType = clssDef.ClssType.Attack;
+        def.drawColor = Color.cyan;
+
+        LaysTo.clssDefs.Add(def);
+        
+        foreach (var cr in LaysTo.clssDefs)
+        {
+            StartCoroutine(cr.DrawCapsuleEnums(.5f));
+        }
+        
+        bool isHit = LaysTo.clssCollided(out Vector3 v1, out Vector3 v2, out float f,
+        clssDef.ClssType.Attack, tgtEntity.animancerManager.primaryAnimDef.clssSetting, 0);
+        return isHit;
     }
 
     //カメラベクトルを比較, 最も中央に近いものを探す.
@@ -1275,7 +1314,12 @@ public class Entity : MonoBehaviour
             equipmentInHand.rb.velocity = forward;
             equipmentInHand.hitDefs.ownerEntity = this;
             //ぐるぐるさせる.
-            equipmentInHand.rb.AddTorque(Vector3.up * 360f);
+            Vector3 tq = 
+            new Vector3
+            (UnityEngine.Random.Range(-1080f, 1080f) * (forward.x + 1f), 
+             UnityEngine.Random.Range(-1080f, 1080f) * (forward.y + 1f),
+             UnityEngine.Random.Range(-1080f, 1080f) * (forward.z + 1f)) * 10f;
+            equipmentInHand.rb.AddRelativeTorque(tq, ForceMode.VelocityChange);
             equipmentInHand.transform.parent = null;
             //これが設定されている間はAttackが有効化.
             equipmentInHand.ThrowTime = 1.0f;

@@ -72,10 +72,27 @@ public class Equipments : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        EquipmentSimbol = 
+        Instantiate(gameState.self.DefaultEquipmentSimbolObj, transform.position, Quaternion.identity);
     }
 
     void FixedUpdate()
     {
+        if(isTaken == true)
+        {
+            EquipmentSimbol.SetActive(false);
+        }
+        else
+        {
+            EquipmentSimbol.SetActive(true);
+            Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 10f);
+            if(hit.collider != null)
+            {
+                EquipmentSimbol.transform.position = hit.point + Vector3.up * 0.01f;
+                EquipmentSimbol.transform.rotation *= 
+                Quaternion.Euler(0f,Time.fixedDeltaTime * 100f,0f);
+            }
+        }
         //if not physic is updated, set kinematically off
         rb.isKinematic = isTaken;
         hitBox.clssPosUpdate();

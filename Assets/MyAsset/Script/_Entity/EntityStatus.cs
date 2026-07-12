@@ -37,6 +37,9 @@ public class EntityAttr
     public int isBeingStateContact = 0;
     public int isBeingStateGuarded = 0;
 
+    //これらのフラグ値はStateScript内の処理やBehaviorDesignerなどのAI処理においても参照される..
+    //気づいたかを考える - Player操作では考慮しない. Entityを追いかけたりする
+    public bool isNoticed;
 
     public void updateCombatStates(bool willReset)
     {

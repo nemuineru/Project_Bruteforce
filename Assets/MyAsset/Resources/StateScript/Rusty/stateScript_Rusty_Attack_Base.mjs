@@ -157,9 +157,10 @@ export function StateDef_230_ID(entity){
     {
         verdList.Add(0);
     }
+    let isEquipmentHold = entity.equipmentInHand != null;
     //Aight, does native JS supports math function?
     //current Animtime needs to be set more than 8
-    if ( CurrentAnimID == 230 && CurrentAnimTime > 9 && CurrentAnimTime < 14)
+    if ( CurrentAnimID == 230 && CurrentAnimTime > 6 && isEquipmentHold)
     {
         verdList.Add(10);
     }
