@@ -460,7 +460,8 @@ public class Entity : MonoBehaviour
         {
             if (tgts != null)
             {
-                gameState.self.target.transform.position = Vector3.Lerp(gameState.self.target.transform.position, tgts.transform.position + Vector3.up * 0.5f, 0.1f);
+                gameState.self.target.transform.position = 
+                Vector3.Lerp(gameState.self.target.transform.position, tgts.transform.position + Vector3.up * 0.5f, 0.1f);
             }
             gameState.self.target.isVisible = tgts != null;
             if (mainTargetEntity != null)
@@ -552,10 +553,25 @@ public class Entity : MonoBehaviour
             else
             {
                 bool isFind = getNearestTarget(FindRadius, FindLength, et);
+                Vector3 rays = (et.transform.position - transform.position).normalized;
+
+
                 bool isNotCollidedTerrain = 
-                !Physics.Raycast(transform.position + Vector3.up, 
-                (et.transform.position - transform.position).normalized, 
-                out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+                    !Physics.Raycast(transform.position + Vector3.up, 
+                    (et.transform.position - transform.position).normalized, 
+                    out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+
+                if(hit.point != null){
+                    Debug.DrawLine(transform.position + Vector3.up,
+                    hit.point,
+                    Color.red,.5f);
+                }
+
+                //地形に当たらないことを願う.
+                if(isFind)
+                {
+                    Debug.Log(FindTarget + " found");
+                }
                 if (isNotCollidedTerrain && isFind)
                 {
                     return true;
@@ -1329,5 +1345,12 @@ public class Entity : MonoBehaviour
             initAnimSetting();
             initStateSetting();
         }
+    }
+
+    //気づいたときに電球を付ける
+    public void NoticeObjEmit()
+    {
+        GameObject objs = Instantiate(gameState.self.onNoticeObj, transform.position + Vector3.up , Quaternion.identity);
+        objs.transform.parent = this.transform;
     }
 }
