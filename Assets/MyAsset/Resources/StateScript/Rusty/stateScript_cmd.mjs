@@ -61,7 +61,7 @@ export function setStatus(entity)
         entity.status.subUIColors = CS.UnityEngine.Color.white;
         if (CS.Elem.isCustomvalueExist(entity, "PowerAmmoRemain"))
         {
-            CS.UnityEngine.Debug.Log("loading PowerAmmos");
+            //CS.UnityEngine.Debug.Log("loading PowerAmmos");
             let surf = entity.getEntityFloatValue("PowerAmmoRemain");
             entity.status.subUIVals = surf;
             entity.status.subUImeterVals = surf / maxPowerVal; 
@@ -133,13 +133,13 @@ export function stateCmd(entity) {
         //Ground Attacks - N
         if(selfOnGrd == true && AttackCmd_x == true && StateDefID == 0)
         {
-            CS.UnityEngine.Debug.Log("Weapon holding");
+            //CS.UnityEngine.Debug.Log("Weapon holding");
             verdList.Add(1000);
         }
         //Throwing Weapons
         if(selfOnGrd == true && AttackCmd_y_isPressed && StateDefID == 0)
         {
-            CS.UnityEngine.Debug.Log("Weapon throwing");
+            //CS.UnityEngine.Debug.Log("Weapon throwing");
             verdList.Add(230);
         }
 

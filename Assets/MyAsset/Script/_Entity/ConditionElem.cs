@@ -285,7 +285,7 @@ public class Elem
     public static bool isCustomvalueExist(Entity et, string strs)
     {
         bool isFind = et.status.vals.Find(v => v.valueName == strs) != null;
-        Debug.Log(strs + isFind.ToString());
+        //Debug.Log(strs + isFind.ToString());
         return isFind;
     }
 }

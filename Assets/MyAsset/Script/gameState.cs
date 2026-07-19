@@ -66,6 +66,9 @@ public class gameState : MonoBehaviour
     
     [SerializeField]
     public Sprite DefaultEquipmentImage; 
+    
+    [SerializeField]
+    public GameObject onNoticeObj; 
 
     public GameObject DefaultEquipmentSimbolObj;
 
