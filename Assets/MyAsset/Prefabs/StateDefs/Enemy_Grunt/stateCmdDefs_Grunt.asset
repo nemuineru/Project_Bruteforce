@@ -41,6 +41,7 @@ MonoBehaviour:
     - rid: 4404388709018370078
     - rid: 4404388664824299529
     - rid: 1982101297765023744
+    - rid: 3714270592367329280
     Dir: 
     setCtrl: 0
   references:
@@ -68,6 +69,42 @@ MonoBehaviour:
         doLoadAfterChangeState: 0
         changeTo: 5000
         priority: 0
+    - rid: 3714270592367329280
+      type: {class: scNoticed, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          useLua: 0
+          value: 10000
+          stLuaLoads: 
+        stateControllerSubName: set notice
+        doLoadAfterChangeState: 0
+        priority:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 0
+          useID: -1
+          stLuaLoads: 
+        value:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: Player
+          useID: -1
+          stLuaLoads: 
+        toggle:
+          _setHidden: 0
+          _setEssential: 0
+          _isReadable: 1
+          _MenuName: Base
+          loadTypes: 0
+          stParamValue: 1
+          useID: -1
+          stLuaLoads: 
     - rid: 4404388664824299527
       type: {class: scChangeState, ns: , asm: Assembly-CSharp}
       data:

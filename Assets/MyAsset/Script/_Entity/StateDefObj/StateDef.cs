@@ -1831,6 +1831,27 @@ public class scThrowEquipment : StateController
     }
 }
 
+[SCHiearchy("Misc/is notice")]
+public class scNoticed : StateController
+{
+    [SerializeField]
+    stParams<int> priority;
+
+    [SerializeField]
+    stParams<string> value;
+    
+    [SerializeField]
+    stParams<bool> toggle;
+
+    internal override void OnExecute(Entity entity)
+    {
+        string strs = value.valueGet(loadParams, entity);
+        bool sets = toggle.valueGet(loadParams, entity);
+        bool detection = entity.findEntityWithTag(strs) ? entity.attrs.isNoticed : sets;
+        entity.attrs.isNoticed = detection;
+    }
+}
+
 [SCHiearchy("Misc/Change Entity Instructions")]
 public class scChangeInstruction : StateController
 {

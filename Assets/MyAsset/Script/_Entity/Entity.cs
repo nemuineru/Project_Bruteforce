@@ -512,11 +512,15 @@ public class Entity : MonoBehaviour
                 else
                 {
                     bool isFind = getNearestTarget(FindRadius, FindLength, et);
-                    bool isNotCollidedTerrain = 
-                    !Physics.Raycast(transform.position + Vector3.up, 
+                    bool isCollidedTerrain = 
+                    Physics.Raycast(transform.position + Vector3.up, 
                     (et.transform.position - transform.position).normalized, 
                     out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
-                    if (isNotCollidedTerrain && isFind)
+                    
+                    Debug.Log("Terrain Collided " + isCollidedTerrain.ToString());
+                    Debug.Log("Objs Found " + isFind.ToString());
+
+                    if (!isCollidedTerrain && isFind)
                     {
                         FindObj.Add(et);
                     }
@@ -541,40 +545,50 @@ public class Entity : MonoBehaviour
     }
 
     //StateScriptでも読み出せるように.
-    public bool findObjs(string FindTarget)
+    public bool findEntityWithTag(string FindTarget)
     {
         float FindLength = 4f;
         float FindRadius = 3f;
         foreach (Entity et in gameState.self.entityList)
         {
             //自分自身、若しくはTargetが見つからなければお通し
-            if (et == this || et.tag != FindTarget)
+            if (et == this || et.gameObject.tag != FindTarget)
+            {
+                //Debug.Log("Target is not tagged : " + et.gameObject.tag);
                 continue;
+            }
             else
             {
+                //Debug.Log("Finding");
                 bool isFind = getNearestTarget(FindRadius, FindLength, et);
                 Vector3 rays = (et.transform.position - transform.position).normalized;
 
 
-                bool isNotCollidedTerrain = 
-                    !Physics.Raycast(transform.position + Vector3.up, 
+                bool isCollidedTerrain = 
+                    Physics.Raycast(transform.position + Vector3.up, 
                     (et.transform.position - transform.position).normalized, 
                     out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+
+                    // Debug.Log("Terrain Collided " + isCollidedTerrain.ToString());
+                    // Debug.Log("Objs Found " + isFind.ToString());
 
                 if(hit.point != null){
                     Debug.DrawLine(transform.position + Vector3.up,
                     hit.point,
-                    Color.red,.5f);
+                    Color.white,.5f);
                 }
 
+                float optimalObjDist = Mathf.Infinity;
+                Entity optimalObj;
                 //地形に当たらないことを願う.
                 if(isFind)
                 {
-                    Debug.Log(FindTarget + " found");
-                }
-                if (isNotCollidedTerrain && isFind)
-                {
-                    return true;
+                    (optimalObjDist, optimalObj) = getOptimalObjs(new List<Entity>{et});
+                    if (!isCollidedTerrain && isFind && isFind)
+                    {
+                        Debug.Log(FindTarget + " found");
+                        return true;
+                    }
                 }
             }
         }

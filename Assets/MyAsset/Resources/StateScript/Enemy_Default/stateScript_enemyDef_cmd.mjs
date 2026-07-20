@@ -37,18 +37,7 @@ export function setStatus(entity)
 
     //  if(entity.)
     
-    let selfStTime = CS.Elem.CheckStateTime(entity) 
-    let isNotice = entity.attrs.isNoticed;
-
-    if(selfStTime % 20 == 19 && !isNotice)
-    {  
-        let isFound = entity.findObjs("Player");
-        if(isFound)
-        {
-            entity.attrs.isNoticed = true;
-            entity.NoticeObjEmit();
-        }
-    }
+    //let selfStTime = CS.Elem.CheckStateTime(entity) 
 
     return verdList;
 }
@@ -77,6 +66,13 @@ export function stateCmd(entity) {
     if(selfOnGrd == true && AttackCmd_b == true && StateDefID == 0)
     {
         verdList.Add(200);
+    }
+
+    let isNotice = entity.attrs.isNoticed;
+
+    if(selfStTime % 20 == 19 && !isNotice)
+    {  
+        verdList.Add(10000);
     }
     return verdList;
 }
