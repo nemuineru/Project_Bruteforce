@@ -500,8 +500,6 @@ public class Entity : MonoBehaviour
             //get Entity-Mask only.
             LayerMask EntityMask = LayerMask.NameToLayer("Entity");
 
-            
-
             List<Entity> FindObj = new List<Entity>();
 
             //射線が通るもののみを選択 自分は選択しない
@@ -512,10 +510,13 @@ public class Entity : MonoBehaviour
                 else
                 {
                     bool isFind = getNearestTarget(FindRadius, FindLength, et);
+                    Vector3 pos = transform.position + Vector3.up;
+                    Vector3 dirs = (et.transform.position - transform.position).normalized;
+                    float DirLength = (transform.position - et.transform.position).magnitude;
                     bool isCollidedTerrain = 
-                    Physics.Raycast(transform.position + Vector3.up, 
-                    (et.transform.position - transform.position).normalized, 
-                    out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+                    Physics.Raycast(pos, dirs, 
+                    out RaycastHit hit, DirLength, LayerMask.GetMask("Terrain"));
+                    Debug.DrawLine(pos,pos + dirs * DirLength, Color.magenta,1.0f);
                     
                     Debug.Log("Terrain Collided " + isCollidedTerrain.ToString());
                     Debug.Log("Objs Found " + isFind.ToString());
@@ -547,6 +548,7 @@ public class Entity : MonoBehaviour
     //StateScriptでも読み出せるように.
     public bool findEntityWithTag(string FindTarget)
     {
+        List<Entity> FindObj = new List<Entity>();
         float FindLength = 4f;
         float FindRadius = 3f;
         foreach (Entity et in gameState.self.entityList)
@@ -559,39 +561,57 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Finding");
+                Debug.Log(et.gameObject.name + "finding");
                 bool isFind = getNearestTarget(FindRadius, FindLength, et);
-                Vector3 rays = (et.transform.position - transform.position).normalized;
+                
+                Vector3 pos = transform.position + Vector3.up;
+                Vector3 dirs = (et.transform.position - transform.position).normalized;
+                float DirLength = (transform.position - et.transform.position).magnitude;
 
 
                 bool isCollidedTerrain = 
-                    Physics.Raycast(transform.position + Vector3.up, 
-                    (et.transform.position - transform.position).normalized, 
-                    out RaycastHit hit, FindLength, LayerMask.GetMask("Terrain"));
+                    Physics.Raycast(pos, dirs, 
+                    out RaycastHit hit, DirLength, LayerMask.GetMask("Terrain"));
+                    Debug.DrawLine(pos,pos + dirs * DirLength, Color.magenta,1.0f);
 
-                    // Debug.Log("Terrain Collided " + isCollidedTerrain.ToString());
-                    // Debug.Log("Objs Found " + isFind.ToString());
+                    Debug.Log("Terrain Collided " + isCollidedTerrain.ToString());
+                    Debug.Log("Objs Found " + isFind.ToString());
 
                 if(hit.point != null){
-                    Debug.DrawLine(transform.position + Vector3.up,
+                    Debug.DrawLine(pos,
+                    pos + dirs * DirLength,
+                    Color.cyan,.5f);
+                    Debug.DrawLine(hit.point + Vector3.up,
                     hit.point,
-                    Color.white,.5f);
+                    Color.cyan,.5f);
                 }
 
-                float optimalObjDist = Mathf.Infinity;
-                Entity optimalObj;
+                // float optimalObjDist = Mathf.Infinity;
+                // Entity optimalObj;
                 //地形に当たらないことを願う.
-                if(isFind)
+                if (!isCollidedTerrain && isFind)
                 {
-                    (optimalObjDist, optimalObj) = getOptimalObjs(new List<Entity>{et});
-                    if (!isCollidedTerrain && isFind && isFind)
-                    {
-                        Debug.Log(FindTarget + " found");
-                        return true;
-                    }
+                    Debug.Log(FindTarget + " found");
+                    FindObj.Add(et);
                 }
             }
         }
+        
+        //Entityが見つからなければそのまま
+        if (FindObj.Count == 0)
+        {
+            return false;
+        }
+        Debug.Log("HitCheck");
+        float optimalObjDist = Mathf.Infinity;
+        Entity optimalObject;
+        (optimalObjDist, optimalObject) = getOptimalObjs(FindObj);
+        if (optimalObject != null)
+        {
+            Debug.Log(optimalObject.gameObject.name + " hitcheck goes good");
+            return true;
+        }
+
         return false;
     }
 
@@ -1364,7 +1384,7 @@ public class Entity : MonoBehaviour
     //気づいたときに電球を付ける
     public void NoticeObjEmit()
     {
-        GameObject objs = Instantiate(gameState.self.onNoticeObj, transform.position + Vector3.up , Quaternion.identity);
+        GameObject objs = Instantiate(gameState.self.onNoticeObj, transform.position + Vector3.up * 1.8f, Quaternion.identity);
         objs.transform.parent = this.transform;
     }
 }

@@ -1845,9 +1845,10 @@ public class scNoticed : StateController
 
     internal override void OnExecute(Entity entity)
     {
+        Debug.Log("scNoticed Working");
         string strs = value.valueGet(loadParams, entity);
         bool sets = toggle.valueGet(loadParams, entity);
-        bool detection = entity.findEntityWithTag(strs) ? entity.attrs.isNoticed : sets;
+        bool detection = entity.findEntityWithTag(strs) ? sets : entity.attrs.isNoticed ;
         entity.attrs.isNoticed = detection;
     }
 }

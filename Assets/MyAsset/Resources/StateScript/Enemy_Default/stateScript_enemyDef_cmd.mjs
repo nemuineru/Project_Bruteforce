@@ -36,6 +36,19 @@ export function setStatus(entity)
         entity.setJugglePoint(entity.status.maxJugglePoint);
 
     //  if(entity.)
+
+    let selfStTime = CS.Elem.CheckStateTime(entity) 
+    let isNotice = entity.attrs.isNoticed;
+
+    if(selfStTime % 20 == 19 && !isNotice)
+    {  
+        var check = entity.findEntityWithTag("Player");
+        if(check)
+        {
+            entity.NoticeObjEmit();
+            entity.attrs.isNoticed = check;
+        }
+    }
     
     //let selfStTime = CS.Elem.CheckStateTime(entity) 
 
@@ -66,13 +79,6 @@ export function stateCmd(entity) {
     if(selfOnGrd == true && AttackCmd_b == true && StateDefID == 0)
     {
         verdList.Add(200);
-    }
-
-    let isNotice = entity.attrs.isNoticed;
-
-    if(selfStTime % 20 == 19 && !isNotice)
-    {  
-        verdList.Add(10000);
     }
     return verdList;
 }

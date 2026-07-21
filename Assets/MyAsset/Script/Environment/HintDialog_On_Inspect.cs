@@ -39,8 +39,8 @@ public class HintDialog_On_Inspect : MonoBehaviour
         if(type == InspectType.Touch && other.CompareTag("Player") && dialogCurrentShowing == null)
         {
             dialogCurrentShowing = prepDialog();
+            dialogCurrentShowing.ExtendTime(Time.deltaTime);
         }
-        dialogCurrentShowing.ExtendTime(Time.deltaTime);
     }
     
     //MainUI is called : 
