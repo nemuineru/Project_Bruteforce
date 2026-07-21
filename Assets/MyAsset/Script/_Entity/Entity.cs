@@ -640,6 +640,7 @@ public class Entity : MonoBehaviour
     }
 
     //カメラベクトルを比較, 最も中央に近いものを探す.
+    //メインカメラが指定されているから直さねば
     //via https://zenn.dev/aruk_vs/articles/ae723b82fd69ec
     private (float, Entity) getOptimalObjs(List<Entity> hitObjects)
     {
