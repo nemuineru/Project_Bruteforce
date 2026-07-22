@@ -1,5 +1,3 @@
-
-
 //現状, debugやexeでは出ない(IndexWasOutOfRange)
 
 using System.Collections;
@@ -602,6 +600,8 @@ public class Entity : MonoBehaviour
         {
             return false;
         }
+        else
+            return true;
         Debug.Log("HitCheck");
         float optimalObjDist = Mathf.Infinity;
         Entity optimalObject;
@@ -647,24 +647,25 @@ public class Entity : MonoBehaviour
         float degreep = Mathf.Atan2(targetTo_fw.x, targetTo_fw.z);
         float lockonFactor = 0.3f;
         float degreemum = Mathf.PI * 2;
+        //cameraTrn
         Transform cameraTrn = Camera.main.transform;
         Entity target = null;
 
-        foreach (var enemy in hitObjects)
+        foreach (var hits in hitObjects)
         {
-            // pos: 敵からカメラへ向けたベクトル
-            // pos2: カメラから敵に向けたベクトル(水平方向に制限して正規化)
-            Vector3 pos = cameraTrn.position - enemy.transform.position;
-            Vector3 pos2 = enemy.transform.position - cameraTrn.position;
+            // pos: 敵から自分方向へ向けたベクトル
+            // pos2: 自分方向から敵に向けたベクトル(水平方向に制限して正規化)
+            Vector3 pos = transform.position - hits.transform.position;
+            Vector3 pos2 = hits.transform.position - transform.position;
             pos2.y = 0.0f;
             pos2.Normalize();
 
-            // degree: pos2のX,Z成分からなる角度. カメラの前方からどれだけ回転しているか
-            float degree = Vector3.SignedAngle(pos2, cameraTrn.forward, Vector3.up);
+            // degree: pos2のX,Z成分からなる角度. カメラ移動向き(targetTo_fw)の前方からどれだけ回転しているか
+            float degree = Vector3.SignedAngle(pos2, targetTo_fw, Vector3.up);
             // degreeを-180°～180°に正規化
             // degree = degreeNormalize(degree, degreep);
 
-            // pos.magnitude: 敵とカメラの距離
+            // pos.magnitude: 敵と自分の距離
             // pos.magnitudeに応じて角度に重みをかけ、距離が近いほど角度の重みが大きく選好される
             degree = degree + degree * (pos.magnitude / 500) * lockonFactor;
             // Mathf.Abs(degreemum): 以前に記録された最小角度差の絶対値
@@ -672,7 +673,7 @@ public class Entity : MonoBehaviour
             if (Mathf.Abs(degreemum) >= Mathf.Abs(degree))
             {
                 degreemum = degree;
-                target = enemy;
+                target = hits;
             }
         }
         return (degreemum, target);
@@ -1385,7 +1386,7 @@ public class Entity : MonoBehaviour
     //気づいたときに電球を付ける
     public void NoticeObjEmit()
     {
-        GameObject objs = Instantiate(gameState.self.onNoticeObj, transform.position + Vector3.up * 1.8f, Quaternion.identity);
+        GameObject objs = Instantiate(gameState.self.onNoticeObj, transform.position + Vector3.up * 1.2f, Quaternion.identity);
         objs.transform.parent = this.transform;
     }
 }
