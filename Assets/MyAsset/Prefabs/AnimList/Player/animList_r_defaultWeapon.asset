@@ -75,7 +75,7 @@ MonoBehaviour:
         _entity: {fileID: 0}
         attachTransform: {fileID: 0}
         startPos: {x: 0, y: 0, z: 0}
-        endPos: {x: 0.6, y: 0, z: 0}
+        endPos: {x: 0.81, y: 0, z: 0}
         width: 0.19
         _lastcalcStartPos: {x: -2.005118, y: 0.67928535, z: 1.9083921}
         _lastcalcEndPos: {x: -1.7067127, y: 0.8188073, z: 1.8886932}

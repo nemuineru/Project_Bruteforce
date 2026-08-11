@@ -193,7 +193,7 @@ MonoBehaviour:
           _isReadable: 1
           _MenuName: Damages
           loadTypes: 0
-          stParamValue: {x: 14, y: 4}
+          stParamValue: {x: 32, y: 8}
           useID: -1
           stLuaLoads: 
         hitStateFlag:

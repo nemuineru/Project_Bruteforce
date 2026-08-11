@@ -87,7 +87,7 @@ public class Entity_PlayableMixer : PlayableBehaviour
             //Rotationは出来てるので問題は Animancerのちゃんとした移行メカニズムなんだよな.
             //stにWeightを指定することでTransitionの組分けは可能
             //Time..がアレ.
-            if(Transit != null && clipWeight > 0.0f)
+            if(Transit != null && clipWeight > 0.0f && clipProgress < 1.0)
             {
                 // TransitionAsset Transit = clipAsset.behaviour.transitter;
                 //CreateState will inheriet the transitionAsset setting.. I guess

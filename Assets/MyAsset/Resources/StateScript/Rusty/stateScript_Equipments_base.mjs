@@ -6,11 +6,11 @@ export function StateDef_1000_ID_Equipment_Pipe(entity)
     
     let verdList = new List_Int();
 
-    let SoundTime = entity.attrs.isSoundNotPlayed == 0;
     let CurrentTime = CS.Elem.CheckStateTime(entity);
     let CurrentAnimTime = CS.Elem.CheckAnimTime(entity);
     let AnimEndTime = CS.Elem.CheckAnimEndTime(entity);
     let AttackCmd_x = CS.Elem.CheckButtonPressed(entity, "Combo");
+    let SoundTime = entity.attrs.isSoundNotPlayed == 0 && CurrentTime > 1;
 
     //装備品が有る場合の設定 - 
     let isEquipmentHold = entity.equipmentInHand != null;
@@ -28,7 +28,7 @@ export function StateDef_1000_ID_Equipment_Pipe(entity)
         verdList.Add(0);
     }
     //Aight, does native JS supports math function?
-    if (Math.abs(CurrentAnimTime - 8) < 2 &&
+    if (Math.abs(CurrentAnimTime - 8) < 4 &&
         entity.attrs.isStateHit == 0)
     {
         verdList.Add(10);
@@ -38,7 +38,8 @@ export function StateDef_1000_ID_Equipment_Pipe(entity)
     {
         verdList.Add(1010);
     }
-    if(SoundTime){
+    if(SoundTime && CurrentAnimTime > 4){
+        CS.UnityEngine.Debug.Log("Sounding");
         verdList.Add(100);
     }
     return verdList;

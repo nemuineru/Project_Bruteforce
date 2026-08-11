@@ -52,7 +52,7 @@ public class AnimancerManager
         //基本値はOverRide.
         inserterLayer.IsAdditive = isAdditive;
 
-        inserterLayer.Play(MakeState(animDef), animDef.blendInTime);
+        AnimancerState initSt = inserterLayer.Play(MakeState(animDef), animDef.blendInTime);
 
         //if the layerID is 0, clss must loaded  via layer 0 so call the order.
         if (LayerID == 0)
@@ -61,8 +61,11 @@ public class AnimancerManager
         }
     }
 
+    //Init for timeline. currently, it seems Fading will cause the mem-leak.
+    //if the time is set 0, I guess it needs manually remove states
     public void TimelineAnimLoad(List<AnimancerState> sts)
     {
+        Debug.Log("loading Timelines");
         int LayerNum = sts.Count;
         for(int ls = 0; ls < main.Layers.Count; ls++)
         {
@@ -79,9 +82,11 @@ public class AnimancerManager
             for(int i = 0; i < LayerNum; i++)
             {
                 AnimancerLayer inserterLayer = main.Layers[i];
-                inserterLayer.IsAdditive = false;
+                inserterLayer.IsAdditive = false;                
                 inserterLayer.Weight = sts[i].Weight;
-                inserterLayer.Play(sts[i]);
+
+                //this section. if I add the epsilon, will be solved??
+                inserterLayer.Play(sts[i],Mathf.Epsilon);
             }
         }
     }
@@ -280,20 +285,47 @@ public class AnimancerManager
 
     //Set Animancer TickStates.
     //it should stop if gamestate is not played..
-    public float Tick(bool isPause)
+    public float Tick(bool isPaused)
     {
         float resumeSpeed = 1f;
+        List<int> deleteLayers = new List<int>();
         foreach (AnimancerLayer lA in main.Layers)
         {
-            if (isPause)
-            {
-                lA.Speed = resumeSpeed;
-            }
-            else
+            if (isPaused)
             {
                 lA.Speed = 0;
             }
+            else
+            {
+                lA.Speed = resumeSpeed;
+            }
+            if(lA.ChildCount == 0)
+            {
+                // //Remove the layer if the child is 0
+                // Debug.Log("Removed unused layers - " + lA.Index);
+                // lA.Weight = 0;
+            }
+            //check the 0-Weight states inside the states.
+            else
+            {
+                // for(int index = 0; index < lA.ChildCount ; index++)
+                // {
+                //     AnimancerState insideState = lA.GetChild(index);
+                //     if(insideState.Weight == 0f && insideState.RawTime == 1.0f)
+                //     {
+                //         deleteLayers.Add(index);
+                //     }
+                // }
+                // foreach(int a in deleteLayers)
+                // {
+                //     lA.GetChild(a).Destroy();
+                // }
+            }
         }
+        // foreach(int a in deleteLayers)
+        // {
+        //     main.
+        // }
 
         if (primaryAnimDef != null)
         {
