@@ -37851,6 +37851,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: swarmbot
       objectReference: {fileID: 0}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: status.maxHP
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: status.currentHP
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: animListObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f6a004db78f47014a910343743d778b4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

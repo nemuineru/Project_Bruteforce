@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3bd391a9e706014f88c1ba738a67323, type: 3}
-  m_Name: animList_test
+  m_Name: animList_swarmtest
   m_EditorClassIdentifier: 
   animDef:
   - mixType: 3
@@ -29,7 +29,7 @@ MonoBehaviour:
       startFrame: 0
       cycleOffset: 0
       mixPosition: {x: -1, y: 0}
-    - Clip: {fileID: 7400000, guid: 7443f9112c567254eb7c324efb27134f, type: 2}
+    - Clip: {fileID: 7400000, guid: 26d8877d1dd48454a969b3f56c401fe0, type: 2}
       speed: 0
       startFrame: 0
       cycleOffset: 0
@@ -49,7 +49,8 @@ MonoBehaviour:
     useDefaultClss: 1
     clssSetting:
       clssDefs:
-      - clssType: 0
+      - drawColor: {r: 1, g: 1, b: 1, a: 1}
+        clssType: 0
         attachTo: UpperLeg.L
         showGizmo: 1
         _entity: {fileID: 0}
@@ -78,7 +79,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 1, g: 1, b: 1, a: 1}
+        clssType: 1
         attachTo: hand.L
         showGizmo: 1
         _entity: {fileID: 0}
@@ -128,7 +130,8 @@ MonoBehaviour:
     useDefaultClss: 0
     clssSetting:
       clssDefs:
-      - clssType: 1
+      - drawColor: {r: 1, g: 1, b: 1, a: 1}
+        clssType: 1
         attachTo: LowerLeg.R
         showGizmo: 1
         _entity: {fileID: 0}
