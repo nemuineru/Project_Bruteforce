@@ -17,6 +17,8 @@ using UnityEngine.InputSystem.XR;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityPhysics;
 using RootMotion.FinalIK;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class Entity : MonoBehaviour
 {
@@ -1388,5 +1390,18 @@ public class Entity : MonoBehaviour
     {
         GameObject objs = Instantiate(gameState.self.onNoticeObj, transform.position + Vector3.up * 1.2f, Quaternion.identity);
         objs.transform.parent = this.transform;
+    }
+
+    //Navmeshを使用したプレイヤー追随機能. うまくバラけさせたいが..
+    public void GetNavMeshPoint(NavMeshSurface sfs,Vector3 NearbyPos, float MaxAltRadius)
+    {
+        NavMeshQueryFilter queryFilter = new NavMeshQueryFilter();
+        queryFilter.agentTypeID = sfs.agentTypeID;
+        queryFilter.areaMask = sfs.defaultArea;
+        NavMeshPath path = new NavMeshPath();
+        if(NavMesh.CalculatePath(transform.position,NearbyPos,NavMesh.AllAreas,path))
+        {
+            
+        }
     }
 }

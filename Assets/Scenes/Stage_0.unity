@@ -30017,7 +30017,7 @@ GameObject:
   - component: {fileID: 1595825736}
   - component: {fileID: 1595825735}
   m_Layer: 0
-  m_Name: AI Surf
+  m_Name: NavMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37860,9 +37860,29 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: DefLists.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b8d7122a600a784ab3ca55da2f627e8, type: 2}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: DefLists.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ded959934f6752e449647e30be27986d, type: 2}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: DefLists.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92307445f3ac94e458ad8bf232543e8e, type: 2}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: DefLists.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c11a7d7cf9090645aeeabd672d8567f, type: 2}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
       propertyPath: animListObject.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: f6a004db78f47014a910343743d778b4, type: 2}
+    - target: {fileID: 8084534950599904827, guid: a143dd9971d8d3f45a9f634218940c00, type: 3}
+      propertyPath: animListObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c1e95e5e0538014cb6c1ad5a6aabd10, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37903,7 +37923,7 @@ SceneRoots:
   - {fileID: 450393968}
   - {fileID: 666390463}
   - {fileID: 1954024475}
-  - {fileID: 1595825736}
   - {fileID: 2399544833518764451}
   - {fileID: 2141536775}
   - {fileID: 4859095276345028293}
+  - {fileID: 1595825736}
