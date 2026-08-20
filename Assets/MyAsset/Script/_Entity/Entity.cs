@@ -20,6 +20,9 @@ using RootMotion.FinalIK;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 
+
+using URnd = UnityEngine.Random;
+
 public class Entity : MonoBehaviour
 {
     //set Entity Name.
@@ -1401,7 +1404,8 @@ public class Entity : MonoBehaviour
         NavMeshPath path = new NavMeshPath();
         if(NavMesh.CalculatePath(transform.position,NearbyPos,NavMesh.AllAreas,path))
         {
-            
+            Vector3 retPos = path.corners[0] + 
+            new Vector3(URnd.Range(-MaxAltRadius,MaxAltRadius),0f,URnd.Range(-MaxAltRadius,MaxAltRadius));
         }
     }
 }
